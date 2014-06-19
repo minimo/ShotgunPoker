@@ -1,6 +1,6 @@
 /*
  *  MainScene.js
- *  2014/06/04
+ *  2014/06/19
  *  @auther minimo  
  *  This Program is MIT license.
  *
@@ -13,10 +13,13 @@ tm.define("shotgun.MainScene", {
     touches: null,
     touchID: -1,
 
+    //デッキ
+    deck: null,
+
     //ゲーム内情報
     score: 0,   //スコア
     life: 3,    //ライフ
-    
+
     //再生中BGM
     bgm: null,
 
@@ -26,18 +29,17 @@ tm.define("shotgun.MainScene", {
     init: function() {
         this.superInit();
         this.background = "rgba(0, 0, 0, 0.0)";
-        
+
         //バックグラウンド
         this.bg = tm.display.Sprite("greenback", SC_W*2, SC_H*2).addChildTo(this);
 
         //マルチタッチ初期化
         this.touches = tm.input.TouchesEx(this);
-        
+
         //レイヤー準備
         this.lowerLayer = tm.app.Object2D().addChildTo(this);
-        this.panelLayer = tm.app.Object2D().addChildTo(this);
-        this.playerLayer = tm.app.Object2D().addChildTo(this);
-        this.itemLayer = tm.app.Object2D().addChildTo(this);
+        this.mainLayer = tm.app.Object2D().addChildTo(this);
+        this.upperLayer = tm.app.Object2D().addChildTo(this);
 
         //スコア表示
         var that = this;
@@ -47,7 +49,7 @@ tm.define("shotgun.MainScene", {
         lb.align     = "left";
         lb.baseline  = "middle";
         lb.fontSize = 20;
-        lb.outlineWidth = 2;
+        lb.outlineWidth = 1;
         lb.update = function() {
             this.text = "SCORE:"+that.score;
         }
@@ -55,6 +57,9 @@ tm.define("shotgun.MainScene", {
         //目隠し
         this.mask = tm.display.Sprite("blackback", SC_W*2, SC_H*2).addChildTo(this);
         this.mask.tweener.clear().fadeOut(100);
+
+        //カードデッキ
+        this.deck = shotgun.CardDeck().addChildTo(this.mainLayer);
     },
     
     update: function() {

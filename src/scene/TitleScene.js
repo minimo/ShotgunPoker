@@ -15,26 +15,29 @@ tm.define("shotgun.TitleScene", {
 
         //バックグラウンド
         this.bg = tm.display.Sprite("greenback", SC_W*2, SC_H*2).addChildTo(this);
+        
+        this.titleLayer = tm.app.Object2D().addChildTo(this);
+        this.tutorialLayer = tm.app.Object2D().addChildTo(this);
 
-        var lb = this.title1 = tm.display.OutlineLabel("Shotgun", 30).addChildTo(this);
+        var lb = this.title1 = tm.display.OutlineLabel("SHOTGUN", 30).addChildTo(this.titleLayer);
         lb.setPosition(SC_W*0.4, SC_H*0.2-SC_H*0.6);
         lb.fontFamily = "'azuki'";
         lb.align     = "center";
         lb.baseline  = "middle";
         lb.fontSize = 50;
         lb.outlineWidth = 2;
-        lb.tweener.wait(500).move(SC_W*0.4, SC_H*0.2, 3000,"easeOutBounce");
+        lb.tweener.wait(500).move(SC_W*0.4, SC_H*0.2, 1500,"easeOutBounce");
 
-        var lb = this.title2 = tm.display.OutlineLabel("Poker", 30).addChildTo(this);
+        var lb = this.title2 = tm.display.OutlineLabel("POKER", 30).addChildTo(this.titleLayer);
         lb.setPosition(SC_W*0.6, SC_H*0.35-SC_H*0.6);
         lb.fontFamily = "'azuki'";
         lb.align     = "center";
         lb.baseline  = "middle";
         lb.fontSize = 50;
         lb.outlineWidth = 2;
-        lb.tweener.wait(500).move(SC_W*0.6, SC_H*0.35, 3000,"easeOutBounce");
+        lb.tweener.wait(500).move(SC_W*0.6, SC_H*0.35, 1500,"easeOutBounce");
 
-        var lb = this.startLabel = tm.display.OutlineLabel("TOUCH START", 30).addChildTo(this);
+        var lb = this.startLabel = tm.display.OutlineLabel("TOUCH START", 30).addChildTo(this.titleLayer);
         lb.setPosition(SC_W*0.5, SC_H*0.8);
         lb.fontFamily = "'KS-Kohichi-FeltPen'";
         lb.align     = "center";
