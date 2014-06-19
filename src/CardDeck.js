@@ -47,13 +47,19 @@ tm.define("shotgun.CardDeck", {
             var x = rand(SC_W*0.1, SC_W*0.9);
             var y = rand(SC_H*0.2, SC_H*0.7);
             var r = rand(0, 360);
-            this.cards[i].tweener.to({x: x, y: y, rotation: r}, 500, "easeOutQuint");        }
+            this.cards[i].tweener.to({x: x, y: y, rotation: r}, 500, "easeOutQuint");
+        }
     },
 
     //カードの追加
-    addHand: function(card) {
+    addHand: function(x, y) {
         if (this.hands.length > 5)return;
         if (!(card instanceof shotgun.Card)) return;
+
+        var card = null;        
+        for (var i = 0; i < this.cards.length; i++) {
+        }
+        
         this.hands.push(card);
     },
 

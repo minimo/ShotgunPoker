@@ -10,9 +10,13 @@ tm.define("shotgun.Card", {
     
     //パターン番号
     _pattern: 0,
-    
+
+    //カード情報    
     mark: 0,
     number: 0,
+
+    //Ｚ値
+    zIndex: 0,
 
     init: function(mark, num) {
         //親クラスの初期化
