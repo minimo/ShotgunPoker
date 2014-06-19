@@ -8,8 +8,8 @@
 //ƒAƒZƒbƒg“o˜^
 var assets = {
     //images
-    "greenback":       "assets/greenback.png",
-    "blackback":       "assets/background.png",
-    "card":     "assets/card.png",
+    "greenback":    "assets/greenback.png",
+    "blackback":    "assets/background.png",
+    "card":         "assets/trump.png",
 }
 

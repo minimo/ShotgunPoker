@@ -28,11 +28,13 @@ tm.define("shotgun.CardDeck", {
             for (var i = 0; i < this.cards.length; i++) this.cards[i].remove();
         }
         this.cards = [];
+        var num = 0;
         for (var i = 0; i < 4; i++) {
             for (var j = 0; j < 13; j++) {
                 var card = shotgun.Card(i, j).addChildTo(this);
                 card.setPosition(SC_W/2, SC_H/2);
-                this.cards.push(card);
+                this.cards[num] = card;
+                num++;
             }
         }
     },
@@ -43,6 +45,20 @@ tm.define("shotgun.CardDeck", {
 
     //シャッフル
     shuffle: function() {
+		for( var i = 0; i < 100; i++ ){
+			var a = rand(0, 4*13-1);
+			var b = rand(0, 4*13-1);
+			if (a == b)continue;
+
+			var tmp = this.cards[a];
+			this.cards[a] = this.cards[b];
+			this.cards[b] = tmp;
+		}
+		//表示順を考慮する為、逆に追加
+		for( var i = 4*13-1; i >= 0; i-- ){
+		    this.cards[i].remove().addChildTo(this);
+		}
+
         for (var i = 0; i < this.cards.length; i++) {
             var x = rand(SC_W*0.1, SC_W*0.9);
             var y = rand(SC_H*0.2, SC_H*0.7);

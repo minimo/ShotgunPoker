@@ -20,8 +20,9 @@ tm.define("shotgun.Card", {
 
     init: function(mark, num) {
         //親クラスの初期化
-        this.superInit("card", 32, 48);
-        
+        this.superInit("card", CARD_W, CARD_H);
+        this.setScale(0.1);
+
         this.mark = mark || MARK_SPADE;
         this.number = num || 1;
 

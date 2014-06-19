@@ -17,8 +17,8 @@ SC_W = 640/2;
 SC_H = 960/2;
 
 //カードサイズ
-CARD_W = 32;
-CARD_H = 48;
+CARD_W = 200;
+CARD_H = 300;
 
 //マーク
 MARK_SPADE = 0;
