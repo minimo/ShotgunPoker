@@ -22,9 +22,9 @@ CARD_H = 300;
 
 //マーク
 MARK_SPADE = 0;
-MARK_HEART = 1;
+MARK_CLOVER = 1;
 MARK_DIAMOND = 2;
-MARK_CLOVER = 3;
+MARK_HEART = 3;
 
 //役一覧
 MISS = -50;

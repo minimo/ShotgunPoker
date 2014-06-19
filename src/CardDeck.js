@@ -63,8 +63,9 @@ tm.define("shotgun.CardDeck", {
             var x = rand(SC_W*0.1, SC_W*0.9);
             var y = rand(SC_H*0.2, SC_H*0.7);
             var r = rand(0, 360);
-            this.cards[i].tweener.to({x: x, y: y, rotation: r}, 500, "easeOutQuint");
+            this.cards[i].tweener.to({x: x, y: y, rotation: r}, 1000, "easeOutQuint");
         }
+        tm.asset.AssetManager.get("dist").clone().play();
     },
 
     //カードの追加
