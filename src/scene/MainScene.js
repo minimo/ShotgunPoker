@@ -43,12 +43,11 @@ tm.define("shotgun.MainScene", {
 
         //スコア表示
         var that = this;
-        var lb = this.scoreLabel = tm.display.OutlineLabel("SCORE:", 30).addChildTo(this);
+        var lb = this.scoreLabel = tm.display.OutlineLabel("SCORE:", 70).addChildTo(this);
         lb.setPosition(8, 32);
         lb.fontFamily = "'KS-Kohichi-FeltPen'";
         lb.align     = "left";
         lb.baseline  = "middle";
-        lb.fontSize = 20;
         lb.outlineWidth = 1;
         lb.update = function() {
             this.text = "SCORE:"+that.score;

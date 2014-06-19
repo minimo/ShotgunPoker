@@ -13,8 +13,8 @@ mt = new MersenneTwister();
 DEBUG = false;
 
 //スクリーンサイズ
-SC_W = 640/2;
-SC_H = 960/2;
+SC_W = 640;
+SC_H = 960;
 
 //カードサイズ
 CARD_W = 200;
