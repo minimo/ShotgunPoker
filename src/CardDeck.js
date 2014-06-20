@@ -9,9 +9,6 @@
 tm.define("shotgun.CardDeck", {
     superClass: tm.app.Object2D,
 
-    //カード枚数
-    num: 0,
-
     //カード配列
     cards: null,
 
@@ -24,13 +21,11 @@ tm.define("shotgun.CardDeck", {
 
         //デッキ構築
         this.cards = [];
-        this.num = 0;
-        for (var i = 0; i < 4; i++) {
-            for (var j = 0; j < 13; j++) {
+        for (var i = 0; i < 1; i++) {
+            for (var j = 0; j < 1; j++) {
                 var card = shotgun.Card(i, j).addChildTo(this);
                 card.setPosition(SC_W/2, SC_H/2);
-                this.cards[this.num] = card;
-                this.num++;
+                this.cards[i*13+j] = card;
             }
         }
         this.shuffle();
@@ -42,9 +37,10 @@ tm.define("shotgun.CardDeck", {
 
     //シャッフル
     shuffle: function(flag) {
+        var num = this.cards.length;
 		for( var i = 0; i < 100; i++ ){
-			var a = rand(0, 4*13-1);
-			var b = rand(0, 4*13-1);
+			var a = rand(0, num-1);
+			var b = rand(0, num-1);
 			if (a == b)continue;
 
 			var tmp = this.cards[a];
@@ -52,11 +48,11 @@ tm.define("shotgun.CardDeck", {
 			this.cards[b] = tmp;
 		}
 		//表示順を考慮する為、逆に追加
-		for( var i = 4*13-1; i >= 0; i-- ){
+		for( var i = num-1; i > -1; i-- ){
 		    this.cards[i].remove().addChildTo(this);
 		}
 
-        for (var i = 0; i < this.cards.length; i++) {
+        for (var i = 0; i < num; i++) {
             var x = rand(SC_W*0.1, SC_W*0.9);
             var y = rand(SC_H*0.2, SC_H*0.7);
             var r = rand(0, 360);
@@ -65,7 +61,20 @@ tm.define("shotgun.CardDeck", {
         tm.asset.AssetManager.get("dist").clone().play();
     },
 
-    //カードの追加
+    //カードの取得
+    pickCard: function(x, y) {
+        for (var i = 0; i < this.cards.length; i++) {
+            var c = this.cards[i];
+            if (c.drop || c.hand)continue;
+            if (c.hitTestPoint({x: x, y: y}))return c;
+/*
+            var dis = distance(c, {x: x, y: y});
+            if (dis < 100) return c;
+*/
+        }
+        return null;
+    },
+
     addHand: function(x, y) {
         if (this.hands.length > 5)return;
         if (!(card instanceof shotgun.Card)) return;

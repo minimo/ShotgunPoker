@@ -86,6 +86,11 @@ tm.define("shotgun.MainScene", {
     ontouchesend: function(e) {
         if (this.touchID != e.ID) return;
         this.touchID = -1;
+        var sx = e.pointing.x;
+        var sy = e.pointing.y;
+
+        var c = this.deck.pickCard(sx, sy);
+        if (c) c.tweener.clear().to({x: SC_W*0.1, y: SC_H*0.9, rotation: 0}, 1000, "easeOutQuint");
     },
 });
 
