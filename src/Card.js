@@ -25,10 +25,10 @@ tm.define("shotgun.Card", {
         this.superInit("card", CARD_W, CARD_H);
         this.setScale(0.6);
 
-        this.suit = suit || SUIT_SPADE;
-        this.number = num || 1;
+        this.suit = suit;
+        this.number = num+1;
 
-        this.pattern = this.suit*13+this.number;
+        this.pattern = this.suit*13+(this.number-1);
     },
 
     //回転を考慮した矩形と点の当り判定
