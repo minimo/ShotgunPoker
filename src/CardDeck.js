@@ -123,6 +123,77 @@ tm.define("shotgun.CardDeck", {
     //役の判定
     checkHand: function() {
         if (this.hands.length < 5)return NOHAND;
+
+		//フラッシュ判別
+		var flash = true;
+		var suit = this.hands[0].suit;
+		for (var i = 1; i < 5; i++) {
+			if (suit != this.hands[i].suit) flash = false;
+		}
+		//ストレート判別
+		var straight = true;
+		var start = this.hands[0].number+1;
+		for (var i = 1; i < 5; i++) {
+			if (start != this.hands[i].number) straight = false;
+			start++;
+		}
+		//特殊なストレート
+		if (straight == false) {
+			straight = true;
+			if (this.hands[0].number == 1 && this.hands[1].number == 10) {
+				var start = this.hands[1].number+1;
+				for (var i = 2; i < 5; i++) {
+					if (start != this.hands[i].number) straight = false;
+					start++;
+				}
+			}else{
+				straight = false;
+			}
+		}
+		
+		//ストレートの場合は役確定	
+		if (straight) {
+			//ストレートフラッシュ判定
+			if (flash) {
+				//ロイヤルストレートフラッシュ判定
+				if (this.hands[0].number == 1 && this.hands[1].number == 10) return ROYALSTRAIGHTFLASH;
+				return STRAIGHTFLASH;
+			}
+			return STRAIGHT;
+		}
+		
+		//フラッシュの場合は役確定
+		if (flash) return FLASH;
+
+		//スリーカード、フォーカード判別
+		if (this.hands[0].number == this.hands[3].number
+		 || this.hands[1].number == this.hands[4].number) return FOURCARD;
+		var three = false;
+		if (this.hands[0].number == this.hands[2].number
+		 || this.hands[1].number == this.hands[3].number
+		 || this.hands[2].number == this.hands[4].number) three = true;
+		 
+		//スリーカード成立の場合は前か後二枚を判別
+		if (three) {
+			if (this.hands[0].number == this.hands[2].number) {
+				if (this.hands[3].number == this.hands[4].number) return FULLHOUSE;
+			}
+			if (this.hands[2].number == this.hands[4].number) {
+				if (this.hands[0].number == this.hands[1].number) return FULLHOUSE;
+			}
+			return THREECARD;
+		}
+
+		//ペア判別
+		var pair = 0;
+		for (var i = 0; i < 5; i++) {
+			for (var j = i+1; j < 5; j++) {
+				if (this.hands[i].number == this.hands[j].number) pair++;
+			}
+		}
+		if (pair == 1) return ONEPAIR;
+		if (pair == 2) return TWOPAIR;
+		return NOHAND;
     },
 });
 
