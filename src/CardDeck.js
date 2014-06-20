@@ -9,34 +9,31 @@
 tm.define("shotgun.CardDeck", {
     superClass: tm.app.Object2D,
 
+    //カード枚数
+    num: 0,
+
     //カード配列
     cards: null,
 
     //手札
     hands: null,
 
-    init: function(mark, num) {
+    init: function(suit, num) {
         //親クラスの初期化
         this.superInit();
-        this.build();
-        this.shuffle();
-    },
 
-    //カードデッキ構築
-    build: function() {
-        if (this.cards) {
-            for (var i = 0; i < this.cards.length; i++) this.cards[i].remove();
-        }
+        //デッキ構築
         this.cards = [];
-        var num = 0;
+        this.num = 0;
         for (var i = 0; i < 4; i++) {
             for (var j = 0; j < 13; j++) {
                 var card = shotgun.Card(i, j).addChildTo(this);
                 card.setPosition(SC_W/2, SC_H/2);
-                this.cards[num] = card;
-                num++;
+                this.cards[this.num] = card;
+                this.num++;
             }
         }
+        this.shuffle();
     },
 
     //開始時演出
@@ -44,7 +41,7 @@ tm.define("shotgun.CardDeck", {
     },
 
     //シャッフル
-    shuffle: function() {
+    shuffle: function(flag) {
 		for( var i = 0; i < 100; i++ ){
 			var a = rand(0, 4*13-1);
 			var b = rand(0, 4*13-1);
