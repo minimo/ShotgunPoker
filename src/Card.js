@@ -37,15 +37,17 @@ tm.define("shotgun.Card", {
         //対象をスプライトの中心を原点とした座標に移動
         var tx = target.x - this.x;
         var ty = target.y - this.y;
-        var arad = Math.atan2(ty, tx)*toDeg;
+        var arad = Math.atan2(ty, tx);    //原点との角度
         var dis = distance(this, target);
 
         //元スプライトの回転分、判定座標を回転する
-        var rad = this.rotation*toRad;
-        tx = Math.sin(rad)*dis;
-        ty = Math.cos(rad)*dis;
+        var rad = arad-(this.rotation)*toRad;
+        var tx2 = Math.cos(rad)*dis;
+        var ty2 = Math.sin(rad)*dis;
 
-        if (-this.width/2 < tx && tx < this.width/2 && -this.height/2 < ty && ty < this.height/2)return true;
+        var w = this.width/2*this.scaleX;
+        var h = this.height/2*this.scaleY;
+        if (-w < tx2 && tx2 < w && -h < ty2 && ty2 < h)return true;
         return false;
     }
 });

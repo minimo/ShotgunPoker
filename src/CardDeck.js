@@ -21,8 +21,8 @@ tm.define("shotgun.CardDeck", {
 
         //デッキ構築
         this.cards = [];
-        for (var i = 0; i < 1; i++) {
-            for (var j = 0; j < 1; j++) {
+        for (var i = 0; i < 4; i++) {
+            for (var j = 0; j < 13; j++) {
                 var card = shotgun.Card(i, j).addChildTo(this);
                 card.setPosition(SC_W/2, SC_H/2);
                 this.cards[i*13+j] = card;
@@ -67,15 +67,11 @@ tm.define("shotgun.CardDeck", {
             var c = this.cards[i];
             if (c.drop || c.hand)continue;
             if (c.hitTestPoint({x: x, y: y}))return c;
-/*
-            var dis = distance(c, {x: x, y: y});
-            if (dis < 100) return c;
-*/
         }
         return null;
     },
 
-    addHand: function(x, y) {
+    addHand: function(card) {
         if (this.hands.length > 5)return;
         if (!(card instanceof shotgun.Card)) return;
 
