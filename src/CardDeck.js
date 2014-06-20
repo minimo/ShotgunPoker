@@ -29,6 +29,7 @@ tm.define("shotgun.CardDeck", {
                 this.cards[i*13+j] = card;
             }
         }
+        this.startup();
         this.shuffle();
 
         //手札配列        
@@ -37,6 +38,10 @@ tm.define("shotgun.CardDeck", {
 
     //開始時演出
     startup: function() {
+        var len = this.cards.length;
+        for (var i = 0; i < len; i++) {
+            this.cards[i].setPosition( rand(0, SC_W), -rand(200, SC_H));
+        }
     },
 
     //シャッフル
@@ -96,7 +101,7 @@ tm.define("shotgun.CardDeck", {
 		    if (c) {
 		        c.hand = false;
 		        c.drop = true;
-		        c.tweener.moveBy(0, 500, 500);
+		        c.tweener.clear().moveBy(0, 300, 200);
 		    }
 		}
 		this.hands = [];
@@ -122,7 +127,7 @@ tm.define("shotgun.CardDeck", {
 
     //役の判定
     checkHand: function() {
-        if (this.hands.length < 5)return NOHAND;
+        if (this.hands.length < 5)return MISS;
 
 		//フラッシュ判別
 		var flash = true;

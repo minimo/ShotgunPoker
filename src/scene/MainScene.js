@@ -44,7 +44,7 @@ tm.define("shotgun.MainScene", {
 
         //スコア表示
         var that = this;
-        var lb = this.scoreLabel = tm.display.OutlineLabel("SCORE:", 70).addChildTo(this);
+        var lb = this.scoreLabel = tm.display.OutlineLabel("SCORE:", 50).addChildTo(this);
         lb.setPosition(8, 32);
         lb.fontFamily = "'KS-Kohichi-FeltPen'";
         lb.align     = "left";
@@ -64,12 +64,42 @@ tm.define("shotgun.MainScene", {
 
     update: function() {
         var kb = app.keyboard;
-        
+
+        //手札が五枚揃った
         if (this.deck.numHand == 5) {
             this.deck.sortHand();
             this.deck.numHand = 0;
+            var sc = this.deck.checkHand();
+            this.dispHand(sc);
+            this.score += sc;
         }
+
         this.time++;
+    },
+
+    //役名表示
+    dispHand: function(hand) {
+        var name;
+        switch (hand) {
+            case MISS:          name = "MISS!";break;
+            case NOHAND:        name = "NO HAND";break;
+            case ONEPAIR:       name = "ONE PAIR";break;
+            case FLASH:         name = "FLASH";break;
+            case TWOPAIR:       name = "TWO PAIR";break;
+            case THREECARD:     name = "THREE CARD";break;
+            case FULLHOUSE:     name = "FULL HOUSE";break;
+            case STRAIGHT:      name = "STRAIGHT";break;
+            case FOURCARD:      name = "FOURCARD";break;
+            case STRAIGHTFLASH: name = "STRAIGHT FLASH";break;
+            case ROYALSTRAIGHTFLASH: name = "ROYAL STRAIGHT FLASH!";break;
+        }
+        var that = this;
+        var lb = tm.display.OutlineLabel(name, 60).addChildTo(this);
+        lb.setPosition(SC_W*0.5, SC_H*0.8);
+        lb.fontFamily = "'KS-Kohichi-FeltPen'";
+        lb.align     = "left";
+        lb.baseline  = "middle";
+        lb.tweener.clear().wait(1000).call(function(){lb.remove(); that.deck.clearHand()});
     },
 
     //タッチorクリック開始処理
