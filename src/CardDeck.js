@@ -14,6 +14,7 @@ tm.define("shotgun.CardDeck", {
 
     //手札
     hands: null,
+    numHand: 0,
 
     init: function(suit, num) {
         //親クラスの初期化
@@ -29,6 +30,9 @@ tm.define("shotgun.CardDeck", {
             }
         }
         this.shuffle();
+
+        //手札配列        
+        this.hands = [];
     },
 
     //開始時演出
@@ -54,7 +58,7 @@ tm.define("shotgun.CardDeck", {
 
         for (var i = 0; i < num; i++) {
             var x = rand(SC_W*0.1, SC_W*0.9);
-            var y = rand(SC_H*0.2, SC_H*0.7);
+            var y = rand(SC_H*0.2, SC_H*0.6);
             var r = rand(0, 360);
             this.cards[i].tweener.to({x: x, y: y, rotation: r}, 1000, "easeOutQuint");
         }
@@ -71,19 +75,62 @@ tm.define("shotgun.CardDeck", {
         return null;
     },
 
+    //手札へ追加
     addHand: function(card) {
-        if (this.hands.length > 5)return;
+        if (this.hands.length > 4)return;
         if (!(card instanceof shotgun.Card)) return;
 
-        var card = null;        
-        for (var i = 0; i < this.cards.length; i++) {
-        }
-        
+        card.hand = true;
         this.hands.push(card);
+
+        var that = this;
+        card.remove().addChildTo(this);
+        card.tweener.clear().to({x: SC_W*0.1+(this.hands.length-1)*70, y: SC_H*0.8, rotation: 0}, 500, "easeOutQuint");
+        card.tweener.call(function(){that.numHand++;});
+    },
+
+    //手札のクリア
+    clearHand: function() {
+		for( var i = 0; i < 5; i++ ){
+		    var c = this.hands[i];
+		    if (c) {
+		        c.hand = false;
+		        c.drop = true;
+		        c.tweener.moveBy(0, 500, 500);
+		    }
+		}
+		this.hands = [];
+		this.numHand = 0;
+    },
+
+    //手札のソート
+    sortHand: function() {
+        if (this.hands.length < 5)return;
+
+		for( var i = 0; i < 5; i++ ){
+		    this.hands[i].tweener.clear().move(SC_W*0.1, SC_H*0.8, 100);
+		}
+		this.hands.sort(compairFunc);
+		for( var i = 0; i < 5; i++ ){
+		    var c = this.hands[i];
+		    if (c) {
+		        c.remove().addChildTo(this);
+		        c.tweener.move(SC_W*0.1+i*70, SC_H*0.8, 100);
+		    }
+		}
     },
 
     //役の判定
     checkHand: function() {
-        if (this.hands.length < 5)return;
+        if (this.hands.length < 5)return NOHAND;
     },
 });
+
+//カードソート用比較関数
+compairFunc = function(a,b){
+	if( a.number == b.number ){
+		if( a.suit == b.suit )return 0;
+		return a.suit-b.suit;
+	}
+	return a.number-b.number;
+}	

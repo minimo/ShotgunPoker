@@ -19,6 +19,7 @@ tm.define("shotgun.MainScene", {
     //ゲーム内情報
     score: 0,   //スコア
     life: 3,    //ライフ
+    pick: true, //カードピック可能フラグ
 
     //再生中BGM
     bgm: null,
@@ -60,9 +61,14 @@ tm.define("shotgun.MainScene", {
         //カードデッキ
         this.deck = shotgun.CardDeck().addChildTo(this.mainLayer);
     },
-    
+
     update: function() {
         var kb = app.keyboard;
+        
+        if (this.deck.numHand == 5) {
+            this.deck.sortHand();
+            this.deck.numHand = 0;
+        }
         this.time++;
     },
 
@@ -89,8 +95,10 @@ tm.define("shotgun.MainScene", {
         var sx = e.pointing.x;
         var sy = e.pointing.y;
 
-        var c = this.deck.pickCard(sx, sy);
-        if (c) c.tweener.clear().to({x: SC_W*0.1, y: SC_H*0.9, rotation: 0}, 1000, "easeOutQuint");
+        if (this.pick) {
+            var c = this.deck.pickCard(sx, sy);
+            if (c) this.deck.addHand(c);
+        }
     },
 });
 
