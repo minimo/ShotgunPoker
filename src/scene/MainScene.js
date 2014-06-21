@@ -28,9 +28,10 @@ tm.define("shotgun.MainScene", {
     startTime: 0,
 
     //ゲーム内情報
-    score: 0,   //スコア
-    life: 3,    //ライフ
-    pick: true, //カードピック可能フラグ
+    start: false,   //ゲームスタートフラグ
+    score: 0,       //スコア
+    life: 3,        //ライフ
+    pick: true,     //カードピック可能フラグ
 
     //再生中BGM
     bgm: null,
@@ -72,13 +73,30 @@ tm.define("shotgun.MainScene", {
         //カードデッキ
         this.deck = shotgun.CardDeck().addChildTo(this.mainLayer);
 
+        //BGM
         this.bgm = tm.asset.AssetManager.get("bgm").clone();
         this.bgm.loop = true;
         this.bgm.play();
+
+        //スタートアップ
+        var lb = this.scoreLabel = tm.display.OutlineLabel("READY", 100).addChildTo(this);
+        lb.setPosition(SC_W/2, SC_H/2);
+        lb.fontFamily = "'KS-Kohichi-FeltPen'";
+        lb.align     = "center";
+        lb.baseline  = "middle";
+        lb.outlineWidth = 2;
+        lb.tweener.clear().wait(500).fadeOut(500);
+        lb.tweener.call(function(){that.start = true;})
     },
 
     update: function() {
         var kb = app.keyboard;
+
+        if (this.start) {
+            this.deck.startup();
+            this.deck.shuffle();
+            this.start = false;
+        }
 
         //手札が五枚揃った
         if (this.deck.numHand == 5) {
@@ -146,12 +164,14 @@ tm.define("shotgun.MainScene", {
 
         var sx = e.pointing.x;
         var sy = e.pointing.y;
-        this.moveX = Math.abs(sx - this.beforeX);
-        this.moveY = Math.abs(sx - this.beforeY);
+        var moveX = Math.abs(sx - this.beforeX);
+        var moveY = Math.abs(sx - this.beforeY);
 
-        if (!this.shuffled && this.moveX > 100) {
-            this.deck.shuffle(true);
-            this.shuffled = true;
+        if (!this.shuffled) {
+            if (moveX > 400 || moveY > 400) {
+                this.deck.shuffle(true);
+                this.shuffled = true;
+            }
         }
 
         this.beforeX = sx;

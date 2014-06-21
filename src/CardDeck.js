@@ -25,12 +25,10 @@ tm.define("shotgun.CardDeck", {
         for (var i = 0; i < 4; i++) {
             for (var j = 0; j < 13; j++) {
                 var card = shotgun.Card(i, j).addChildTo(this);
-                card.setPosition(SC_W/2, SC_H/2);
+                card.setPosition(SC_W/2, -SC_H/2);
                 this.cards[i*13+j] = card;
             }
         }
-        this.startup();
-        this.shuffle();
 
         //手札配列        
         this.hands = [];
