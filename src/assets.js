@@ -18,7 +18,7 @@ var assets = {
     //SE
     "countdown":    "assets/se_countdown.mp3",
     "deal":         "assets/se_deal.mp3",
-    "dist":         "assets/nc52460.wav",
+    "dist":         "assets/se_maoudamashii_se_paper01.mp3",
     "hand":         "assets/se_hand.mp3",
     "nohand":       "assets/se_nohand.mp3",
 }
