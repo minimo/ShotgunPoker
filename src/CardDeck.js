@@ -62,6 +62,9 @@ tm.define("shotgun.CardDeck", {
 		}
 		//表示順を考慮する為、逆に追加
 		for( var i = num-1; i > -1; i-- ){
+            if (flag){
+                if (this.cards[i].drop || this.cards[i].hand) continue;
+            }
 		    this.cards[i].remove().addChildTo(this);
 		}
 
