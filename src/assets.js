@@ -5,12 +5,15 @@
  *  This Program is MIT license.
  */
 
-//ƒAƒZƒbƒg“o˜^
+//Æ’AÆ’ZÆ’bÆ’gâ€œoËœ^
 var assets = {
     //images
     "greenback":    "assets/greenback.png",
     "blackback":    "assets/background.png",
     "card":         "assets/trump.png",
+
+    //BGM
+    "bgm":          "assets/game_maoudamashii_5_casino01.mp3",
 
     //SE
     "countdown":    "assets/se_countdown.mp3",

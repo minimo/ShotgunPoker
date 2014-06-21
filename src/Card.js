@@ -23,7 +23,7 @@ tm.define("shotgun.Card", {
     init: function(suit, num) {
         //親クラスの初期化
         this.superInit("card", CARD_W, CARD_H);
-        this.setScale(0.6);
+        this.setScale(CARD_SCALE);
 
         this.suit = suit;
         this.number = num+1;

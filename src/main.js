@@ -19,6 +19,7 @@ SC_H = 960;
 //カードサイズ
 CARD_W = 200;
 CARD_H = 300;
+CARD_SCALE = 0.6;
 
 //スート
 SUIT_SPADE = 0;

@@ -51,6 +51,10 @@ tm.define("shotgun.CardDeck", {
 			var a = rand(0, num-1);
 			var b = rand(0, num-1);
 			if (a == b)continue;
+            if (flag){
+                if (this.cards[a].drop || this.cards[a].hand) continue;
+                if (this.cards[b].drop || this.cards[b].hand) continue;
+            }
 
 			var tmp = this.cards[a];
 			this.cards[a] = this.cards[b];
@@ -62,10 +66,13 @@ tm.define("shotgun.CardDeck", {
 		}
 
         for (var i = 0; i < num; i++) {
+            if (flag){
+                if (this.cards[i].drop || this.cards[i].hand) continue;
+            }
             var x = rand(SC_W*0.1, SC_W*0.9);
             var y = rand(SC_H*0.2, SC_H*0.6);
             var r = rand(0, 360);
-            this.cards[i].tweener.to({x: x, y: y, rotation: r}, 1000, "easeOutQuint");
+            this.cards[i].tweener.clear().to({x: x, y: y, rotation: r}, 1000, "easeOutQuint");
         }
         tm.asset.AssetManager.get("dist").clone().play();
     },
@@ -90,8 +97,9 @@ tm.define("shotgun.CardDeck", {
 
         var that = this;
         card.remove().addChildTo(this);
-        card.tweener.clear().to({x: SC_W*0.1+(this.hands.length-1)*70, y: SC_H*0.8, rotation: 0}, 500, "easeOutQuint");
+        card.tweener.clear().to({x: (CARD_W/2)*CARD_SCALE+(this.hands.length-1)*70, y: SC_H*0.8, rotation: 0}, 500, "easeOutQuint");
         card.tweener.call(function(){that.numHand++;});
+        tm.asset.AssetManager.get("deal").clone().play();
     },
 
     //手札のクリア
@@ -113,14 +121,14 @@ tm.define("shotgun.CardDeck", {
         if (this.hands.length < 5)return;
 
 		for( var i = 0; i < 5; i++ ){
-		    this.hands[i].tweener.clear().move(SC_W*0.1, SC_H*0.8, 100);
+		    this.hands[i].tweener.clear().move((CARD_W/2)*CARD_SCALE, SC_H*0.8, 100);
 		}
 		this.hands.sort(compairFunc);
 		for( var i = 0; i < 5; i++ ){
 		    var c = this.hands[i];
 		    if (c) {
 		        c.remove().addChildTo(this);
-		        c.tweener.move(SC_W*0.1+i*70, SC_H*0.8, 100);
+		        c.tweener.move((CARD_W/2)*CARD_SCALE+i*70, SC_H*0.8, 100);
 		    }
 		}
     },

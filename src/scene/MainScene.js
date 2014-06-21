@@ -13,8 +13,19 @@ tm.define("shotgun.MainScene", {
     touches: null,
     touchID: -1,
 
+    //タッチ情報
+    startX: 0,
+    startY: 0,
+    moveX: 0,
+    moveY: 0,
+    beforeX: 0,
+    beforeY: 0,
+
     //デッキ
     deck: null,
+
+    shuffled: false,
+    startTime: 0,
 
     //ゲーム内情報
     score: 0,   //スコア
@@ -60,6 +71,10 @@ tm.define("shotgun.MainScene", {
 
         //カードデッキ
         this.deck = shotgun.CardDeck().addChildTo(this.mainLayer);
+
+        this.bgm = tm.asset.AssetManager.get("bgm").clone();
+        this.bgm.loop = true;
+        this.bgm.play();
     },
 
     update: function() {
@@ -93,26 +108,51 @@ tm.define("shotgun.MainScene", {
             case STRAIGHTFLASH: name = "STRAIGHT FLASH";break;
             case ROYALSTRAIGHTFLASH: name = "ROYAL STRAIGHT FLASH!";break;
         }
+        //役名表示
         var that = this;
         var lb = tm.display.OutlineLabel(name, 60).addChildTo(this);
         lb.setPosition(SC_W*0.5, SC_H*0.8);
         lb.fontFamily = "'KS-Kohichi-FeltPen'";
         lb.align     = "left";
         lb.baseline  = "middle";
+        lb.outlineWidth = 3;
         lb.tweener.clear().wait(1000).call(function(){lb.remove(); that.deck.clearHand()});
+
+        //効果音
+        if (hand > 0) {
+            tm.asset.AssetManager.get("hand").clone().play();
+        } else {
+            tm.asset.AssetManager.get("nohand").clone().play();
+        }
     },
 
     //タッチorクリック開始処理
     ontouchesstart: function(e) {
         if (this.touchID > 0)return;
         this.touchID = e.ID;
+
+        var sx = this.startX = e.pointing.x;
+        var sy = this.startY = e.pointing.y;
+        this.moveX = 0;
+        this.moveY = 0;
+
+        this.beforeX = sx;
+        this.beforeY = sy;
     },
 
     //タッチorクリック移動処理
     ontouchesmove: function(e) {
         if (this.touchID != e.ID) return;
-        var sx = this.moveX = e.pointing.x;
-        var sy = this.moveY = e.pointing.y;
+
+        var sx = e.pointing.x;
+        var sy = e.pointing.y;
+        this.moveX = Math.abs(sx - this.beforeX);
+        this.moveY = Math.abs(sx - this.beforeY);
+
+        if (!this.shuffled && this.moveX > 100) {
+            this.deck.shuffle(true);
+            this.shuffled = true;
+        }
 
         this.beforeX = sx;
         this.beforeY = sy;
@@ -122,13 +162,15 @@ tm.define("shotgun.MainScene", {
     ontouchesend: function(e) {
         if (this.touchID != e.ID) return;
         this.touchID = -1;
+
         var sx = e.pointing.x;
         var sy = e.pointing.y;
 
-        if (this.pick) {
+        if (this.pick && !this.shuffled) {
             var c = this.deck.pickCard(sx, sy);
             if (c) this.deck.addHand(c);
         }
+        this.shuffled = false;
     },
 });
 
