@@ -19,7 +19,7 @@ tm.define("shotgun.TitleScene", {
         this.titleLayer = tm.app.Object2D().addChildTo(this);
         this.tutorialLayer = tm.app.Object2D().addChildTo(this);
 
-        var lb = this.title1 = tm.display.OutlineLabel("SHOTGUN", 90).addChildTo(this.titleLayer);
+        var lb = this.title1 = tm.display.OutlineLabel("SHOTGUN", 120).addChildTo(this.titleLayer);
         lb.setPosition(SC_W*0.4, SC_H*0.2-SC_H*0.6);
         lb.fontFamily = "'azuki'";
         lb.align     = "center";
@@ -27,7 +27,7 @@ tm.define("shotgun.TitleScene", {
         lb.outlineWidth = 2;
         lb.tweener.wait(500).move(SC_W*0.4, SC_H*0.2, 1500,"easeOutBounce");
 
-        var lb = this.title2 = tm.display.OutlineLabel("POKER", 90).addChildTo(this.titleLayer);
+        var lb = this.title2 = tm.display.OutlineLabel("POKER", 120).addChildTo(this.titleLayer);
         lb.setPosition(SC_W*0.6, SC_H*0.35-SC_H*0.6);
         lb.fontFamily = "'azuki'";
         lb.align     = "center";
