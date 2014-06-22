@@ -168,14 +168,16 @@ tm.define("shotgun.MainScene", {
         var moveY = Math.abs(sx - this.beforeY);
 
         if (!this.shuffled) {
-            if (moveX > 400 || moveY > 400) {
+            if (moveX > 300) {
                 this.deck.shuffle(true);
                 this.shuffled = true;
             }
         }
 
-        this.beforeX = sx;
-        this.beforeY = sy;
+        if (this.time % 10 == 0) {
+            this.beforeX = sx;
+            this.beforeY = sy;
+        }
     },
 
     //タッチorクリック終了処理
