@@ -32,6 +32,7 @@ tm.define("shotgun.MainScene", {
     score: 0,       //スコア
     life: 3,        //ライフ
     pick: true,     //カードピック可能フラグ
+    count: 10,      //カード選択カウントダウン用
 
     //再生中BGM
     bgm: null,
@@ -79,24 +80,36 @@ tm.define("shotgun.MainScene", {
         this.bgm.play();
 
         //スタートアップ
-        var lb = this.scoreLabel = tm.display.OutlineLabel("READY", 100).addChildTo(this);
+        var lb = this.scoreLabel = tm.display.OutlineLabel("READY", 100).addChildTo(this.upperLayer);
         lb.setPosition(SC_W/2, SC_H/2);
         lb.fontFamily = "'KS-Kohichi-FeltPen'";
         lb.align     = "center";
         lb.baseline  = "middle";
         lb.outlineWidth = 2;
         lb.tweener.clear().wait(500).fadeOut(500);
-        lb.tweener.call(function(){that.start = true;})
+        lb.tweener.call(function(){
+            that.deck.startup();
+            that.deck.shuffle();
+            that.start = true;
+        });
+
+        var lb = this.countDown = tm.display.OutlineLabel("5", 100).addChildTo(this.upperLayer);
+        lb.setPosition(SC_W/2, SC_H/2);
+        lb.fontFamily = "'KS-Kohichi-FeltPen'";
+        lb.align     = "center";
+        lb.baseline  = "middle";
+        lb.outlineWidth = 2;
+        lb.update = function() {
+            if (that.count < 6) {
+                this.text = ""+that.count;
+            } else {
+                this.alpha = 0;
+            }
+        }
     },
 
     update: function() {
-        var kb = app.keyboard;
-
-        if (this.start) {
-            this.deck.startup();
-            this.deck.shuffle();
-            this.start = false;
-        }
+        if (!this.start) return;
 
         //手札が五枚揃った
         if (this.deck.numHand == 5) {
