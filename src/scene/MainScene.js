@@ -93,7 +93,7 @@ tm.define("shotgun.MainScene", {
             that.start = true;
         });
 
-        var lb = this.countDown = tm.display.OutlineLabel("5", 100).addChildTo(this.upperLayer);
+        var lb = this.countDown = tm.display.OutlineLabel("5", 200).addChildTo(this.upperLayer);
         lb.setPosition(SC_W/2, SC_H/2);
         lb.fontFamily = "'KS-Kohichi-FeltPen'";
         lb.align     = "center";
@@ -101,6 +101,7 @@ tm.define("shotgun.MainScene", {
         lb.outlineWidth = 2;
         lb.update = function() {
             if (that.count < 6) {
+                this.alpha = 1;
                 this.text = ""+that.count;
             } else {
                 this.alpha = 0;
@@ -111,13 +112,19 @@ tm.define("shotgun.MainScene", {
     update: function() {
         if (!this.start) return;
 
+        if (this.time % 30 == 0) {
+            this.count--;
+        }
+
         //手札が五枚揃った
-        if (this.deck.numHand == 5) {
+        if (this.deck.numHand == 5 || this.count < 0) {
             this.deck.sortHand();
             this.deck.numHand = 0;
             var sc = this.deck.checkHand();
             this.dispHand(sc);
             this.score += sc;
+            if (this.score < 0) this.score = 0;
+            this.count = 9;
         }
 
         this.time++;
