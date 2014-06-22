@@ -45,6 +45,15 @@ tm.define("shotgun.CardDeck", {
     //シャッフル
     shuffle: function(flag) {
         var num = this.cards.length;
+
+        //ドロップしたカードを場に戻す
+        if (flag) {
+            for (var i = 0; i < num; i++) {
+                var c = this.cards[i];
+                if (c.drop) setPosition(rand(0, SC_W), -100);
+            }
+        }
+
 		for( var i = 0; i < 100; i++ ){
 			var a = rand(0, num-1);
 			var b = rand(0, num-1);
@@ -208,6 +217,16 @@ tm.define("shotgun.CardDeck", {
 		if (pair == 1) return ONEPAIR;
 		if (pair == 2) return TWOPAIR;
 		return NOHAND;
+    },
+});
+
+shotgun.CardDeck.prototype.accessor("left", {
+    "get": function() {
+        var num = 0;
+        for (var i = 0; i < this.cards.length; i++) {
+            if (!this.cards[i].drop) num++;
+        }
+        return num;
     },
 });
 
