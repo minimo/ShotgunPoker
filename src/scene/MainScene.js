@@ -30,7 +30,7 @@ tm.define("shotgun.MainScene", {
     //ゲーム内情報
     start: false,   //ゲームスタートフラグ
     score: 0,       //スコア
-    life: 3,        //ライフ
+    life: 6,        //ライフ
     pick: true,     //カードピック可能フラグ
     count: 10,      //カード選択カウントダウン用
 
@@ -65,6 +65,18 @@ tm.define("shotgun.MainScene", {
         lb.outlineWidth = 1;
         lb.update = function() {
             this.text = "SCORE:"+that.score;
+        }
+
+        //ライフ表示
+        var lb = this.scoreLabel = tm.display.OutlineLabel("LIFE:", 50).addChildTo(this);
+        lb.setPosition(SC_W*0.8, 32);
+        lb.fontFamily = "'KS-Kohichi-FeltPen'";
+        lb.align     = "left";
+        lb.baseline  = "middle";
+        lb.outlineWidth = 1;
+        lb.update = function() {
+            var life = that.life < 0 ? 0 : thar.life;
+            this.text = "LIFE:"+life;
         }
 
         //目隠し
@@ -108,7 +120,7 @@ tm.define("shotgun.MainScene", {
             }
         }
     },
-
+    
     update: function() {
         if (!this.start) return;
 
@@ -124,6 +136,8 @@ tm.define("shotgun.MainScene", {
             this.dispHand(sc);
             this.score += sc;
             if (this.score < 0) this.score = 0;
+            if (sc == NOHAND) this.life--;
+            if (sc == MISS) this.life -= 2;
             this.count = 9;
         }
 
