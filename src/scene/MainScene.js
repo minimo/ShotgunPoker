@@ -33,12 +33,14 @@ tm.define("shotgun.MainScene", {
     life: 6,        //ライフ
     pick: true,     //カードピック可能フラグ
     count: 10,      //カード選択カウントダウン用
+    level: 0,       //ゲームレベル
 
     //再生中BGM
     bgm: null,
 
     //経過時間
     time: 0,
+    absTime: 0,
 
     init: function() {
         this.superInit();
@@ -134,13 +136,17 @@ tm.define("shotgun.MainScene", {
     update: function() {
         if (!this.start) return;
 
-        if (this.time % 30 == 0) {
+        var level = Math.sqrt(this.absTime*0.0001)+1;
+        var interval = 41-~~(level*10);
+        if (interval < 20) interval = 20;
+        if (this.time % interval == 0) {
             this.count--;
             tm.asset.AssetManager.get("countdown").clone().play();
         }
 
         //手札が五枚揃った
         if (this.deck.numHand == 5 || this.count < 0) {
+            this.pick = false;
             this.deck.sortHand();
             this.deck.numHand = 0;
             var sc = this.deck.checkHand();
@@ -168,9 +174,10 @@ tm.define("shotgun.MainScene", {
                 this.gameover();
             }
             this.count = 9;
+            this.time = 0;
         }
-
         this.time++;
+        this.absTime++;
     },
 
     //リスタート
@@ -179,13 +186,15 @@ tm.define("shotgun.MainScene", {
         this.pick = true;
         this.score = 0;
         this.life = 6;
+        this.time = 0;
+        this.absTime = 0;
     },
 
     //ゲームオーバー
     gameover: function() {
         this.start = false;
         this.pick = false;
-        var lb = this.title2 = tm.display.OutlineLabel("GAME OVER", 200).addChildTo(this.titleLayer);
+        var lb = this.title2 = tm.display.OutlineLabel("GAME OVER", 200).addChildTo(this.upperLayer);
         lb.setPosition(SC_W*0.6, SC_H*0.5-SC_H);
         lb.fontFamily = "'azuki'";
         lb.align     = "center";
@@ -218,7 +227,7 @@ tm.define("shotgun.MainScene", {
         lb.align     = "left";
         lb.baseline  = "middle";
         lb.outlineWidth = 3;
-        lb.tweener.clear().wait(1000).call(function(){lb.remove(); that.deck.clearHand()});
+        lb.tweener.clear().wait(1000).call(function(){lb.remove(); that.deck.clearHand();that.pick = true;});
 
         //効果音
         if (hand > 0) {
