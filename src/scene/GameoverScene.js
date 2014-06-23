@@ -25,8 +25,12 @@ tm.define("shotgun.GameoverScene", {
         lb.outlineWidth = 2;
 
         //リトライボタン
-        var sh = this.retry = tm.display.RoundRectangleShape(120, 50).addChildTo(this);
+        var sh = this.retry = tm.display.RoundRectangleShape(200, 70).addChildTo(this);
         sh.setPosition(SC_W*0.25, SC_H*0.6);
+        sh.interactive = true;
+        sh.addEventListener("click", function() {
+            app.replaceScene(shotgun.MainScene());
+        });
         var lb = this.retryLabel = tm.display.OutlineLabel("RETRY", 50).addChildTo(this);
         lb.setPosition(SC_W*0.25, SC_H*0.6);
         lb.fontFamily = "'azuki'";
@@ -34,6 +38,12 @@ tm.define("shotgun.GameoverScene", {
         lb.baseline  = "middle";
         lb.outlineWidth = 2;
 
+        var sh = this.exit = tm.display.RoundRectangleShape(200, 70).addChildTo(this);
+        sh.setPosition(SC_W*0.75, SC_H*0.6);
+        sh.interactive = true;
+        sh.addEventListener("click", function() {
+            app.replaceScene(shotgun.TitleScene());
+        });
         var lb = this.exitLabel = tm.display.OutlineLabel("EXIT", 50).addChildTo(this);
         lb.setPosition(SC_W*0.75, SC_H*0.6);
         lb.fontFamily = "'azuki'";
@@ -59,9 +69,6 @@ tm.define("shotgun.GameoverScene", {
 
     //タッチorクリック終了処理
     ontouchend: function(e) {
-        var x = e.x;
-        var y = e.y;
-        app.replaceScene(shotgun.TitleScene());
     },
 
 });
