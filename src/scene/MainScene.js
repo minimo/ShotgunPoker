@@ -105,19 +105,29 @@ tm.define("shotgun.MainScene", {
             that.start = true;
         });
 
-        var lb = this.countDown = tm.display.OutlineLabel("5", 200).addChildTo(this.upperLayer);
+        //カウントダウン表示
+        var lb = this.countDown = tm.display.OutlineLabel("5", 300).addChildTo(this.upperLayer);
         lb.setPosition(SC_W/2, SC_H/2);
         lb.fontFamily = "'KS-Kohichi-FeltPen'";
         lb.align     = "center";
         lb.baseline  = "middle";
-        lb.outlineWidth = 2;
+        lb.outlineWidth = 3;
+        lb.beforeCount = 9;
+        lb.alpha = 0.8;
         lb.update = function() {
             if (that.count < 6) {
-                this.alpha = 1;
+                this.visible = true;
                 this.text = ""+that.count;
             } else {
-                this.alpha = 0;
+                this.visible = false;
             }
+            if (this.beforeCount == that.count) {
+                this.alpha -= 0.05;
+                if (this.alpha < 0)this.alpha = 0;
+            } else {
+                this.alpha = 0.8;
+            }
+            this.beforeCount = that.count;
         }
     },
     
@@ -126,6 +136,7 @@ tm.define("shotgun.MainScene", {
 
         if (this.time % 30 == 0) {
             this.count--;
+            tm.asset.AssetManager.get("countdown").clone().play();
         }
 
         //手札が五枚揃った
