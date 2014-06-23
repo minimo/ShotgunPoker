@@ -32,7 +32,7 @@ tm.define("shotgun.MainScene", {
     score: 0,       //スコア
     life: 6,        //ライフ
     pick: true,     //カードピック可能フラグ
-    count: 10,      //カード選択カウントダウン用
+    count: 9,       //カード選択カウントダウン用
     level: 0,       //ゲームレベル
 
     //再生中BGM
@@ -94,7 +94,7 @@ tm.define("shotgun.MainScene", {
         this.bgm.play();
 
         //スタートアップ
-        var lb = this.scoreLabel = tm.display.OutlineLabel("READY", 100).addChildTo(this.upperLayer);
+        var lb = this.readyLabel = tm.display.OutlineLabel("READY", 100).addChildTo(this.upperLayer);
         lb.setPosition(SC_W/2, SC_H/2);
         lb.fontFamily = "'KS-Kohichi-FeltPen'";
         lb.align     = "center";
@@ -115,7 +115,7 @@ tm.define("shotgun.MainScene", {
         lb.baseline  = "middle";
         lb.outlineWidth = 3;
         lb.beforeCount = 9;
-        lb.alpha = 0.8;
+        lb.alpha = 1.0;
         lb.update = function() {
             if (that.count < 6) {
                 this.visible = true;
@@ -127,7 +127,7 @@ tm.define("shotgun.MainScene", {
                 this.alpha -= 0.05;
                 if (this.alpha < 0)this.alpha = 0;
             } else {
-                this.alpha = 0.8;
+                this.alpha = 1.0;
             }
             this.beforeCount = that.count;
         }
@@ -144,7 +144,7 @@ tm.define("shotgun.MainScene", {
             tm.asset.AssetManager.get("countdown").clone().play();
         }
 
-        //手札が五枚揃った
+        //手札が五枚揃ったor時間切れ
         if (this.deck.numHand == 5 || this.count < 0) {
             this.pick = false;
             this.deck.sortHand();
@@ -154,6 +154,7 @@ tm.define("shotgun.MainScene", {
             if (sc == NOHAND) this.life--;
             if (sc == MISS) this.life -= 2;
             if (sc == ROYALSTRAIGHTFLASH) this.life++;
+            if (this.life > 6)this.life = 6;
 
             //早上がりボーナス
             if (this.count > 5 && sc > 0) {
@@ -186,21 +187,32 @@ tm.define("shotgun.MainScene", {
         this.pick = true;
         this.score = 0;
         this.life = 6;
+        this.count = 9;
         this.time = 0;
         this.absTime = 0;
+        this.level = 0;
+
+        this.readyLabel.tweener.clear().wait(500).fadeOut(500);
+        this.readyLabel.tweener.call(function(){
+            that.deck.startup();
+            that.deck.shuffle();
+            that.start = true;
+        });
     },
 
     //ゲームオーバー
     gameover: function() {
         this.start = false;
         this.pick = false;
-        var lb = this.title2 = tm.display.OutlineLabel("GAME OVER", 200).addChildTo(this.upperLayer);
-        lb.setPosition(SC_W*0.6, SC_H*0.5-SC_H);
+
+        var that = this;
+        var lb = this.title2 = tm.display.OutlineLabel("GAME OVER", 100).addChildTo(this.upperLayer);
+        lb.setPosition(SC_W*0.5, SC_H*0.5-SC_H);
         lb.fontFamily = "'azuki'";
         lb.align     = "center";
         lb.baseline  = "middle";
-        lb.outlineWidth = 3;
-        lb.tweener.wait(500).move(SC_W*0.6, SC_H*0.35, 1500,"easeOutBounce");
+        lb.outlineWidth = 4;
+        lb.tweener.wait(500).move(SC_W*0.5, SC_H*0.5, 4000,"easeOutBounce");
     },
 
     //役名表示
