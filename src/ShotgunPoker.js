@@ -15,6 +15,9 @@ tm.define("shotgun.CanvasApp", {
 
     bgm: null,
 
+    lastScore: 0,
+    highScore: 0, 
+
     init: function(id) {
         this.superInit(id);
         this.resize(SC_W, SC_H).fitWindow();

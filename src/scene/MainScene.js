@@ -205,6 +205,11 @@ tm.define("shotgun.MainScene", {
         this.start = false;
         this.pick = false;
 
+        //スコア情報更新
+        app.lastScore = this.score;
+        if (this.score > app.highScore) app.highScore = this.score;
+
+        //メッセージ
         var that = this;
         var lb = this.title2 = tm.display.OutlineLabel("GAME OVER", 100).addChildTo(this.upperLayer);
         lb.setPosition(SC_W*0.5, SC_H*0.5-SC_H);
@@ -212,7 +217,8 @@ tm.define("shotgun.MainScene", {
         lb.align     = "center";
         lb.baseline  = "middle";
         lb.outlineWidth = 4;
-        lb.tweener.wait(500).move(SC_W*0.5, SC_H*0.5, 4000,"easeOutBounce");
+        lb.tweener.wait(500).move(SC_W*0.5, SC_H*0.5, 4000,"easeOutBounce").wait(2000);
+        lb.tweener.call(function(){app.replaceScene(shotgun.GameoverScene());});
     },
 
     //役名表示
