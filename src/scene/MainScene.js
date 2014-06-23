@@ -145,14 +145,53 @@ tm.define("shotgun.MainScene", {
             this.deck.numHand = 0;
             var sc = this.deck.checkHand();
             this.dispHand(sc);
-            this.score += sc;
-            if (this.score < 0) this.score = 0;
             if (sc == NOHAND) this.life--;
             if (sc == MISS) this.life -= 2;
+            if (sc == ROYALSTRAIGHTFLASH) this.life++;
+
+            //早上がりボーナス
+            if (this.count > 5 && sc > 0) {
+                sc = ~~(sc*1.5);
+                var lb = tm.display.OutlineLabel("EXCELLENT!", 100).addChildTo(this);
+                lb.setPosition(SC_W*0.5, SC_H*0.5);
+                lb.fontFamily = "'KS-Kohichi-FeltPen'";
+                lb.align     = "center";
+                lb.baseline  = "middle";
+                lb.outlineWidth = 3;
+                lb.tweener.clear().wait(1000).call(function(){lb.remove();});
+            }
+            this.score += sc;
+            if (this.score < 0) this.score = 0;
+
+            //ゲームオーバー判定
+            if (this.life < 0) {
+                this.gameover();
+            }
             this.count = 9;
         }
 
         this.time++;
+    },
+
+    //リスタート
+    restart: function() {
+        this.start = false;
+        this.pick = true;
+        this.score = 0;
+        this.life = 6;
+    },
+
+    //ゲームオーバー
+    gameover: function() {
+        this.start = false;
+        this.pick = false;
+        var lb = this.title2 = tm.display.OutlineLabel("GAME OVER", 200).addChildTo(this.titleLayer);
+        lb.setPosition(SC_W*0.6, SC_H*0.5-SC_H);
+        lb.fontFamily = "'azuki'";
+        lb.align     = "center";
+        lb.baseline  = "middle";
+        lb.outlineWidth = 3;
+        lb.tweener.wait(500).move(SC_W*0.6, SC_H*0.35, 1500,"easeOutBounce");
     },
 
     //役名表示
