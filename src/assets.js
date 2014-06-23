@@ -5,7 +5,6 @@
  *  This Program is MIT license.
  */
 
-//ƒAƒZƒbƒg“o˜^
 var assets = {
     //images
     "greenback":    "assets/greenback.png",
