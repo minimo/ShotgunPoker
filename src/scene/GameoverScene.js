@@ -15,10 +15,12 @@ tm.define("shotgun.GameoverScene", {
 
         //バックグラウンド
         this.bg = tm.display.Sprite("greenback", SC_W*2, SC_H*2).addChildTo(this);
+        
+        var that = this;
 
         //スコア表示
         var lb = this.score = tm.display.OutlineLabel("SCORE: "+app.lastScore, 50).addChildTo(this);
-        lb.setPosition(SC_W*0.5, SC_H*0.4);
+        lb.setPosition(SC_W*0.5, SC_H*0.3);
         lb.fontFamily = "'azuki'";
         lb.align     = "center";
         lb.baseline  = "middle";
@@ -26,26 +28,41 @@ tm.define("shotgun.GameoverScene", {
 
         //リトライボタン
         var sh = this.retry = tm.display.RoundRectangleShape(200, 70).addChildTo(this);
-        sh.setPosition(SC_W*0.25, SC_H*0.6);
+        sh.setPosition(SC_W*0.25, SC_H*0.5);
         sh.interactive = true;
         sh.addEventListener("click", function() {
-            app.replaceScene(shotgun.MainScene());
+            that.mask.tweener.fadeIn(300).call(function(){app.replaceScene(shotgun.MainScene());});
         });
         var lb = this.retryLabel = tm.display.OutlineLabel("RETRY", 50).addChildTo(this);
-        lb.setPosition(SC_W*0.25, SC_H*0.6);
+        lb.setPosition(SC_W*0.25, SC_H*0.5);
         lb.fontFamily = "'azuki'";
         lb.align     = "center";
         lb.baseline  = "middle";
         lb.outlineWidth = 2;
 
+        //戻るボタン
         var sh = this.exit = tm.display.RoundRectangleShape(200, 70).addChildTo(this);
-        sh.setPosition(SC_W*0.75, SC_H*0.6);
+        sh.setPosition(SC_W*0.75, SC_H*0.5);
+        sh.interactive = true;
+        sh.addEventListener("click", function() {
+            that.mask.tweener.fadeIn(300).call(function(){app.replaceScene(shotgun.TitleScene());});
+        });
+        var lb = this.exitLabel = tm.display.OutlineLabel("EXIT", 50).addChildTo(this);
+        lb.setPosition(SC_W*0.75, SC_H*0.5);
+        lb.fontFamily = "'azuki'";
+        lb.align     = "center";
+        lb.baseline  = "middle";
+        lb.outlineWidth = 2;
+
+        //ツイートボタン
+        var sh = this.exit = tm.display.RoundRectangleShape(200, 70).addChildTo(this);
+        sh.setPosition(SC_W*0.5, SC_H*0.7);
         sh.interactive = true;
         sh.addEventListener("click", function() {
             app.replaceScene(shotgun.TitleScene());
         });
-        var lb = this.exitLabel = tm.display.OutlineLabel("EXIT", 50).addChildTo(this);
-        lb.setPosition(SC_W*0.75, SC_H*0.6);
+        var lb = this.exitLabel = tm.display.OutlineLabel("TWEET", 50).addChildTo(this);
+        lb.setPosition(SC_W*0.5, SC_H*0.7);
         lb.fontFamily = "'azuki'";
         lb.align     = "center";
         lb.baseline  = "middle";

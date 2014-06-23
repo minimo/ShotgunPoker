@@ -46,9 +46,12 @@ tm.define("shotgun.TitleScene", {
 
         this.mask = tm.display.Sprite("blackback", SC_W*2, SC_H*2).addChildTo(this);
         this.mask.tweener.clear().fadeOut(200);
+        
+        this.time = 0;
     },
 
     update: function() {
+        this.time++;
     },
 
     //タッチorクリック開始処理
@@ -61,9 +64,7 @@ tm.define("shotgun.TitleScene", {
 
     //タッチorクリック終了処理
     ontouchend: function(e) {
-        var x = e.x;
-        var y = e.y;
-        app.replaceScene(shotgun.MainScene());
+        if (this.time > 30) app.replaceScene(shotgun.MainScene());
     },
 
 });
