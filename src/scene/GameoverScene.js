@@ -31,7 +31,7 @@ tm.define("shotgun.GameoverScene", {
         sh.setPosition(SC_W*0.25, SC_H*0.5);
         sh.interactive = true;
         sh.addEventListener("click", function() {
-            that.mask.tweener.fadeIn(300).call(function(){app.replaceScene(shotgun.MainScene());});
+            that.mask.tweener.clear().fadeIn(300).call(function(){app.replaceScene(shotgun.MainScene());});
         });
         var lb = this.retryLabel = tm.display.OutlineLabel("RETRY", 50).addChildTo(this);
         lb.setPosition(SC_W*0.25, SC_H*0.5);
@@ -45,7 +45,7 @@ tm.define("shotgun.GameoverScene", {
         sh.setPosition(SC_W*0.75, SC_H*0.5);
         sh.interactive = true;
         sh.addEventListener("click", function() {
-            that.mask.tweener.fadeIn(300).call(function(){app.replaceScene(shotgun.TitleScene());});
+            that.mask.tweener.clear().fadeIn(300).call(function(){app.replaceScene(shotgun.TitleScene());});
         });
         var lb = this.exitLabel = tm.display.OutlineLabel("EXIT", 50).addChildTo(this);
         lb.setPosition(SC_W*0.75, SC_H*0.5);
