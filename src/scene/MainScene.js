@@ -280,7 +280,7 @@ tm.define("shotgun.MainScene", {
 
         if (!this.shuffled) {
             if (moveX > 300) {
-                this.deck.shuffle(true);
+                this.deck.shuffle();
                 this.shuffled = true;
             }
         }

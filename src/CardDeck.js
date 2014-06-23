@@ -43,6 +43,7 @@ tm.define("shotgun.CardDeck", {
     },
 
     //シャッフル
+    //flagがtrueの場合、全カードのシャッフル。falseの場合、場に有るカードのみ
     shuffle: function(flag) {
         var num = this.cards.length;
 
@@ -50,7 +51,7 @@ tm.define("shotgun.CardDeck", {
         if (flag) {
             for (var i = 0; i < num; i++) {
                 var c = this.cards[i];
-                if (c.drop) setPosition(rand(0, SC_W), -100);
+                if (c.drop) c.setPosition(rand(0, SC_W), -100);
             }
         }
 
@@ -58,7 +59,7 @@ tm.define("shotgun.CardDeck", {
 			var a = rand(0, num-1);
 			var b = rand(0, num-1);
 			if (a == b)continue;
-            if (flag){
+            if (!flag){
                 if (this.cards[a].drop || this.cards[a].hand) continue;
                 if (this.cards[b].drop || this.cards[b].hand) continue;
             }
@@ -69,14 +70,14 @@ tm.define("shotgun.CardDeck", {
 		}
 		//表示順を考慮する為、逆に追加
 		for( var i = num-1; i > -1; i-- ){
-            if (flag){
+            if (!flag){
                 if (this.cards[i].drop || this.cards[i].hand) continue;
             }
 		    this.cards[i].remove().addChildTo(this);
 		}
 
         for (var i = 0; i < num; i++) {
-            if (flag){
+            if (!flag){
                 if (this.cards[i].drop || this.cards[i].hand) continue;
             }
             var x = rand(SC_W*0.1, SC_W*0.9);
