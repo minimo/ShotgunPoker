@@ -141,7 +141,7 @@ tm.define("shotgun.MainScene", {
         if (interval < 20) interval = 20;
         if (this.time % interval == 0) {
             this.count--;
-            tm.asset.AssetManager.get("countdown").clone().play();
+            if (this.count < 6) tm.asset.AssetManager.get("countdown").clone().play();
         }
 
         //手札が五枚揃ったor時間切れ
@@ -173,8 +173,10 @@ tm.define("shotgun.MainScene", {
             //ゲームオーバー判定
             if (this.life < 0) {
                 this.gameover();
+            } else {
+//                if (this.deck.left < 25) this.deck.shuffle(true);
             }
-            this.count = 9;
+            this.count = 10;
             this.time = 0;
         }
         this.time++;
@@ -245,7 +247,7 @@ tm.define("shotgun.MainScene", {
         lb.align     = "left";
         lb.baseline  = "middle";
         lb.outlineWidth = 3;
-        lb.tweener.clear().wait(1000).call(function(){lb.remove(); that.deck.clearHand();that.pick = true;});
+        lb.tweener.clear().wait(1200).call(function(){lb.remove(); that.deck.clearHand();that.pick = true;});
 
         //効果音
         if (hand > 0) {

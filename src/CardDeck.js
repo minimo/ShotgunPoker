@@ -120,7 +120,7 @@ tm.define("shotgun.CardDeck", {
 		    if (c) {
 		        c.hand = false;
 		        c.drop = true;
-		        c.tweener.clear().moveBy(0, 300, 200);
+		        c.tweener.clear().wait(300).moveBy(0, 300, 500);
 		    }
 		}
 		this.hands = [];
@@ -132,14 +132,14 @@ tm.define("shotgun.CardDeck", {
         if (this.hands.length < 5)return;
 
 		for( var i = 0; i < 5; i++ ){
-		    this.hands[i].tweener.clear().move((CARD_W/2)*CARD_SCALE, SC_H*0.8, 100);
+		    this.hands[i].tweener.clear().move((CARD_W/2)*CARD_SCALE, SC_H*0.8, 200).wait(200);
 		}
 		this.hands.sort(compairFunc);
 		for( var i = 0; i < 5; i++ ){
 		    var c = this.hands[i];
 		    if (c) {
 		        c.remove().addChildTo(this);
-		        c.tweener.move((CARD_W/2)*CARD_SCALE+i*70, SC_H*0.8, 100);
+		        c.tweener.move((CARD_W/2)*CARD_SCALE+i*70, SC_H*0.8, 300);
 		    }
 		}
     },
