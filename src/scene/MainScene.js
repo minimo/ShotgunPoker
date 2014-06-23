@@ -59,7 +59,7 @@ tm.define("shotgun.MainScene", {
         var that = this;
         var lb = this.scoreLabel = tm.display.OutlineLabel("SCORE:", 50).addChildTo(this);
         lb.setPosition(8, 64);
-        lb.fontFamily = "'KS-Kohichi-FeltPen'";
+        lb.fontFamily = "'azuki'";
         lb.align     = "left";
         lb.baseline  = "middle";
         lb.outlineWidth = 1;
@@ -70,7 +70,7 @@ tm.define("shotgun.MainScene", {
         //ライフ表示
         var lb = this.lifeLabel = tm.display.OutlineLabel("LIFE:", 50).addChildTo(this);
         lb.setPosition(SC_W*0.7, 64);
-        lb.fontFamily = "'KS-Kohichi-FeltPen'";
+        lb.fontFamily = "'azuki'";
         lb.align     = "left";
         lb.baseline  = "middle";
         lb.outlineWidth = 1;
