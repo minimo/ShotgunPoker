@@ -58,7 +58,7 @@ tm.define("shotgun.MainScene", {
         //スコア表示
         var that = this;
         var lb = this.scoreLabel = tm.display.OutlineLabel("SCORE:", 50).addChildTo(this);
-        lb.setPosition(8, 32);
+        lb.setPosition(8, 64);
         lb.fontFamily = "'KS-Kohichi-FeltPen'";
         lb.align     = "left";
         lb.baseline  = "middle";
@@ -68,14 +68,14 @@ tm.define("shotgun.MainScene", {
         }
 
         //ライフ表示
-        var lb = this.scoreLabel = tm.display.OutlineLabel("LIFE:", 50).addChildTo(this);
-        lb.setPosition(SC_W*0.8, 32);
+        var lb = this.lifeLabel = tm.display.OutlineLabel("LIFE:", 50).addChildTo(this);
+        lb.setPosition(SC_W*0.7, 64);
         lb.fontFamily = "'KS-Kohichi-FeltPen'";
         lb.align     = "left";
         lb.baseline  = "middle";
         lb.outlineWidth = 1;
         lb.update = function() {
-            var life = that.life < 0 ? 0 : thar.life;
+            var life = that.life < 0 ? 0 : that.life;
             this.text = "LIFE:"+life;
         }
 
