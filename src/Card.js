@@ -16,6 +16,7 @@ tm.define("shotgun.Card", {
     number: 0,      //数
     drop: false,    //落ち札
     hand: false,    //手札
+    reverse: false, //裏面表示
 
     //Ｚ値
     zIndex: 0,
@@ -29,6 +30,14 @@ tm.define("shotgun.Card", {
         this.number = num+1;
 
         this.pattern = this.suit*13+(this.number-1);
+    },
+
+    update: function() {
+        if (this.reverse) {
+            this.setFrameIndex(53);
+        } else {
+            this.setFrameIndex(this._pattern);
+        }
     },
 
     //回転を考慮した矩形と点の当り判定
