@@ -35,8 +35,8 @@ NUM_SHUFFLE = 20;
 USE_JOKER = true;
 
 //役一覧
-MISS = -50;
-NOHAND = -30;
+MISS = -30;
+NOHAND = -20;
 ONEPAIR = 5;
 FLASH = 10;
 TWOPAIR = 20;
