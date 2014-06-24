@@ -35,6 +35,7 @@ tm.define("shotgun.MainScene", {
     count: 9,       //カード選択カウントダウン用
     level: 0,       //ゲームレベル
     hand: null,     //役の回数
+    onePair: 0,     //ワンペアの連続回数
 
     //経過時間
     time: 0,
@@ -152,6 +153,12 @@ tm.define("shotgun.MainScene", {
             this.deck.numHand = 0;
             var sc = this.deck.checkHand();
             this.dispHand(sc);
+            if (sc == ONEPAIR) {
+                this.onePair++;
+                if (this.onePair % 2 == 0) this.life--;
+            } else {
+                this.onePair = 0;
+            }
             if (sc == NOHAND) this.life--;
             if (sc == MISS) this.life -= 2;
             if (sc == ROYALSTRAIGHTFLASH) this.life++;
