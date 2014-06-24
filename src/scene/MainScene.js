@@ -34,6 +34,7 @@ tm.define("shotgun.MainScene", {
     pick: true,     //カードピック可能フラグ
     count: 9,       //カード選択カウントダウン用
     level: 0,       //ゲームレベル
+    hand: null,     //役の回数
 
     //再生中BGM
     bgm: null,
@@ -56,6 +57,9 @@ tm.define("shotgun.MainScene", {
         this.lowerLayer = tm.app.Object2D().addChildTo(this);
         this.mainLayer = tm.app.Object2D().addChildTo(this);
         this.upperLayer = tm.app.Object2D().addChildTo(this);
+
+        //上がり回数配列
+        this.hand = [];
 
         //スコア表示
         var that = this;
@@ -167,6 +171,7 @@ tm.define("shotgun.MainScene", {
                 lb.outlineWidth = 3;
                 lb.tweener.clear().wait(1000).call(function(){lb.remove();});
             }
+            this.hand[sc]++;
             this.score += sc;
             if (this.score < 0) this.score = 0;
 
@@ -193,6 +198,7 @@ tm.define("shotgun.MainScene", {
         this.time = 0;
         this.absTime = 0;
         this.level = 0;
+        this.hand = [];
 
         this.readyLabel.tweener.clear().wait(500).fadeOut(500);
         this.readyLabel.tweener.call(function(){
