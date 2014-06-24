@@ -74,29 +74,29 @@ tm.define("shotgun.CardDeck", {
             }
         }
 
-		for( var i = 0; i < 100; i++ ){
-			var a = rand(0, num-1);
-			var b = rand(0, num-1);
-			if (a == b)continue;
+        for( var i = 0; i < 100; i++ ){
+            var a = rand(0, num-1);
+            var b = rand(0, num-1);
+            if (a == b)continue;
             if (!flag){
                 if (this.cards[a].drop || this.cards[a].hand) continue;
                 if (this.cards[b].drop || this.cards[b].hand) continue;
             }
 
-			var tmp = this.cards[a];
-			this.cards[a] = this.cards[b];
-			this.cards[b] = tmp;
-		}
-		//表示順を考慮する為、逆に追加
-		for( var i = num-1; i > -1; i-- ){
+            var tmp = this.cards[a];
+            this.cards[a] = this.cards[b];
+            this.cards[b] = tmp;
+        }
+        //表示順を考慮する為、逆に追加
+        for( var i = num-1; i > -1; i-- ){
             if (!flag){
                 if (this.cards[i].drop || this.cards[i].hand) continue;
             }
-		    this.cards[i].remove().addChildTo(this);
-		}
+        this.cards[i].remove().addChildTo(this);
+        }
 
         for (var i = 0; i < num; i++) {
-			var c = this.cards[i];
+            var c = this.cards[i];
             if (!flag) {
                 if (c.drop || c.hand) continue;
             } else {
@@ -138,40 +138,40 @@ tm.define("shotgun.CardDeck", {
     //手札のクリア
     clearHand: function() {
         this.busy = true;
-		for( var i = 0; i < 5; i++ ){
-		    var c = this.hands[i];
-		    if (c) {
-		        c.hand = false;
-		        c.drop = true;
-		        c.tweener.clear().wait(300).moveBy(0, 300, 500, "easeOutQuint");
-		    }
-		}
-		this.hands = [];
-		this.numHand = 0;
-		var that = this;
-		this.tweener.clear().wait(800)
-		    .call(function(){
-		        that.busy = false;
+        for( var i = 0; i < 5; i++ ){
+            var c = this.hands[i];
+            if (c) {
+                c.hand = false;
+                c.drop = true;
+                c.tweener.clear().wait(300).moveBy(0, 300, 500, "easeOutQuint");
+            }
+        }
+        this.hands = [];
+        this.numHand = 0;
+        var that = this;
+        this.tweener.clear().wait(800)
+            .call(function(){
+                that.busy = false;
                 //場の札が一定数以下の場合、落ち札を戻してシャッフル
-		        if (that.left < NUM_SHUFFLE) that.shuffle(true);
-		    });
+                if (that.left < NUM_SHUFFLE) that.shuffle(true);
+            });
     },
 
     //手札のソート
     sortHand: function() {
         if (this.hands.length < 5)return;
 
-		for( var i = 0; i < 5; i++ ){
-		    this.hands[i].tweener.clear().move((CARD_W/2)*CARD_SCALE, SC_H*0.8, 100).wait(100);
-		}
-		this.hands.sort(compairFunc);
-		for( var i = 0; i < 5; i++ ){
-		    var c = this.hands[i];
-		    if (c) {
-		        c.remove().addChildTo(this);
-		        c.tweener.move((CARD_W/2)*CARD_SCALE+i*70, SC_H*0.8, 100);
-		    }
-		}
+        for( var i = 0; i < 5; i++ ){
+            this.hands[i].tweener.clear().move((CARD_W/2)*CARD_SCALE, SC_H*0.8, 100).wait(100);
+        }
+        this.hands.sort(compairFunc);
+        for( var i = 0; i < 5; i++ ){
+            var c = this.hands[i];
+            if (c) {
+                c.remove().addChildTo(this);
+                c.tweener.move((CARD_W/2)*CARD_SCALE+i*70, SC_H*0.8, 100);
+            }
+        }
     },
 
     //役の判定
@@ -185,15 +185,15 @@ tm.define("shotgun.CardDeck", {
             this.jokerInHand = false;
         }
 
-		//フラッシュ判別
-		var max = this.jokerInHand ? 4: 5;
-		var flash = true;
-		var suit = this.hands[0].suit;
-		for (var i = 1; i < max; i++) {
-			if (suit != this.hands[i].suit) flash = false;
-		}
+        //フラッシュ判別
+        var max = this.jokerInHand ? 4: 5;
+        var flash = true;
+        var suit = this.hands[0].suit;
+        for (var i = 1; i < max; i++) {
+            if (suit != this.hands[i].suit) flash = false;
+        }
 
-		//ストレート判別
+        //ストレート判別
         var straight = true;
         var start = this.hands[0].number+1;
         if (!this.jokerInHand) {
@@ -223,64 +223,63 @@ tm.define("shotgun.CardDeck", {
             }
         }
 
-		//ストレートの場合は役確定	
-		if (straight) {
-			//ストレートフラッシュ判定
-			if (flash) {
-				//ロイヤルストレートフラッシュ判定（ジョーカー有りは成立しない）
-				if (this.hands[0].number == 1 && this.hands[1].number == 10 && !this.jokerInHand) return ROYALSTRAIGHTFLASH;
-				return STRAIGHTFLASH;
-			}
-			return STRAIGHT;
-		}
-		
-		//フラッシュの場合は役確定
-		if (flash) return FLASH;
+        //ストレートの場合は役確定	
+        if (straight) {
+            //ストレートフラッシュ判定
+            if (flash) {
+                //ロイヤルストレートフラッシュ判定（ジョーカー有りは成立しない）
+                if (this.hands[0].number == 1 && this.hands[1].number == 10 && !this.jokerInHand) return ROYALSTRAIGHTFLASH;
+                return STRAIGHTFLASH;
+            }
+            return STRAIGHT;
+        }
 
-		//スリーカード、フォーカード判別
-		if (this.hands[0].number == this.hands[3].number
-		 || this.hands[1].number == this.hands[4].number) {
-		    if (this.jokerInHand) return FIVECARD;
-		    return FOURCARD;
-		}
-		var three = false;
-		if (this.hands[0].number == this.hands[2].number
-		 || this.hands[1].number == this.hands[3].number
-		 || this.hands[2].number == this.hands[4].number) {
-		    if (this.jokerInHand) return FOURCARD;
-		    three = true;
-		}
-		 
-		//スリーカード成立の場合は前か後二枚を判別
-		if (three) {
-			if (this.hands[0].number == this.hands[2].number) {
-				if (this.hands[3].number == this.hands[4].number) return FULLHOUSE;
-			}
-			if (this.hands[2].number == this.hands[4].number) {
-				if (this.hands[0].number == this.hands[1].number) return FULLHOUSE;
-			}
-			return THREECARD;
-		}
+        //フラッシュの場合は役確定
+        if (flash) return FLASH;
 
-		//ペア判別
-		var pair = 0;
-		for (var i = 0; i < 5; i++) {
-			for (var j = i+1; j < 5; j++) {
-				if (this.hands[i].number == this.hands[j].number) pair++;
-			}
-		}
-		if (pair == 1) {
-		    if (this.jokerInHand) return THREECARD;
-		    return ONEPAIR;
-		}
-		if (pair == 2) {
-		    if (this.jokerInHand) return FULLHOUSE;
-		    return TWOPAIR;
-		}
-		if (this.jokerInHand) return ONEPAIR;
-		return NOHAND;
+        //スリーカード、フォーカード判別
+        if (this.hands[0].number == this.hands[3].number
+         || this.hands[1].number == this.hands[4].number) {
+            if (this.jokerInHand) return FIVECARD;
+            return FOURCARD;
+        }
+        var three = false;
+        if (this.hands[0].number == this.hands[2].number
+         || this.hands[1].number == this.hands[3].number
+         || this.hands[2].number == this.hands[4].number) {
+            if (this.jokerInHand) return FOURCARD;
+            three = true;
+        }
+
+        //スリーカード成立の場合は前か後二枚を判別
+        if (three) {
+            if (this.hands[0].number == this.hands[2].number) {
+                if (this.hands[3].number == this.hands[4].number) return FULLHOUSE;
+            }
+            if (this.hands[2].number == this.hands[4].number) {
+                if (this.hands[0].number == this.hands[1].number) return FULLHOUSE;
+            }
+            return THREECARD;
+        }
+
+        //ペア判別
+        var pair = 0;
+        for (var i = 0; i < 5; i++) {
+            for (var j = i+1; j < 5; j++) {
+                if (this.hands[i].number == this.hands[j].number) pair++;
+            }
+        }
+        if (pair == 1) {
+            if (this.jokerInHand) return THREECARD;
+            return ONEPAIR;
+        }
+        if (pair == 2) {
+            if (this.jokerInHand) return FULLHOUSE;
+            return TWOPAIR;
+        }
+        if (this.jokerInHand) return ONEPAIR;
+        return NOHAND;
     },
-
 });
 
 shotgun.CardDeck.prototype.accessor("left", {
@@ -295,9 +294,10 @@ shotgun.CardDeck.prototype.accessor("left", {
 
 //カードソート用比較関数
 compairFunc = function(a,b){
-	if( a.number == b.number ){
-		if( a.suit == b.suit )return 0;
-		return a.suit-b.suit;
-	}
-	return a.number-b.number;
-}	
+    if( a.number == b.number ){
+        if( a.suit == b.suit )return 0;
+        return a.suit-b.suit;
+    }
+    return a.number-b.number;
+}
+
