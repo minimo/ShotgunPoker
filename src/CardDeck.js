@@ -67,7 +67,7 @@ tm.define("shotgun.CardDeck", {
         if (flag) {
             for (var i = 0; i < num; i++) {
                 var c = this.cards[i];
-                if (c.drop) {
+                if (c.drop && c.suit != 5) {
                     c.setPosition(rand(0, SC_W), -100);
                     c.drop = false;
                 }
