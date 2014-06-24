@@ -29,20 +29,18 @@ tm.define("shotgun.Card", {
         this.suit = suit;
         this.number = num+1;
 
-        this.pattern = this.suit*13+(this.number-1);
+        this._pattern = this.suit*13+(this.number-1);
+        if (suit == 5) {
+            this.number = 99;
+            this._pattern = 54;
+        }
     },
 
     update: function() {
         if (this.reverse) {
             this.setFrameIndex(53);
         } else {
-            if (this.suit < 5) {
-                //通常カード
-                this.setFrameIndex(this._pattern);
-            } else {
-                //ジョーカー
-                this.setFrameIndex(54);
-            }
+            this.setFrameIndex(this._pattern);
         }
     },
 
