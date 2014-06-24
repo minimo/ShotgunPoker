@@ -135,7 +135,12 @@ tm.define("shotgun.CardDeck", {
 		this.hands = [];
 		this.numHand = 0;
 		var that = this;
-		this.tweener.clear().wait(800).call(function(){that.busy = false;});
+		this.tweener.clear().wait(800)
+		    .call(function(){
+		        that.busy = false;
+                //場の札が一定数以下の場合、落ち札を戻してシャッフル
+		        if (that.left < NUM_SHUFFLE) that.shuffle(true);
+		    });
     },
 
     //手札のソート
