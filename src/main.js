@@ -26,6 +26,8 @@ SUIT_SPADE = 0;
 SUIT_CLOVER = 1;
 SUIT_DIAMOND = 2;
 SUIT_HEART = 3;
+SUIT_JOKER = 4;
+
 //シャッフルが発生する残りカード枚数
 NUM_SHUFFLE = 25;
 

@@ -36,7 +36,13 @@ tm.define("shotgun.Card", {
         if (this.reverse) {
             this.setFrameIndex(53);
         } else {
-            this.setFrameIndex(this._pattern);
+            if (this.suit < 5) {
+                //通常カード
+                this.setFrameIndex(this._pattern);
+            } else {
+                //ジョーカー
+                this.setFrameIndex(54);
+            }
         }
     },
 
