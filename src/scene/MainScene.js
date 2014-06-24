@@ -36,9 +36,6 @@ tm.define("shotgun.MainScene", {
     level: 0,       //ゲームレベル
     hand: null,     //役の回数
 
-    //再生中BGM
-    bgm: null,
-
     //経過時間
     time: 0,
     absTime: 0,
@@ -92,10 +89,8 @@ tm.define("shotgun.MainScene", {
         //カードデッキ
         this.deck = shotgun.CardDeck().addChildTo(this.mainLayer);
 
-        //BGM
-        this.bgm = tm.asset.AssetManager.get("bgm").clone();
-        this.bgm.loop = true;
-        this.bgm.play();
+        //BGM再生
+        app.playBGM("mainBGM");
 
         //スタートアップ
         var lb = this.readyLabel = tm.display.OutlineLabel("READY", 100).addChildTo(this.upperLayer);

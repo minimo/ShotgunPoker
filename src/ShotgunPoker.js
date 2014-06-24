@@ -47,5 +47,20 @@ tm.define("shotgun.CanvasApp", {
     exitApp: function() {
         this.stop();
     },
+    
+    playBGM: function(asset) {
+        if (this.bgm) this.bgm.stop();
+        this.bgm = tm.asset.AssetManager.get(asset);
+        if (this.bgm) {
+            this.bgm.loop = true;
+            this.bgm.play();
+        }
+        return this.bgm;
+    },
+
+    stopBGM: function() {
+        if (this.bgm) this.bgm.stop();
+        return this.bgm;
+    },
 });
 
