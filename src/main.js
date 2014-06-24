@@ -29,7 +29,7 @@ SUIT_HEART = 3;
 SUIT_JOKER = 4;
 
 //シャッフルが発生する残りカード枚数
-NUM_SHUFFLE = 25;
+NUM_SHUFFLE = 20;
 
 //ジョーカー使用フラグ
 USE_JOKER = true;

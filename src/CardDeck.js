@@ -67,7 +67,7 @@ tm.define("shotgun.CardDeck", {
         if (flag) {
             for (var i = 0; i < num; i++) {
                 var c = this.cards[i];
-                if (c.drop && c.suit != 5) {    //ジョーカーは戻さない
+                if (c.drop) {
                     c.setPosition(rand(0, SC_W), -100);
                     c.drop = false;
                 }
@@ -96,8 +96,11 @@ tm.define("shotgun.CardDeck", {
 		}
 
         for (var i = 0; i < num; i++) {
+			var c = this.cards[i];
             if (!flag) {
-                if (this.cards[i].drop || this.cards[i].hand) continue;
+                if (c.drop || c.hand) continue;
+            } else {
+                if (c.suit == 5) continue;  //ジョーカーは戻さない
             }
             var x = rand(SC_W*0.1, SC_W*0.9);
             var y = rand(SC_H*0.2, SC_H*0.6);
