@@ -16,6 +16,8 @@ tm.define("shotgun.CardDeck", {
     hands: null,
     numHand: 0,
 
+    busy: false,    //処理中フラグ
+
     init: function(suit, num) {
         //親クラスの初期化
         this.superInit();
@@ -32,6 +34,9 @@ tm.define("shotgun.CardDeck", {
 
         //手札配列        
         this.hands = [];
+
+        //Tweener初期化
+        this.tweener.clear();
     },
 
     //開始時演出
@@ -51,7 +56,10 @@ tm.define("shotgun.CardDeck", {
         if (flag) {
             for (var i = 0; i < num; i++) {
                 var c = this.cards[i];
-                if (c.drop) c.setPosition(rand(0, SC_W), -100);
+                if (c.drop) {
+                    c.setPosition(rand(0, SC_W), -100);
+                    c.drop = false;
+                }
             }
         }
 
@@ -115,6 +123,7 @@ tm.define("shotgun.CardDeck", {
 
     //手札のクリア
     clearHand: function() {
+        this.busy = true;
 		for( var i = 0; i < 5; i++ ){
 		    var c = this.hands[i];
 		    if (c) {
@@ -125,6 +134,8 @@ tm.define("shotgun.CardDeck", {
 		}
 		this.hands = [];
 		this.numHand = 0;
+		var that = this;
+		this.tweener.clear().wait(350).call(function(){that.busy = false;});
     },
 
     //手札のソート
@@ -132,14 +143,14 @@ tm.define("shotgun.CardDeck", {
         if (this.hands.length < 5)return;
 
 		for( var i = 0; i < 5; i++ ){
-		    this.hands[i].tweener.clear().move((CARD_W/2)*CARD_SCALE, SC_H*0.8, 200).wait(200);
+		    this.hands[i].tweener.clear().move((CARD_W/2)*CARD_SCALE, SC_H*0.8, 100).wait(100);
 		}
 		this.hands.sort(compairFunc);
 		for( var i = 0; i < 5; i++ ){
 		    var c = this.hands[i];
 		    if (c) {
 		        c.remove().addChildTo(this);
-		        c.tweener.move((CARD_W/2)*CARD_SCALE+i*70, SC_H*0.8, 300);
+		        c.tweener.move((CARD_W/2)*CARD_SCALE+i*70, SC_H*0.8, 100);
 		    }
 		}
     },
