@@ -15,7 +15,10 @@ tm.define("shotgun.CardDeck", {
     //手札
     hands: null,
     numHand: 0,
+    jokerInHand: false,
 
+    //カードデッキ情報
+    joker: false,   //ジョーカー有りフラグ
     busy: false,    //処理中フラグ
 
     init: function(suit, num) {
@@ -30,6 +33,14 @@ tm.define("shotgun.CardDeck", {
                 card.setPosition(SC_W/2, -SC_H/2);
                 this.cards[i*13+j] = card;
             }
+        }
+
+        //ジョーカー追加
+        if (USE_JOKER) {
+            this.joker = true;
+            var card = shotgun.Card(5, 99).addChildTo(this);
+            card.setPosition(SC_W/2, -SC_H/2);
+            this.cards.push(card);
         }
 
         //手札配列        
@@ -56,7 +67,7 @@ tm.define("shotgun.CardDeck", {
         if (flag) {
             for (var i = 0; i < num; i++) {
                 var c = this.cards[i];
-                if (c.drop) {
+                if (c.drop && c.suit != 5) {    //ジョーカーは戻さない
                     c.setPosition(rand(0, SC_W), -100);
                     c.drop = false;
                 }
@@ -164,10 +175,19 @@ tm.define("shotgun.CardDeck", {
     checkHand: function() {
         if (this.hands.length < 5)return MISS;
 
+
+        //手札内ジョーカー有り
+        if (this.hands[4].suit == 5) {
+            this.jokerInHand = true;
+        } else {
+            this.jokerInHand = false;
+        }
+
 		//フラッシュ判別
+		var max = this.jokerInHand ? 4: 5;
 		var flash = true;
 		var suit = this.hands[0].suit;
-		for (var i = 1; i < 5; i++) {
+		for (var i = 1; i < max; i++) {
 			if (suit != this.hands[i].suit) flash = false;
 		}
 		//ストレート判別
@@ -195,8 +215,8 @@ tm.define("shotgun.CardDeck", {
 		if (straight) {
 			//ストレートフラッシュ判定
 			if (flash) {
-				//ロイヤルストレートフラッシュ判定
-				if (this.hands[0].number == 1 && this.hands[1].number == 10) return ROYALSTRAIGHTFLASH;
+				//ロイヤルストレートフラッシュ判定（ジョーカー有りは成立しない）
+				if (this.hands[0].number == 1 && this.hands[1].number == 10 && !this.jokerInHand) return ROYALSTRAIGHTFLASH;
 				return STRAIGHTFLASH;
 			}
 			return STRAIGHT;
@@ -207,11 +227,17 @@ tm.define("shotgun.CardDeck", {
 
 		//スリーカード、フォーカード判別
 		if (this.hands[0].number == this.hands[3].number
-		 || this.hands[1].number == this.hands[4].number) return FOURCARD;
+		 || this.hands[1].number == this.hands[4].number) {
+		    if (this.jokerInHand) return FIVECARD;
+		    return FOURCARD;
+		}
 		var three = false;
 		if (this.hands[0].number == this.hands[2].number
 		 || this.hands[1].number == this.hands[3].number
-		 || this.hands[2].number == this.hands[4].number) three = true;
+		 || this.hands[2].number == this.hands[4].number) {
+		    if (this.jokerInHand) return FOURCARD;
+		    three = true;
+		}
 		 
 		//スリーカード成立の場合は前か後二枚を判別
 		if (three) {
@@ -231,10 +257,18 @@ tm.define("shotgun.CardDeck", {
 				if (this.hands[i].number == this.hands[j].number) pair++;
 			}
 		}
-		if (pair == 1) return ONEPAIR;
-		if (pair == 2) return TWOPAIR;
+		if (pair == 1) {
+		    if (this.jokerInHand) return THREECARD;
+		    return ONEPAIR;
+		}
+		if (pair == 2) {
+		    if (this.jokerInHand) return FULLHOUSE;
+		    return TWOPAIR;
+		}
+		if (this.jokerInHand) return ONEPAIR;
 		return NOHAND;
     },
+
 });
 
 shotgun.CardDeck.prototype.accessor("left", {
