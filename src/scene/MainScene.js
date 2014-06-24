@@ -174,7 +174,7 @@ tm.define("shotgun.MainScene", {
 
             //ゲームオーバー判定
             if (this.life < 0) {
-                this.bgm.stop();
+                app.stopBGM();
                 this.gameover();
             }
 
