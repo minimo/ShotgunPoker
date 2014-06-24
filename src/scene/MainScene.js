@@ -242,6 +242,7 @@ tm.define("shotgun.MainScene", {
             case FULLHOUSE:     name = "FULL HOUSE";break;
             case STRAIGHT:      name = "STRAIGHT";break;
             case FOURCARD:      name = "FOURCARD";break;
+            case FIVECARD:      name = "FIVECARD";break;
             case STRAIGHTFLASH: name = "STRAIGHT FLASH";break;
             case ROYALSTRAIGHTFLASH: name = "ROYAL STRAIGHT FLASH!";break;
         }
