@@ -85,7 +85,7 @@ tm.define("shotgun.CardDeck", {
 		}
 
         for (var i = 0; i < num; i++) {
-            if (!flag){
+            if (!flag) {
                 if (this.cards[i].drop || this.cards[i].hand) continue;
             }
             var x = rand(SC_W*0.1, SC_W*0.9);
