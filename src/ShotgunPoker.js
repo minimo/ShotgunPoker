@@ -33,7 +33,6 @@ tm.define("shotgun.CanvasApp", {
             height: SC_H,
             nextScene: function() {
                 this._onLoadAssets();
-//                return shotgun.MainScene();
                 return shotgun.TitleScene();
             }.bind(this),
         });
@@ -49,7 +48,9 @@ tm.define("shotgun.CanvasApp", {
     },
     
     playBGM: function(asset) {
-        if (this.bgm) this.bgm.stop();
+        if (this.bgm) {
+            if (this.bgm.isPlay) this.bgm.stop();
+        }
         this.bgm = tm.asset.AssetManager.get(asset);
         if (this.bgm) {
             this.bgm.loop = true;
