@@ -27,7 +27,7 @@ tm.define("shotgun.CardDeck", {
 
         //デッキ構築
         this.cards = [];
-        for (var i = 0; i < 4; i++) {
+        for (var i = 0; i < 2; i++) {
             for (var j = 0; j < 13; j++) {
                 var card = shotgun.Card(i, j).addChildTo(this);
                 card.setPosition(SC_W/2, -SC_H/2);
@@ -178,7 +178,6 @@ tm.define("shotgun.CardDeck", {
     checkHand: function() {
         if (this.hands.length < 5)return MISS;
 
-
         //手札内ジョーカー有り
         if (this.hands[4].suit == 5) {
             this.jokerInHand = true;
@@ -193,27 +192,37 @@ tm.define("shotgun.CardDeck", {
 		for (var i = 1; i < max; i++) {
 			if (suit != this.hands[i].suit) flash = false;
 		}
+
 		//ストレート判別
-		var straight = true;
-		var start = this.hands[0].number+1;
-		for (var i = 1; i < 5; i++) {
-			if (start != this.hands[i].number) straight = false;
-			start++;
-		}
-		//特殊なストレート
-		if (straight == false) {
-			straight = true;
-			if (this.hands[0].number == 1 && this.hands[1].number == 10) {
-				var start = this.hands[1].number+1;
-				for (var i = 2; i < 5; i++) {
-					if (start != this.hands[i].number) straight = false;
-					start++;
-				}
-			}else{
-				straight = false;
-			}
-		}
-		
+        var straight = true;
+        var start = this.hands[0].number+1;
+        if (!this.jokerInHand) {
+            //通常の判定
+            for (var i = 1; i < 5; i++) {
+                if (start != this.hands[i].number) straight = false;
+                start++;
+            }
+            //特殊なストレート
+            if (!straight) {
+                straight = true;
+                if (this.hands[0].number == 1 && this.hands[1].number == 10) {
+                    var start = this.hands[1].number+1;
+                    for (var i = 2; i < 5; i++) {
+                        if (start != this.hands[i].number) straight = false;
+                        start++;
+                    }
+                }else{
+                    straight = false;
+                }
+            }
+        } else {
+            //ジョーカー有りの場合   
+            for (var i = 1; i < 4; i++) {
+                if (start != this.hands[i].number) straight = false;
+                start++;
+            }
+        }
+
 		//ストレートの場合は役確定	
 		if (straight) {
 			//ストレートフラッシュ判定
