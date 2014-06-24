@@ -177,10 +177,10 @@ tm.define("shotgun.MainScene", {
 
             //ゲームオーバー判定
             if (this.life < 0) {
+                this.bgm.stop();
                 this.gameover();
-            } else {
-//                if (this.deck.left < 25) this.deck.shuffle(true);
             }
+
             this.count = 10;
             this.time = 0;
         }
