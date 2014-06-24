@@ -31,7 +31,7 @@ tm.define("shotgun.MainScene", {
     start: false,   //ゲームスタートフラグ
     score: 0,       //スコア
     life: 6,        //ライフ
-    pick: true,     //カードピック可能フラグ
+    pick: false,    //カードピック可能フラグ
     count: 9,       //カード選択カウントダウン用
     level: 0,       //ゲームレベル
     hand: null,     //役の回数
@@ -104,11 +104,12 @@ tm.define("shotgun.MainScene", {
         lb.align     = "center";
         lb.baseline  = "middle";
         lb.outlineWidth = 2;
-        lb.tweener.clear().wait(500).fadeOut(500);
+        lb.tweener.clear().wait(500).fadeOut(500).wait(300);
         lb.tweener.call(function(){
             that.deck.startup();
             that.deck.shuffle();
             that.start = true;
+            that.pick = true;
         });
 
         //カウントダウン表示
@@ -123,29 +124,30 @@ tm.define("shotgun.MainScene", {
         lb.update = function() {
             if (that.count < 6) {
                 this.visible = true;
-                this.text = ""+that.count;
+                if (this.beforeCount == that.count) {
+                    this.alpha -= 0.05;
+                    if (this.alpha < 0)this.alpha = 0;
+                } else {
+                    this.alpha = 1.0;
+                    tm.asset.AssetManager.get("countdown").clone().play();
+                }
             } else {
                 this.visible = false;
             }
-            if (this.beforeCount == that.count) {
-                this.alpha -= 0.05;
-                if (this.alpha < 0)this.alpha = 0;
-            } else {
-                this.alpha = 1.0;
-            }
+            this.text = ""+that.count;
             this.beforeCount = that.count;
         }
     },
     
     update: function() {
         if (!this.start) return;
+        if (this.deck.busy) return;
 
-        var level = Math.sqrt(this.absTime*0.0001)+1;
-        var interval = 41-~~(level*10);
+        this.level = Math.sqrt(this.absTime*0.0001)+1;
+        var interval = 41-~~(this.level*10);
         if (interval < 20) interval = 20;
-        if (this.time % interval == 0) {
+        if (this.time % interval == 0 && this.pick) {
             this.count--;
-            if (this.count < 6) tm.asset.AssetManager.get("countdown").clone().play();
         }
 
         //手札が五枚揃ったor時間切れ
@@ -184,8 +186,11 @@ tm.define("shotgun.MainScene", {
             this.count = 10;
             this.time = 0;
         }
-        this.time++;
-        this.absTime++;
+
+        if (this.pick) {
+            this.time++;
+            this.absTime++;
+        }
     },
 
     //リスタート
@@ -307,7 +312,7 @@ tm.define("shotgun.MainScene", {
         var sx = e.pointing.x;
         var sy = e.pointing.y;
 
-        if (this.pick && !this.shuffled) {
+        if (this.pick && !this.shuffled && !this.deck.busy) {
             var c = this.deck.pickCard(sx, sy);
             if (c) this.deck.addHand(c);
         }

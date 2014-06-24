@@ -129,13 +129,13 @@ tm.define("shotgun.CardDeck", {
 		    if (c) {
 		        c.hand = false;
 		        c.drop = true;
-		        c.tweener.clear().wait(300).moveBy(0, 300, 500);
+		        c.tweener.clear().wait(300).moveBy(0, 300, 500, "easeOutQuint");
 		    }
 		}
 		this.hands = [];
 		this.numHand = 0;
 		var that = this;
-		this.tweener.clear().wait(350).call(function(){that.busy = false;});
+		this.tweener.clear().wait(800).call(function(){that.busy = false;});
     },
 
     //手札のソート
