@@ -265,9 +265,9 @@ tm.define("shotgun.MainScene", {
 
         //効果音
         if (hand > 0) {
-            tm.asset.AssetManager.get("hand").clone().play();
+            app.playSE("hand");
         } else {
-            tm.asset.AssetManager.get("nohand").clone().play();
+            app.playSE("nohand");
         }
     },
 

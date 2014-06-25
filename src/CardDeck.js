@@ -132,7 +132,7 @@ tm.define("shotgun.CardDeck", {
         card.remove().addChildTo(this);
         card.tweener.clear().to({x: (CARD_W/2)*CARD_SCALE+(this.hands.length-1)*70, y: SC_H*0.8, rotation: 0}, 500, "easeOutQuint");
         card.tweener.call(function(){that.numHand++;});
-        tm.asset.AssetManager.get("deal").clone().play();
+        app.playSE("deal");
     },
 
     //手札のクリア
