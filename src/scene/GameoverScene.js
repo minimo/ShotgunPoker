@@ -17,6 +17,7 @@ tm.define("shotgun.GameoverScene", {
         this.bg = tm.display.Sprite("greenback", SC_W*2, SC_H*2).addChildTo(this);
         
         var that = this;
+        var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
         //スコア表示
         var lb = this.score = tm.display.OutlineLabel("SCORE: "+app.lastScore, 50).addChildTo(this);
@@ -27,7 +28,7 @@ tm.define("shotgun.GameoverScene", {
         lb.outlineWidth = 2;
 
         //リトライボタン
-        var sh = this.retry = tm.display.RoundRectangleShape(200, 70).addChildTo(this);
+        var sh = this.retry = tm.display.RoundRectangleShape(200, 70, param).addChildTo(this);
         sh.setPosition(SC_W*0.25, SC_H*0.5);
         sh.interactive = true;
         sh.addEventListener("click", function() {
@@ -41,7 +42,7 @@ tm.define("shotgun.GameoverScene", {
         lb.outlineWidth = 2;
 
         //戻るボタン
-        var sh = this.exit = tm.display.RoundRectangleShape(200, 70).addChildTo(this);
+        var sh = this.exit = tm.display.RoundRectangleShape(200, 70, param).addChildTo(this);
         sh.setPosition(SC_W*0.75, SC_H*0.5);
         sh.interactive = true;
         sh.addEventListener("click", function() {
@@ -55,7 +56,7 @@ tm.define("shotgun.GameoverScene", {
         lb.outlineWidth = 2;
 
         //ツイートボタン
-        var sh = this.exit = tm.display.RoundRectangleShape(200, 70).addChildTo(this);
+        var sh = this.exit = tm.display.RoundRectangleShape(200, 70, param).addChildTo(this);
         sh.setPosition(SC_W*0.5, SC_H*0.7);
         sh.interactive = true;
         sh.addEventListener("click", function() {
