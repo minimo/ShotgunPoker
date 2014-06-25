@@ -16,9 +16,17 @@ tm.define("shotgun.PauseScene", {
         //バックグラウンド
         this.bg = tm.display.Sprite("greenback", SC_W*2, SC_H*2).addChildTo(this);
 
-        //マスク        
+        var lb = this.credit1 = tm.display.OutlineLabel("PAUSE", 60).addChildTo(this);
+        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
+        lb.setPosition(SC_W*0.5, SC_H*0.2);
+
+        var lb = this.credit1 = tm.display.OutlineLabel("YOUR HAND LIST", 60).addChildTo(this);
+        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
+        lb.setPosition(SC_W*0.5, SC_H*0.3);
+
+        //マスク
         this.mask = tm.display.Sprite("blackback", SC_W*2, SC_H*2).addChildTo(this);
-        this.mask.tweener.clear().fadeOut(100);
+        this.mask.tweener.clear().fadeOut(10);
         
         this.time = 0;
     },
@@ -37,9 +45,7 @@ tm.define("shotgun.PauseScene", {
 
     //タッチorクリック終了処理
     ontouchend: function(e) {
-//        if (this.time > 30) app.replaceScene(shotgun.MainScene());
+        app.popScene();
     },
 
 });
-
-
