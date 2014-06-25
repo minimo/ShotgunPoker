@@ -255,23 +255,23 @@ tm.define("shotgun.MainScene", {
         }
         //役名表示
         var that = this;
-        var x = SC_W*0.6, y = SC_H*0.8;
-        if (name2 != "") y-=SC_H*0.03;
-        if (name3 != "") y-=SC_H*0.03;
+        var x = SC_W*0.55, y = SC_H*0.8;
+        if (name2 != "") y-=SC_H*0.04;
+        if (name3 != "") y-=SC_H*0.04;
 
-        var lb1 = tm.display.OutlineLabel(name1, 60).addChildTo(this);
+        var lb1 = tm.display.OutlineLabel(name1, 80).addChildTo(this);
         lb1.fontFamily = "'KS-Kohichi-FeltPen'"; lb1.align = "left"; lb1.baseline  = "middle"; lb1.outlineWidth = 3;
         lb1.setPosition(x, y);
         lb1.tweener.clear().wait(1200).call(function(){lb1.remove(); that.deck.clearHand();that.pick = true;});
 
-        y += SC_H*0.06;
-        var lb2 = tm.display.OutlineLabel(name2, 60).addChildTo(this);
+        y += SC_H*0.08;
+        var lb2 = tm.display.OutlineLabel(name2, 80).addChildTo(this);
         lb2.fontFamily = "'KS-Kohichi-FeltPen'"; lb2.align = "left"; lb2.baseline  = "middle"; lb2.outlineWidth = 3;
         lb2.setPosition(x, y);
         lb2.tweener.clear().wait(1200).call(function(){lb2.remove();});
 
-        y += SC_H*0.06;
-        var lb3 = tm.display.OutlineLabel(name3, 60).addChildTo(this);
+        y += SC_H*0.08;
+        var lb3 = tm.display.OutlineLabel(name3, 80).addChildTo(this);
         lb3.fontFamily = "'KS-Kohichi-FeltPen'"; lb3.align = "left"; lb3.baseline  = "middle"; lb3.outlineWidth = 3;
         lb3.setPosition(x, y);
         lb3.tweener.clear().wait(1200).call(function(){lb3.remove();});
