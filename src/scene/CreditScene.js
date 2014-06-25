@@ -60,8 +60,8 @@ tm.define("shotgun.CreditScene", {
 
     //タッチorクリック終了処理
     ontouchend: function(e) {
-        this.mask.tweener.clear().fadeOut(1000);
-        app.replaceScene(shotgun.TitleScene());
+        this.mask.tweener.clear().fadeOut(300);
+        app.popScene();
     },
 
 });

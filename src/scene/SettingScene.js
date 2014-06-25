@@ -15,9 +15,13 @@ tm.define("shotgun.SettingScene", {
 
         //バックグラウンド
         this.bg = tm.display.Sprite("greenback", SC_W*2, SC_H*2).addChildTo(this);
-        
+
+        var lb = this.credit1 = tm.display.OutlineLabel("SETTING", 60).addChildTo(this);
+        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
+        lb.setPosition(SC_W*0.5, SC_H*0.2);
+
         this.mask = tm.display.Sprite("blackback", SC_W*2, SC_H*2).addChildTo(this);
-        this.mask.tweener.clear().fadeOut(1000);
+        this.mask.tweener.clear().fadeOut(100);
         
         this.time = 0;
     },
@@ -36,6 +40,7 @@ tm.define("shotgun.SettingScene", {
 
     //タッチorクリック終了処理
     ontouchend: function(e) {
+        this.mask.tweener.clear().fadeOut(300);
         app.popScene();
     },
 });
