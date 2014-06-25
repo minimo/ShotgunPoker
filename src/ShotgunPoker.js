@@ -22,7 +22,6 @@ tm.define("shotgun.CanvasApp", {
 
     useJoker: USE_JOKER,
     returnJoker: RETURN_JOKER,
-    numShuffle: NUM_SHUFFLE,
 
     init: function(id) {
         this.superInit(id);
