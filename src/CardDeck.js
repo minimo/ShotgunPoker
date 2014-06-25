@@ -27,7 +27,7 @@ tm.define("shotgun.CardDeck", {
 
         //デッキ構築
         this.cards = [];
-        for (var i = 0; i < 2; i++) {
+        for (var i = 0; i < 4; i++) {
             for (var j = 0; j < 13; j++) {
                 var card = shotgun.Card(i, j).addChildTo(this);
                 card.setPosition(SC_W/2, -SC_H/2);
@@ -195,9 +195,9 @@ tm.define("shotgun.CardDeck", {
 
         //ストレート判別
         var straight = true;
-        var start = this.hands[0].number+1;
         if (!this.jokerInHand) {
             //通常の判定
+            var start = this.hands[0].number+1;
             for (var i = 1; i < 5; i++) {
                 if (start != this.hands[i].number) straight = false;
                 start++;
@@ -216,11 +216,20 @@ tm.define("shotgun.CardDeck", {
                 }
             }
         } else {
-            //ジョーカー有りの場合   
+            //ジョーカー有りの場合
+            var skip = 0, count = 0;
+            straight = false;
+            var start = this.hands[0].number+1;
             for (var i = 1; i < 4; i++) {
-                if (start != this.hands[i].number) straight = false;
+                if (start == this.hands[i].number) count++;
+                if (start+1 == this.hands[i].number && skip < 1) {
+                    skip++;
+                    count++;
+                    start++;
+                }
                 start++;
             }
+            if (count == 3) straight = true;
         }
 
         //ストレートの場合は役確定	
