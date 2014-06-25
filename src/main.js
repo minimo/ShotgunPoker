@@ -33,6 +33,7 @@ NUM_SHUFFLE = 20;
 
 //ジョーカー使用フラグ
 USE_JOKER = true;
+RETURN_JOKER = false;   //使用したジョーカーを場に戻すか
 
 //役一覧
 MISS = -30;

@@ -36,7 +36,7 @@ tm.define("shotgun.CardDeck", {
         }
 
         //ジョーカー追加
-        if (USE_JOKER) {
+        if (app.useJoker) {
             this.joker = true;
             var card = shotgun.Card(5, 99).addChildTo(this);
             card.setPosition(SC_W/2, -SC_H/2);
@@ -67,7 +67,7 @@ tm.define("shotgun.CardDeck", {
         if (flag) {
             for (var i = 0; i < num; i++) {
                 var c = this.cards[i];
-                if (c.drop && c.suit != 5) {
+                if (c.drop && c.suit != 5 || c.drop && c.suit == 5 && app.returnJoker) {
                     c.setPosition(rand(0, SC_W), -100);
                     c.drop = false;
                 }
@@ -92,7 +92,7 @@ tm.define("shotgun.CardDeck", {
             if (!flag){
                 if (this.cards[i].drop || this.cards[i].hand) continue;
             }
-        this.cards[i].remove().addChildTo(this);
+            this.cards[i].remove().addChildTo(this);
         }
 
         for (var i = 0; i < num; i++) {
@@ -100,7 +100,7 @@ tm.define("shotgun.CardDeck", {
             if (!flag) {
                 if (c.drop || c.hand) continue;
             } else {
-                if (c.suit == 5) continue;  //ジョーカーは戻さない
+                if (c.suit == 5 && !app.returnJoker) continue;  //ジョーカーはフラグによって戻すか決める
             }
             var x = rand(SC_W*0.1, SC_W*0.9);
             var y = rand(SC_H*0.2, SC_H*0.6);
