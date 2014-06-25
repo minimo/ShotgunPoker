@@ -154,7 +154,7 @@ tm.define("shotgun.CardDeck", {
             .call(function(){
                 that.busy = false;
                 //場の札が一定数以下の場合、落ち札を戻してシャッフル
-                if (that.left < this.numShuffle) that.shuffle(true);
+                if (that.left < that.numShuffle) that.shuffle(true);
             });
     },
 
