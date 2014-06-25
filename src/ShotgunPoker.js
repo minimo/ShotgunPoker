@@ -14,6 +14,7 @@ tm.define("shotgun.CanvasApp", {
     superClass: tm.app.CanvasApp,
 
     bgm: null,
+    bgmIsPlay: false,
     bgmVolume: 1.0,
     seVolume: 1.0,
 
@@ -54,20 +55,28 @@ tm.define("shotgun.CanvasApp", {
     
     playBGM: function(asset) {
         if (this.bgm) {
-            if (this.bgm.isPlay) this.bgm.stop();
+            if (this.bgmIsPlay) {
+                this.bgm.stop();
+                this.bgmIsPlay = false;
+            }
         }
         this.bgm = tm.asset.AssetManager.get(asset).clone();
         if (this.bgm) {
             this.bgm.loop = true;
             this.bgm.volume = this.bgmVolume;
             this.bgm.play();
+            this.bgmIsPlay = true;
         }
         return this.bgm;
     },
 
     stopBGM: function() {
-        if (this.bgm) this.bgm.stop();
-        return this.bgm;
+        if (this.bgm) {
+            if (this.bgmIsPlay) {
+                this.bgm.stop();
+                this.bgmIsPlay = false;
+            }
+        }
     },
 
     playSE: function(asset) {

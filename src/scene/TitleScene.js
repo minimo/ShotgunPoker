@@ -91,6 +91,8 @@ tm.define("shotgun.TitleScene", {
         this.mask.tweener.clear().fadeOut(200);
         
         this.time = 0;
+
+        app.playBGM("titleBGM");
     },
 
     update: function() {
