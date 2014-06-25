@@ -100,7 +100,7 @@ tm.define("shotgun.CardDeck", {
             if (!flag) {
                 if (c.drop || c.hand) continue;
             } else {
-                if (c.suit == 5 && !app.returnJoker) continue;  //ジョーカーはフラグによって戻すか決める
+                if (c.drop && c.suit == 5 && !app.returnJoker) continue;  //ジョーカーはフラグによって戻すか決める
             }
             var x = rand(SC_W*0.1, SC_W*0.9);
             var y = rand(SC_H*0.2, SC_H*0.6);
@@ -153,7 +153,7 @@ tm.define("shotgun.CardDeck", {
             .call(function(){
                 that.busy = false;
                 //場の札が一定数以下の場合、落ち札を戻してシャッフル
-                if (that.left < NUM_SHUFFLE) that.shuffle(true);
+                if (that.left < app.numShuffle) that.shuffle(true);
             });
     },
 
