@@ -61,11 +61,8 @@ tm.define("shotgun.TitleScene", {
             that.mask.tweener.clear().fadeIn(300).call(function(){app.replaceScene(shotgun.MainScene());});
         });
         var lb = this.tutorialLabel = tm.display.OutlineLabel("TUTORIAL", 50).addChildTo(this);
+        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
         lb.setPosition(SC_W*0.5, SC_H*0.6);
-        lb.fontFamily = "'azuki'";
-        lb.align     = "center";
-        lb.baseline  = "middle";
-        lb.outlineWidth = 4;
 
         //設定
         var sh = this.setting = tm.display.RoundRectangleShape(width, height, param).addChildTo(this);
@@ -75,11 +72,8 @@ tm.define("shotgun.TitleScene", {
             that.mask.tweener.clear().fadeIn(300).call(function(){app.replaceScene(shotgun.MainScene());});
         });
         var lb = this.settingLabel = tm.display.OutlineLabel("SETTING", 50).addChildTo(this);
+        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
         lb.setPosition(SC_W*0.5, SC_H*0.7);
-        lb.fontFamily = "'azuki'";
-        lb.align     = "center";
-        lb.baseline  = "middle";
-        lb.outlineWidth = 4;
 
         //クレジット
         var sh = this.credit = tm.display.RoundRectangleShape(width, height, param).addChildTo(this);
@@ -89,11 +83,8 @@ tm.define("shotgun.TitleScene", {
             that.mask.tweener.clear().fadeIn(300).call(function(){app.replaceScene(shotgun.CreditScene());});
         });
         var lb = this.creditLabel = tm.display.OutlineLabel("CREDIT", 50).addChildTo(this);
+        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
         lb.setPosition(SC_W*0.5, SC_H*0.8);
-        lb.fontFamily = "'azuki'";
-        lb.align     = "center";
-        lb.baseline  = "middle";
-        lb.outlineWidth = 4;
 
         //マスク
         this.mask = tm.display.Sprite("blackback", SC_W*2, SC_H*2).addChildTo(this);
