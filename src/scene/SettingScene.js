@@ -36,6 +36,7 @@ tm.define("shotgun.SettingScene", {
 
     //タッチorクリック終了処理
     ontouchend: function(e) {
+        app.popScene();
     },
 });
 
