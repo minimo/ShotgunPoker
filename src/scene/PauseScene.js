@@ -24,6 +24,12 @@ tm.define("shotgun.PauseScene", {
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
         lb.setPosition(SC_W*0.5, SC_H*0.3);
 
+        for (var i = 1; i < 12; i++) {
+            var lb = this.credit1 = tm.display.OutlineLabel(shotgun.handList[i].name, 60).addChildTo(this);
+            lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
+            lb.setPosition(SC_W*0.5, SC_H*0.4+(i*30));
+        }
+
         //マスク
         this.mask = tm.display.Sprite("blackback", SC_W*2, SC_H*2).addChildTo(this);
         this.mask.tweener.clear().fadeOut(10);

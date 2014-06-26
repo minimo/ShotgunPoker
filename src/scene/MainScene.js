@@ -34,7 +34,7 @@ tm.define("shotgun.MainScene", {
     pick: false,    //カードピック可能フラグ
     count: 9,       //カード選択カウントダウン用
     level: 0,       //ゲームレベル
-    hand: null,     //役の回数
+    handCount: null,//役の回数
     onePair: 0,     //ワンペアの連続回数
 
     //経過時間
@@ -57,7 +57,7 @@ tm.define("shotgun.MainScene", {
         this.upperLayer = tm.app.Object2D().addChildTo(this);
 
         //上がり回数配列
-        this.hand = [];
+        this.handCount = [];
 
         //スコア表示
         var that = this;
@@ -175,7 +175,7 @@ tm.define("shotgun.MainScene", {
                 lb.outlineWidth = 3;
                 lb.tweener.clear().wait(1000).call(function(){lb.remove();});
             }
-            this.hand[sc]++;
+            this.handCount[sc]++;
             this.score += sc;
             if (this.score < 0) this.score = 0;
 

@@ -13,16 +13,20 @@ shotgun = {
 tm.define("shotgun.CanvasApp", {
     superClass: tm.app.CanvasApp,
 
+    //ＢＧＭ＆効果音
     bgm: null,
     bgmIsPlay: false,
     bgmVolume: 1.0,
     seVolume: 1.0,
 
+    //スコア保存
     lastScore: 0,
     highScore: 0,
 
+    //各種設定
     useJoker: USE_JOKER,
     returnJoker: RETURN_JOKER,
+    handList: null,
 
     init: function(id) {
         this.superInit(id);
@@ -44,7 +48,22 @@ tm.define("shotgun.CanvasApp", {
         });
         loadingScene.bg.canvas.clearColor("black");
         this.replaceScene(loadingScene);
-  },
+
+        //役名一覧
+        this.handList = [];
+        this.handList[0]  = {name: "MISS", point: MISS};
+        this.handList[1]  = {name: "NO HAND", point: NOHAND};
+        this.handList[2]  = {name: "ONE PAIR", point: ONEPAIR};
+        this.handList[3]  = {name: "TWO PAIR", point: TWOPAIR};
+        this.handList[4]  = {name: "FLASH", point: FLASH};
+        this.handList[5]  = {name: "THREE CARD", point: THREECARD};
+        this.handList[6]  = {name: "FULL HOUSE", point: FULLHOUSE};
+        this.handList[7]  = {name: "STRAIGHT", point: STRAIGHT};
+        this.handList[8]  = {name: "FOUR CARD", point: FOURCARD};
+        this.handList[9]  = {name: "FIVE CARD", point: FIVECARD};
+        this.handList[10] = {name: "STRAIGHT FLASH", point: STRAIGHTFLASH};
+        this.handList[11] = {name: "ROYAL STRAIGHT FLASH", point: ROYALSTRAIGHTFLASH};
+    },
 
     _onLoadAssets: function() {
     },
