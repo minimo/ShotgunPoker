@@ -58,6 +58,9 @@ tm.define("shotgun.MainScene", {
 
         //上がり回数配列
         this.handCount = [];
+        for (var i = 0; i < 12; i++) {
+            this.handCount[app.handList[i].point] = 0;
+        }
 
         //スコア表示
         var that = this;
@@ -135,12 +138,9 @@ tm.define("shotgun.MainScene", {
         }
 
         //ポーズボタン
-        var sh = this.credit = tm.display.RoundRectangleShape(200, 40, {fillStyle:'rgba(0,80,0,1)', lineWidth:4}).addChildTo(this);
+        var sh = this.credit = tm.display.RoundRectangleShape(200, 50, {fillStyle:'rgba(0,80,0,1)', lineWidth:4}).addChildTo(this);
         sh.setPosition(SC_W*0.8, SC_H*0.9);
         sh.interactive = true;
-        sh.addEventListener("click", function() {
-            that.mask.tweener.clear().call(function(){app.pushScene(shotgun.PauseScene());});
-        });
         var lb = this.creditLabel = tm.display.OutlineLabel("pause", 50).addChildTo(this);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
         lb.setPosition(SC_W*0.8, SC_H*0.9);
@@ -344,6 +344,10 @@ tm.define("shotgun.MainScene", {
             if (c) this.deck.addHand(c);
         }
         this.shuffled = false;
+
+        if (sx > SC_W*0.9 && sy > SC_H*0.9) {
+            app.pushScene(shotgun.PauseScene(this));
+        }
     },
 });
 
