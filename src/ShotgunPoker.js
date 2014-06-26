@@ -62,7 +62,7 @@ tm.define("shotgun.CanvasApp", {
         this.handList[8]  = {name: "FOUR CARD", point: FOURCARD};
         this.handList[9]  = {name: "FIVE CARD", point: FIVECARD};
         this.handList[10] = {name: "STRAIGHT FLASH", point: STRAIGHTFLASH};
-        this.handList[11] = {name: "ROYAL STRAIGHT FLASH", point: ROYALSTRAIGHTFLASH};
+        this.handList[11] = {name: "R.STRAIGHT FLASH", point: ROYALSTRAIGHTFLASH};
     },
 
     _onLoadAssets: function() {
