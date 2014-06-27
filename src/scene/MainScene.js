@@ -30,7 +30,7 @@ tm.define("shotgun.MainScene", {
     //ゲーム内情報
     start: false,   //ゲームスタートフラグ
     score: 0,       //スコア
-    life: 6,        //ライフ
+    life: 5,        //ライフ
     pick: false,    //カードピック可能フラグ
     count: 9,       //カード選択カウントダウン用
     level: 1,       //ゲームレベル
@@ -174,26 +174,46 @@ tm.define("shotgun.MainScene", {
             this.deck.numHand = 0;
             var sc = this.deck.checkHand();
             this.dispHand(sc);
+
+            //役無し、手札未成立、ワンペア２連続はペナルティ
+            var penalty = 0;
+            if (sc == NOHAND) penalty = 1;
+            if (sc == MISS) penalty = 2;
             if (sc == ONEPAIR) {
                 this.onePair++;
-                if (this.onePair % 2 == 0) this.life--;
+                if (this.onePair % 2 == 0) penalty = 1;
             } else {
                 this.onePair = 0;
             }
-            if (sc == NOHAND) this.life--;
-            if (sc == MISS) this.life -= 2;
-            if (sc == ROYALSTRAIGHTFLASH) this.life++;
-            if (this.life > 6)this.life = 6;
+            if (penalty > 0) {
+                this.life -= penalty;
+                var lb = tm.display.OutlineLabel("LIFE -"+penalty, 50).addChildTo(this);
+                lb.fontFamily = "'KS-Kohichi-FeltPen'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 3;
+                lb.setPosition(SC_W*0.8, SC_H*0.8);
+                lb.alpha = 0;
+                lb.tweener.clear().wait(1200).fadeIn(1).to({x: SC_W*0.8, y: SC_H*0.8-20, alpha:0.0},1000).call(function(){lb.remove();});
+            }
+
+            //R.S.Fの場合はライフ＋１
+            if (sc == ROYALSTRAIGHTFLASH) {
+                this.life++;
+                if (this.life > 7) {
+                    this.life = 7;
+                } else {
+                    var lb = tm.display.OutlineLabel("1UP!!"+penalty, 50).addChildTo(this);
+                    lb.fontFamily = "'KS-Kohichi-FeltPen'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 3;
+                    lb.setPosition(SC_W*0.8, SC_H*0.8);
+                    lb.alpha = 0;
+                    lb.tweener.clear().wait(1200).fadeIn(1).to({x: SC_W*0.8, y: SC_H*0.8-20, alpha:0.0},1000).call(function(){lb.remove();});
+                }
+            }
 
             //早上がりボーナス
             if (this.count > 4 && sc > 0) {
                 sc = ~~(sc*1.5);
                 var lb = tm.display.OutlineLabel("EXCELLENT!", 100).addChildTo(this);
+                lb.fontFamily = "'KS-Kohichi-FeltPen'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 3;
                 lb.setPosition(SC_W*0.5, SC_H*0.5);
-                lb.fontFamily = "'KS-Kohichi-FeltPen'";
-                lb.align     = "center";
-                lb.baseline  = "middle";
-                lb.outlineWidth = 3;
                 lb.tweener.clear().wait(1000).call(function(){lb.remove();});
             }
             this.handCount[sc]++;
