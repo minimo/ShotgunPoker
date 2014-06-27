@@ -33,7 +33,7 @@ tm.define("shotgun.MainScene", {
     life: 6,        //ライフ
     pick: false,    //カードピック可能フラグ
     count: 9,       //カード選択カウントダウン用
-    level: 0,       //ゲームレベル
+    level: 1,       //ゲームレベル
     handCount: null,//役の回数
     onePair: 0,     //ワンペアの連続回数
 
@@ -160,8 +160,7 @@ tm.define("shotgun.MainScene", {
         if (!this.start) return;
         if (this.deck.busy) return;
 
-        this.level = Math.sqrt(this.absTime*0.0001)+1;
-        var interval = 50-~~(this.level*10);
+        var interval = 45-~~(this.level*10);
         if (interval < 10) interval = 10;
         if (this.time % interval == 0 && this.pick) {
             this.count--;
@@ -186,7 +185,7 @@ tm.define("shotgun.MainScene", {
             if (this.life > 6)this.life = 6;
 
             //早上がりボーナス
-            if (this.count > 5 && sc > 0) {
+            if (this.count > 4 && sc > 0) {
                 sc = ~~(sc*1.5);
                 var lb = tm.display.OutlineLabel("EXCELLENT!", 100).addChildTo(this);
                 lb.setPosition(SC_W*0.5, SC_H*0.5);
@@ -208,6 +207,7 @@ tm.define("shotgun.MainScene", {
 
             this.count = 10;
             this.time = 0;
+            this.level = Math.sqrt(this.absTime*0.0001)+1;
         }
 
         if (this.pick) {
