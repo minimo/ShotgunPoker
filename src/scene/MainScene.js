@@ -154,7 +154,7 @@ tm.define("shotgun.MainScene", {
 
         this.level = Math.sqrt(this.absTime*0.0001)+1;
         var interval = 41-~~(this.level*10);
-        if (interval < 20) interval = 20;
+        if (interval < 10) interval = 10;
         if (this.time % interval == 0 && this.pick) {
             this.count--;
         }
