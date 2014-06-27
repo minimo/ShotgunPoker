@@ -170,6 +170,7 @@ tm.define("shotgun.CardDeck", {
             var c = this.hands[i];
             if (c) {
                 c.remove().addChildTo(this);
+                c.rotation = 0;
                 c.tweener.move((CARD_W/2)*CARD_SCALE+i*60, SC_H*0.8, 100);
             }
         }
