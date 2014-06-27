@@ -34,6 +34,7 @@ tm.define("shotgun.MainScene", {
     pick: false,    //カードピック可能フラグ
     count: 9,       //カード選択カウントダウン用
     level: 1,       //ゲームレベル
+    levelReset: 0,  //レベルリセット回数
     handCount: null,//役の回数
     onePair: 0,     //ワンペアの連続回数
 
@@ -207,7 +208,13 @@ tm.define("shotgun.MainScene", {
 
             this.count = 10;
             this.time = 0;
-            this.level = Math.sqrt(this.absTime*0.0001)+1;
+
+            this.level = Math.sqrt(this.absTime*0.0002)+1;
+            if (this.level > 2 && this.levelReset < 1) {
+                this.absTime = 0;
+                this.level = 1;
+                this.levelReset++;
+            }
         }
 
         if (this.pick) {
