@@ -10,7 +10,7 @@ mt = new MersenneTwister();
 
 //定数
 //デバッグフラグ
-DEBUG = false;
+DEBUG = true;
 
 //スクリーンサイズ
 SC_W = 640;
