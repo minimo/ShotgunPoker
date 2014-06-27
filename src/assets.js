@@ -10,6 +10,7 @@ var assets = {
     "greenback":    "assets/greenback.png",
     "blackback":    "assets/background.png",
     "card":         "assets/trump.png",
+    "tmliblogo":    "assets/tmlib_logo.png",
 
     //BGM
     "titleBGM":     "assets/game_maoudamashii_5_casino02.mp3",
