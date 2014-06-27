@@ -20,7 +20,7 @@ tm.define("shotgun.CardDeck", {
     //カードデッキ情報
     joker: false,   //ジョーカー有りフラグ
     busy: false,    //処理中フラグ
-    numShuffle: NUM_SHUFFLE,    //シャッフルが発生する残り枚数
+    shuffleLimit: SHUFFLE_LIMIT,    //シャッフルが発生する残り枚数
 
     init: function(suit, num) {
         //親クラスの初期化
@@ -75,7 +75,8 @@ tm.define("shotgun.CardDeck", {
             }
         }
 
-        for( var i = 0; i < 100; i++ ){
+        //カードのシャッフル
+        for( var i = 0; i < 200; i++ ){
             var a = rand(0, num-1);
             var b = rand(0, num-1);
             if (a == b)continue;
@@ -83,11 +84,11 @@ tm.define("shotgun.CardDeck", {
                 if (this.cards[a].drop || this.cards[a].hand) continue;
                 if (this.cards[b].drop || this.cards[b].hand) continue;
             }
-
             var tmp = this.cards[a];
             this.cards[a] = this.cards[b];
             this.cards[b] = tmp;
         }
+
         //表示順を考慮する為、逆に追加
         for( var i = num-1; i > -1; i-- ){
             if (!flag){
@@ -96,6 +97,7 @@ tm.define("shotgun.CardDeck", {
             this.cards[i].remove().addChildTo(this);
         }
 
+        //カード位置シャッフル
         for (var i = 0; i < num; i++) {
             var c = this.cards[i];
             if (!flag) {
@@ -154,7 +156,7 @@ tm.define("shotgun.CardDeck", {
             .call(function(){
                 that.busy = false;
                 //場の札が一定数以下の場合、落ち札を戻してシャッフル
-                if (that.left < that.numShuffle) that.shuffle(true);
+                if (that.left < that.shuffleLimit) that.shuffle(true);
             });
     },
 
