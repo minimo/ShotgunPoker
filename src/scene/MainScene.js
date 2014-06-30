@@ -192,6 +192,9 @@ tm.define("shotgun.MainScene", {
                 lb.setPosition(SC_W*0.8, SC_H*0.8);
                 lb.alpha = 0;
                 lb.tweener.clear().wait(1200).fadeIn(1).to({x: SC_W*0.8, y: SC_H*0.8-20, alpha:0.0},1000).call(function(){lb.remove();});
+                app.playSE("nohand");
+            } else {
+                app.playSE("hand");
             }
 
             //R.S.Fの場合はライフ＋１
@@ -323,13 +326,6 @@ tm.define("shotgun.MainScene", {
         lb3.fontFamily = "'KS-Kohichi-FeltPen'"; lb3.align = "left"; lb3.baseline  = "middle"; lb3.outlineWidth = 3;
         lb3.setPosition(x, y);
         lb3.tweener.clear().wait(1200).call(function(){lb3.remove();});
-
-        //効果音
-        if (hand > 0) {
-            app.playSE("hand");
-        } else {
-            app.playSE("nohand");
-        }
     },
 
     //タッチorクリック開始処理

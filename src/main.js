@@ -11,6 +11,7 @@ mt = new MersenneTwister();
 //定数
 //デバッグフラグ
 DEBUG = true;
+PHONEGAP = false;
 
 //スクリーンサイズ
 SC_W = 640;
@@ -89,3 +90,16 @@ tm.main(function() {
     app.run();
 });
 
+document.addEventListener('pause', function() {
+    var scene = app.currentScene;
+    if (scene instanceof 'shotgun.MainScene') {
+        app.pushScene(shotgun.pauseScene());
+    }
+}, false);
+document.addEventListener('resume', function() {
+}, false);
+
+/*
+document.addEventListener(‘online’, PENQs.online, false);
+document.addEventListener(‘offline’, PENQs.offline, false);
+*/
