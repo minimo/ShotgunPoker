@@ -14,7 +14,8 @@ tm.define("shotgun.GameoverScene", {
         this.background = "rgba(0, 0, 0, 0.0)";
 
         //バックグラウンド
-        this.bg = tm.display.Sprite("greenback", SC_W*2, SC_H*2).addChildTo(this);
+        this.bg = tm.display.Sprite("greenback", SC_W, SC_H).addChildTo(this);
+        this.bg.setPosition(SC_W/2, SC_H/2);
         
         var that = this;
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};

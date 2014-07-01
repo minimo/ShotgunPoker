@@ -14,7 +14,8 @@ tm.define("shotgun.SettingScene", {
         this.background = "rgba(0, 0, 0, 0.0)";
 
         //バックグラウンド
-        this.bg = tm.display.Sprite("greenback", SC_W*2, SC_H*2).addChildTo(this);
+        this.bg = tm.display.Sprite("greenback", SC_W, SC_H).addChildTo(this);
+        this.bg.setPosition(SC_W/2, SC_H/2);
 
         var lb = this.credit1 = tm.display.OutlineLabel("SETTING", 60).addChildTo(this);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;

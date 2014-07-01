@@ -8,13 +8,13 @@
 
 tm.define("shotgun.PauseScene", {
     superClass: tm.app.Scene,
-    
+
     parent: null,
 
     init: function(parent) {
         this.superInit();
         this.background = "rgba(0, 0, 0, 0.0)";
-        
+
         this.parent = parent;
 
         //バックグラウンド
