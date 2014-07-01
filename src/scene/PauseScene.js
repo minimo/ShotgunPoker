@@ -34,6 +34,7 @@ tm.define("shotgun.PauseScene", {
             lb.setPosition(SC_W*0.2, SC_H*0.28+(i*45));
         }
 
+        var that = this;
         var width = 250, height = 70;
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
@@ -53,6 +54,9 @@ tm.define("shotgun.PauseScene", {
         sh.setPosition(SC_W*0.75, SC_H*0.9);
         sh.interactive = true;
         sh.addEventListener("click", function() {
+            if (that.parent instanceof shotgun.MainScene) {
+                that.parent.exitGame = true;
+            }
             that.mask.tweener.clear().fadeIn(300).call(function(){app.popScene();}).fadeOut(300);
         });
         var lb = tm.display.OutlineLabel("GAME EXIT", 50).addChildTo(this);

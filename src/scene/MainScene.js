@@ -23,9 +23,7 @@ tm.define("shotgun.MainScene", {
 
     //デッキ
     deck: null,
-
     shuffled: false,
-    startTime: 0,
 
     //ゲーム内情報
     start: false,   //ゲームスタートフラグ
@@ -41,6 +39,9 @@ tm.define("shotgun.MainScene", {
     //経過時間
     time: 0,
     absTime: 0,
+
+    //遷移情報
+    exitGame: false,
 
     init: function() {
         this.superInit();
@@ -243,6 +244,11 @@ tm.define("shotgun.MainScene", {
         if (this.pick) {
             this.time++;
             this.absTime++;
+        }
+
+        if (this.exitGame) {
+            app.stopBGM();
+            app.replaceScene(shotgun.TitleScene());
         }
     },
 
