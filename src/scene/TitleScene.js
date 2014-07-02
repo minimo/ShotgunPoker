@@ -30,12 +30,13 @@ tm.define("shotgun.TitleScene", {
 //        lb.tweener.wait(500).move(SC_W*0.4, SC_H*0.2, 1500,"easeOutBounce");
 
         var lb = this.title2 = tm.display.OutlineLabel("POKER", 120).addChildTo(this.titleLayer);
-        lb.setPosition(SC_W*0.7, SC_H*0.35-SC_H*0.6);
+//        lb.setPosition(SC_W*0.7, SC_H*0.35-SC_H*0.6);
+        lb.setPosition(SC_W*0.7, SC_H*0.35);
         lb.fontFamily = "'azuki'";
         lb.align     = "center";
         lb.baseline  = "middle";
         lb.outlineWidth = 2;
-        lb.tweener.wait(500).move(SC_W*0.7, SC_H*0.35, 1500,"easeOutBounce");
+//        lb.tweener.wait(500).move(SC_W*0.7, SC_H*0.35, 1500,"easeOutBounce");
 
         var that = this;
         var width = 230, height = 70;
