@@ -28,7 +28,7 @@ tm.define("shotgun.MainScene", {
     //ゲーム内情報
     start: false,   //ゲームスタートフラグ
     score: 0,       //スコア
-    life: 5,        //ライフ
+    life: 3,        //ライフ
     pick: false,    //カードピック可能フラグ
     count: 9,       //カード選択カウントダウン用
     level: 1,       //ゲームレベル
@@ -177,13 +177,13 @@ tm.define("shotgun.MainScene", {
             var sc = this.deck.checkHand();
             this.dispHand(sc);
 
-            //役無し、手札未成立、ワンペア２連続はペナルティ
+            //役無し、手札未成立、ワンペア３連続はペナルティ
             var penalty = 0;
             if (sc == NOHAND) penalty = 1;
-            if (sc == MISS) penalty = 2;
+            if (sc == MISS) penalty = 1;
             if (sc == ONEPAIR) {
                 this.onePair++;
-                if (this.onePair % 2 == 0) penalty = 1;
+                if (this.onePair % 3 == 0) penalty = 1;
             } else {
                 this.onePair = 0;
             }
