@@ -9,14 +9,14 @@
 tm.define("shotgun.PauseScene", {
     superClass: tm.app.Scene,
 
-    parent: null,
+    parentScene: null,
     dialog: null,
 
-    init: function(parent) {
+    init: function(parentScene) {
         this.superInit();
         this.background = "rgba(0, 0, 0, 0.0)";
 
-        this.parent = parent;
+        this.parentScene = parentScene;
         
         //ダイアログ
         this.dialog = shotgun.YesNoDialog("ExitGame?");
@@ -33,7 +33,7 @@ tm.define("shotgun.PauseScene", {
         lb.setPosition(SC_W*0.5, SC_H*0.2);
 
         for (var i = 0; i < 12; i++) {
-            var lb = tm.display.OutlineLabel(app.handList[i].name+":"+this.parent.handCount[app.handList[i].point], 40).addChildTo(this);
+            var lb = tm.display.OutlineLabel(app.handList[i].name+":"+this.parentScene.handCount[app.handList[i].point], 40).addChildTo(this);
             lb.fontFamily = "'azuki'"; lb.align = "left"; lb.baseline = "middle"; lb.outlineWidth = 2;
             lb.setPosition(SC_W*0.2, SC_H*0.28+(i*45));
         }
