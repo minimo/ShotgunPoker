@@ -21,9 +21,19 @@ tm.define("shotgun.SettingScene", {
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
         lb.setPosition(SC_W*0.5, SC_H*0.2);
 
+        //ＢＧＭ音量
+        var lb = this.credit1 = tm.display.OutlineLabel("BGM", 60).addChildTo(this);
+        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
+        lb.setPosition(SC_W*0.25, SC_H*0.4);
+
+        //ＳＥ音量
+        var lb = this.credit1 = tm.display.OutlineLabel("SE", 60).addChildTo(this);
+        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
+        lb.setPosition(SC_W*0.25, SC_H*0.6);
+
         this.mask = tm.display.Sprite("blackback", SC_W*2, SC_H*2).addChildTo(this);
         this.mask.tweener.clear().fadeOut(100);
-        
+
         this.time = 0;
     },
 
