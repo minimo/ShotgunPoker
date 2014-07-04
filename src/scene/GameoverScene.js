@@ -22,18 +22,18 @@ tm.define("shotgun.GameoverScene", {
         var that = this;
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
-        var lb = this.score = tm.display.OutlineLabel("YOUR RESULT"+app.lastScore, 50).addChildTo(this);
+        var lb = this.score = tm.display.OutlineLabel("YOUR RESULT"+appMain.lastScore, 50).addChildTo(this);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
         lb.setPosition(SC_W*0.5, SC_H*0.1);
 
         //スコア表示
-        var lb = this.score = tm.display.OutlineLabel("SCORE: "+app.lastScore, 50).addChildTo(this);
+        var lb = this.score = tm.display.OutlineLabel("SCORE: "+appMain.lastScore, 50).addChildTo(this);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
         lb.setPosition(SC_W*0.5, SC_H*0.2);
         lb.outlineWidth = 2;
 
         for (var i = 0; i < 12; i++) {
-            var lb = tm.display.OutlineLabel(app.handList[i].name+":"+this.parentScene.handCount[app.handList[i].point], 40).addChildTo(this);
+            var lb = tm.display.OutlineLabel(appMain.handList[i].name+":"+this.parentScene.handCount[appMain.handList[i].point], 40).addChildTo(this);
             lb.fontFamily = "'azuki'"; lb.align = "left"; lb.baseline = "middle"; lb.outlineWidth = 2;
             lb.setPosition(SC_W*0.2, SC_H*0.28+(i*45));
         }
@@ -43,7 +43,7 @@ tm.define("shotgun.GameoverScene", {
         sh.setPosition(SC_W*0.25, SC_H*0.9);
         sh.interactive = true;
         sh.addEventListener("click", function() {
-            that.mask.tweener.clear().fadeIn(300).call(function(){app.replaceScene(shotgun.MainScene());});
+            that.mask.tweener.clear().fadeIn(300).call(function(){appMain.replaceScene(shotgun.MainScene());});
         });
         var lb = this.retryLabel = tm.display.OutlineLabel("RETRY", 50).addChildTo(this);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
@@ -54,7 +54,7 @@ tm.define("shotgun.GameoverScene", {
         sh.setPosition(SC_W*0.75, SC_H*0.9);
         sh.interactive = true;
         sh.addEventListener("click", function() {
-            that.mask.tweener.clear().fadeIn(300).call(function(){app.replaceScene(shotgun.TitleScene());});
+            that.mask.tweener.clear().fadeIn(300).call(function(){appMain.replaceScene(shotgun.TitleScene());});
         });
         var lb = this.exitLabel = tm.display.OutlineLabel("EXIT", 50).addChildTo(this);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
@@ -66,7 +66,7 @@ tm.define("shotgun.GameoverScene", {
         sh.setPosition(SC_W*0.5, SC_H*0.7);
         sh.interactive = true;
         sh.addEventListener("click", function() {
-            app.replaceScene(shotgun.TitleScene());
+            appMain.replaceScene(shotgun.TitleScene());
         });
         var lb = this.exitLabel = tm.display.OutlineLabel("TWEET", 50).addChildTo(this);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;

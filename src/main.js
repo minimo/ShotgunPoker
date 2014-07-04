@@ -82,22 +82,24 @@ var clamp = function(x, min, max) {
 };
 
 //インスタンス
-app = {};
+appMain = {};
 
 //アプリケーションメイン
 tm.main(function() {
-    app = shotgun.CanvasApp("#world");
-    app.run();
+    appMain = shotgun.CanvasApp("#world");
+    appMain.run();
 });
 
+/*
 document.addEventListener('pause', function() {
-    var scene = app.currentScene;
+    var scene = main.currentScene;
     if (scene instanceof 'shotgun.MainScene') {
-        app.pushScene(shotgun.pauseScene());
+        appMain.pushScene(shotgun.pauseScene());
     }
 }, false);
 document.addEventListener('resume', function() {
 }, false);
+/*
 
 /*
 document.addEventListener(‘online’, PENQs.online, false);

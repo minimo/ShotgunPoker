@@ -52,7 +52,7 @@ tm.define("shotgun.SettingScene", {
     //タッチorクリック終了処理
     ontouchend: function(e) {
         this.mask.tweener.clear().fadeOut(200);
-        app.popScene();
+        appMain.popScene();
     },
 });
 

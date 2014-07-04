@@ -38,7 +38,7 @@ tm.define("shotgun.TitleScene", {
         sh.interactive = true;
         sh.boundingType = "rect";
         sh.addEventListener("click", function() {
-            that.mask.tweener.clear().fadeIn(200).call(function(){app.replaceScene(shotgun.MainScene());});
+            that.mask.tweener.clear().fadeIn(200).call(function(){appMain.replaceScene(shotgun.MainScene());});
         });
         var lb = this.playLabel = tm.display.OutlineLabel("PLAY", 50).addChildTo(this);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
@@ -50,7 +50,7 @@ tm.define("shotgun.TitleScene", {
         sh.interactive = true;
         sh.boundingType = "rect";
         sh.addEventListener("click", function() {
-            that.mask.tweener.clear().fadeIn(200).call(function(){app.pushScene(shotgun.MainScene());});
+            that.mask.tweener.clear().fadeIn(200).call(function(){appMain.pushScene(shotgun.MainScene());});
         });
         var lb = this.tutorialLabel = tm.display.OutlineLabel("TUTORIAL", 50).addChildTo(this);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
@@ -62,7 +62,7 @@ tm.define("shotgun.TitleScene", {
         sh.interactive = true;
         sh.boundingType = "rect";
         sh.addEventListener("click", function() {
-            that.mask.tweener.clear().fadeIn(200).call(function(){app.pushScene(shotgun.SettingScene());});
+            that.mask.tweener.clear().fadeIn(200).call(function(){appMain.pushScene(shotgun.SettingScene());});
         });
         var lb = this.settingLabel = tm.display.OutlineLabel("SETTING", 50).addChildTo(this);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
@@ -74,7 +74,7 @@ tm.define("shotgun.TitleScene", {
         sh.interactive = true;
         sh.boundingType = "rect";
         sh.addEventListener("click", function() {
-            that.mask.tweener.clear().fadeIn(200).call(function(){app.pushScene(shotgun.CreditScene());});
+            that.mask.tweener.clear().fadeIn(200).call(function(){appMain.pushScene(shotgun.CreditScene());});
         });
         var lb = this.creditLabel = tm.display.OutlineLabel("CREDIT", 50).addChildTo(this);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
