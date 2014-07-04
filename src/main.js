@@ -90,16 +90,21 @@ tm.main(function() {
     appMain.run();
 });
 
-/*
+document.addEventListener('load', function () {
+//    alert('loadイベントが発火しました');
+}, false);
+document.addEventListener('deviceready', function () {
+//    alert('devicereadyイベントが発火しました');
+}, false);
 document.addEventListener('pause', function() {
-    var scene = main.currentScene;
-    if (scene instanceof 'shotgun.MainScene') {
+//    alert('pauseイベントが発火しました');
+//    var scene = appMain.currentScene;
+//    if (scene instanceof 'shotgun.MainScene') {
         appMain.pushScene(shotgun.pauseScene());
-    }
+//    }
 }, false);
 document.addEventListener('resume', function() {
 }, false);
-/*
 
 /*
 document.addEventListener(‘online’, PENQs.online, false);
