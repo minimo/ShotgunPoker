@@ -86,7 +86,7 @@ tm.define("shotgun.TitleScene", {
         
         this.time = 0;
 
-        app.playBGM("titleBGM");
+        appMain.playBGM("titleBGM");
     },
 
     onenter: function() {
@@ -107,7 +107,7 @@ tm.define("shotgun.TitleScene", {
 
     //タッチorクリック終了処理
     ontouchend: function(e) {
-//        if (this.time > 30) app.replaceScene(shotgun.MainScene());
+//        if (this.time > 30) appMain.replaceScene(shotgun.MainScene());
     },
 
 });
