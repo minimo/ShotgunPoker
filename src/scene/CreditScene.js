@@ -62,7 +62,7 @@ tm.define("shotgun.CreditScene", {
         sp.setScale(0.5, 0.5);
 
         this.mask = tm.display.Sprite("blackback", SC_W*2, SC_H*2).addChildTo(this);
-        this.mask.tweener.clear().fadeOut(1000);
+        this.mask.tweener.clear().fadeOut(200);
         
         this.time = 0;
     },
@@ -81,7 +81,7 @@ tm.define("shotgun.CreditScene", {
 
     //タッチorクリック終了処理
     ontouchend: function(e) {
-        this.mask.tweener.clear().fadeOut(300);
+        this.mask.tweener.clear().fadeOut(200);
         app.popScene();
     },
 

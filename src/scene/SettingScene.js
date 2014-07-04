@@ -32,7 +32,7 @@ tm.define("shotgun.SettingScene", {
         lb.setPosition(SC_W*0.25, SC_H*0.6);
 
         this.mask = tm.display.Sprite("blackback", SC_W*2, SC_H*2).addChildTo(this);
-        this.mask.tweener.clear().fadeOut(100);
+        this.mask.tweener.clear().fadeOut(200);
 
         this.time = 0;
     },
@@ -51,7 +51,7 @@ tm.define("shotgun.SettingScene", {
 
     //タッチorクリック終了処理
     ontouchend: function(e) {
-        this.mask.tweener.clear().fadeOut(300);
+        this.mask.tweener.clear().fadeOut(200);
         app.popScene();
     },
 });

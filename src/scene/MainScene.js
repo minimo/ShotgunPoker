@@ -92,7 +92,7 @@ tm.define("shotgun.MainScene", {
 
         //目隠し
         this.mask = tm.display.Sprite("blackback", SC_W*2, SC_H*2).addChildTo(this);
-        this.mask.tweener.clear().fadeOut(100);
+        this.mask.tweener.clear().fadeOut(200);
 
         //カードデッキ
         this.deck = shotgun.CardDeck().addChildTo(this.mainLayer);
