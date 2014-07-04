@@ -35,6 +35,7 @@ tm.define("shotgun.MainScene", {
     levelReset: 0,  //レベルリセット回数
     handCount: null,//役の回数
     onePair: 0,     //ワンペアの連続回数
+    gameend: false, //ゲーム終了フラグ
 
     //経過時間
     time: 0,
@@ -277,6 +278,7 @@ tm.define("shotgun.MainScene", {
     gameover: function() {
         this.start = false;
         this.pick = false;
+        this.gameend = true;
 
         //スコア情報更新
         app.lastScore = this.score;
@@ -379,7 +381,7 @@ tm.define("shotgun.MainScene", {
         var sx = e.pointing.x;
         var sy = e.pointing.y;
 
-        if (this.pick && !this.shuffled && !this.deck.busy) {
+        if (this.pick && !this.shuffled && !this.deck.busy && !this.gameend) {
             var c = this.deck.pickCard(sx, sy);
             if (c) this.deck.addHand(c);
         }
