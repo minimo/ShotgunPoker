@@ -21,22 +21,12 @@ tm.define("shotgun.TitleScene", {
         this.tutorialLayer = tm.app.Object2D().addChildTo(this);
 
         var lb = this.title1 = tm.display.OutlineLabel("SHOTGUN", 120).addChildTo(this.titleLayer);
-//        lb.setPosition(SC_W*0.4, SC_H*0.2-SC_H*0.6);
+        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
         lb.setPosition(SC_W*0.4, SC_H*0.2);
-        lb.fontFamily = "'azuki'";
-        lb.align     = "center";
-        lb.baseline  = "middle";
-        lb.outlineWidth = 2;
-//        lb.tweener.wait(500).move(SC_W*0.4, SC_H*0.2, 1500,"easeOutBounce");
 
         var lb = this.title2 = tm.display.OutlineLabel("POKER", 120).addChildTo(this.titleLayer);
-//        lb.setPosition(SC_W*0.7, SC_H*0.35-SC_H*0.6);
+        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
         lb.setPosition(SC_W*0.7, SC_H*0.35);
-        lb.fontFamily = "'azuki'";
-        lb.align     = "center";
-        lb.baseline  = "middle";
-        lb.outlineWidth = 2;
-//        lb.tweener.wait(500).move(SC_W*0.7, SC_H*0.35, 1500,"easeOutBounce");
 
         var that = this;
         var width = 230, height = 70;
@@ -46,20 +36,19 @@ tm.define("shotgun.TitleScene", {
         var sh = this.play = tm.display.RoundRectangleShape(width, height, param).addChildTo(this);
         sh.setPosition(SC_W*0.5, SC_H*0.5);
         sh.interactive = true;
+        sh.boundingType = "rect";
         sh.addEventListener("click", function() {
             that.mask.tweener.clear().fadeIn(300).call(function(){app.replaceScene(shotgun.MainScene());});
         });
         var lb = this.playLabel = tm.display.OutlineLabel("PLAY", 50).addChildTo(this);
+        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
         lb.setPosition(SC_W*0.5, SC_H*0.5);
-        lb.fontFamily = "'azuki'";
-        lb.align     = "center";
-        lb.baseline  = "middle";
-        lb.outlineWidth = 4;
 
         //チュートリアル
         var sh = this.tutorial = tm.display.RoundRectangleShape(width, height, param).addChildTo(this);
         sh.setPosition(SC_W*0.5, SC_H*0.6);
         sh.interactive = true;
+        sh.boundingType = "rect";
         sh.addEventListener("click", function() {
             that.mask.tweener.clear().fadeIn(300).call(function(){app.pushScene(shotgun.MainScene());}).fadeOut(300);
         });
@@ -71,6 +60,7 @@ tm.define("shotgun.TitleScene", {
         var sh = this.setting = tm.display.RoundRectangleShape(width, height, param).addChildTo(this);
         sh.setPosition(SC_W*0.5, SC_H*0.7);
         sh.interactive = true;
+        sh.boundingType = "rect";
         sh.addEventListener("click", function() {
             that.mask.tweener.clear().fadeIn(300).call(function(){app.pushScene(shotgun.SettingScene());}).fadeOut(300);
         });
@@ -82,6 +72,7 @@ tm.define("shotgun.TitleScene", {
         var sh = this.credit = tm.display.RoundRectangleShape(width, height, param).addChildTo(this);
         sh.setPosition(SC_W*0.5, SC_H*0.8);
         sh.interactive = true;
+        sh.boundingType = "rect";
         sh.addEventListener("click", function() {
             that.mask.tweener.clear().fadeIn(300).call(function(){app.pushScene(shotgun.CreditScene());}).fadeOut(300);
         });

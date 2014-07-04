@@ -46,6 +46,7 @@ tm.define("shotgun.PauseScene", {
         var sh = tm.display.RoundRectangleShape(width, height, param).addChildTo(this);
         sh.setPosition(SC_W*0.25, SC_H*0.9);
         sh.interactive = true;
+        sh.boundingType = "rect";
         sh.addEventListener("click", function() {
             that.tweener.clear().call(function(){app.popScene();});
         });
@@ -57,6 +58,7 @@ tm.define("shotgun.PauseScene", {
         var sh = tm.display.RoundRectangleShape(width, height, param).addChildTo(this);
         sh.setPosition(SC_W*0.75, SC_H*0.9);
         sh.interactive = true;
+        sh.boundingType = "rect";
         sh.addEventListener("click", function() {
             app.pushScene(that.dialog);
         });
@@ -103,40 +105,43 @@ tm.define("shotgun.YesNoDialog", {
         this.superInit();
 
         //バックグラウンド
-        this.bg = tm.display.Sprite("greenback", SC_W, SC_H/2).addChildTo(this);
-        this.bg.setPosition(SC_W/2, SC_H/2);
-
-        var lb = tm.display.OutlineLabel(caption, 50).addChildTo(this);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
-        lb.setPosition(SC_W*0.5, SC_H*0.4);
+        var sh = tm.display.RoundRectangleShape(SC_W-20, SC_H*0.3, {fillStyle:'rgba(0,100,0,1)', lineWidth:4}).addChildTo(this);
+        sh.setPosition(SC_W*0.5, SC_H*0.5);
 
         var that = this;
         var width = 250, height = 70;
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
+        //キャプション
+        var lb = tm.display.OutlineLabel(caption, 50).addChildTo(this);
+        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
+        lb.setPosition(SC_W*0.5, SC_H*0.45);
+
         //ＹＥＳ
         var sh = tm.display.RoundRectangleShape(width, height, param).addChildTo(this);
-        sh.setPosition(SC_W*0.25, SC_H*0.5);
+        sh.setPosition(SC_W*0.25, SC_H*0.55);
         sh.interactive = true;
+        sh.boundingType = "rect";
         sh.addEventListener("click", function() {
             that.answer = true;
             app.popScene();
         });
         var lb = tm.display.OutlineLabel("YES", 50).addChildTo(this);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
-        lb.setPosition(SC_W*0.25, SC_H*0.5);
+        lb.setPosition(SC_W*0.25, SC_H*0.55);
 
         //ＮＯ
         var sh = tm.display.RoundRectangleShape(width, height, param).addChildTo(this);
-        sh.setPosition(SC_W*0.75, SC_H*0.5);
+        sh.setPosition(SC_W*0.75, SC_H*0.55);
         sh.interactive = true;
+        sh.boundingType = "rect";
         sh.addEventListener("click", function() {
             that.answer = false;
             app.popScene();
         });
         var lb = tm.display.OutlineLabel("NO", 50).addChildTo(this);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
-        lb.setPosition(SC_W*0.75, SC_H*0.5);
+        lb.setPosition(SC_W*0.75, SC_H*0.55);
     },
     //タッチorクリック開始処理
     ontouchstart: function(e) {
