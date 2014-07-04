@@ -75,11 +75,7 @@ tm.define("shotgun.PauseScene", {
 
     onenter: function() {
         if (this.dialog.answer == true) {
-            if (this.parent instanceof shotgun.MainScene) {
-                this.parent.exitGame = true;
-                app.replaceScene(shotgun.TitleScene());
-            }
-            app.popScene();
+            app.replaceScene(shotgun.TitleScene());
         }
     },
 
