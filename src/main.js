@@ -90,6 +90,7 @@ tm.main(function() {
     appMain.run();
 });
 
+//iPhonr device event message
 document.addEventListener('load', function () {
 //    alert('loadイベントが発火しました');
 }, false);
@@ -97,13 +98,13 @@ document.addEventListener('deviceready', function () {
 //    alert('devicereadyイベントが発火しました');
 }, false);
 document.addEventListener('pause', function() {
-//    alert('pauseイベントが発火しました');
-//    var scene = appMain.currentScene;
-//    if (scene instanceof 'shotgun.MainScene') {
-        appMain.pushScene(shotgun.pauseScene());
-//    }
 }, false);
 document.addEventListener('resume', function() {
+    var scene = appMain.currentScene;
+    if (scene instanceof shotgun.MainScene) {
+//        alert('resumeイベントが発火しました');
+        appMain.pushScene(shotgun.PauseScene(scene));
+    }
 }, false);
 
 /*
