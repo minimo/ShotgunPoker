@@ -134,7 +134,7 @@ tm.define("shotgun.CanvasApp", {
                 this.bgmIsPlay = true;
             }
         }
-    }
+    },
 
     playSE: function(asset) {
         var se = tm.asset.AssetManager.get(asset).clone();
