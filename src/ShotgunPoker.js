@@ -118,6 +118,24 @@ tm.define("shotgun.CanvasApp", {
         }
     },
 
+    pauseBGM: function() {
+        if (this.bgm) {
+            if (this.bgmIsPlay) {
+                this.bgm.pause();
+                this.bgmIsPlay = false;
+            }
+        }
+    }
+
+    resumeBGM: function() {
+        if (this.bgm) {
+            if (!this.bgmIsPlay) {
+                this.bgm.resume();
+                this.bgmIsPlay = true;
+            }
+        }
+    }
+
     playSE: function(asset) {
         var se = tm.asset.AssetManager.get(asset).clone();
         if (se) {
