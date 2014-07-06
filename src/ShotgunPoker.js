@@ -125,7 +125,7 @@ tm.define("shotgun.CanvasApp", {
                 this.bgmIsPlay = false;
             }
         }
-    }
+    },
 
     resumeBGM: function() {
         if (this.bgm) {
