@@ -22,7 +22,7 @@ tm.define("shotgun.GameoverScene", {
         var that = this;
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
-        var lb = this.score = tm.display.OutlineLabel("YOUR RESULT"+appMain.lastScore, 50).addChildTo(this);
+        var lb = this.score = tm.display.OutlineLabel("YOUR RESULT", 50).addChildTo(this);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
         lb.setPosition(SC_W*0.5, SC_H*0.1);
 
