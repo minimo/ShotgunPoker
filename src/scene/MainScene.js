@@ -200,8 +200,8 @@ tm.define("shotgun.MainScene", {
                 appMain.playSE("hand");
             }
 
-            //R.S.Fの場合はライフ＋１
-            if (sc == ROYALSTRAIGHTFLASH) {
+            //初回R.S.Fの場合はライフ＋１
+            if (sc == ROYALSTRAIGHTFLASH && this.handCount[sc] < 1) {
                 this.life++;
                 if (this.life > 7) {
                     this.life = 7;
