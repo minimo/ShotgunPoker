@@ -16,8 +16,8 @@ tm.define("shotgun.CanvasApp", {
     //ＢＧＭ＆効果音
     bgm: null,
     bgmIsPlay: false,
-    volumeBGM: 6,
-    volumeSE: 6,
+    volumeBGM: 3,
+    volumeSE: 3,
 
     //スコア保存
     lastScore: 0,
@@ -103,7 +103,7 @@ tm.define("shotgun.CanvasApp", {
         this.bgm = tm.asset.AssetManager.get(asset).clone();
         if (this.bgm) {
             this.bgm.loop = true;
-            this.bgm.volume = this.volumeBGM*0.17;
+            this.bgm.volume = this.volumeBGM*0.34;
             this.bgm.play();
             this.bgmIsPlay = true;
         }
@@ -133,7 +133,7 @@ tm.define("shotgun.CanvasApp", {
         if (this.bgm) {
             if (!this.bgmIsPlay) {
                 this.bgm.resume();
-                this.bgm.volume = this.volumeBGM*0.17;
+                this.bgm.volume = this.volumeBGM*0.34;
                 this.bgmIsPlay = true;
             }
         }
@@ -143,7 +143,7 @@ tm.define("shotgun.CanvasApp", {
         var se = tm.asset.AssetManager.get(asset).clone();
         if (se) {
             se.loop = false;
-            se.volume = this.volumeSE*0.17;
+            se.volume = this.volumeSE*0.34;
             se.play();
         }
         return se;

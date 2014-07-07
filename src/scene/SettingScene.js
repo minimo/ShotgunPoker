@@ -34,7 +34,7 @@ tm.define("shotgun.SettingScene", {
             var lb = this.bgm[i] = tm.display.OutlineLabel(""+i, 30).addChildTo(this);
             lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
             lb.setPosition(SC_W*0.4+i*60, SC_H*0.4);
-            if ((appMain.volumeBGM/2) == i) lb.fontSize = 80;
+            if (appMain.volumeBGM == i) lb.fontSize = 80;
         }
 
         //ＳＥ音量
@@ -46,7 +46,7 @@ tm.define("shotgun.SettingScene", {
             var lb = this.se[i] = tm.display.OutlineLabel(""+i, 30).addChildTo(this);
             lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
             lb.setPosition(SC_W*0.4+i*60, SC_H*0.6);
-            if ((appMain.volumeSE/2) == i) lb.fontSize = 80;
+            if (appMain.volumeSE == i) lb.fontSize = 80;
         }
 
         var that = this;
@@ -89,9 +89,9 @@ tm.define("shotgun.SettingScene", {
         if ( SC_H*0.35 < sy && sy < SC_H*0.45 && sx > SC_W*0.4-30 && sx < SC_W*0.4-30+360) {
             var x = sx-(SC_W*0.4-30);
             x = ~~(x/60);
-            if (appMain.volumeBGM != x*2) {
-                this.bgm[~~(appMain.volumeBGM/2)].fontSize = 30;
-                appMain.volumeBGM = x*2;
+            if (appMain.volumeBGM != x) {
+                this.bgm[appMain.volumeBGM].fontSize = 30;
+                appMain.volumeBGM = x;
                 this.bgm[x].fontSize = 80;
                 this.pauseBGM();
                 this.resumeBGM();
@@ -101,9 +101,9 @@ tm.define("shotgun.SettingScene", {
         if ( SC_H*0.55 < sy && sy < SC_H*0.65 && SC_W*0.4-30 < sx && sx < SC_W*0.4-30+360) {
             var x = sx-(SC_W*0.4-30);
             x = ~~(x/60);
-            if (appMain.volumeSE != x*2) {
-                this.se[~~(appMain.volumeSE/2)].fontSize = 30;
-                appMain.volumeSE = x*2;
+            if (appMain.volumeSE != x) {
+                this.se[appMain.volumeSE].fontSize = 30;
+                appMain.volumeSE = x;
                 this.se[x].fontSize = 80;
                 appMain.playSE("hand");
             }
