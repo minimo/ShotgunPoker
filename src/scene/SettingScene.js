@@ -91,10 +91,10 @@ tm.define("shotgun.SettingScene", {
             x = ~~(x/60);
             if (appMain.volumeBGM != x) {
                 this.bgm[appMain.volumeBGM].fontSize = 30;
-                appMain.volumeBGM = x;
                 this.bgm[x].fontSize = 80;
-                this.pauseBGM();
-                this.resumeBGM();
+                appMain.pauseBGM();
+                appMain.volumeBGM = x;
+                appMain.resumeBGM();
             }
         }
         //ＳＥボリューム
@@ -103,8 +103,8 @@ tm.define("shotgun.SettingScene", {
             x = ~~(x/60);
             if (appMain.volumeSE != x) {
                 this.se[appMain.volumeSE].fontSize = 30;
-                appMain.volumeSE = x;
                 this.se[x].fontSize = 80;
+                appMain.volumeSE = x;
                 appMain.playSE("hand");
             }
         }
