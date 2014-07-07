@@ -255,26 +255,6 @@ tm.define("shotgun.MainScene", {
         }
     },
 
-    //リスタート
-    restart: function() {
-        this.start = false;
-        this.pick = true;
-        this.score = 0;
-        this.life = 6;
-        this.count = 9;
-        this.time = 0;
-        this.absTime = 0;
-        this.level = 0;
-        this.hand = [];
-
-        this.readyLabel.tweener.clear().wait(500).fadeOut(500);
-        this.readyLabel.tweener.call(function(){
-            that.deck.startup();
-            that.deck.shuffle();
-            that.start = true;
-        });
-    },
-
     //ゲームオーバー
     gameover: function() {
         this.start = false;
