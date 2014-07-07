@@ -86,9 +86,6 @@ appMain = {};
 
 //アプリケーションメイン
 tm.main(function() {
-    if (PHONEGAP) {
-        checkDevice();
-    }
     appMain = shotgun.CanvasApp("#world");
     appMain.run();
 });
@@ -99,16 +96,17 @@ document.addEventListener('load', function () {
 
 document.addEventListener('deviceready', function () {
     PHONEGAP = true;
+    checkDevice();
 }, false);
 
 document.addEventListener('pause', function() {
-}, false);
-
-document.addEventListener('resume', function() {
     var scene = appMain.currentScene;
     if (scene instanceof shotgun.MainScene) {
         appMain.pushScene(shotgun.PauseScene(scene));
     }
+}, false);
+
+document.addEventListener('resume', function() {
 //    alert('resumeイベントが発火しました');
 }, false);
 
@@ -131,8 +129,6 @@ checkDevice = function() {
     appMain.uuid = window.device.uuid;
     appMain.pageY = $('body').height();
     appMain.pageX = $('body').width();
-
     SC_W = $('body').width();
     SC_H = $('body').height();
 }
-
