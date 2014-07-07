@@ -24,41 +24,37 @@ tm.define("shotgun.CreditScene", {
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
         lb.setPosition(SC_W*0.5, SC_H*0.05);
 
-        var lb = this.credit1 = tm.display.OutlineLabel("ＢＧＭ：魔王魂様", 40).addChildTo(this.titleLayer);
+        var lb = this.credit1 = tm.display.OutlineLabel("ＢＧＭ：魔王魂様", 30).addChildTo(this.titleLayer);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
         lb.setPosition(SC_W*0.5, SC_H*0.15);
-        var lb = this.credit1url = tm.display.OutlineLabel("http://maoudamashii.jokersounds.com/", 30).addChildTo(this.titleLayer);
+        var lb = this.credit1url = tm.display.OutlineLabel("http://maoudamashii.jokersounds.com/", 20).addChildTo(this.titleLayer);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
         lb.setPosition(SC_W*0.5, SC_H*0.15+45);
 
-        var lb = this.credit2 = tm.display.OutlineLabel("効果音：ＯＮ－ＪＩＮ様", 40).addChildTo(this.titleLayer);
+        var lb = this.credit2 = tm.display.OutlineLabel("効果音：ＯＮ－ＪＩＮ様", 30).addChildTo(this.titleLayer);
         lb.fontFamily = "'azuki'"; lb.align = "cnter"; lb.baseline = "middle"; lb.outlineWidth = 2;
         lb.setPosition(SC_W*0.5, SC_H*0.25);
-        var lb = this.credit1url = tm.display.OutlineLabel("http://on-jin.com/", 30).addChildTo(this.titleLayer);
+        var lb = this.credit1url = tm.display.OutlineLabel("http://on-jin.com/", 20).addChildTo(this.titleLayer);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
         lb.setPosition(SC_W*0.5, SC_H*0.25+45);
 
-        var lb = this.credit2 = tm.display.OutlineLabel("CARD GRAPHIC：無料素材倶楽部様", 40).addChildTo(this.titleLayer);
+        var lb = this.credit3 = tm.display.OutlineLabel("CARD GRAPHIC：無料素材倶楽部様", 30).addChildTo(this.titleLayer);
         lb.fontFamily = "'azuki'"; lb.align = "cnter"; lb.baseline = "middle"; lb.outlineWidth = 2;
         lb.setPosition(SC_W*0.5, SC_H*0.35);
-        var lb = this.credit1url = tm.display.OutlineLabel("http://sozai.7gates.net/", 30).addChildTo(this.titleLayer);
+        var lb = this.credit1url = tm.display.OutlineLabel("http://sozai.7gates.net/", 20).addChildTo(this.titleLayer);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
         lb.setPosition(SC_W*0.5, SC_H*0.35+45);
 
-        var lb = this.credit2 = tm.display.OutlineLabel("Program：minimo", 40).addChildTo(this.titleLayer);
-        lb.fontFamily = "'azuki'"; lb.align = "cnter"; lb.baseline = "middle"; lb.outlineWidth = 2;
-        lb.setPosition(SC_W*0.5, SC_H*0.50);
-
-        var lb = credit3 = tm.display.OutlineLabel("Powered by tmlib.js", 40).addChildTo(this.titleLayer);
+        var lb = this.credit4 = tm.display.OutlineLabel("Powered by tmlib.js", 30).addChildTo(this.titleLayer);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
-        lb.setPosition(SC_W*0.5, SC_H*0.6);
-        var lb = this.credit3url = tm.display.OutlineLabel("http://phi-jp.github.io/tmlib.js/", 30).addChildTo(this.titleLayer);
+        lb.setPosition(SC_W*0.5, SC_H*0.5);
+        var lb = this.credit3url = tm.display.OutlineLabel("http://phi-jp.github.io/tmlib.js/", 20).addChildTo(this.titleLayer);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
-        lb.setPosition(SC_W*0.5, SC_H*0.6+45);
+        lb.setPosition(SC_W*0.5, SC_H*0.5+45);
 
         //tmlibロゴ
         var sp = tm.display.Sprite("tmliblogo").addChildTo(this);
-        sp.setPosition(SC_W*0.5, SC_H*0.8);
+        sp.setPosition(SC_W*0.5, SC_H*0.7);
         sp.setScale(0.5, 0.5);
 
         this.mask = tm.display.Sprite("blackback", SC_W*2, SC_H*2).addChildTo(this);
