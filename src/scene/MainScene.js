@@ -73,22 +73,30 @@ tm.define("shotgun.MainScene", {
         lb.fontFamily = "'azuki'";
         lb.align     = "left";
         lb.baseline  = "middle";
-        lb.outlineWidth = 1;
+        lb.outlineWidth = 3;
         lb.update = function() {
             this.text = "SCORE:"+that.score;
         }
 
         //ライフ表示
         var lb = this.lifeLabel = tm.display.OutlineLabel("LIFE:", 50).addChildTo(this);
-        lb.setPosition(SC_W*0.7, 64);
+        lb.setPosition(8, 120);
         lb.fontFamily = "'azuki'";
         lb.align     = "left";
         lb.baseline  = "middle";
-        lb.outlineWidth = 1;
+        lb.outlineWidth = 3;
         lb.update = function() {
             var life = that.life < 0 ? 0 : that.life;
             this.text = "LIFE:"+life;
         }
+
+        //ポーズボタン
+        var sh = this.credit = tm.display.RoundRectangleShape(200, 50, {fillStyle:'rgba(0,80,0,1)', lineWidth:4}).addChildTo(this);
+        sh.setPosition(SC_W*0.8, 64);
+        sh.interactive = true;
+        var lb = this.creditLabel = tm.display.OutlineLabel("pause", 50).addChildTo(this);
+        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
+        lb.setPosition(SC_W*0.8, 56);
 
         //目隠し
         this.mask = tm.display.Sprite("blackback", SC_W*2, SC_H*2).addChildTo(this);
@@ -141,15 +149,6 @@ tm.define("shotgun.MainScene", {
             this.beforeCount = that.count;
         }
 
-        //ポーズボタン
-/*
-        var sh = this.credit = tm.display.RoundRectangleShape(200, 50, {fillStyle:'rgba(0,80,0,1)', lineWidth:4}).addChildTo(this);
-        sh.setPosition(SC_W*0.8, SC_H*0.9);
-        sh.interactive = true;
-        var lb = this.creditLabel = tm.display.OutlineLabel("pause", 50).addChildTo(this);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
-        lb.setPosition(SC_W*0.8, SC_H*0.9);
-*/
         if (DEBUG) {
             var lb = this.creditLabel = tm.display.OutlineLabel("", 40).addChildTo(this);
             lb.fontFamily = "'azuki'"; lb.align = "left"; lb.baseline = "middle"; lb.outlineWidth = 4;
@@ -368,10 +367,10 @@ tm.define("shotgun.MainScene", {
         }
         this.shuffled = false;
 
-        if (sx > SC_W*0.9 && sy > SC_H*0.9) {
+        //ポーズボタン
+        if (SC_W*0.8-100 < sx && sx < SC_W*0.8+100 && 39 < sy && sy < 89) {
             appMain.pushScene(shotgun.PauseScene(this));
         }
     },
 });
-
 
