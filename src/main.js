@@ -37,11 +37,11 @@ USE_JOKER = true;
 RETURN_JOKER = false;   //使用したジョーカーを場に戻すか
 
 //役一覧
-MISS = -30;
-NOHAND = -20;
+MISS = -20;
+NOHAND = -10;
 ONEPAIR = 10;
-TWOPAIR = 20;
-FLASH = 30;
+FLASH = 20;
+TWOPAIR = 30;
 THREECARD = 50;
 FULLHOUSE = 100;
 STRAIGHT = 150;
