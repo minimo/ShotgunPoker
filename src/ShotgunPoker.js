@@ -63,27 +63,6 @@ tm.define("shotgun.CanvasApp", {
         this.handList[9]  = {name: "FIVE CARD", point: FIVECARD};
         this.handList[10] = {name: "STRAIGHT FLASH", point: STRAIGHTFLASH};
         this.handList[11] = {name: "R.STRAIGHT FLASH", point: ROYALSTRAIGHTFLASH};
-
-        this.checkDevice();
-    },
-
-    //実行環境チェック
-    checkDevice: function() {
-        this.isPad = (navigator.userAgent.indexOf('iPad')+1?true:false);
-        this.isPod = (navigator.userAgent.indexOf('iPad')+1?true:false);
-        this.isPhone = (navigator.userAgent.indexOf('iPhone')+1?true:false);
-        this.isAndroid = (navigator.userAgent.indexOf('Android')+1?true:false);
-        this.isiOS4 = navigator.userAgent.match(/OS 4_[0-9_]+ like Mac OS X/i)!==null;
-        this.isiOS5 = navigator.userAgent.match(/OS 5_[0-9_]+ like Mac OS X/i)!==null;
-        this.isiOS6 = navigator.userAgent.match(/OS 6_[0-9_]+ like Mac OS X/i)!==null;
-
-        if (PHONEGAP) {
-            this.version = window.device.version;
-            this.model = window.device.name;
-            this.uuid = window.device.uuid;
-            this.pageY = $('body').height();
-            this.pageX = $('body').width();
-        }
     },
 
     _onLoadAssets: function() {

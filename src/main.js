@@ -86,28 +86,53 @@ appMain = {};
 
 //アプリケーションメイン
 tm.main(function() {
+    if (PHONEGAP) {
+        checkDevice();
+    }
     appMain = shotgun.CanvasApp("#world");
     appMain.run();
 });
 
 //iPhonr device event message
 document.addEventListener('load', function () {
-//    alert('loadイベントが発火しました');
 }, false);
+
 document.addEventListener('deviceready', function () {
-//    alert('devicereadyイベントが発火しました');
+    PHONEGAP = true;
 }, false);
+
 document.addEventListener('pause', function() {
 }, false);
+
 document.addEventListener('resume', function() {
     var scene = appMain.currentScene;
     if (scene instanceof shotgun.MainScene) {
-//        alert('resumeイベントが発火しました');
         appMain.pushScene(shotgun.PauseScene(scene));
     }
+//    alert('resumeイベントが発火しました');
 }, false);
 
 /*
 document.addEventListener(‘online’, PENQs.online, false);
 document.addEventListener(‘offline’, PENQs.offline, false);
 */
+
+//実行環境チェック
+checkDevice = function() {
+    appMain.isPad = (navigator.userAgent.indexOf('iPad')+1?true:false);
+    appMain.isPod = (navigator.userAgent.indexOf('iPad')+1?true:false);
+    appMain.isPhone = (navigator.userAgent.indexOf('iPhone')+1?true:false);
+    appMain.isAndroid = (navigator.userAgent.indexOf('Android')+1?true:false);
+    appMain.isiOS4 = navigator.userAgent.match(/OS 4_[0-9_]+ like Mac OS X/i)!==null;
+    appMain.isiOS5 = navigator.userAgent.match(/OS 5_[0-9_]+ like Mac OS X/i)!==null;
+    appMain.isiOS6 = navigator.userAgent.match(/OS 6_[0-9_]+ like Mac OS X/i)!==null;
+    appMain.version = window.device.version;
+    appMain.model = window.device.name;
+    appMain.uuid = window.device.uuid;
+    appMain.pageY = $('body').height();
+    appMain.pageX = $('body').width();
+
+    SC_W = $('body').width();
+    SC_H = $('body').height();
+}
+
