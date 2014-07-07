@@ -103,7 +103,7 @@ tm.define("shotgun.CanvasApp", {
         this.bgm = tm.asset.AssetManager.get(asset).clone();
         if (this.bgm) {
             this.bgm.loop = true;
-            this.bgm.volume = this.volumeBGM*0.1;
+            this.bgm.volume = this.volumeBGM*0.17;
             this.bgm.play();
             this.bgmIsPlay = true;
         }
@@ -116,6 +116,7 @@ tm.define("shotgun.CanvasApp", {
                 this.bgm.stop();
                 this.bgmIsPlay = false;
             }
+            this.bgm = null;
         }
     },
 
@@ -132,6 +133,7 @@ tm.define("shotgun.CanvasApp", {
         if (this.bgm) {
             if (!this.bgmIsPlay) {
                 this.bgm.resume();
+                this.bgm.volume = this.volumeBGM*0.17;
                 this.bgmIsPlay = true;
             }
         }
@@ -141,7 +143,7 @@ tm.define("shotgun.CanvasApp", {
         var se = tm.asset.AssetManager.get(asset).clone();
         if (se) {
             se.loop = false;
-            se.volume = this.volumeSE*0.1;
+            se.volume = this.volumeSE*0.17;
             se.play();
         }
         return se;

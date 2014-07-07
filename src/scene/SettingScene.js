@@ -89,20 +89,24 @@ tm.define("shotgun.SettingScene", {
         if ( SC_H*0.35 < sy && sy < SC_H*0.45 && sx > SC_W*0.4-30 && sx < SC_W*0.4-30+360) {
             var x = sx-(SC_W*0.4-30);
             x = ~~(x/60);
-            this.bgm[~~(appMain.volumeBGM/2)].fontSize = 30;
-            appMain.volumeBGM = x*2;
-            this.bgm[x].fontSize = 80;
+            if (appMain.volumeBGM != x*2) {
+                this.bgm[~~(appMain.volumeBGM/2)].fontSize = 30;
+                appMain.volumeBGM = x*2;
+                this.bgm[x].fontSize = 80;
+                this.pauseBGM();
+                this.resumeBGM();
+            }
         }
         //ＳＥボリューム
         if ( SC_H*0.55 < sy && sy < SC_H*0.65 && SC_W*0.4-30 < sx && sx < SC_W*0.4-30+360) {
             var x = sx-(SC_W*0.4-30);
             x = ~~(x/60);
-            this.se[~~(appMain.volumeSE/2)].fontSize = 30;
             if (appMain.volumeSE != x*2) {
+                this.se[~~(appMain.volumeSE/2)].fontSize = 30;
                 appMain.volumeSE = x*2;
+                this.se[x].fontSize = 80;
                 appMain.playSE("hand");
             }
-            this.se[x].fontSize = 80;
         }
     },
 
