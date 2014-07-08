@@ -29,6 +29,7 @@ tm.define("shotgun.MainScene", {
     start: false,   //ゲームスタートフラグ
     score: 0,       //スコア
     life: 3,        //ライフ
+    lifeMax: 5,     //ライフ最大値
     pick: false,    //カードピック可能フラグ
     count: 9,       //カード選択カウントダウン用
     level: 1,       //ゲームレベル
@@ -190,8 +191,8 @@ tm.define("shotgun.MainScene", {
             //初回R.S.Fの場合はライフ＋１
             if (sc == ROYALSTRAIGHTFLASH && this.handCount[sc] < 1) {
                 this.life++;
-                if (this.life > 7) {
-                    this.life = 7;
+                if (this.life > this.lifeMax) {
+                    this.life = this.lifeMax;
                 } else {
                     var lb = tm.display.OutlineLabel("1UP!!"+penalty, 50).addChildTo(this);
                     lb.fontFamily = "'KS-Kohichi-FeltPen'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 3;
