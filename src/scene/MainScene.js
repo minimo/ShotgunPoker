@@ -165,14 +165,15 @@ tm.define("shotgun.MainScene", {
             this.deck.numHand = 0;
             var sc = this.deck.checkHand();
             this.dispHand(sc);
+            this.handCount[sc]++;
 
-            //役無し、手札未成立、ワンペア３連続はペナルティ
+            //役無し、手札未成立、ワンペア２連続はペナルティ
             var penalty = 0;
             if (sc == NOHAND) penalty = 1;
             if (sc == MISS) penalty = 1;
             if (sc == ONEPAIR) {
                 this.onePair++;
-                if (this.onePair % 3 == 0) penalty = 1;
+                if (this.onePair % 2 == 0) penalty = 1;
             } else {
                 this.onePair = 0;
             }
@@ -189,7 +190,7 @@ tm.define("shotgun.MainScene", {
             }
 
             //初回R.S.Fの場合はライフ＋１
-            if (sc == ROYALSTRAIGHTFLASH && this.handCount[sc] < 1) {
+            if (sc == ROYALSTRAIGHTFLASH && this.handCount[sc] == 1) {
                 this.life++;
                 if (this.life > this.lifeMax) {
                     this.life = this.lifeMax;
@@ -216,7 +217,6 @@ tm.define("shotgun.MainScene", {
                 lb.setPosition(SC_W*0.5, SC_H*0.5);
                 lb.tweener.clear().wait(1000).call(function(){lb.remove();});
             }
-            this.handCount[sc]++;
             this.score += sc;
             if (this.score < 0) this.score = 0;
 
