@@ -109,9 +109,13 @@ tm.define("shotgun.TitleScene", {
         var width = 230, height = 60;
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
-        var lb = this.credit1 = tm.display.OutlineLabel("TUTORIAL", 40).addChildTo(this.titleLayer);
+        var lb = this.credit1 = tm.display.OutlineLabel("HOW TO PLAY", 40).addChildTo(this.titleLayer);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
         lb.setPosition(SC_W*1.5, SC_H*0.05);
+
+        var lb = this.credit1 = tm.display.OutlineLabel("プレイ画面の説明", 40).addChildTo(this.titleLayer);
+        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
+        lb.setPosition(SC_W*1.5, SC_H*0.1);
 
         //戻る
         var sh = tm.display.RoundRectangleShape(width, height, param).addChildTo(this.titleLayer);

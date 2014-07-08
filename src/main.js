@@ -10,8 +10,8 @@ mt = new MersenneTwister();
 
 //定数
 //デバッグフラグ
-DEBUG = true;
-DEBUG_PHONEGAP = true;
+DEBUG = false;
+DEBUG_PHONEGAP = false;
 PHONEGAP = false;
 
 //スクリーンサイズ
