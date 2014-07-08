@@ -202,7 +202,13 @@ tm.define("shotgun.MainScene", {
             }
 
             //早上がりボーナス
-            if (this.count > 4 && sc > 0) {
+            if (this.count > 7 && sc > 0) {
+                sc = ~~(sc*2);
+                var lb = tm.display.OutlineLabel("FANTASTIC!", 100).addChildTo(this);
+                lb.fontFamily = "'KS-Kohichi-FeltPen'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 3;
+                lb.setPosition(SC_W*0.5, SC_H*0.5);
+                lb.tweener.clear().wait(1000).call(function(){lb.remove();});
+            } else if (this.count > 4 && sc > 0) {
                 sc = ~~(sc*1.5);
                 var lb = tm.display.OutlineLabel("EXCELLENT!", 100).addChildTo(this);
                 lb.fontFamily = "'KS-Kohichi-FeltPen'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 3;
