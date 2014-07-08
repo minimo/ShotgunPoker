@@ -19,7 +19,7 @@ tm.define("shotgun.PauseScene", {
         this.parentScene = parentScene;
         
         //ダイアログ
-        this.dialog = shotgun.YesNoDialog("Exit?");
+        this.dialog = shotgun.YesNoDialog("EXIT GAME?");
 
         //バックグラウンド
         this.bg = tm.display.Sprite("greenback", SC_W*2, SC_H*2).addChildTo(this);
@@ -62,7 +62,7 @@ tm.define("shotgun.PauseScene", {
         sh.addEventListener("click", function() {
             appMain.pushScene(that.dialog);
         });
-        var lb = tm.display.OutlineLabel("GAME EXIT", 50).addChildTo(this);
+        var lb = tm.display.OutlineLabel("EXIT", 50).addChildTo(this);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
         lb.setPosition(SC_W*0.75, SC_H*0.9);
 
