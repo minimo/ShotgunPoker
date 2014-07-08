@@ -69,22 +69,16 @@ tm.define("shotgun.MainScene", {
         //スコア表示
         var that = this;
         var lb = this.scoreLabel = tm.display.OutlineLabel("SCORE:", 50).addChildTo(this);
+        lb.fontFamily = "'azuki'"; lb.align = "left"; lb.baseline = "middle"; lb.outlineWidth = 3;
         lb.setPosition(8, 64);
-        lb.fontFamily = "'azuki'";
-        lb.align     = "left";
-        lb.baseline  = "middle";
-        lb.outlineWidth = 3;
         lb.update = function() {
             this.text = "SCORE:"+that.score;
         }
 
         //ライフ表示
         var lb = this.lifeLabel = tm.display.OutlineLabel("LIFE:", 50).addChildTo(this);
+        lb.fontFamily = "'azuki'"; lb.align = "left"; lb.baseline = "middle"; lb.outlineWidth = 3;
         lb.setPosition(8, 120);
-        lb.fontFamily = "'azuki'";
-        lb.align     = "left";
-        lb.baseline  = "middle";
-        lb.outlineWidth = 3;
         lb.update = function() {
             var life = that.life < 0 ? 0 : that.life;
             this.text = "LIFE:"+life;
@@ -110,11 +104,8 @@ tm.define("shotgun.MainScene", {
 
         //スタートアップ
         var lb = this.readyLabel = tm.display.OutlineLabel("READY", 100).addChildTo(this.upperLayer);
+        lb.fontFamily = "'KS-Kohichi-FeltPen'"; lb.align = "center"; lb.baseline  = "middle"; lb.outlineWidth = 2;
         lb.setPosition(SC_W/2, SC_H/2);
-        lb.fontFamily = "'KS-Kohichi-FeltPen'";
-        lb.align     = "center";
-        lb.baseline  = "middle";
-        lb.outlineWidth = 2;
         lb.tweener.clear().wait(500).fadeOut(500).wait(300);
         lb.tweener.call(function(){
             that.deck.startup();
@@ -125,11 +116,8 @@ tm.define("shotgun.MainScene", {
 
         //カウントダウン表示
         var lb = this.countDown = tm.display.OutlineLabel("5", 300).addChildTo(this.upperLayer);
+        lb.fontFamily = "'KS-Kohichi-FeltPen'"; lb.align = "center"; lb.baseline  = "middle"; lb.outlineWidth = 3;
         lb.setPosition(SC_W/2, SC_H/2);
-        lb.fontFamily = "'KS-Kohichi-FeltPen'";
-        lb.align     = "center";
-        lb.baseline  = "middle";
-        lb.outlineWidth = 3;
         lb.beforeCount = 9;
         lb.alpha = 1.0;
         lb.update = function() {
@@ -267,11 +255,8 @@ tm.define("shotgun.MainScene", {
         //メッセージ
         var that = this;
         var lb = this.title2 = tm.display.OutlineLabel("GAME OVER", 100).addChildTo(this.upperLayer);
+        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
         lb.setPosition(SC_W*0.5, SC_H*0.5-SC_H);
-        lb.fontFamily = "'azuki'";
-        lb.align     = "center";
-        lb.baseline  = "middle";
-        lb.outlineWidth = 4;
         lb.tweener.wait(500).move(SC_W*0.5, SC_H*0.5, 4000,"easeOutBounce").wait(2000);
         lb.tweener.call(function(){appMain.replaceScene(shotgun.GameoverScene(that));});
     },
