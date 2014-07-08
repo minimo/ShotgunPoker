@@ -87,7 +87,7 @@ appMain = {};
 
 //アプリケーションメイン
 tm.main(function() {
-    if (DEBUG_PHONEGAP) alert('tm.main entry');
+    if (PHONEGAP && DEBUG_PHONEGAP) alert('tm.main entry');
 
     appMain = shotgun.CanvasApp("#world");
     appMain.run();
