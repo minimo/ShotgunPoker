@@ -11,6 +11,7 @@ mt = new MersenneTwister();
 //定数
 //デバッグフラグ
 DEBUG = true;
+DEBUG_PHONEGAP = true;
 PHONEGAP = false;
 
 //スクリーンサイズ
@@ -86,20 +87,25 @@ appMain = {};
 
 //アプリケーションメイン
 tm.main(function() {
+    if (DEBUG_PHONEGAP) alert('tm.main entry');
+
     appMain = shotgun.CanvasApp("#world");
     appMain.run();
 });
 
-//iPhonr device event message
+//iPhone device event message
 document.addEventListener('load', function () {
+    if (DEBUG_PHONEGAP) alert('loadイベントが発火しました');
 }, false);
 
 document.addEventListener('deviceready', function () {
+    if (DEBUG_PHONEGAP) alert('devicereadyイベントが発火しました');
     PHONEGAP = true;
     checkDevice();
 }, false);
 
 document.addEventListener('pause', function() {
+    if (DEBUG_PHONEGAP) alert('pauseイベントが発火しました');
     var scene = appMain.currentScene;
     if (scene instanceof shotgun.MainScene) {
         appMain.pushScene(shotgun.PauseScene(scene));
@@ -107,7 +113,7 @@ document.addEventListener('pause', function() {
 }, false);
 
 document.addEventListener('resume', function() {
-//    alert('resumeイベントが発火しました');
+    if (DEBUG_PHONEGAP) alert('resumeイベントが発火しました');
 }, false);
 
 /*
@@ -129,6 +135,7 @@ checkDevice = function() {
     appMain.uuid = window.device.uuid;
     appMain.pageY = $('body').height();
     appMain.pageX = $('body').width();
-    SC_W = $('body').width();
-    SC_H = $('body').height();
+
+    SC_W = screen.height;
+    SC_H = screen.width;
 }
