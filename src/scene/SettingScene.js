@@ -50,7 +50,7 @@ tm.define("shotgun.SettingScene", {
         }
 
         var that = this;
-        var width = 250, height = 70;
+        var width = 250, height = 60;
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
         //戻るボタン

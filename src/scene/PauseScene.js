@@ -19,7 +19,7 @@ tm.define("shotgun.PauseScene", {
         this.parentScene = parentScene;
         
         //ダイアログ
-        this.dialog = shotgun.YesNoDialog("ExitGame?");
+        this.dialog = shotgun.YesNoDialog("Exit?");
 
         //バックグラウンド
         this.bg = tm.display.Sprite("greenback", SC_W*2, SC_H*2).addChildTo(this);
@@ -39,7 +39,7 @@ tm.define("shotgun.PauseScene", {
         }
 
         var that = this;
-        var width = 250, height = 70;
+        var width = 250, height = 60;
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
         //戻るボタン
