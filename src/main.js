@@ -15,8 +15,10 @@ DEBUG_PHONEGAP = false;
 PHONEGAP = false;
 
 //スクリーンサイズ
-SC_W = 640;
-SC_H = 960;
+//SC_W = 640;
+//SC_H = 960;
+SC_W = window.innerWidth*2;
+SC_H = window.innerHeight*2;
 
 //カードサイズ
 CARD_W = 200;
