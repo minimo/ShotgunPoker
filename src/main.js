@@ -94,10 +94,6 @@ tm.main(function() {
 });
 
 //iPhone device event message
-document.addEventListener('load', function () {
-    if (DEBUG_PHONEGAP) alert('loadイベントが発火しました');
-}, false);
-
 document.addEventListener('deviceready', function () {
     if (DEBUG_PHONEGAP) alert('devicereadyイベントが発火しました');
     PHONEGAP = true;
@@ -131,11 +127,8 @@ checkDevice = function() {
     appMain.isiOS5 = navigator.userAgent.match(/OS 5_[0-9_]+ like Mac OS X/i)!==null;
     appMain.isiOS6 = navigator.userAgent.match(/OS 6_[0-9_]+ like Mac OS X/i)!==null;
     appMain.version = window.device.version;
-    appMain.model = window.device.name;
+    appMain.model = window.device.model;
+    appMain.name = window.device.name;
     appMain.uuid = window.device.uuid;
-    appMain.pageY = $('body').height();
-    appMain.pageX = $('body').width();
-
-    SC_W = screen.height;
-    SC_H = screen.width;
 }
+
