@@ -98,6 +98,7 @@ document.addEventListener('deviceready', function () {
     if (DEBUG_PHONEGAP) alert('devicereadyイベントが発火しました');
     PHONEGAP = true;
     checkDevice();
+    if (DEBUG_PHONEGAP) alert(appMain.windowWidth+":"+appMain.windowHeight);
 }, false);
 
 document.addEventListener('pause', function() {
@@ -130,5 +131,8 @@ checkDevice = function() {
     appMain.model = window.device.model;
     appMain.name = window.device.name;
     appMain.uuid = window.device.uuid;
+
+    appMain.windowWidth = window.innerWidth;
+    appMain.windowHeight = window.innerHeight;
 }
 
