@@ -12,6 +12,8 @@ var assets = {
     "card":         "assets/trump.png",
     "tmliblogo":    "assets/tmlib_logo.png",
 
+    "tutorial1":    "assets/tutorial1.png",
+
     //BGM
     "titleBGM":     "assets/game_maoudamashii_5_casino02.mp3",
     "mainBGM":      "assets/game_maoudamashii_5_casino01.mp3",

@@ -166,7 +166,11 @@ tm.define("shotgun.TitleScene", {
         var lb = tm.display.OutlineLabel("プレイ画面の説明", 40).addChildTo(this.titleLayer);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
         lb.setPosition(SC_W*0.5+SC_W*page, SC_H*0.1);
-        
+
+        var sp = tm.display.Sprite("tutorial1").addChildTo(this.titleLayer);
+        sp.setPosition(SC_W*0.5+SC_W*page, SC_H*0.5);
+        sp.setScale(1.5);
+
         this.addButton(page);
     },
 
