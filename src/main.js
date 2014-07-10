@@ -12,7 +12,7 @@ mt = new MersenneTwister();
 //デバッグフラグ
 DEBUG = false;
 PHONEGAP = false;
-DEBUG_PHONEGAP = false && PHONRGAP;
+DEBUG_PHONEGAP = false;
 
 //GAMECENTER使用フラグ
 GAMECENTER = false;
