@@ -11,14 +11,12 @@ mt = new MersenneTwister();
 //定数
 //デバッグフラグ
 DEBUG = false;
-DEBUG_PHONEGAP = false;
 PHONEGAP = false;
+DEBUG_PHONEGAP = false && PHONRGAP;
 
 //スクリーンサイズ
-//SC_W = 640;
-//SC_H = 960;
-SC_W = window.innerWidth*2;
-SC_H = window.innerHeight*2;
+SC_W = 640;
+SC_H = 960;
 
 //カードサイズ
 CARD_W = 200;
@@ -89,52 +87,13 @@ appMain = {};
 
 //アプリケーションメイン
 tm.main(function() {
-    if (PHONEGAP && DEBUG_PHONEGAP) alert('tm.main entry');
+
+    //PHONEGAPの場合スクリーンサイズ調整
+    if (PHONEGAP) {
+        SC_W = window.innerWidth*2;
+        SC_H = window.innerHeight*2;
+    }
 
     appMain = shotgun.CanvasApp("#world");
     appMain.run();
 });
-
-//iPhone device event message
-document.addEventListener('deviceready', function () {
-    if (DEBUG_PHONEGAP) alert('devicereadyイベントが発火しました');
-    PHONEGAP = true;
-    checkDevice();
-    if (DEBUG_PHONEGAP) alert(appMain.windowWidth+":"+appMain.windowHeight);
-}, false);
-
-document.addEventListener('pause', function() {
-    if (DEBUG_PHONEGAP) alert('pauseイベントが発火しました');
-    var scene = appMain.currentScene;
-    if (scene instanceof shotgun.MainScene) {
-        appMain.pushScene(shotgun.PauseScene(scene));
-    }
-}, false);
-
-document.addEventListener('resume', function() {
-    if (DEBUG_PHONEGAP) alert('resumeイベントが発火しました');
-}, false);
-
-/*
-document.addEventListener(‘online’, PENQs.online, false);
-document.addEventListener(‘offline’, PENQs.offline, false);
-*/
-
-//実行環境チェック
-checkDevice = function() {
-    appMain.isPad = (navigator.userAgent.indexOf('iPad')+1?true:false);
-    appMain.isPod = (navigator.userAgent.indexOf('iPad')+1?true:false);
-    appMain.isPhone = (navigator.userAgent.indexOf('iPhone')+1?true:false);
-    appMain.isAndroid = (navigator.userAgent.indexOf('Android')+1?true:false);
-    appMain.isiOS4 = navigator.userAgent.match(/OS 4_[0-9_]+ like Mac OS X/i)!==null;
-    appMain.isiOS5 = navigator.userAgent.match(/OS 5_[0-9_]+ like Mac OS X/i)!==null;
-    appMain.isiOS6 = navigator.userAgent.match(/OS 6_[0-9_]+ like Mac OS X/i)!==null;
-    appMain.version = window.device.version;
-    appMain.model = window.device.model;
-    appMain.name = window.device.name;
-    appMain.uuid = window.device.uuid;
-
-    appMain.windowWidth = window.innerWidth;
-    appMain.windowHeight = window.innerHeight;
-}
-

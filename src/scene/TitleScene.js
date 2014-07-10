@@ -27,6 +27,9 @@ tm.define("shotgun.TitleScene", {
         this.setupTutorial2();
         this.setupScoreList();
 
+        //ステータスバー
+        var sh = tm.display.RectangleShape(SC_W, 20, {fillStyle:'rgba(50,100,50,1)'}).addChildTo(this);
+
         //マスク
         this.mask = tm.display.Sprite("blackback", SC_W*2, SC_H*2).addChildTo(this);
         this.mask.tweener.clear().fadeOut(200);
