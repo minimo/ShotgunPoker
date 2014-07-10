@@ -53,7 +53,7 @@ tm.define("shotgun.TitleScene", {
         lb.setPosition(SC_W*0.7, SC_H*0.35);
 
         var that = this;
-        var width = 230, height = 70;
+        var width = 300, height = 70;
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
         //プレイスタート
@@ -107,6 +107,28 @@ tm.define("shotgun.TitleScene", {
         var lb = this.creditLabel = tm.display.OutlineLabel("CREDIT", 50).addChildTo(this.titleLayer);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
         lb.setPosition(SC_W*0.5, SC_H*0.8);
+
+        //GAMECENTER
+        var sh = this.credit = tm.display.RoundRectangleShape(width, height, param).addChildTo(this.titleLayer);
+        sh.setPosition(SC_W*0.5, SC_H*0.9);
+        sh.interactive = true;
+        sh.checkHierarchy = true;
+        sh.boundingType = "rect";
+        sh.addEventListener("pointingend", function() {
+            if (GAMECENTER) {
+                var data = {
+                    period: "today",
+                    leaderboardId: "board"
+                };
+                gamecenter.showLeaderboard(function() {}, function() {alert('GAMECENTERを開けませんでした');}, data);
+            } else {
+                alert('GAMECENTERの準備が出来ていません');
+            }
+//            that.mask.tweener.clear().fadeIn(200).call(function(){appMain.pushScene(shotgun.CreditScene());});
+        });
+        var lb = this.creditLabel = tm.display.OutlineLabel("GAME CENTER", 50).addChildTo(this.titleLayer);
+        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
+        lb.setPosition(SC_W*0.5, SC_H*0.9);
     },
 
     addButton: function(page, finish) {

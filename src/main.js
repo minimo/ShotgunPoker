@@ -14,6 +14,9 @@ DEBUG = false;
 PHONEGAP = false;
 DEBUG_PHONEGAP = false && PHONRGAP;
 
+//GAMECENTER使用フラグ
+GAMECENTER = false;
+
 //スクリーンサイズ
 SC_W = 640;
 SC_H = 960;

@@ -49,10 +49,12 @@ var onOffline = function() {
 
 var onGamecenterSuccess = function() {
     if (DEBUG_PHONEGAP) alert('GAMECENTER connect success');
+    GAMECENTER = true;
 }
 
 var onGamecenterFailure = function() {
     if (DEBUG_PHONEGAP) alert('GAMECENTER connect failure');
+    GAMECENTER = false;
 }
 
 //Phonegap Event listener
@@ -62,3 +64,5 @@ document.addEventListener('resume', onResume, false);
 document.addEventListener('online', onOnline, false);
 document.addEventListener('offline', onOffline, false);
 
+//GamecenterPlungin
+//https://github.com/leecrossley/cordova-plugin-game-center

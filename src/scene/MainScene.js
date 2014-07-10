@@ -259,6 +259,15 @@ tm.define("shotgun.MainScene", {
         appMain.lastScore = this.score;
         if (this.score > appMain.highScore) appMain.highScore = this.score;
 
+        //GAMECENTERにスコアを登録
+        if (GAMECENTER) {
+            var data = {
+                score: this.score,
+                leaderboardId: "board"
+            };
+            gamecenter.submitScore(function() {}, function() {alert('スコア登録に失敗しました')}, data);
+        }
+
         //メッセージ
         var that = this;
         var lb = this.title2 = tm.display.OutlineLabel("GAME OVER", 100).addChildTo(this.upperLayer);
