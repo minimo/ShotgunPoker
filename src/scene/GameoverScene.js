@@ -73,6 +73,10 @@ tm.define("shotgun.GameoverScene", {
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
         lb.setPosition(SC_W*0.5, SC_H*0.7);
 */
+        //ステータスバー
+        var sh = tm.display.RectangleShape(SC_W, 20, {strokeStyle: 'rgba(50,200,50,1)',fillStyle: 'rgba(50,200,50,1)'}).addChildTo(this);
+        sh.originX = sh.originY = 0;
+
         //マスク
         this.mask = tm.display.Sprite("blackback", SC_W*2, SC_H*2).addChildTo(this);
         this.mask.tweener.clear().fadeOut(200);

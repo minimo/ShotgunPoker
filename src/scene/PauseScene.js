@@ -66,6 +66,10 @@ tm.define("shotgun.PauseScene", {
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
         lb.setPosition(SC_W*0.75, SC_H*0.9);
 
+        //ステータスバー
+        var sh = tm.display.RectangleShape(SC_W, 20, {strokeStyle: 'rgba(50,200,50,1)',fillStyle: 'rgba(50,200,50,1)'}).addChildTo(this);
+        sh.originX = sh.originY = 0;
+
         this.time = 0;
     },
 
