@@ -4,7 +4,7 @@
  *  @auther minimo  
  *  This Program is MIT license.
  */
- 
+
 var onDeviceready = function () {
     if (DEBUG_PHONEGAP) alert('devicereadyイベントが発火しました');
     PHONEGAP = true;
@@ -27,6 +27,14 @@ var onDeviceready = function () {
 
     appMain.windowWidth = window.innerWidth;
     appMain.windowHeight = window.innerHeight;
+
+    if (DEBUG_PHONEGAP) {
+        alert('version:'+appMain.version
+              ' model:'+appMain.model+
+              ' name:'+appMain.name+
+              ' uuid:'+appMain.uuid
+        );
+    }
 }
 
 var onPause = function() {
