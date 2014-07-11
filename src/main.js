@@ -20,7 +20,10 @@ GAMECENTER = false;
 //スクリーンサイズ
 SC_W = 640;
 SC_H = 960;
+
+//ステータスバー情報
 STATUSBAR_HEIGHT = 40;
+STATUSBAR_COLOR = 'rgba(20,200,20,1)';
 
 //カードサイズ
 CARD_W = 200;

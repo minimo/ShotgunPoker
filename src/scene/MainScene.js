@@ -104,7 +104,7 @@ tm.define("shotgun.MainScene", {
         lb.setPosition(SC_W*0.8, 56);
 
         //ステータスバー
-        var sh = tm.display.RectangleShape(SC_W, STATUSBAR_HEIGHT, {strokeStyle: 'rgba(50,200,50,1)',fillStyle: 'rgba(50,200,50,1)'}).addChildTo(this);
+        var sh = tm.display.RectangleShape(SC_W, STATUSBAR_HEIGHT, {strokeStyle: STATUSBAR_COLOR,fillStyle: STATUSBAR_COLOR}).addChildTo(this);
         sh.originX = sh.originY = 0;
 
         //目隠し
