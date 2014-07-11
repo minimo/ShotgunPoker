@@ -87,6 +87,7 @@ tm.define("shotgun.MainScene", {
             c.setPosition( 155+i*45, 120);
             c.life = i;
             c.update = function() {
+                this.pattern = that.life+this.suit*13-1;
                 if (this.life < that.life) {
                     this.visible = true;
                 } else {

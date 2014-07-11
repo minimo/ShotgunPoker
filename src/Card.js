@@ -72,4 +72,3 @@ shotgun.Card.prototype.accessor("pattern", {
         this.setFrameIndex(ptn);
     }
 });
-
