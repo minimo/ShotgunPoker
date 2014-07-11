@@ -29,10 +29,10 @@ tm.define("shotgun.Card", {
         this.suit = suit;
         this.number = num+1;
 
-        this._pattern = this.suit*13+(this.number-1);
+        this.pattern = this.suit*13+(this.number-1);
         if (suit == 5) {
             this.number = 99;
-            this._pattern = 54;
+            this.pattern = 54;
         }
     },
 

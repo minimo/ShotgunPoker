@@ -80,9 +80,19 @@ tm.define("shotgun.MainScene", {
         var lb = this.lifeLabel = tm.display.OutlineLabel("LIFE:", 50).addChildTo(this);
         lb.fontFamily = "'azuki'"; lb.align = "left"; lb.baseline = "middle"; lb.outlineWidth = 3;
         lb.setPosition(8, 120);
-        lb.update = function() {
-            var life = that.life < 0 ? 0 : that.life;
-            this.text = "LIFE:"+life;
+        this.lg = [];
+        for (var i = 0; i < 7; i++ ) {
+            var c = this.lg[i] = shotgun.Card(SUIT_HEART, 0).addChildTo(this);
+            c.setScale(0.2);
+            c.setPosition( 155+i*45, 120);
+            c.life = i;
+            c.update = function() {
+                if (this.life < that.life) {
+                    this.visible = true;
+                } else {
+                    this.visible = false;
+                }
+            }
         }
 
         //ポーズボタン
