@@ -20,6 +20,7 @@ GAMECENTER = false;
 //スクリーンサイズ
 SC_W = 640;
 SC_H = 960;
+STATUSBAR_HEIGHT = 40;
 
 //カードサイズ
 CARD_W = 200;
