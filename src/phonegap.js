@@ -9,7 +9,7 @@ var onDeviceready = function () {
     if (DEBUG_PHONEGAP) alert('devicereadyイベントが発火しました');
     PHONEGAP = true;
 
-    //Game Center Plubin
+    //Game Center Plugin
     gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
 
     //実行環境取得
