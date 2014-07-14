@@ -20,6 +20,10 @@ GAMECENTER = false;
 //スクリーンサイズ
 SC_W = 640;
 SC_H = 960;
+if(PHONEGAP) {
+    SC_W = window.innerWidth*2;
+    SC_H = window.innerHeight*2;
+}
 
 //ステータスバー情報
 STATUSBAR_HEIGHT = 40;
@@ -112,30 +116,6 @@ var onDeviceready = function () {
 
     //Game Center Plugin
     gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
-
-    //実行環境取得
-    appMain.isPad = (navigator.userAgent.indexOf('iPad')+1?true:false);
-    appMain.isPod = (navigator.userAgent.indexOf('iPod')+1?true:false);
-    appMain.isPhone = (navigator.userAgent.indexOf('iPhone')+1?true:false);
-    appMain.isAndroid = (navigator.userAgent.indexOf('Android')+1?true:false);
-    appMain.isiOS4 = navigator.userAgent.match(/OS 4_[0-9_]+ like Mac OS X/i)!==null;
-    appMain.isiOS5 = navigator.userAgent.match(/OS 5_[0-9_]+ like Mac OS X/i)!==null;
-    appMain.isiOS6 = navigator.userAgent.match(/OS 6_[0-9_]+ like Mac OS X/i)!==null;
-    appMain.version = window.device.version;
-    appMain.model = window.device.model;
-    appMain.name = window.device.name;
-    appMain.uuid = window.device.uuid;
-
-    appMain.windowWidth = window.innerWidth;
-    appMain.windowHeight = window.innerHeight;
-
-    if (DEBUG_PHONEGAP) {
-        alert('version:'+appMain.version+
-              ' model:'+appMain.model+
-              ' name:'+appMain.name+
-              ' uuid:'+appMain.uuid
-        );
-    }
 }
 
 var onPause = function() {
