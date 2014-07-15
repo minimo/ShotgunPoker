@@ -116,15 +116,16 @@ tm.define("shotgun.TitleScene", {
         sh.checkHierarchy = true;
         sh.boundingType = "rect";
         sh.addEventListener("pointingend", function() {
-            if (GAMECENTER) {
-                var data = {
-                    period: "today",
-                    leaderboardId: "board"
-                };
-                gamecenter.showLeaderboard(function() {}, function() {AdvanceAlert('GAMECENTERを開けませんでした');}, data);
-            } else {
-                AdvanceAlert('GAMECENTERの準備が出来ていません');
+            if (!PHONEGAP) return;
+            if (!GAMECENTER) {
+                gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
+//                AdvanceAlert('GAMECENTERの準備が出来ていません');
             }
+            var data = {
+                period: "today",
+                leaderboardId: "board"
+            };
+            gamecenter.showLeaderboard(function() {}, function() {AdvanceAlert('GAMECENTERを開けませんでした');}, data);
 //            that.mask.tweener.clear().fadeIn(200).call(function(){appMain.pushScene(shotgun.CreditScene());});
         });
         var lb = this.creditLabel = tm.display.OutlineLabel("GAME CENTER", 50).addChildTo(this.titleLayer);
