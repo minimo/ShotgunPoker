@@ -280,7 +280,7 @@ tm.define("shotgun.MainScene", {
                 score: this.score,
                 leaderboardId: "board"
             };
-            gamecenter.submitScore(function() {}, function() {AdvanceAlert('スコア登録に失敗しました')}, data);
+            gamecenter.submitScore(function() {AdvanceAlert('スコア登録に成功しました')}, function() {AdvanceAlert('スコア登録に失敗しました')}, data);
         }
 
         //メッセージ
