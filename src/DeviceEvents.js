@@ -24,6 +24,11 @@ var onPause = function() {
 
 var onResume = function() {
     if (DEBUG_PHONEGAP) alert('resumeイベントが発火しました');
+
+    //GAME CENTERに再度接続を行う
+    if (!GAMECENTER) {
+        gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
+    }
 }
 
 var onOnline = function() {
