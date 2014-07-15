@@ -19,7 +19,7 @@ tm.define("shotgun.PauseScene", {
         this.parentScene = parentScene;
         
         //ダイアログ
-        this.dialog = shotgun.YesNoDialog("EXIT GAME?");
+        this.dialog = shotgun.ConfirmDialog("EXIT GAME?", ["YES", "NO"]);
 
         //バックグラウンド
         this.bg = tm.display.Sprite("greenback", SC_W*2, SC_H*2).addChildTo(this);
@@ -96,13 +96,15 @@ tm.define("shotgun.PauseScene", {
     },
 });
 
-tm.define("shotgun.YesNoDialog", {
+tm.define("shotgun.ConfirmDialog", {
     superClass: tm.app.Scene,
 
     answer: null,
 
-    init: function(caption) {
+    init: function(caption, button) {
         this.superInit();
+        
+        button = button || ["OK", "CANCEL"];
 
         //バックグラウンド
         var sh = tm.display.RoundRectangleShape(SC_W-20, SC_H*0.3, {fillStyle:'rgba(0,100,0,1)', lineWidth:4}).addChildTo(this);
@@ -126,7 +128,7 @@ tm.define("shotgun.YesNoDialog", {
             that.answer = true;
             appMain.popScene();
         });
-        var lb = tm.display.OutlineLabel("YES", 50).addChildTo(this);
+        var lb = tm.display.OutlineLabel(button[0], 50).addChildTo(this);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
         lb.setPosition(SC_W*0.25, SC_H*0.55);
 
@@ -139,19 +141,42 @@ tm.define("shotgun.YesNoDialog", {
             that.answer = false;
             appMain.popScene();
         });
-        var lb = tm.display.OutlineLabel("NO", 50).addChildTo(this);
+        var lb = tm.display.OutlineLabel(button[1], 50).addChildTo(this);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
         lb.setPosition(SC_W*0.75, SC_H*0.55);
     },
-    //タッチorクリック開始処理
-    ontouchstart: function(e) {
-    },
+});
 
-    //タッチorクリック移動処理
-    ontouchmove: function(e) {
-    },
+tm.define("shotgun.AlertDialog", {
+    superClass: tm.app.Scene,
 
-    //タッチorクリック終了処理
-    ontouchend: function(e) {
+    init: function(caption, button) {
+        this.superInit();
+        button = button || "OK";
+
+        //バックグラウンド
+        var sh = tm.display.RoundRectangleShape(SC_W-20, SC_H*0.3, {fillStyle:'rgba(0,100,0,1)', lineWidth:4}).addChildTo(this);
+        sh.setPosition(SC_W*0.5, SC_H*0.5);
+
+        var that = this;
+        var width = 250, height = 70;
+        var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
+
+        //キャプション
+        var lb = tm.display.OutlineLabel(caption, 50).addChildTo(this);
+        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
+        lb.setPosition(SC_W*0.5, SC_H*0.45);
+
+        var sh = tm.display.RoundRectangleShape(width, height, param).addChildTo(this);
+        sh.setPosition(SC_W*0.5, SC_H*0.55);
+        sh.interactive = true;
+        sh.boundingType = "rect";
+        sh.addEventListener("click", function() {
+            that.answer = true;
+            appMain.popScene();
+        });
+        var lb = tm.display.OutlineLabel(button, 50).addChildTo(this);
+        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
+        lb.setPosition(SC_W*0.25, SC_H*0.55);
     },
 });
