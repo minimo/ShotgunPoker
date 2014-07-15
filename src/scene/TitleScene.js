@@ -121,9 +121,9 @@ tm.define("shotgun.TitleScene", {
                     period: "today",
                     leaderboardId: "board"
                 };
-                gamecenter.showLeaderboard(function() {}, function() {alert('GAMECENTERを開けませんでした');}, data);
+                gamecenter.showLeaderboard(function() {}, function() {AdvanceAlert('GAMECENTERを開けませんでした');}, data);
             } else {
-                alert('GAMECENTERの準備が出来ていません');
+                AdvanceAlert('GAMECENTERの準備が出来ていません');
             }
 //            that.mask.tweener.clear().fadeIn(200).call(function(){appMain.pushScene(shotgun.CreditScene());});
         });
