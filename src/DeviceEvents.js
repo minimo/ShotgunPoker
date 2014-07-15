@@ -5,18 +5,6 @@
  *  This Program is MIT license.
  */
 
-//Confirm dialog
-var setConf = function(str) {
-    var tmpFrame = document.createElement('iframe');
-    tmpFrame.setAttribute('src', 'data:text/plain,');
-    document.documentElement.appendChild(tmpFrame);
-
-    var result = window.frames[0].window.confirm(str);
-    tmpFrame.parentNode.removeChild(tmpFrame);
-
-    return result;
-};
-
 //PhoneGap Device Events
 var onDeviceready = function () {
     if (DEBUG_PHONEGAP) alert('devicereadyイベントが発火しました');
