@@ -384,7 +384,7 @@ tm.define("shotgun.MainScene", {
         this.shuffled = false;
 
         //ポーズボタン
-        if (SC_W*0.8-100 < sx && sx < SC_W*0.8+100 && 39 < sy && sy < 89) {
+        if (SC_W*0.8-100 < sx && sx < SC_W*0.8+100 && 39 < sy && sy < 89 && !scene.gameend) {
             appMain.pushScene(shotgun.PauseScene(this));
         }
     },

@@ -12,7 +12,7 @@ mt = new MersenneTwister();
 //デバッグフラグ
 DEBUG = false;
 PHONEGAP = false;
-DEBUG_PHONEGAP = false;
+DEBUG_PHONEGAP = true;
 
 //GAMECENTER使用フラグ
 GAMECENTER = false;
@@ -20,10 +20,6 @@ GAMECENTER = false;
 //スクリーンサイズ
 SC_W = 640;
 SC_H = 960;
-if(PHONEGAP) {
-    SC_W = window.innerWidth*2;
-    SC_H = window.innerHeight*2;
-}
 
 //ステータスバー情報
 STATUSBAR_HEIGHT = 40;
@@ -104,54 +100,6 @@ tm.main(function() {
         SC_W = window.innerWidth*2;
         SC_H = window.innerHeight*2;
     }
-
     appMain = shotgun.CanvasApp("#world");
     appMain.run();
 });
-
-
-var onDeviceready = function () {
-    if (DEBUG_PHONEGAP) alert('devicereadyイベントが発火しました');
-    PHONEGAP = true;
-
-    //Game Center Plugin
-    gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
-}
-
-var onPause = function() {
-    if (DEBUG_PHONEGAP) alert('pauseイベントが発火しました');
-    var scene = appMain.currentScene;
-    if (scene instanceof shotgun.MainScene) {
-        appMain.pushScene(shotgun.PauseScene(scene));
-    }
-}
-
-var onResume = function() {
-    if (DEBUG_PHONEGAP) alert('resumeイベントが発火しました');
-}
-
-var onOnline = function() {
-}
-
-var onOffline = function() {
-}
-
-var onGamecenterSuccess = function() {
-    if (DEBUG_PHONEGAP) alert('GAMECENTER connect success');
-    GAMECENTER = true;
-}
-
-var onGamecenterFailure = function() {
-    if (DEBUG_PHONEGAP) alert('GAMECENTER connect failure');
-    GAMECENTER = false;
-}
-
-//Phonegap Event listener
-document.addEventListener('deviceready', onDeviceready, false);
-document.addEventListener('pause', onPause, false);
-document.addEventListener('resume', onResume, false);
-document.addEventListener('online', onOnline, false);
-document.addEventListener('offline', onOffline, false);
-
-//GamecenterPlungin
-//https://github.com/leecrossley/cordova-plugin-game-center
