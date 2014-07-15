@@ -89,12 +89,31 @@ var clamp = function(x, min, max) {
     return (x<min)?min:((x>max)?max:x);
 };
 
+//タイトル無しダイアログ
+var AdvanceAlert = function(str) {
+    var tmpFrame = document.createElement('iframe');
+    tmpFrame.setAttribute('src', 'data:text/plain,');
+    document.documentElement.appendChild(tmpFrame);
+
+    window.frames[0].window.alert(str);
+    tmpFrame.parentNode.removeChild(tmpFrame);
+};
+var AdvanceConfirm = function(str) {
+    var tmpFrame = document.createElement('iframe');
+    tmpFrame.setAttribute('src', 'data:text/plain,');
+    document.documentElement.appendChild(tmpFrame);
+
+    var result = window.frames[0].window.confirm(str);
+    tmpFrame.parentNode.removeChild(tmpFrame);
+
+    return result;
+};
+
 //インスタンス
 appMain = {};
 
 //アプリケーションメイン
 tm.main(function() {
-
     //PHONEGAPの場合スクリーンサイズ調整
     if (PHONEGAP) {
         SC_W = window.innerWidth*2;
