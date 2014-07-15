@@ -71,7 +71,7 @@ tm.define("shotgun.MainScene", {
         var that = this;
         var lb = this.scoreLabel = tm.display.OutlineLabel("SCORE:", 50).addChildTo(this);
         lb.fontFamily = "'azuki'"; lb.align = "left"; lb.baseline = "middle"; lb.outlineWidth = 3;
-        lb.setPosition(8, 64);
+        lb.setPosition(8, 72);
         lb.update = function() {
             this.text = "SCORE:"+that.score;
         }
@@ -79,12 +79,12 @@ tm.define("shotgun.MainScene", {
         //ライフ表示
         var lb = this.lifeLabel = tm.display.OutlineLabel("LIFE:", 50).addChildTo(this);
         lb.fontFamily = "'azuki'"; lb.align = "left"; lb.baseline = "middle"; lb.outlineWidth = 3;
-        lb.setPosition(8, 120);
+        lb.setPosition(8, 128);
         this.lg = [];
         for (var i = 0; i < 7; i++ ) {
             var c = this.lg[i] = shotgun.Card(SUIT_HEART, 0).addChildTo(this);
             c.setScale(0.2);
-            c.setPosition( 155+i*45, 120);
+            c.setPosition( 155+i*45, 128);
             c.life = i;
             c.update = function() {
                 this.pattern = that.life+this.suit*13-1;
@@ -98,11 +98,11 @@ tm.define("shotgun.MainScene", {
 
         //ポーズボタン
         var sh = this.credit = tm.display.RoundRectangleShape(200, 50, {fillStyle:'rgba(0,80,0,1)', lineWidth:4}).addChildTo(this);
-        sh.setPosition(SC_W*0.8, 64);
+        sh.setPosition(SC_W*0.84, 72);
         sh.interactive = true;
         var lb = this.creditLabel = tm.display.OutlineLabel("pause", 50).addChildTo(this);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
-        lb.setPosition(SC_W*0.8, 56);
+        lb.setPosition(SC_W*0.84, 64);
 
         //ステータスバー
         var sh = tm.display.RectangleShape(SC_W, STATUSBAR_HEIGHT, {strokeStyle: STATUSBAR_COLOR,fillStyle: STATUSBAR_COLOR}).addChildTo(this);

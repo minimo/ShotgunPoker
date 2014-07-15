@@ -22,7 +22,7 @@ tm.define("shotgun.CreditScene", {
 
         var lb = this.credit1 = tm.display.OutlineLabel("CREDIT", 40).addChildTo(this.titleLayer);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
-        lb.setPosition(SC_W*0.5, SC_H*0.05);
+        lb.setPosition(SC_W*0.5, SC_H*0.1);
 
         var lb = this.credit1 = tm.display.OutlineLabel("ＢＧＭ：魔王魂様", 30).addChildTo(this.titleLayer);
         lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
