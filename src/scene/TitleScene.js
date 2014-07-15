@@ -40,7 +40,7 @@ tm.define("shotgun.TitleScene", {
         appMain.playBGM("titleBGM");
     },
 
-    onenter: function() {
+    onresume: function() {
         this.mask.tweener.clear().fadeOut(200);
     },
 

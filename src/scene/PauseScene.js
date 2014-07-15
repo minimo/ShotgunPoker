@@ -77,7 +77,7 @@ tm.define("shotgun.PauseScene", {
         this.time++;
     },
 
-    onenter: function() {
+    onresume: function() {
         if (this.dialog.answer == true) {
             appMain.replaceScene(shotgun.TitleScene());
         }

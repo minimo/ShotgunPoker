@@ -41,12 +41,12 @@ tm.define("shotgun.CanvasApp", {
             assets: assets,
             width: SC_W,
             height: SC_H,
+            bgColor: "black",
             nextScene: function() {
                 this._onLoadAssets();
                 return shotgun.TitleScene();
             }.bind(this),
         });
-        loadingScene.bg.canvas.clearColor("black");
         this.replaceScene(loadingScene);
 
         //役名一覧
