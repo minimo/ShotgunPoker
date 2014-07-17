@@ -3,8 +3,8 @@ ShotgunPoker
 
 <img src="screenshot.png" />
 
-TODO LIST<br>
-チュートリアル<br>
-<br>
-GAME CENTER連携<br>
-TWITTER連携<br>
+制限時間以内に、カードを５枚タッチして選び、ポーカーの役を作ってください。
+
+役無し、手札５枚未満、ワンペア連続２回でライフが１減ります。
+ロイヤルストレートフラッシュの場合、初回のみライフが１増えます。
+
