@@ -198,7 +198,7 @@ tm.define("shotgun.MainScene", {
                 lb.fontFamily = "'KS-Kohichi-FeltPen'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 3;
                 lb.setPosition(SC_W*0.8, SC_H*0.8);
                 lb.alpha = 0;
-                lb.tweener.clear().wait(1200).fadeIn(1).to({x: SC_W*0.8, y: SC_H*0.8-20, alpha:0.0},1000).call(function(){lb.remove();});
+                lb.tweener.clear().wait(1200).fadeIn(1).to({x: SC_W*0.8, y: SC_H*0.8-20, alpha:0.0},1000).call(lb.remove());
                 appMain.playSE("nohand");
             } else {
                 appMain.playSE("hand");
@@ -214,7 +214,7 @@ tm.define("shotgun.MainScene", {
                     lb.fontFamily = "'KS-Kohichi-FeltPen'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 3;
                     lb.setPosition(SC_W*0.8, SC_H*0.8);
                     lb.alpha = 0;
-                    lb.tweener.clear().wait(1200).fadeIn(1).to({x: SC_W*0.8, y: SC_H*0.8-20, alpha:0.0},1000).call(function(){lb.remove();});
+                    lb.tweener.clear().wait(1200).fadeIn(1).to({x: SC_W*0.8, y: SC_H*0.8-20, alpha:0.0},1000).call(lb.remove());
                 }
             }
 
@@ -230,7 +230,7 @@ tm.define("shotgun.MainScene", {
                 var lb = tm.display.OutlineLabel("EXCELLENT!", 100).addChildTo(this);
                 lb.fontFamily = "'KS-Kohichi-FeltPen'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 3;
                 lb.setPosition(SC_W*0.5, SC_H*0.5);
-                lb.tweener.clear().wait(1000).call(function(){lb.remove();});
+                lb.tweener.clear().wait(1000).call(lb.remove());
             }
             this.score += sc;
             if (this.score < 0) this.score = 0;
