@@ -12195,9 +12195,7 @@ tm.app = tm.app || {};
          * 親から離す
          */
         remove: function() {
-            if (!this.parent) {
-                console.assert(this.parent, "parentがありません");
-            }
+            console.assert(this.parent);
             this.parent.removeChild(this);
 
             this.parent = null;
