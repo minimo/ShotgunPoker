@@ -252,4 +252,22 @@ tm.define("shotgun.TitleScene", {
 
 });
 
+tm.define("shotgun.WaitScene", {
+    superClass: tm.app.Scene,
+
+    init: function() {
+        this.superInit();
+    },
+    update: function() {
+        if (fontLoadEnd) {
+            fontLoadEnd = false;
+            tm.app.Object2D().addChildTo(this).tweener
+                .wait(100)
+                .call(function(){
+                    appMain.replaceScene(shotgun.TitleScene());
+                });
+        }
+    },
+});
+
 

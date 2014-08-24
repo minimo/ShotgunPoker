@@ -44,7 +44,8 @@ tm.define("shotgun.CanvasApp", {
             bgColor: "black",
             nextScene: function() {
                 this._onLoadAssets();
-                return shotgun.TitleScene();
+                return shotgun.WaitScene();
+//                return shotgun.TitleScene();
             }.bind(this),
         });
         this.replaceScene(loadingScene);

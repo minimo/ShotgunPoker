@@ -14,6 +14,9 @@ DEBUG = false;
 PHONEGAP = false;
 DEBUG_PHONEGAP = true;
 
+//フォント読み込み終了フラグ
+fontLoadEnd = false;
+
 //GAMECENTER使用フラグ
 GAMECENTER = false;
 
@@ -119,6 +122,27 @@ tm.main(function() {
         SC_W = window.innerWidth*2;
         SC_H = window.innerHeight*2;
     }
+    detectFontLoading("KS-Kohichi-FeltPen");
     appMain = shotgun.CanvasApp("#world");
     appMain.run();
 });
+
+//フォント読み込み終了検出
+detectFontLoading = function(fontName) {
+    var tester = document.createElement('span');
+    tester.style.fontFamily = '"' + fontName + '", "Adobe Blank"';
+    tester.style.position = 'absolute';
+    tester.style.top = '-100px';
+    tester.appendChild(document.createTextNode('a'));
+    document.body.appendChild(tester);
+
+    var timerId = setInterval(checkWidth, 500);
+    function checkWidth() {
+        if (tester.offsetWidth > 0) {
+            clearInterval(timerId);
+            document.documentElement.className += ' ' + fontName.toLowerCase().replace(/\s/g, '_');
+            fontLoadEnd = true;
+            tester.parentNode.removeChild(tester);
+        }
+    }
+}
