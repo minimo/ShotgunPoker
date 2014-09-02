@@ -14,8 +14,9 @@ DEBUG = false;
 PHONEGAP = false;
 DEBUG_PHONEGAP = true;
 
-//フォント読み込み終了フラグ
-fontLoadEnd = false;
+//フォント読み込み終了カウント
+fontLoadEnd = 0;
+fontLoadMax = 2;
 
 //GAMECENTER使用フラグ
 GAMECENTER = false;
@@ -123,6 +124,8 @@ tm.main(function() {
         SC_H = window.innerHeight*2;
     }
     detectFontLoading("KS-Kohichi-FeltPen");
+    detectFontLoading("azuki");
+
     appMain = shotgun.CanvasApp("#world");
     appMain.run();
 });
@@ -141,7 +144,7 @@ detectFontLoading = function(fontName) {
         if (tester.offsetWidth > 0) {
             clearInterval(timerId);
             document.documentElement.className += ' ' + fontName.toLowerCase().replace(/\s/g, '_');
-            fontLoadEnd = true;
+            fontLoadEnd++;
             tester.parentNode.removeChild(tester);
         }
     }

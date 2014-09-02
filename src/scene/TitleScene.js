@@ -259,8 +259,8 @@ tm.define("shotgun.WaitScene", {
         this.superInit();
     },
     update: function() {
-        if (fontLoadEnd) {
-            fontLoadEnd = false;
+        if (fontLoadEnd == fontLoadMax) {
+            fontLoadEnd = 0;
             tm.app.Object2D().addChildTo(this).tweener
                 .wait(100)
                 .call(function(){
