@@ -12,6 +12,10 @@ tm.define("shotgun.PauseScene", {
     parentScene: null,
     dialog: null,
 
+    //ラベル用フォントパラメータ
+    labelParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:2 },
+    scoreParam: {fontFamily:"'azuki'", align: "left", baseline:"middle", outlineWidth:2 },
+
     init: function(parentScene) {
         this.superInit();
         this.background = "rgba(0, 0, 0, 0.0)";
@@ -25,16 +29,16 @@ tm.define("shotgun.PauseScene", {
         this.bg = tm.display.Sprite("greenback", SC_W*2, SC_H*2).addChildTo(this);
 
         var lb = tm.display.OutlineLabel("PAUSE", 60).addChildTo(this);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
+        lb.setParam(this.labelParam);
         lb.setPosition(SC_W*0.5, SC_H*0.1);
 
         var lb = tm.display.OutlineLabel("YOUR HAND LIST", 40).addChildTo(this);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
+        lb.setParam(this.labelParam);
         lb.setPosition(SC_W*0.5, SC_H*0.2);
 
         for (var i = 0; i < 12; i++) {
             var lb = tm.display.OutlineLabel(appMain.handList[i].name+":"+this.parentScene.handCount[appMain.handList[i].point], 40).addChildTo(this);
-            lb.fontFamily = "'azuki'"; lb.align = "left"; lb.baseline = "middle"; lb.outlineWidth = 2;
+            lb.setParam(this.scoreParam);
             lb.setPosition(SC_W*0.2, SC_H*0.28+(i*45));
         }
 
@@ -51,7 +55,7 @@ tm.define("shotgun.PauseScene", {
             that.tweener.clear().call(function(){appMain.popScene();});
         });
         var lb = tm.display.OutlineLabel("RESUME", 50).addChildTo(this);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
+        lb.setParam(this.labelParam);
         lb.setPosition(SC_W*0.25, SC_H*0.9);
 
         //終了ボタン
@@ -63,7 +67,7 @@ tm.define("shotgun.PauseScene", {
             appMain.pushScene(that.dialog);
         });
         var lb = tm.display.OutlineLabel("EXIT", 50).addChildTo(this);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
+        lb.setParam(this.labelParam);
         lb.setPosition(SC_W*0.75, SC_H*0.9);
 
         //ステータスバー
@@ -101,6 +105,9 @@ tm.define("shotgun.ConfirmDialog", {
 
     answer: null,
 
+    //ラベル用フォントパラメータ
+    labelParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:4 },
+
     init: function(caption, button) {
         this.superInit();
         
@@ -116,7 +123,7 @@ tm.define("shotgun.ConfirmDialog", {
 
         //キャプション
         var lb = tm.display.OutlineLabel(caption, 50).addChildTo(this);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
+        lb.setParam(this.labelParam);
         lb.setPosition(SC_W*0.5, SC_H*0.45);
 
         //ＹＥＳ
@@ -129,7 +136,7 @@ tm.define("shotgun.ConfirmDialog", {
             appMain.popScene();
         });
         var lb = tm.display.OutlineLabel(button[0], 50).addChildTo(this);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
+        lb.setParam(this.labelParam);
         lb.setPosition(SC_W*0.25, SC_H*0.55);
 
         //ＮＯ
@@ -142,13 +149,16 @@ tm.define("shotgun.ConfirmDialog", {
             appMain.popScene();
         });
         var lb = tm.display.OutlineLabel(button[1], 50).addChildTo(this);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
+        lb.setParam(this.labelParam);
         lb.setPosition(SC_W*0.75, SC_H*0.55);
     },
 });
 
 tm.define("shotgun.AlertDialog", {
     superClass: tm.app.Scene,
+
+    //ラベル用フォントパラメータ
+    labelParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:2 },
 
     init: function(caption, button) {
         this.superInit();
@@ -164,7 +174,7 @@ tm.define("shotgun.AlertDialog", {
 
         //キャプション
         var lb = tm.display.OutlineLabel(caption, 50).addChildTo(this);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
+        lb.setParam(this.labelParam);
         lb.setPosition(SC_W*0.5, SC_H*0.45);
 
         var sh = tm.display.RoundRectangleShape(width, height, param).addChildTo(this);
@@ -176,7 +186,7 @@ tm.define("shotgun.AlertDialog", {
             appMain.popScene();
         });
         var lb = tm.display.OutlineLabel(button, 50).addChildTo(this);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
+        lb.setParam(this.labelParam);
         lb.setPosition(SC_W*0.25, SC_H*0.55);
     },
 });

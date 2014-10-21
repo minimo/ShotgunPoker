@@ -11,6 +11,8 @@ tm.define("shotgun.TitleScene", {
 
     //ボタン用フォントパラメータ
     buttonParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:4 },
+    labelParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:2 },
+    scoreParam: {fontFamily:"'azuki'", align: "left", baseline:"middle", outlineWidth:2 },
 
     init: function() {
         this.superInit();
@@ -203,11 +205,11 @@ tm.define("shotgun.TitleScene", {
 
         var lb = tm.display.OutlineLabel("HOW TO PLAY", 40).addChildTo(this.titleLayer);
         lb.setPosition(SC_W*0.5+SC_W*page, SC_H*0.05);
-        lb.setParam(this.buttonParam);
+        lb.setParam(this.labelParam);
 
         var lb = tm.display.OutlineLabel("プレイ画面の説明", 40).addChildTo(this.titleLayer);
         lb.setPosition(SC_W*0.5+SC_W*page, SC_H*0.1);
-        lb.setParam(this.buttonParam);
+        lb.setParam(this.labelParam);
 
         var sp = tm.display.Sprite("tutorial1").addChildTo(this.titleLayer);
         sp.setPosition(SC_W*0.5+SC_W*page, SC_H*0.5);
@@ -224,7 +226,7 @@ tm.define("shotgun.TitleScene", {
 
         var lb = tm.display.OutlineLabel("プレイ画面の説明", 40).addChildTo(this.titleLayer);
         lb.setPosition(SC_W*0.5+SC_W*page, SC_H*0.1);
-        lb.setParam(this.buttonParam);
+        lb.setParam(this.labelParam);
  
         this.addButton(page);
     },
@@ -237,12 +239,12 @@ tm.define("shotgun.TitleScene", {
 
         var lb = tm.display.OutlineLabel("得点表", 40).addChildTo(this.titleLayer);
         lb.setPosition(SC_W*0.5+SC_W*page, SC_H*0.1);
-        lb.setParam(this.buttonParam);
+        lb.setParam(this.labelParam);
 
         for (var i = 0; i < 12; i++) {
             var lb = tm.display.OutlineLabel(appMain.handList[i].name+" : "+appMain.handList[i].point+"pts", 40).addChildTo(this.titleLayer);
             lb.setPosition(SC_W*0.1+SC_W*page, SC_H*0.17+(i*55));
-            lb.setParam(this.buttonParam);
+            lb.setParam(this.scoreParam);
         }
 
         this.addButton(page, true);

@@ -12,6 +12,9 @@ tm.define("shotgun.SettingScene", {
     bgm: null,
     se: null,
 
+    //ラベル用フォントパラメータ
+    labelParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:2 },
+
     init: function() {
         this.superInit();
         this.background = "rgba(0, 0, 0, 0.0)";
@@ -22,12 +25,12 @@ tm.define("shotgun.SettingScene", {
         this.bg.setPosition(SC_W/2, SC_H/2);
 
         var lb = this.credit1 = tm.display.OutlineLabel("SETTING", 60).addChildTo(this);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
+        lb.setParam(this.labelParam);
         lb.setPosition(SC_W*0.5, SC_H*0.2);
 
         //ＢＧＭ音量
         var lb = tm.display.OutlineLabel("BGM", 60).addChildTo(this);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
+        lb.setParam(this.labelParam);
         lb.setPosition(SC_W*0.2, SC_H*0.4);
         this.bgm = [];
         for (var i = 0; i < 6; i++) {
@@ -39,12 +42,12 @@ tm.define("shotgun.SettingScene", {
 
         //ＳＥ音量
         var lb = tm.display.OutlineLabel("SE", 60).addChildTo(this);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
+        lb.setParam(this.labelParam);
         lb.setPosition(SC_W*0.2, SC_H*0.6);
         this.se = [];
         for (var i = 0; i < 6; i++) {
             var lb = this.se[i] = tm.display.OutlineLabel(""+i, 30).addChildTo(this);
-            lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
+            lb.setParam(this.labelParam);
             lb.setPosition(SC_W*0.4+i*60, SC_H*0.6);
             if (appMain.volumeSE == i) lb.fontSize = 80;
         }
@@ -63,7 +66,7 @@ tm.define("shotgun.SettingScene", {
             appMain.popScene();
         });
         var lb = tm.display.OutlineLabel("RETURN", 50).addChildTo(this);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
+        lb.setParam(this.labelParam);
         lb.setPosition(SC_W*0.5, SC_H*0.9);
 
         //ステータスバー

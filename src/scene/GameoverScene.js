@@ -9,6 +9,10 @@
 tm.define("shotgun.GameoverScene", {
     superClass: tm.app.Scene,
 
+    //ラベル用フォントパラメータ
+    labelParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:2 },
+    scoreParam: {fontFamily:"'azuki'", align: "left", baseline:"middle", outlineWidth:2 },
+
     init: function(parentScene) {
         this.superInit();
         this.background = "rgba(0, 0, 0, 0.0)";
@@ -18,24 +22,24 @@ tm.define("shotgun.GameoverScene", {
         //バックグラウンド
         this.bg = tm.display.Sprite("greenback", SC_W, SC_H).addChildTo(this);
         this.bg.setPosition(SC_W/2, SC_H/2);
-        
+
         var that = this;
         var width = 230, height = 60;
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
         var lb = this.score = tm.display.OutlineLabel("YOUR RESULT", 50).addChildTo(this);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
+        lb.setParam(this.labelParam);
         lb.setPosition(SC_W*0.5, SC_H*0.1);
 
         //スコア表示
         var lb = this.score = tm.display.OutlineLabel("SCORE: "+appMain.lastScore, 50).addChildTo(this);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
+        lb.setParam(this.labelParam);
         lb.setPosition(SC_W*0.5, SC_H*0.2);
         lb.outlineWidth = 2;
 
         for (var i = 0; i < 12; i++) {
             var lb = tm.display.OutlineLabel(appMain.handList[i].name+":"+this.parentScene.handCount[appMain.handList[i].point], 40).addChildTo(this);
-            lb.fontFamily = "'azuki'"; lb.align = "left"; lb.baseline = "middle"; lb.outlineWidth = 2;
+            lb.setParam(this.scoreParam);
             lb.setPosition(SC_W*0.2, SC_H*0.28+(i*45));
         }
 
@@ -47,7 +51,7 @@ tm.define("shotgun.GameoverScene", {
             that.mask.tweener.clear().fadeIn(300).call(function(){appMain.replaceScene(shotgun.MainScene());});
         });
         var lb = this.retryLabel = tm.display.OutlineLabel("RETRY", 50).addChildTo(this);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
+        lb.setParam(this.labelParam);
         lb.setPosition(SC_W*0.25, SC_H*0.9);
 
         //戻るボタン
@@ -58,7 +62,7 @@ tm.define("shotgun.GameoverScene", {
             that.mask.tweener.clear().fadeIn(300).call(function(){appMain.replaceScene(shotgun.TitleScene());});
         });
         var lb = this.exitLabel = tm.display.OutlineLabel("EXIT", 50).addChildTo(this);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
+        lb.setParam(this.labelParam);
         lb.setPosition(SC_W*0.75, SC_H*0.9);
 
 /*
