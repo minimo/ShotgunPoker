@@ -92,6 +92,19 @@ tm.display = tm.display || {};
             this.outlineWidth = width;
             return this;
         },
+
+        //パラメータ一括セット
+        setParam: function(param) {
+            this.fontFamily       = param.fontFamily       || this.fontFamily;
+            this.align            = param.align            || this.align;
+            this.baseline         = param.baseline         || this.baseline;
+            this.fontSize         = param.fontSize         || this.fontSize
+            this.fontWeight       = param.fontWeight       || this.fontWeight;
+            this.fillStyle        = param.fillStyle        || this.fillStyle;
+            this.fillStyleOutline = param.fillStyleOutline || this.fillStyleOutline;
+            this.outlineWidth     = param.outlineWidth     || this.outlineWidth;
+            return this;
+        },
     });
 
     /**
@@ -238,6 +251,28 @@ tm.display = tm.display || {};
                     n++;
                 }
             }
+        }
+    });
+
+    /**
+     * @property    shadowBlur
+     */
+    tm.display.OutlineLabel.prototype.accessor("shadowBlur", {
+        "get": function() { return this.labels[4].shadowBlur; },
+        "set": function(shadowBlur) {
+           for (var i = 0; i < 9; i++)this.labels[i].shadowBlur = shadowBlur;
+//           this.labels[4].shadowBlur = shadowBlur;
+        }
+    });
+
+    /**
+     * @property    shadowColoe
+     */
+    tm.display.OutlineLabel.prototype.accessor("shadowColor", {
+        "get": function() { return this.labels[4].shadowColor; },
+        "set": function(shadowColor) {
+            for (var i = 0; i < 9; i++)this.labels[i].shadowColor = shadowColor;
+//            this.labels[4].shadowColor = shadowColor;
         }
     });
 

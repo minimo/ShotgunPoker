@@ -45,13 +45,26 @@ tm.define("shotgun.TitleScene", {
     },
 
     setupTitle: function() {
+        var fillStyle = tm.graphics.LinearGradient(-SC_W*0.2, 0, SC_W*0.1, 64)
+            .addColorStopList([
+                { offset: 0.1, color: "hsla(230, 90%, 50%, 0.5)"},
+                { offset: 0.5, color: "hsla(230, 80%, 90%, 0.9)"},
+                { offset: 0.9, color: "hsla(230, 90%, 50%, 0.5)"},
+            ]).toStyle();
+
         var lb = this.title1 = tm.display.OutlineLabel("SHOTGUN", 120).addChildTo(this.titleLayer);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
-        lb.setPosition(SC_W*0.4, SC_H*0.15);
+        lb.fontFamily = "'CasinoQueen'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
+        lb.setPosition(SC_W*0.45, SC_H*0.15);
+        lb.fillStyle = fillStyle;
+        lb.shadowColor = "Black";
+        lb.shadowBlur = 10;
 
         var lb = this.title2 = tm.display.OutlineLabel("POKER", 120).addChildTo(this.titleLayer);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
-        lb.setPosition(SC_W*0.7, SC_H*0.30);
+        lb.fontFamily = "'CasinoQueen'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
+        lb.setPosition(SC_W*0.65, SC_H*0.30);
+        lb.fillStyle = fillStyle;
+        lb.shadowColor = "Black";
+        lb.shadowBlur = 10;
 
         var that = this;
         var width = 300, height = 70;
