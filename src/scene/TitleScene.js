@@ -9,6 +9,9 @@
 tm.define("shotgun.TitleScene", {
     superClass: tm.app.Scene,
 
+    //ボタン用フォントパラメータ
+    buttonParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:4 },
+
     init: function() {
         this.superInit();
         this.background = "rgba(0, 0, 0, 0.0)";
@@ -53,15 +56,15 @@ tm.define("shotgun.TitleScene", {
             ]).toStyle();
 
         var lb = this.title1 = tm.display.OutlineLabel("SHOTGUN", 120).addChildTo(this.titleLayer);
-        lb.fontFamily = "'CasinoQueen'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
         lb.setPosition(SC_W*0.45, SC_H*0.15);
+        lb.setParam({fontFamily:"'CasinoQueen'", align: "center", baseline:"middle", outlineWidth:2 });
         lb.fillStyle = fillStyle;
         lb.shadowColor = "Black";
         lb.shadowBlur = 10;
 
         var lb = this.title2 = tm.display.OutlineLabel("POKER", 120).addChildTo(this.titleLayer);
-        lb.fontFamily = "'CasinoQueen'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
         lb.setPosition(SC_W*0.65, SC_H*0.30);
+        lb.setParam({fontFamily:"'CasinoQueen'", align: "center", baseline:"middle", outlineWidth:2 });
         lb.fillStyle = fillStyle;
         lb.shadowColor = "Black";
         lb.shadowBlur = 10;
@@ -79,9 +82,8 @@ tm.define("shotgun.TitleScene", {
         sh.addEventListener("pointingend", function() {
             that.mask.tweener.clear().fadeIn(200).call(function(){appMain.replaceScene(shotgun.MainScene());});
         });
-        var lb = this.playLabel = tm.display.OutlineLabel("PLAY", 50).addChildTo(this.titleLayer);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
-        lb.setPosition(SC_W*0.5, SC_H*0.45);
+        var lb = this.playLabel = tm.display.OutlineLabel("PLAY", 50).addChildTo(this.titleLayer).setPosition(SC_W*0.5, SC_H*0.45);
+        lb.setParam(this.buttonParam);
 
         //チュートリアル
         var sh = this.tutorial = tm.display.RoundRectangleShape(width, height, param).addChildTo(this.titleLayer);
@@ -93,8 +95,8 @@ tm.define("shotgun.TitleScene", {
             that.titleLayer.tweener.clear().moveBy(-SC_W, 0, 1000, "easeOutQuint");
         });
         var lb = this.tutorialLabel = tm.display.OutlineLabel("TUTORIAL", 50).addChildTo(this.titleLayer);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
         lb.setPosition(SC_W*0.5, SC_H*0.55);
+        lb.setParam(this.buttonParam);
 
         //設定
         var sh = this.setting = tm.display.RoundRectangleShape(width, height, param).addChildTo(this.titleLayer);
@@ -106,8 +108,8 @@ tm.define("shotgun.TitleScene", {
             that.mask.tweener.clear().fadeIn(200).call(function(){appMain.pushScene(shotgun.SettingScene());});
         });
         var lb = this.settingLabel = tm.display.OutlineLabel("SETTING", 50).addChildTo(this.titleLayer);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
         lb.setPosition(SC_W*0.5, SC_H*0.65);
+        lb.setParam(this.buttonParam);
 
         //クレジット
         var sh = this.credit = tm.display.RoundRectangleShape(width, height, param).addChildTo(this.titleLayer);
@@ -119,8 +121,8 @@ tm.define("shotgun.TitleScene", {
             that.mask.tweener.clear().fadeIn(200).call(function(){appMain.pushScene(shotgun.CreditScene());});
         });
         var lb = this.creditLabel = tm.display.OutlineLabel("CREDIT", 50).addChildTo(this.titleLayer);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
         lb.setPosition(SC_W*0.5, SC_H*0.75);
+        lb.setParam(this.buttonParam);
 
         //GAMECENTER
         var sh = this.credit = tm.display.RoundRectangleShape(width, height, param).addChildTo(this.titleLayer);
@@ -138,12 +140,12 @@ tm.define("shotgun.TitleScene", {
                 period: "today",
                 leaderboardId: "board"
             };
-            gamecenter.showLeaderboard(function() {}, function() {AdvanceAlert('GAMECENTERを開けませんでした');}, data);
+            gamecenter.showLeaderboard(function() {}, function() {AdvanceAlert('GAMECENTERのアクセスに失敗しました');}, data);
 //            that.mask.tweener.clear().fadeIn(200).call(function(){appMain.pushScene(shotgun.CreditScene());});
         });
         var lb = this.creditLabel = tm.display.OutlineLabel("GAME CENTER", 50).addChildTo(this.titleLayer);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
         lb.setPosition(SC_W*0.5, SC_H*0.85);
+        lb.setParam(this.buttonParam);
     },
 
     addButton: function(page, finish) {
@@ -161,8 +163,8 @@ tm.define("shotgun.TitleScene", {
             that.titleLayer.tweener.clear().moveBy(SC_W, 0, 1000, "easeOutQuint");
         });
         var lb = tm.display.OutlineLabel("PREV", 50).addChildTo(this.titleLayer);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
         lb.setPosition(SC_W*0.25+SC_W*page, SC_H*0.9);
+        lb.setParam(this.buttonParam);
 
         if (!finish) {
             //次
@@ -175,8 +177,8 @@ tm.define("shotgun.TitleScene", {
                 that.titleLayer.tweener.clear().moveBy(-SC_W, 0, 1000, "easeOutQuint");
             });
             var lb = tm.display.OutlineLabel("NEXT", 50).addChildTo(this.titleLayer);
-            lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
             lb.setPosition(SC_W*0.75+SC_W*page, SC_H*0.9);
+            lb.setParam(this.buttonParam);
         } else {
             //終了
             var sh = tm.display.RoundRectangleShape(width, height, param).addChildTo(this.titleLayer);
@@ -188,8 +190,8 @@ tm.define("shotgun.TitleScene", {
                 that.titleLayer.tweener.clear().moveBy(SC_W*page, 0, 1000, "easeOutQuint");
             });
             var lb = tm.display.OutlineLabel("EXIT", 50).addChildTo(this.titleLayer);
-            lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
             lb.setPosition(SC_W*0.75+SC_W*page, SC_H*0.9);
+            lb.setParam(this.buttonParam);
         }
     },
 
@@ -200,12 +202,12 @@ tm.define("shotgun.TitleScene", {
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
         var lb = tm.display.OutlineLabel("HOW TO PLAY", 40).addChildTo(this.titleLayer);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
         lb.setPosition(SC_W*0.5+SC_W*page, SC_H*0.05);
+        lb.setParam(this.buttonParam);
 
         var lb = tm.display.OutlineLabel("プレイ画面の説明", 40).addChildTo(this.titleLayer);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
         lb.setPosition(SC_W*0.5+SC_W*page, SC_H*0.1);
+        lb.setParam(this.buttonParam);
 
         var sp = tm.display.Sprite("tutorial1").addChildTo(this.titleLayer);
         sp.setPosition(SC_W*0.5+SC_W*page, SC_H*0.5);
@@ -221,8 +223,8 @@ tm.define("shotgun.TitleScene", {
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
         var lb = tm.display.OutlineLabel("プレイ画面の説明", 40).addChildTo(this.titleLayer);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
         lb.setPosition(SC_W*0.5+SC_W*page, SC_H*0.1);
+        lb.setParam(this.buttonParam);
  
         this.addButton(page);
     },
@@ -234,13 +236,13 @@ tm.define("shotgun.TitleScene", {
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
         var lb = tm.display.OutlineLabel("得点表", 40).addChildTo(this.titleLayer);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
         lb.setPosition(SC_W*0.5+SC_W*page, SC_H*0.1);
+        lb.setParam(this.buttonParam);
 
         for (var i = 0; i < 12; i++) {
             var lb = tm.display.OutlineLabel(appMain.handList[i].name+" : "+appMain.handList[i].point+"pts", 40).addChildTo(this.titleLayer);
-            lb.fontFamily = "'azuki'"; lb.align = "left"; lb.baseline = "middle"; lb.outlineWidth = 2;
             lb.setPosition(SC_W*0.1+SC_W*page, SC_H*0.17+(i*55));
+            lb.setParam(this.buttonParam);
         }
 
         this.addButton(page, true);
@@ -272,7 +274,7 @@ tm.define("shotgun.WaitScene", {
         this.superInit();
     },
     update: function() {
-        if (fontLoadEnd == fontLoadMax) {
+        if (fontLoadEnd >= fontLoadMax) {
             fontLoadEnd = 0;
             tm.app.Object2D().addChildTo(this).tweener
                 .wait(100)

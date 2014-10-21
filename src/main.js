@@ -16,7 +16,10 @@ DEBUG_PHONEGAP = true;
 
 //フォント読み込み終了カウント
 fontLoadEnd = 0;
-fontLoadMax = 2;
+fontLoadMax = 4;
+
+//使用フォント
+FONT = ["'KS-Kohichi-FeltPen'", "'azuki'", "'CasinoQueen'", "'CasinoRegular'"];
 
 //GAMECENTER使用フラグ
 GAMECENTER = false;
@@ -64,10 +67,6 @@ ROYALSTRAIGHTFLASH = 1000;
 
 //フレームレート
 fps = 30;
-
-//使用フォント
-FONT1 = "'KS-Kohichi-FeltPen'";
-FONT2 = "'azuki'";
 
 var toRad = 3.14159/180;    //弧度法toラジアン変換
 var toDeg = 180/3.14159;    //ラジアンto弧度法変換
@@ -125,6 +124,8 @@ tm.main(function() {
     }
     detectFontLoading("KS-Kohichi-FeltPen");
     detectFontLoading("azuki");
+    detectFontLoading("CasinoQueen");
+    detectFontLoading("CasinoRegular");
 
     appMain = shotgun.CanvasApp("#world");
     appMain.run();

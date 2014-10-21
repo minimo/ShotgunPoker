@@ -45,6 +45,12 @@ tm.define("shotgun.MainScene", {
     //遷移情報
     exitGame: false,
 
+    //ラベル用パラメータ
+    labelParamBasic: {fontFamily: "'azuki'", align: "left", baseline: "middle",outlineWidth: 3},
+    labelParamBasicCenter: {fontFamily: "'azuki'", align: "center", baseline: "middle",outlineWidth: 3},
+    labelParamPoker: {fontFamily: "'KS-Kohichi-FeltPen'",align: "center", baseline: "middle", outlineWidth: 3},
+    labelParamHand:  {fontFamily: "'KS-Kohichi-FeltPen'",align: "left", baseline: "middle", outlineWidth: 3},
+
     init: function() {
         this.superInit();
         this.background = "rgba(0, 0, 0, 0.0)";
@@ -70,7 +76,7 @@ tm.define("shotgun.MainScene", {
         //スコア表示
         var that = this;
         var lb = this.scoreLabel = tm.display.OutlineLabel("SCORE:", 50).addChildTo(this);
-        lb.fontFamily = "'azuki'"; lb.align = "left"; lb.baseline = "middle"; lb.outlineWidth = 3;
+        lb.setParam(this.labelParamBasic);
         lb.setPosition(8, 72);
         lb.update = function() {
             this.text = "SCORE:"+that.score;
@@ -78,7 +84,7 @@ tm.define("shotgun.MainScene", {
 
         //ライフ表示
         var lb = this.lifeLabel = tm.display.OutlineLabel("LIFE:", 50).addChildTo(this);
-        lb.fontFamily = "'azuki'"; lb.align = "left"; lb.baseline = "middle"; lb.outlineWidth = 3;
+        lb.setParam(this.labelParamBasic);
         lb.setPosition(8, 128);
         this.lg = [];
         for (var i = 0; i < 7; i++ ) {
@@ -101,7 +107,7 @@ tm.define("shotgun.MainScene", {
         sh.setPosition(SC_W*0.84, 72);
         sh.interactive = true;
         var lb = this.creditLabel = tm.display.OutlineLabel("pause", 50).addChildTo(this);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
+        lb.setParam(this.labelParamBasicCenter);
         lb.setPosition(SC_W*0.84, 64);
 
         //ステータスバー
@@ -120,7 +126,7 @@ tm.define("shotgun.MainScene", {
 
         //スタートアップ
         var lb = this.readyLabel = tm.display.OutlineLabel("READY", 100).addChildTo(this.upperLayer);
-        lb.fontFamily = "'KS-Kohichi-FeltPen'"; lb.align = "center"; lb.baseline  = "middle"; lb.outlineWidth = 2;
+        lb.setParam(this.labelParamPoker);
         lb.setPosition(SC_W/2, SC_H/2);
         lb.tweener.clear().wait(500).fadeOut(500).wait(300);
         lb.tweener.call(function(){
@@ -132,7 +138,7 @@ tm.define("shotgun.MainScene", {
 
         //カウントダウン表示
         var lb = this.countDown = tm.display.OutlineLabel("5", 300).addChildTo(this.upperLayer);
-        lb.fontFamily = "'KS-Kohichi-FeltPen'"; lb.align = "center"; lb.baseline  = "middle"; lb.outlineWidth = 3;
+        lb.setParam(this.labelParamPoker);
         lb.setPosition(SC_W/2, SC_H/2);
         lb.beforeCount = 9;
         lb.alpha = 1.0;
@@ -155,7 +161,7 @@ tm.define("shotgun.MainScene", {
 
         if (DEBUG) {
             var lb = this.creditLabel = tm.display.OutlineLabel("", 40).addChildTo(this);
-            lb.fontFamily = "'azuki'"; lb.align = "left"; lb.baseline = "middle"; lb.outlineWidth = 4;
+            lb.setParam(this.labelParamBasic);
             lb.setPosition(SC_W*0.0, SC_H*0.9);
             lb.update = function() {
                 this.text = "Level:"+that.level;
@@ -195,7 +201,7 @@ tm.define("shotgun.MainScene", {
             if (penalty > 0) {
                 this.life -= penalty;
                 var lb = tm.display.OutlineLabel("LIFE -"+penalty, 50).addChildTo(this);
-                lb.fontFamily = "'KS-Kohichi-FeltPen'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 3;
+                lb.setParam(this.labelParamPoker);
                 lb.setPosition(SC_W*0.8, SC_H*0.8);
                 lb.alpha = 0;
                 lb.tweener.clear().wait(1200).fadeIn(1).to({x: SC_W*0.8, y: SC_H*0.8-20, alpha:0.0},1000).call(lb.remove());
@@ -211,7 +217,7 @@ tm.define("shotgun.MainScene", {
                     this.life = this.lifeMax;
                 } else {
                     var lb = tm.display.OutlineLabel("1UP!!"+penalty, 50).addChildTo(this);
-                    lb.fontFamily = "'KS-Kohichi-FeltPen'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 3;
+                    lb.setParam(this.labelParamPoker);
                     lb.setPosition(SC_W*0.8, SC_H*0.8);
                     lb.alpha = 0;
                     lb.tweener.clear().wait(1200).fadeIn(1).to({x: SC_W*0.8, y: SC_H*0.8-20, alpha:0.0},1000).call(lb.remove());
@@ -222,13 +228,13 @@ tm.define("shotgun.MainScene", {
             if (this.count > 7 && sc > 0) {
                 sc = ~~(sc*2);
                 var lb = tm.display.OutlineLabel("FANTASTIC!", 100).addChildTo(this);
-                lb.fontFamily = "'KS-Kohichi-FeltPen'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 3;
+                lb.setParam(this.labelParamPoker);
                 lb.setPosition(SC_W*0.5, SC_H*0.5);
                 lb.tweener.clear().wait(1000).call(function(){lb.remove();});
             } else if (this.count > 4 && sc > 0) {
                 sc = ~~(sc*1.5);
                 var lb = tm.display.OutlineLabel("EXCELLENT!", 100).addChildTo(this);
-                lb.fontFamily = "'KS-Kohichi-FeltPen'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 3;
+                lb.setParam(this.labelParamPoker);
                 lb.setPosition(SC_W*0.5, SC_H*0.5);
                 lb.tweener.clear().wait(1000).call(lb.remove());
             }
@@ -292,7 +298,7 @@ tm.define("shotgun.MainScene", {
         //メッセージ
         var that = this;
         var lb = this.title2 = tm.display.OutlineLabel("GAME OVER", 100).addChildTo(this.upperLayer);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 4;
+        lb.setParam(this.labelParamBasicCenter);
         lb.setPosition(SC_W*0.5, SC_H*0.5-SC_H);
         lb.tweener.wait(500).move(SC_W*0.5, SC_H*0.5, 4000,"easeOutBounce").wait(2000);
         lb.tweener.call(function(){appMain.replaceScene(shotgun.GameoverScene(that));});
@@ -322,19 +328,19 @@ tm.define("shotgun.MainScene", {
         if (name3 != "") y-=SC_H*0.04;
 
         var lb1 = tm.display.OutlineLabel(name1, size).addChildTo(this);
-        lb1.fontFamily = "'KS-Kohichi-FeltPen'"; lb1.align = "left"; lb1.baseline  = "middle"; lb1.outlineWidth = 3;
+        lb1.setParam(this.labelParamHand);
         lb1.setPosition(x, y);
         lb1.tweener.clear().wait(1200).call(function(){lb1.remove(); that.deck.clearHand();that.pick = true;});
 
         y += SC_H*0.08;
         var lb2 = tm.display.OutlineLabel(name2, size).addChildTo(this);
-        lb2.fontFamily = "'KS-Kohichi-FeltPen'"; lb2.align = "left"; lb2.baseline  = "middle"; lb2.outlineWidth = 3;
+        lb2.setParam(this.labelParamHand);
         lb2.setPosition(x, y);
         lb2.tweener.clear().wait(1200).call(function(){lb2.remove();});
 
         y += SC_H*0.08;
         var lb3 = tm.display.OutlineLabel(name3, size).addChildTo(this);
-        lb3.fontFamily = "'KS-Kohichi-FeltPen'"; lb3.align = "left"; lb3.baseline  = "middle"; lb3.outlineWidth = 3;
+        lb3.setParam(this.labelParamHand);
         lb3.setPosition(x, y);
         lb3.tweener.clear().wait(1200).call(function(){lb3.remove();});
     },
