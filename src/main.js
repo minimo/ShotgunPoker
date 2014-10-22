@@ -49,6 +49,7 @@ SHUFFLE_LIMIT = 25;
 //ジョーカー使用フラグ
 USE_JOKER = true;
 RETURN_JOKER = false;   //使用したジョーカーを場に戻すか
+RETURN_JOKER_TURN = 3;  //ジョーカーを戻すターン間隔
 
 //役一覧
 MISS = -20;
