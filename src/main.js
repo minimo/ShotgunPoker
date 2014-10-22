@@ -16,7 +16,6 @@ DEBUG_PHONEGAP = true;
 
 //フォント読み込み終了カウント
 fontLoadEnd = 0;
-fontLoadMax = 4;
 
 //使用フォント
 FONT = ["'KS-Kohichi-FeltPen'", "'azuki'", "'CasinoQueen'", "'CasinoRegular'"];
@@ -122,17 +121,17 @@ tm.main(function() {
         SC_W = window.innerWidth*2;
         SC_H = window.innerHeight*2;
     }
-    detectFontLoading("KS-Kohichi-FeltPen");
-    detectFontLoading("azuki");
-    detectFontLoading("CasinoQueen");
-    detectFontLoading("CasinoRegular");
+
+    for (var i = 0; i < FONT.length; i++) {
+        detectFontLoading(FONT[i]);
+    }
 
     appMain = shotgun.CanvasApp("#world");
     appMain.run();
 });
 
 //フォント読み込み終了検出
-detectFontLoading = function(fontName) {
+detectFontLoading = function(fontName) {    
     var tester = document.createElement('span');
     tester.style.fontFamily = '"' + fontName + '", "Adobe Blank"';
     tester.style.position = 'absolute';
