@@ -216,7 +216,7 @@ tm.define("shotgun.MainScene", {
                 if (this.life > this.lifeMax) {
                     this.life = this.lifeMax;
                 } else {
-                    var lb = tm.display.OutlineLabel("1UP!!"+penalty, 50).addChildTo(this);
+                    var lb = tm.display.OutlineLabel("1UP!!", 50).addChildTo(this);
                     lb.setParam(this.labelParamPoker);
                     lb.setPosition(SC_W*0.8, SC_H*0.8);
                     lb.alpha = 0;
