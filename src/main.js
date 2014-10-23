@@ -68,7 +68,6 @@ ROYALSTRAIGHTFLASH = 1000;
 //使用言語
 JAPANESE = 0;
 ENGLISH = 1;
-LANGUAGE = JAPANESE;
 
 //フレームレート
 fps = 30;
