@@ -85,7 +85,7 @@ tm.define("shotgun.CanvasApp", {
             "volumeBGM": this.volumeBGM,
             "volumeSE": this.volumeSE,
         };
-        localStorage.setItem("config", JSON.stringfy(saveObj));
+        localStorage.setItem("config", JSON.stringify(saveObj));
     },
 
     //設定データの読み込み
