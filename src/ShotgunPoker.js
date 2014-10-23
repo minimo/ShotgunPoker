@@ -67,6 +67,9 @@ tm.define("shotgun.CanvasApp", {
         this.handList[9]  = {name: "FIVE CARD", point: FIVECARD};
         this.handList[10] = {name: "STRAIGHT FLASH", point: STRAIGHTFLASH};
         this.handList[11] = {name: "R.STRAIGHT FLASH", point: ROYALSTRAIGHTFLASH};
+
+        //設定情報の読み込み
+        this.loadConfig();
     },
 
     _onLoadAssets: function() {
@@ -97,7 +100,7 @@ tm.define("shotgun.CanvasApp", {
             this.lastScore = c.lastScore;
             this.highScore = c.highScore;
             this.volumeBGM = c.volumeBGM;
-            this.volumeSE = c.bolumeSE;
+            this.volumeSE = c.volumeSE;
         }
     },
 

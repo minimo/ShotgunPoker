@@ -63,6 +63,7 @@ tm.define("shotgun.SettingScene", {
         sh.boundingType = "rect";
         sh.addEventListener("click", function() {
             that.mask.tweener.clear().fadeOut(200);
+            appMain.saveConfig();
             appMain.popScene();
         });
         var lb = tm.display.OutlineLabel("RETURN", 50).addChildTo(this);

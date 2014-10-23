@@ -302,6 +302,9 @@ tm.define("shotgun.MainScene", {
         lb.setPosition(SC_W*0.5, SC_H*0.5-SC_H);
         lb.tweener.wait(500).move(SC_W*0.5, SC_H*0.5, 4000,"easeOutBounce").wait(2000);
         lb.tweener.call(function(){appMain.replaceScene(shotgun.GameoverScene(that));});
+
+        //設定保存
+        appMain.saveConfig();
     },
 
     //役名表示
