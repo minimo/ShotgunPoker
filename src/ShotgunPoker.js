@@ -76,12 +76,29 @@ tm.define("shotgun.CanvasApp", {
         this.stop();
     },
 
+    //設定データの保存
     saveConfig: function() {
-        
-
+        var saveObj = {
+            "language": this.language,
+            "lastScore": this.lastScore,
+            "highScore": this.highScore,
+            "volumeBGM": this.volumeBGM,
+            "volumeSE": this.volumeSE,
+        };
+        localStorage.setItem("config", JSON.stringfy(saveObj));
     },
 
+    //設定データの読み込み
     loadConfig: function() {
+        var cfg = localStorage.getItem("config");
+        if (cfg) {
+            var c = JSON.parse(cfg);
+            this.language = c.language;
+            this.lastScore = c.lastScore;
+            this.highScore = c.highScore;
+            this.volumeBGM = c.volumeBGM;
+            this.volumeSE = c.bolumeSE;
+        }
     },
 
     playBGM: function(asset) {
