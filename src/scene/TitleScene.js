@@ -142,7 +142,7 @@ tm.define("shotgun.TitleScene", {
                 period: "today",
                 leaderboardId: "board"
             };
-            gamecenter.showLeaderboard(function() {}, function() {AdvanceAlert(lang("GAMECENTERのアクセスに失敗しました"));}, data);
+            gamecenter.showLeaderboard(function() {}, function() {AdvanceAlert($trans("GAMECENTERのアクセスに失敗しました"));}, data);
 //            that.mask.tweener.clear().fadeIn(200).call(function(){appMain.pushScene(shotgun.CreditScene());});
         });
         var lb = this.creditLabel = tm.display.OutlineLabel("GAME CENTER", 50).addChildTo(this.titleLayer);
