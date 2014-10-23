@@ -55,18 +55,18 @@ tm.define("shotgun.CanvasApp", {
 
         //役名一覧
         this.handList = [];
-        this.handList[0]  = {name: $trans("MISS"), point: MISS};
-        this.handList[1]  = {name: $trans("NO HAND"), point: NOHAND};
-        this.handList[2]  = {name: $trans("ONE PAIR"), point: ONEPAIR};
-        this.handList[3]  = {name: $trans("TWO PAIR"), point: TWOPAIR};
-        this.handList[4]  = {name: $trans("FLASH"), point: FLASH};
-        this.handList[5]  = {name: $trans("THREE CARD"), point: THREECARD};
-        this.handList[6]  = {name: $trans("FULL HOUSE"), point: FULLHOUSE};
-        this.handList[7]  = {name: $trans("STRAIGHT"), point: STRAIGHT};
-        this.handList[8]  = {name: $trans("FOUR CARD"), point: FOURCARD};
-        this.handList[9]  = {name: $trans("FIVE CARD"), point: FIVECARD};
-        this.handList[10] = {name: $trans("STRAIGHT FLASH"), point: STRAIGHTFLASH};
-        this.handList[11] = {name: $trans("R.STRAIGHT FLASH"), point: ROYALSTRAIGHTFLASH};
+        this.handList[0]  = {name: "MISS", point: MISS};
+        this.handList[1]  = {name: "NO HAND", point: NOHAND};
+        this.handList[2]  = {name: "ONE PAIR", point: ONEPAIR};
+        this.handList[3]  = {name: "TWO PAIR", point: TWOPAIR};
+        this.handList[4]  = {name: "FLASH", point: FLASH};
+        this.handList[5]  = {name: "THREE CARD", point: THREECARD};
+        this.handList[6]  = {name: "FULL HOUSE", point: FULLHOUSE};
+        this.handList[7]  = {name: "STRAIGHT", point: STRAIGHT};
+        this.handList[8]  = {name: "FOUR CARD", point: FOURCARD};
+        this.handList[9]  = {name: "FIVE CARD", point: FIVECARD};
+        this.handList[10] = {name: "STRAIGHT FLASH", point: STRAIGHTFLASH};
+        this.handList[11] = {name: "R.STRAIGHT FLASH", point: ROYALSTRAIGHTFLASH};
     },
 
     _onLoadAssets: function() {

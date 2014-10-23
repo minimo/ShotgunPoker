@@ -19,8 +19,9 @@ var $trans = function(text) {
 
         //POKER HANDS
         if (text == "NO HAND") return "NO PAIR";
-        if (text == "FOUR CARD") return "FOUR OF A KIND";
         if (text == "THREE CARD") return "THREE OF A KIND";
+        if (text == "FOUR CARD") return "FOUR OF A KIND";
+        if (text == "FIVE CARD") return "FIVE OF A KIND";
         if (text == "R.STRAIGHT FLASH") return "ROYAL FLASH";
     }
     return text;

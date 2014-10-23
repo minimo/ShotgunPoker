@@ -242,7 +242,7 @@ tm.define("shotgun.TitleScene", {
         lb.setParam(this.labelParam);
 
         for (var i = 0; i < 12; i++) {
-            var lb = tm.display.OutlineLabel(appMain.handList[i].name+" : "+appMain.handList[i].point+"pts", 40).addChildTo(this.titleLayer);
+            var lb = tm.display.OutlineLabel($trans(appMain.handList[i].name)+" : "+appMain.handList[i].point+"pts", 40).addChildTo(this.titleLayer);
             lb.setPosition(SC_W*0.1+SC_W*page, SC_H*0.17+(i*55));
             lb.setParam(this.scoreParam);
         }
