@@ -29,7 +29,7 @@ tm.define("shotgun.GameoverScene", {
 
         //メインとリザルトを分けてレイヤーを作成
         this.mainLayer = tm.app.Object2D().addChildTo(this);
-        this.resultLayer = tm.app.Object2D().addChildTo(this).setPosition(SC_W, 0);
+        this.resultLayer = tm.app.Object2D().addChildTo(this);
 
         this.top = tm.display.OutlineLabel("RESULT", 40)
             .addChildTo(this)

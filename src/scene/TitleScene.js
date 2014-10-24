@@ -163,17 +163,17 @@ tm.define("shotgun.TitleScene", {
         var width = 230, height = 60;
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
-        var lb = tm.display.OutlineLabel("HOW TO PLAY", 40)
+        tm.display.OutlineLabel("HOW TO PLAY", 40)
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5+SC_W*page, SC_H*0.05)
             .setParam(this.labelParam);
 
-        var lb = tm.display.OutlineLabel("プレイ画面の説明", 40)
+        tm.display.OutlineLabel("プレイ画面の説明", 40)
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5+SC_W*page, SC_H*0.1)
             .setParam(this.labelParam);
 
-        var sp = tm.display.Sprite("tutorial1")
+        tm.display.Sprite("tutorial1")
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5+SC_W*page, SC_H*0.5)
             .setScale(1.5);
@@ -187,7 +187,7 @@ tm.define("shotgun.TitleScene", {
         var width = 230, height = 60;
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
-        var lb = tm.display.OutlineLabel("プレイ画面の説明", 40)
+        tm.display.OutlineLabel("プレイ画面の説明", 40)
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5+SC_W*page, SC_H*0.1)
             .setParam(this.labelParam);
@@ -201,12 +201,13 @@ tm.define("shotgun.TitleScene", {
         var width = 230, height = 60;
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
-        var lb = tm.display.OutlineLabel("得点表", 40).addChildTo(this.titleLayer);
-        lb.setPosition(SC_W*0.5+SC_W*page, SC_H*0.1);
-        lb.setParam(this.labelParam);
+        tm.display.OutlineLabel("得点表", 40)
+            .addChildTo(this.titleLayer)
+            .setPosition(SC_W*0.5+SC_W*page, SC_H*0.1)
+            .setParam(this.labelParam);
 
         for (var i = 0; i < 12; i++) {
-            var lb = tm.display.OutlineLabel($trans(appMain.handList[i].name)+" : "+appMain.handList[i].point+"pts", 40)
+            tm.display.OutlineLabel($trans(appMain.handList[i].name)+" : "+appMain.handList[i].point+"pts", 40)
                 .addChildTo(this.titleLayer)
                 .setPosition(SC_W*0.1+SC_W*page, SC_H*0.17+(i*55))
                 .setParam(this.scoreParam);

@@ -75,17 +75,19 @@ tm.define("shotgun.MainScene", {
 
         //スコア表示
         var that = this;
-        var lb = this.scoreLabel = tm.display.OutlineLabel("SCORE:", 50).addChildTo(this);
-        lb.setParam(this.labelParamBasic);
-        lb.setPosition(8, 72);
-        lb.update = function() {
+        this.scoreLabel = tm.display.OutlineLabel("SCORE:", 50)
+            .addChildTo(this)
+            .setParam(this.labelParamBasic)
+            .setPosition(8, 72);
+        this.scoreLabel.update = function() {
             this.text = "SCORE:"+that.score;
         }
 
         //ライフ表示
-        var lb = this.lifeLabel = tm.display.OutlineLabel("LIFE:", 50).addChildTo(this);
-        lb.setParam(this.labelParamBasic);
-        lb.setPosition(8, 128);
+        this.lifeLabel = tm.display.OutlineLabel("LIFE:", 50)
+            .addChildTo(this)
+            .setParam(this.labelParamBasic)
+            .setPosition(8, 128);
         this.lg = [];
         for (var i = 0; i < 7; i++ ) {
             var c = this.lg[i] = shotgun.Card(SUIT_HEART, 0).addChildTo(this);
@@ -103,11 +105,10 @@ tm.define("shotgun.MainScene", {
         }
 
         //ポーズボタン
-        var sh = this.credit = tm.display.RoundRectangleShape(200, 50, {fillStyle:'rgba(0,80,0,1)', lineWidth:4})
+        this.credit = tm.display.RoundRectangleShape(200, 50, {fillStyle:'rgba(0,80,0,1)', lineWidth:4})
             .addChildTo(this)
-            .setPosition(SC_W*0.84, 72)
-        sh.interactive = true;
-        var lb = this.creditLabel = tm.display.OutlineLabel("pause", 50)
+            .setPosition(SC_W*0.84, 72);
+        this.creditLabel = tm.display.OutlineLabel("pause", 50)
             .addChildTo(this)
             .setParam(this.labelParamBasicCenter)
             .setPosition(SC_W*0.84, 64);
@@ -123,9 +124,10 @@ tm.define("shotgun.MainScene", {
         appMain.playBGM("mainBGM");
 
         //スタートアップ
-        var lb = this.readyLabel = tm.display.OutlineLabel("READY", 100).addChildTo(this.upperLayer);
-        lb.setParam(this.labelParamPoker);
-        lb.setPosition(SC_W/2, SC_H/2);
+        var lb = this.readyLabel = tm.display.OutlineLabel("READY", 100)
+            .addChildTo(this.upperLayer)
+            .setParam(this.labelParamPoker)
+            .setPosition(SC_W/2, SC_H/2);
         lb.tweener.clear().wait(500).fadeOut(500).wait(300);
         lb.tweener.call(function(){
             that.deck.startup();
@@ -135,9 +137,10 @@ tm.define("shotgun.MainScene", {
         });
 
         //カウントダウン表示
-        var lb = this.countDown = tm.display.OutlineLabel("5", 300).addChildTo(this.upperLayer);
-        lb.setParam(this.labelParamPoker);
-        lb.setPosition(SC_W/2, SC_H/2);
+        var lb = this.countDown = tm.display.OutlineLabel("5", 300)
+            .addChildTo(this.upperLayer)
+            .setParam(this.labelParamPoker)
+            .setPosition(SC_W/2, SC_H/2);
         lb.beforeCount = 9;
         lb.alpha = 1.0;
         lb.update = function() {
@@ -158,9 +161,10 @@ tm.define("shotgun.MainScene", {
         }
 
         if (DEBUG) {
-            var lb = this.creditLabel = tm.display.OutlineLabel("", 40).addChildTo(this);
-            lb.setParam(this.labelParamBasic);
-            lb.setPosition(SC_W*0.0, SC_H*0.9);
+            var lb = this.creditLabel = tm.display.OutlineLabel("", 40)
+                .addChildTo(this)
+                .setParam(this.labelParamBasic)
+                .setPosition(SC_W*0.0, SC_H*0.9);
             lb.update = function() {
                 this.text = "Level:"+that.level;
             }
