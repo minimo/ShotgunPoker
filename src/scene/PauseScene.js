@@ -62,10 +62,6 @@ tm.define("shotgun.PauseScene", {
                 appMain.pushScene(that.dialog);
             });
 
-        //ステータスバー
-        var sh = tm.display.RectangleShape(SC_W, STATUSBAR_HEIGHT, {strokeStyle: STATUSBAR_COLOR,fillStyle: STATUSBAR_COLOR}).addChildTo(this);
-        sh.originX = sh.originY = 0;
-
         this.time = 0;
     },
 
