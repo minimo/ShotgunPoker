@@ -47,32 +47,20 @@ tm.define("shotgun.PauseScene", {
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
         //戻るボタン
-        var sh = tm.display.RoundRectangleShape(width, height, param).addChildTo(this);
-        sh.setPosition(SC_W*0.25, SC_H*0.9);
-        sh.interactive = true;
-        sh.boundingType = "rect";
-        sh.addEventListener("pointingstart", function() {this.y += 10;});
-        sh.addEventListener("pointingend", function() {
-            this.y -= 10;
-            that.tweener.clear().call(function(){appMain.popScene();});
-        });
-        var lb = tm.display.OutlineLabel("RESUME", 50).addChildTo(this);
-        lb.setParam(this.labelParam);
-        lb.setPosition(SC_W*0.25, SC_H*0.9);
+        shotgun.Button(width, height, "RESUME")
+            .addChildTo(this)
+            .setPosition(SC_W*0.25, SC_H*0.9)
+            .addEventListener("pushed", function() {
+                that.tweener.clear().call(function(){appMain.popScene();});
+            });
 
         //終了ボタン
-        var sh = tm.display.RoundRectangleShape(width, height, param).addChildTo(this);
-        sh.setPosition(SC_W*0.75, SC_H*0.9);
-        sh.interactive = true;
-        sh.boundingType = "rect";
-        sh.addEventListener("pointingstart", function() {this.y += 10;});
-        sh.addEventListener("pointingend", function() {
-            this.y -= 10;
-            appMain.pushScene(that.dialog);
-        });
-        var lb = tm.display.OutlineLabel("EXIT", 50).addChildTo(this);
-        lb.setParam(this.labelParam);
-        lb.setPosition(SC_W*0.75, SC_H*0.9);
+        shotgun.Button(width, height, "EXIT")
+            .addChildTo(this)
+            .setPosition(SC_W*0.75, SC_H*0.9)
+            .addEventListener("pushed", function() {
+                appMain.pushScene(that.dialog);
+            });
 
         //ステータスバー
         var sh = tm.display.RectangleShape(SC_W, STATUSBAR_HEIGHT, {strokeStyle: STATUSBAR_COLOR,fillStyle: STATUSBAR_COLOR}).addChildTo(this);
@@ -131,34 +119,22 @@ tm.define("shotgun.ConfirmDialog", {
         lb.setPosition(SC_W*0.5, SC_H*0.45);
 
         //ＹＥＳ
-        var sh = tm.display.RoundRectangleShape(width, height, param).addChildTo(this);
-        sh.setPosition(SC_W*0.25, SC_H*0.55);
-        sh.interactive = true;
-        sh.boundingType = "rect";
-        sh.addEventListener("pointingstart", function() {this.y += 10;});
-        sh.addEventListener("pointingend", function() {
-            this.y -= 10;
-            that.answer = true;
-            appMain.popScene();
-        });
-        var lb = tm.display.OutlineLabel(button[0], 50).addChildTo(this);
-        lb.setParam(this.labelParam);
-        lb.setPosition(SC_W*0.25, SC_H*0.55);
+        shotgun.Button(width, height, button[0])
+            .addChildTo(this)
+            .setPosition(SC_W*0.25, SC_H*0.55)
+            .addEventListener("pushed", function() {
+                that.answer = true;
+                appMain.popScene();
+            });
 
         //ＮＯ
-        var sh = tm.display.RoundRectangleShape(width, height, param).addChildTo(this);
-        sh.setPosition(SC_W*0.75, SC_H*0.55);
-        sh.interactive = true;
-        sh.boundingType = "rect";
-        sh.addEventListener("pointingstart", function() {this.y += 10;});
-        sh.addEventListener("pointingend", function() {
-            this.y -= 10;
-            that.answer = false;
-            appMain.popScene();
-        });
-        var lb = tm.display.OutlineLabel(button[1], 50).addChildTo(this);
-        lb.setParam(this.labelParam);
-        lb.setPosition(SC_W*0.75, SC_H*0.55);
+        shotgun.Button(width, height, button[1])
+            .addChildTo(this)
+            .setPosition(SC_W*0.75, SC_H*0.55)
+            .addEventListener("pushed", function() {
+                that.answer = false;
+                appMain.popScene();
+            });
     },
 });
 
@@ -185,18 +161,13 @@ tm.define("shotgun.AlertDialog", {
         lb.setParam(this.labelParam);
         lb.setPosition(SC_W*0.5, SC_H*0.45);
 
-        var sh = tm.display.RoundRectangleShape(width, height, param).addChildTo(this);
-        sh.setPosition(SC_W*0.5, SC_H*0.55);
-        sh.interactive = true;
-        sh.boundingType = "rect";
-        sh.addEventListener("pointingstart", function() {this.y += 10;});
-        sh.addEventListener("pointingend", function() {
-            this.y -= 10;
-            that.answer = true;
-            appMain.popScene();
-        });
-        var lb = tm.display.OutlineLabel(button, 50).addChildTo(this);
-        lb.setParam(this.labelParam);
-        lb.setPosition(SC_W*0.25, SC_H*0.55);
+        //ボタン
+        shotgun.Button(width, height, button)
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.55)
+            .addEventListener("pushed", function() {
+                that.answer = false;
+                appMain.popScene();
+            });
     },
 });

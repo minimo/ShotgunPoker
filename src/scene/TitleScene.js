@@ -135,47 +135,29 @@ tm.define("shotgun.TitleScene", {
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
         //戻る
-        var sh = tm.display.RoundRectangleShape(width, height, param)
+        shotgun.Button(width, height, "PREV")
             .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.25+SC_W*page, SC_H*0.9);
-        sh.interactive = true;
-        sh.checkHierarchy = true;
-        sh.boundingType = "rect";
-        sh.addEventListener("pointingstart", function() {this.y += 10;});
-        sh.addEventListener("pointingend", function() {
-            this.y -= 10;
-            that.titleLayer.tweener.clear().moveBy(SC_W, 0, 1000, "easeOutQuint");
-        });
-        var lb = tm.display.OutlineLabel("PREV", 50).addChildTo(sh).setParam(this.buttonParam);
+            .setPosition(SC_W*0.25+SC_W*page, SC_H*0.9)
+            .addEventListener("pushed", function() {
+                that.titleLayer.tweener.clear().moveBy(SC_W, 0, 500, "easeOutQuint");
+            });
 
         if (!finish) {
             //次
-            var sh = tm.display.RoundRectangleShape(width, height, param)
+            shotgun.Button(width, height, "NEXT")
                 .addChildTo(this.titleLayer)
-                .setPosition(SC_W*0.75+SC_W*page, SC_H*0.9);
-            sh.interactive = true;
-            sh.checkHierarchy = true;
-            sh.boundingType = "rect";
-            sh.addEventListener("pointingstart", function() {this.y += 10;});
-            sh.addEventListener("pointingend", function() {
-                this.y -= 10;
-                that.titleLayer.tweener.clear().moveBy(-SC_W, 0, 1000, "easeOutQuint");
-            });
-            var lb = tm.display.OutlineLabel("NEXT", 50).addChildTo(sh).setParam(this.buttonParam);
+                .setPosition(SC_W*0.75+SC_W*page, SC_H*0.9)
+                .addEventListener("pushed", function() {
+                    that.titleLayer.tweener.clear().moveBy(-SC_W, 0, 500, "easeOutQuint");
+                });
         } else {
             //終了
-            var sh = tm.display.RoundRectangleShape(width, height, param)
+            shotgun.Button(width, height, "EXIT")
                 .addChildTo(this.titleLayer)
-                .setPosition(SC_W*0.75+SC_W*page, SC_H*0.9);
-            sh.interactive = true;
-            sh.checkHierarchy = true;
-            sh.boundingType = "rect";
-            sh.addEventListener("pointingstart", function() {this.y += 10;});
-            sh.addEventListener("pointingend", function() {
-                this.y -= 10;
-                that.titleLayer.tweener.clear().moveBy(SC_W*page, 0, 1000, "easeOutQuint");
-            });
-            var lb = tm.display.OutlineLabel("EXIT", 50).addChildTo(sh).setParam(this.buttonParam);
+                .setPosition(SC_W*0.75+SC_W*page, SC_H*0.9)
+                .addEventListener("pushed", function() {
+                    that.titleLayer.tweener.clear().moveBy(SC_W*page, 0, 500, "easeOutQuint");
+                });
         }
     },
 

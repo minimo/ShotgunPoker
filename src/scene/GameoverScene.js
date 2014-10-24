@@ -56,32 +56,20 @@ tm.define("shotgun.GameoverScene", {
         }
 
         //リトライボタン
-        var sh = this.retry = tm.display.RoundRectangleShape(width, height, param).addChildTo(this);
-        sh.setPosition(SC_W*0.25, SC_H*0.9);
-        sh.interactive = true;
-        sh.addEventListener("pointingstart", function() {this.y += 10;});
-        sh.addEventListener("pointingend", function() {
-            this.y -= 10;
-            that.mask.tweener.clear().fadeIn(300).call(function(){appMain.replaceScene(shotgun.MainScene());});
-        });
-        this.retryLabel = tm.display.OutlineLabel("RETRY", 50)
+        shotgun.Button(width, height, "RETRY")
             .addChildTo(this)
-            .setParam(this.labelParam)
-            .setPosition(SC_W*0.25, SC_H*0.9);
+            .setPosition(SC_W*0.25, SC_H*0.9)
+            .addEventListener("pushed", function() {
+                that.mask.tweener.clear().fadeIn(300).call(function(){appMain.replaceScene(shotgun.MainScene());});
+            });
 
         //戻るボタン
-        var sh = this.exit = tm.display.RoundRectangleShape(width, height, param).addChildTo(this);
-        sh.setPosition(SC_W*0.75, SC_H*0.9);
-        sh.interactive = true;
-        sh.addEventListener("pointingstart", function() {this.y += 10;});
-        sh.addEventListener("pointingend", function() {
-            this.y -= 10;
-            that.mask.tweener.clear().fadeIn(300).call(function(){appMain.replaceScene(shotgun.TitleScene());});
-        });
-        this.exitLabel = tm.display.OutlineLabel("EXIT", 50)
+        shotgun.Button(width, height, "EXIT")
             .addChildTo(this)
-            .setParam(this.labelParam)
-            .setPosition(SC_W*0.75, SC_H*0.9);
+            .setPosition(SC_W*0.75, SC_H*0.9)
+            .addEventListener("pushed", function() {
+                that.mask.tweener.clear().fadeIn(300).call(function(){appMain.replaceScene(shotgun.TitleScene());});
+            });
 
 /*
         //ツイートボタン

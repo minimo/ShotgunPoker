@@ -19,6 +19,7 @@ tm.define("shotgun.Button", {
         this.superInit(width, height, {fillStyle:'rgba(0,80,0,1)', lineWidth:4});
 
         this.interactive = true;
+        this.checkHierarchy = true;
         this.boundingType = "rect";
         this.addEventListener("pointingstart", function() {
             this.push = true;

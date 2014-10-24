@@ -57,20 +57,14 @@ tm.define("shotgun.SettingScene", {
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
         //戻るボタン
-        var sh = tm.display.RoundRectangleShape(width, height, param).addChildTo(this);
-        sh.setPosition(SC_W*0.5, SC_H*0.9);
-        sh.interactive = true;
-        sh.boundingType = "rect";
-        sh.addEventListener("pointingstart", function() {this.y += 10;});
-        sh.addEventListener("pointingend", function() {
-            this.y -= 10;
-            that.mask.tweener.clear().fadeOut(200);
-            appMain.saveConfig();
-            appMain.popScene();
-        });
-        var lb = tm.display.OutlineLabel("RETURN", 50).addChildTo(this);
-        lb.setParam(this.labelParam);
-        lb.setPosition(SC_W*0.5, SC_H*0.9);
+        shotgun.Button(width, height, "RETURN")
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.9)
+            .addEventListener("pushed", function() {
+                that.mask.tweener.clear().fadeOut(200);
+                appMain.saveConfig();
+                appMain.popScene();
+            });
 
         //ステータスバー
         var sh = tm.display.RectangleShape(SC_W, STATUSBAR_HEIGHT, {strokeStyle: STATUSBAR_COLOR,fillStyle: STATUSBAR_COLOR}).addChildTo(this);
