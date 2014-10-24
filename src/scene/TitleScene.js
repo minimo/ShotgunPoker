@@ -23,6 +23,7 @@ tm.define("shotgun.TitleScene", {
         this.bg = tm.display.Sprite("greenback", SC_W, SC_H).addChildTo(this);
         this.bg.setPosition(SC_W/2, SC_H/2);
 
+        //タイトルとチュートリアルを分けてレイヤーを作成
         this.titleLayer = tm.app.Object2D().addChildTo(this);
         this.titleLayer.checkHierarchy = true;
         this.tutorialLayer = tm.app.Object2D().addChildTo(this);
@@ -57,16 +58,18 @@ tm.define("shotgun.TitleScene", {
                 { offset: 0.9, color: "hsla(230, 90%, 50%, 0.5)"},
             ]).toStyle();
 
-        var lb = this.title1 = tm.display.OutlineLabel("SHOTGUN", 120).addChildTo(this.titleLayer);
-        lb.setPosition(SC_W*0.45, SC_H*0.15);
-        lb.setParam({fontFamily:"'CasinoQueen'", align: "center", baseline:"middle", outlineWidth:2 });
+        var lb = this.title1 = tm.display.OutlineLabel("SHOTGUN", 120)
+            .addChildTo(this.titleLayer)
+            .setPosition(SC_W*0.45, SC_H*0.15)
+            .setParam({fontFamily:"'CasinoQueen'", align: "center", baseline:"middle", outlineWidth:2 });
         lb.fillStyle = fillStyle;
         lb.shadowColor = "Black";
         lb.shadowBlur = 10;
 
-        var lb = this.title2 = tm.display.OutlineLabel("POKER", 120).addChildTo(this.titleLayer);
-        lb.setPosition(SC_W*0.65, SC_H*0.30);
-        lb.setParam({fontFamily:"'CasinoQueen'", align: "center", baseline:"middle", outlineWidth:2 });
+        var lb = this.title2 = tm.display.OutlineLabel("POKER", 120)
+            .addChildTo(this.titleLayer)
+            .setPosition(SC_W*0.65, SC_H*0.30)
+            .setParam({fontFamily:"'CasinoQueen'", align: "center", baseline:"middle", outlineWidth:2 });
         lb.fillStyle = fillStyle;
         lb.shadowColor = "Black";
         lb.shadowBlur = 10;
@@ -76,78 +79,54 @@ tm.define("shotgun.TitleScene", {
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
         //プレイスタート
-        var sh = this.play = tm.display.RoundRectangleShape(width, height, param).addChildTo(this.titleLayer);
-        sh.setPosition(SC_W*0.5, SC_H*0.45);
-        sh.interactive = true;
-        sh.checkHierarchy = true;
-        sh.boundingType = "rect";
-        sh.addEventListener("pointingend", function() {
-            that.mask.tweener.clear().fadeIn(200).call(function(){appMain.replaceScene(shotgun.MainScene());});
-        });
-        var lb = this.playLabel = tm.display.OutlineLabel("PLAY", 50).addChildTo(this.titleLayer).setPosition(SC_W*0.5, SC_H*0.45);
-        lb.setParam(this.buttonParam);
+        shotgun.Button(width, height, "START")
+            .addChildTo(this.titleLayer)
+            .setPosition(SC_W*0.5, SC_H*0.45)
+            .addEventListener("pushed", function() {
+                that.mask.tweener.clear().fadeIn(200).call(function(){appMain.replaceScene(shotgun.MainScene());});
+            });
 
         //チュートリアル
-        var sh = this.tutorial = tm.display.RoundRectangleShape(width, height, param).addChildTo(this.titleLayer);
-        sh.setPosition(SC_W*0.5, SC_H*0.55);
-        sh.interactive = true;
-        sh.checkHierarchy = true;
-        sh.boundingType = "rect";
-        sh.addEventListener("pointingend", function() {
-            that.titleLayer.tweener.clear().moveBy(-SC_W, 0, 1000, "easeOutQuint");
-        });
-        var lb = this.tutorialLabel = tm.display.OutlineLabel("TUTORIAL", 50).addChildTo(this.titleLayer);
-        lb.setPosition(SC_W*0.5, SC_H*0.55);
-        lb.setParam(this.buttonParam);
+        shotgun.Button(width, height, "TUTORIAL")
+            .addChildTo(this.titleLayer)
+            .setPosition(SC_W*0.5, SC_H*0.55)
+            .addEventListener("pushed", function() {
+                that.titleLayer.tweener.clear().moveBy(-SC_W, 0, 500, "easeOutQuint");
+            });
 
         //設定
-        var sh = this.setting = tm.display.RoundRectangleShape(width, height, param).addChildTo(this.titleLayer);
-        sh.setPosition(SC_W*0.5, SC_H*0.65);
-        sh.interactive = true;
-        sh.checkHierarchy = true;
-        sh.boundingType = "rect";
-        sh.addEventListener("pointingend", function() {
-            that.mask.tweener.clear().fadeIn(200).call(function(){appMain.pushScene(shotgun.SettingScene());});
-        });
-        var lb = this.settingLabel = tm.display.OutlineLabel("SETTING", 50).addChildTo(this.titleLayer);
-        lb.setPosition(SC_W*0.5, SC_H*0.65);
-        lb.setParam(this.buttonParam);
+        shotgun.Button(width, height, "SETTING")
+            .addChildTo(this.titleLayer)
+            .setPosition(SC_W*0.5, SC_H*0.65)
+            .addEventListener("pushed", function() {
+                that.mask.tweener.clear().fadeIn(200).call(function(){appMain.pushScene(shotgun.SettingScene());});
+            });
 
         //クレジット
-        var sh = this.credit = tm.display.RoundRectangleShape(width, height, param).addChildTo(this.titleLayer);
-        sh.setPosition(SC_W*0.5, SC_H*0.75);
-        sh.interactive = true;
-        sh.checkHierarchy = true;
-        sh.boundingType = "rect";
-        sh.addEventListener("pointingend", function() {
-            that.mask.tweener.clear().fadeIn(200).call(function(){appMain.pushScene(shotgun.CreditScene());});
-        });
-        var lb = this.creditLabel = tm.display.OutlineLabel("CREDIT", 50).addChildTo(this.titleLayer);
-        lb.setPosition(SC_W*0.5, SC_H*0.75);
-        lb.setParam(this.buttonParam);
+        shotgun.Button(width, height, "CREDIT")
+            .addChildTo(this.titleLayer)
+            .setPosition(SC_W*0.5, SC_H*0.75)
+            .addEventListener("pushed", function() {
+                that.mask.tweener.clear().fadeIn(200).call(function(){appMain.pushScene(shotgun.CreditScene());});
+            });
 
         //GAMECENTER
-        var sh = this.credit = tm.display.RoundRectangleShape(width, height, param).addChildTo(this.titleLayer);
-        sh.setPosition(SC_W*0.5, SC_H*0.85);
-        sh.interactive = true;
-        sh.checkHierarchy = true;
-        sh.boundingType = "rect";
-        sh.addEventListener("pointingend", function() {
-            if (!PHONEGAP) return;
-            if (!GAMECENTER) {
-                gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
-//                AdvanceAlert('GAMECENTERの準備が出来ていません');
-            }
-            var data = {
-                period: "today",
-                leaderboardId: "board"
-            };
-            gamecenter.showLeaderboard(function() {}, function() {AdvanceAlert($trans("GAMECENTERのアクセスに失敗しました"));}, data);
-//            that.mask.tweener.clear().fadeIn(200).call(function(){appMain.pushScene(shotgun.CreditScene());});
-        });
-        var lb = this.creditLabel = tm.display.OutlineLabel("GAME CENTER", 50).addChildTo(this.titleLayer);
-        lb.setPosition(SC_W*0.5, SC_H*0.85);
-        lb.setParam(this.buttonParam);
+        shotgun.Button(width, height, "GAME CENTER")
+            .addChildTo(this.titleLayer)
+            .setPosition(SC_W*0.5, SC_H*0.85)
+            .addEventListener("pushed", function() {
+                if (!PHONEGAP) return;
+                if (!GAMECENTER) {
+                    gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
+//                    AdvanceAlert('GAMECENTERの準備が出来ていません');
+                }
+                var data = {
+                    period: "today",
+                    leaderboardId: "board"
+                };
+                gamecenter.showLeaderboard(function() {}, function() {AdvanceAlert($trans("GAMECENTERのアクセスに失敗しました"));}, data);
+//                that.mask.tweener.clear().fadeIn(200).call(function(){appMain.pushScene(shotgun.CreditScene());});
+            });
     },
 
     addButton: function(page, finish) {
@@ -156,44 +135,47 @@ tm.define("shotgun.TitleScene", {
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
         //戻る
-        var sh = tm.display.RoundRectangleShape(width, height, param).addChildTo(this.titleLayer);
-        sh.setPosition(SC_W*0.25+SC_W*page, SC_H*0.9);
+        var sh = tm.display.RoundRectangleShape(width, height, param)
+            .addChildTo(this.titleLayer)
+            .setPosition(SC_W*0.25+SC_W*page, SC_H*0.9);
         sh.interactive = true;
         sh.checkHierarchy = true;
         sh.boundingType = "rect";
+        sh.addEventListener("pointingstart", function() {this.y += 10;});
         sh.addEventListener("pointingend", function() {
+            this.y -= 10;
             that.titleLayer.tweener.clear().moveBy(SC_W, 0, 1000, "easeOutQuint");
         });
-        var lb = tm.display.OutlineLabel("PREV", 50).addChildTo(this.titleLayer);
-        lb.setPosition(SC_W*0.25+SC_W*page, SC_H*0.9);
-        lb.setParam(this.buttonParam);
+        var lb = tm.display.OutlineLabel("PREV", 50).addChildTo(sh).setParam(this.buttonParam);
 
         if (!finish) {
             //次
-            var sh = tm.display.RoundRectangleShape(width, height, param).addChildTo(this.titleLayer);
-            sh.setPosition(SC_W*0.75+SC_W*page, SC_H*0.9);
+            var sh = tm.display.RoundRectangleShape(width, height, param)
+                .addChildTo(this.titleLayer)
+                .setPosition(SC_W*0.75+SC_W*page, SC_H*0.9);
             sh.interactive = true;
             sh.checkHierarchy = true;
             sh.boundingType = "rect";
+            sh.addEventListener("pointingstart", function() {this.y += 10;});
             sh.addEventListener("pointingend", function() {
+                this.y -= 10;
                 that.titleLayer.tweener.clear().moveBy(-SC_W, 0, 1000, "easeOutQuint");
             });
-            var lb = tm.display.OutlineLabel("NEXT", 50).addChildTo(this.titleLayer);
-            lb.setPosition(SC_W*0.75+SC_W*page, SC_H*0.9);
-            lb.setParam(this.buttonParam);
+            var lb = tm.display.OutlineLabel("NEXT", 50).addChildTo(sh).setParam(this.buttonParam);
         } else {
             //終了
-            var sh = tm.display.RoundRectangleShape(width, height, param).addChildTo(this.titleLayer);
-            sh.setPosition(SC_W*0.75+SC_W*page, SC_H*0.9);
+            var sh = tm.display.RoundRectangleShape(width, height, param)
+                .addChildTo(this.titleLayer)
+                .setPosition(SC_W*0.75+SC_W*page, SC_H*0.9);
             sh.interactive = true;
             sh.checkHierarchy = true;
             sh.boundingType = "rect";
+            sh.addEventListener("pointingstart", function() {this.y += 10;});
             sh.addEventListener("pointingend", function() {
+                this.y -= 10;
                 that.titleLayer.tweener.clear().moveBy(SC_W*page, 0, 1000, "easeOutQuint");
             });
-            var lb = tm.display.OutlineLabel("EXIT", 50).addChildTo(this.titleLayer);
-            lb.setPosition(SC_W*0.75+SC_W*page, SC_H*0.9);
-            lb.setParam(this.buttonParam);
+            var lb = tm.display.OutlineLabel("EXIT", 50).addChildTo(sh).setParam(this.buttonParam);
         }
     },
 
@@ -203,17 +185,20 @@ tm.define("shotgun.TitleScene", {
         var width = 230, height = 60;
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
-        var lb = tm.display.OutlineLabel("HOW TO PLAY", 40).addChildTo(this.titleLayer);
-        lb.setPosition(SC_W*0.5+SC_W*page, SC_H*0.05);
-        lb.setParam(this.labelParam);
+        var lb = tm.display.OutlineLabel("HOW TO PLAY", 40)
+            .addChildTo(this.titleLayer)
+            .setPosition(SC_W*0.5+SC_W*page, SC_H*0.05)
+            .setParam(this.labelParam);
 
-        var lb = tm.display.OutlineLabel("プレイ画面の説明", 40).addChildTo(this.titleLayer);
-        lb.setPosition(SC_W*0.5+SC_W*page, SC_H*0.1);
-        lb.setParam(this.labelParam);
+        var lb = tm.display.OutlineLabel("プレイ画面の説明", 40)
+            .addChildTo(this.titleLayer)
+            .setPosition(SC_W*0.5+SC_W*page, SC_H*0.1)
+            .setParam(this.labelParam);
 
-        var sp = tm.display.Sprite("tutorial1").addChildTo(this.titleLayer);
-        sp.setPosition(SC_W*0.5+SC_W*page, SC_H*0.5);
-        sp.setScale(1.5);
+        var sp = tm.display.Sprite("tutorial1")
+            .addChildTo(this.titleLayer)
+            .setPosition(SC_W*0.5+SC_W*page, SC_H*0.5)
+            .setScale(1.5);
 
         this.addButton(page);
     },
@@ -224,10 +209,11 @@ tm.define("shotgun.TitleScene", {
         var width = 230, height = 60;
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
-        var lb = tm.display.OutlineLabel("プレイ画面の説明", 40).addChildTo(this.titleLayer);
-        lb.setPosition(SC_W*0.5+SC_W*page, SC_H*0.1);
-        lb.setParam(this.labelParam);
- 
+        var lb = tm.display.OutlineLabel("プレイ画面の説明", 40)
+            .addChildTo(this.titleLayer)
+            .setPosition(SC_W*0.5+SC_W*page, SC_H*0.1)
+            .setParam(this.labelParam);
+
         this.addButton(page);
     },
 
@@ -242,9 +228,10 @@ tm.define("shotgun.TitleScene", {
         lb.setParam(this.labelParam);
 
         for (var i = 0; i < 12; i++) {
-            var lb = tm.display.OutlineLabel($trans(appMain.handList[i].name)+" : "+appMain.handList[i].point+"pts", 40).addChildTo(this.titleLayer);
-            lb.setPosition(SC_W*0.1+SC_W*page, SC_H*0.17+(i*55));
-            lb.setParam(this.scoreParam);
+            var lb = tm.display.OutlineLabel($trans(appMain.handList[i].name)+" : "+appMain.handList[i].point+"pts", 40)
+                .addChildTo(this.titleLayer)
+                .setPosition(SC_W*0.1+SC_W*page, SC_H*0.17+(i*55))
+                .setParam(this.scoreParam);
         }
 
         this.addButton(page, true);

@@ -51,7 +51,9 @@ tm.define("shotgun.PauseScene", {
         sh.setPosition(SC_W*0.25, SC_H*0.9);
         sh.interactive = true;
         sh.boundingType = "rect";
-        sh.addEventListener("click", function() {
+        sh.addEventListener("pointingstart", function() {this.y += 10;});
+        sh.addEventListener("pointingend", function() {
+            this.y -= 10;
             that.tweener.clear().call(function(){appMain.popScene();});
         });
         var lb = tm.display.OutlineLabel("RESUME", 50).addChildTo(this);
@@ -63,7 +65,9 @@ tm.define("shotgun.PauseScene", {
         sh.setPosition(SC_W*0.75, SC_H*0.9);
         sh.interactive = true;
         sh.boundingType = "rect";
-        sh.addEventListener("click", function() {
+        sh.addEventListener("pointingstart", function() {this.y += 10;});
+        sh.addEventListener("pointingend", function() {
+            this.y -= 10;
             appMain.pushScene(that.dialog);
         });
         var lb = tm.display.OutlineLabel("EXIT", 50).addChildTo(this);
@@ -131,7 +135,9 @@ tm.define("shotgun.ConfirmDialog", {
         sh.setPosition(SC_W*0.25, SC_H*0.55);
         sh.interactive = true;
         sh.boundingType = "rect";
-        sh.addEventListener("click", function() {
+        sh.addEventListener("pointingstart", function() {this.y += 10;});
+        sh.addEventListener("pointingend", function() {
+            this.y -= 10;
             that.answer = true;
             appMain.popScene();
         });
@@ -144,7 +150,9 @@ tm.define("shotgun.ConfirmDialog", {
         sh.setPosition(SC_W*0.75, SC_H*0.55);
         sh.interactive = true;
         sh.boundingType = "rect";
-        sh.addEventListener("click", function() {
+        sh.addEventListener("pointingstart", function() {this.y += 10;});
+        sh.addEventListener("pointingend", function() {
+            this.y -= 10;
             that.answer = false;
             appMain.popScene();
         });
@@ -181,7 +189,9 @@ tm.define("shotgun.AlertDialog", {
         sh.setPosition(SC_W*0.5, SC_H*0.55);
         sh.interactive = true;
         sh.boundingType = "rect";
-        sh.addEventListener("click", function() {
+        sh.addEventListener("pointingstart", function() {this.y += 10;});
+        sh.addEventListener("pointingend", function() {
+            this.y -= 10;
             that.answer = true;
             appMain.popScene();
         });

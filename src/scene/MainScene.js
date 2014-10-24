@@ -103,12 +103,14 @@ tm.define("shotgun.MainScene", {
         }
 
         //ポーズボタン
-        var sh = this.credit = tm.display.RoundRectangleShape(200, 50, {fillStyle:'rgba(0,80,0,1)', lineWidth:4}).addChildTo(this);
-        sh.setPosition(SC_W*0.84, 72);
+        var sh = this.credit = tm.display.RoundRectangleShape(200, 50, {fillStyle:'rgba(0,80,0,1)', lineWidth:4})
+            .addChildTo(this)
+            .setPosition(SC_W*0.84, 72)
         sh.interactive = true;
-        var lb = this.creditLabel = tm.display.OutlineLabel("pause", 50).addChildTo(this);
-        lb.setParam(this.labelParamBasicCenter);
-        lb.setPosition(SC_W*0.84, 64);
+        var lb = this.creditLabel = tm.display.OutlineLabel("pause", 50)
+            .addChildTo(this)
+            .setParam(this.labelParamBasicCenter)
+            .setPosition(SC_W*0.84, 64);
 
         //ステータスバー
         var sh = tm.display.RectangleShape(SC_W, STATUSBAR_HEIGHT, {strokeStyle: STATUSBAR_COLOR,fillStyle: STATUSBAR_COLOR}).addChildTo(this);

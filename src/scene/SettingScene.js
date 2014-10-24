@@ -61,7 +61,9 @@ tm.define("shotgun.SettingScene", {
         sh.setPosition(SC_W*0.5, SC_H*0.9);
         sh.interactive = true;
         sh.boundingType = "rect";
-        sh.addEventListener("click", function() {
+        sh.addEventListener("pointingstart", function() {this.y += 10;});
+        sh.addEventListener("pointingend", function() {
+            this.y -= 10;
             that.mask.tweener.clear().fadeOut(200);
             appMain.saveConfig();
             appMain.popScene();
