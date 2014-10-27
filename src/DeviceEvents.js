@@ -7,7 +7,11 @@
 
 //PhoneGap Device Events
 var onDeviceready = function () {
-    if (DEBUG_PHONEGAP) AdvanceAlert('devicereadyイベントが発火しました');
+    if (DEBUG_PHONEGAP) {
+        AdvanceAlert('devicereadyイベントが発火しました');
+        AdvanceAlert('Device:'+device.name+" "+device.platform);
+    }
+
     PHONEGAP = true;
 
     //Game Center Plugin
@@ -56,6 +60,13 @@ document.addEventListener('resume', onResume, false);
 document.addEventListener('online', onOnline, false);
 document.addEventListener('offline', onOffline, false);
 
-//GamecenterPlungin
+//UsingPluginList
+//Gamecenter
 //https://github.com/leecrossley/cordova-plugin-game-center.git
+//Admob
+//https://github.com/floatinghotpot/cordova-plugin-admob.git
+//StatusBar
+//https://github.com/apache/cordova-plugin-statusbar.git
+//Device
+//https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
 
