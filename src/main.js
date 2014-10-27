@@ -25,7 +25,7 @@ GAMECENTER = false;
 
 //スクリーンサイズ
 SC_W = 640;
-SC_H = 960;
+SC_H = 1136;
 
 //ステータスバー情報
 STATUSBAR_HEIGHT = 30;
