@@ -121,12 +121,8 @@ appMain = {};
 
 //アプリケーションメイン
 tm.main(function() {
-    //PHONEGAPの場合スクリーンサイズ調整
-    if (PHONEGAP) {
-        SC_W = window.innerWidth*2;
-        SC_H = window.innerHeight*2;
-    }
 
+    //使用フォント読み込み終了検出
     for (var i = 0; i < FONT.length; i++) {
         detectFontLoading(FONT[i]);
     }

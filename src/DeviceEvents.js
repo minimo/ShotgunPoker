@@ -14,6 +14,13 @@ var onDeviceready = function () {
 
     PHONEGAP = true;
 
+    //スクリーンサイズ調整
+    if (appMain) {
+        SC_W = window.innerWidth*2;
+        SC_H = window.innerHeight*2;
+        appMain.resize(SC_W, SC_H).fitWindow();
+    }
+
     //Game Center Plugin
     gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
 }
