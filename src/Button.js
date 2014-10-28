@@ -20,6 +20,8 @@ tm.define("shotgun.Button", {
 
     init: function(width, height, text, style) {
         this.superInit();
+        this.width = width;
+        this.height = height;
 
         //ƒ{ƒ^ƒ“‰e
         this.shadow = tm.display.RoundRectangleShape(width, height, {fillStyle:'rgba(0,0,0,1)', strokeStyle:'rgba(0,0,0,1)', lineWidth:4})
