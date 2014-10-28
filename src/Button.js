@@ -13,7 +13,10 @@ tm.define("shotgun.Button", {
     labelParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:3 },
 
     push: false,
-    down: 5,
+
+    //ƒ{ƒ^ƒ“‰Ÿ‰ºŽž‚ÌˆÚ“®—Ê
+    downX: 0,
+    downY: 5,
 
     init: function(width, height, text) {
         this.superInit(width, height, {fillStyle:'rgba(0,80,0,1)', lineWidth:4});
@@ -23,27 +26,32 @@ tm.define("shotgun.Button", {
         this.boundingType = "rect";
         this.addEventListener("pointingstart", function() {
             this.push = true;
-            this.y += this.down;
+            this.x += this.downX;
+            this.y += this.downY;
         });
         this.addEventListener("pointingmove", function(e) {
             var pt = e.pointing;
             if (this.isHitPoint(pt.x, pt.y)) {
                 if (!this.push) {
                     this.push = true;
-                    this.y += this.down;
+                    this.x += this.downX;
+                    this.y += this.downY;
                 }
             } else {
                 if (this.push) {
                     this.push = false;
-                    this.y -= this.down;
+                    this.x -= this.downX;
+                    this.y -= this.downY;
                 }
             }
         });
         this.addEventListener("pointingend", function(e) {
             var pt = e.pointing;
             if (this.isHitPoint(pt.x, pt.y)) {
-                this.y -= this.down;
+                this.x -= this.downX;
+                this.y -= this.downY;
                 this.push = false;
+
                 var e = tm.event.Event("pushed");
                 this.dispatchEvent(e);
             }
