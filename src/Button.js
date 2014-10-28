@@ -42,10 +42,10 @@ tm.define("shotgun.Button", {
         this.addEventListener("pointingend", function(e) {
             var pt = e.pointing;
             if (this.isHitPoint(pt.x, pt.y)) {
+                this.y -= this.down;
+                this.push = false;
                 var e = tm.event.Event("pushed");
                 this.dispatchEvent(e);
-                this.push = false;
-                this.y -= this.down;
             }
         });
 

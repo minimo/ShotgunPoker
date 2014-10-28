@@ -27,6 +27,8 @@ var onDeviceready = function () {
 
 var onPause = function() {
     if (DEBUG_PHONEGAP) AdvanceAlert('pauseイベントが発火しました');
+
+    //ゲーム中の場合ポーズシーンに移行
     var scene = appMain.currentScene;
     if (scene instanceof shotgun.MainScene && !scene.gameend) {
         appMain.pushScene(shotgun.PauseScene(scene));
