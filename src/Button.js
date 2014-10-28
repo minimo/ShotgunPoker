@@ -7,7 +7,7 @@
  */
 
 tm.define("shotgun.Button", {
-    superClass: tm.display.RoundRectangleShape,
+    superClass: tm.app.Object2D,
 
     //ラベル用フォントパラメータ
     labelParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:3 },
@@ -18,47 +18,60 @@ tm.define("shotgun.Button", {
     downX: 0,
     downY: 5,
 
-    init: function(width, height, text) {
-        this.superInit(width, height, {fillStyle:'rgba(0,80,0,1)', lineWidth:4});
+    init: function(width, height, text, style) {
+        this.superInit();
 
+        //ボタン影
+        this.shadow = tm.display.RoundRectangleShape(width, height, {fillStyle:'rgba(0,0,0,1)', strokeStyle:'rgba(0,0,0,1)', lineWidth:4})
+            .addChildTo(this)
+            .setPosition(this.downX, this.downY);
+
+        //ボタン本体
+        this.button = tm.display.RoundRectangleShape(width, height, {fillStyle:'rgba(0,80,0,1)', lineWidth:4})
+            .addChildTo(this);
+
+        //ボタンラベル
+        this.label = tm.display.OutlineLabel(text, 50)
+            .addChildTo(this.button)
+            .setParam(this.labelParam);
+
+        //判定処理設定
         this.interactive = true;
         this.checkHierarchy = true;
         this.boundingType = "rect";
+
+        //イベントリスナ登録
         this.addEventListener("pointingstart", function() {
             this.push = true;
-            this.x += this.downX;
-            this.y += this.downY;
+            this.button.x += this.downX;
+            this.button.y += this.downY;
         });
         this.addEventListener("pointingmove", function(e) {
             var pt = e.pointing;
             if (this.isHitPoint(pt.x, pt.y)) {
                 if (!this.push) {
                     this.push = true;
-                    this.x += this.downX;
-                    this.y += this.downY;
+                    this.button.x += this.downX;
+                    this.button.y += this.downY;
                 }
             } else {
                 if (this.push) {
                     this.push = false;
-                    this.x -= this.downX;
-                    this.y -= this.downY;
+                    this.button.x -= this.downX;
+                    this.button.y -= this.downY;
                 }
             }
         });
         this.addEventListener("pointingend", function(e) {
             var pt = e.pointing;
             if (this.isHitPoint(pt.x, pt.y)) {
-                this.x -= this.downX;
-                this.y -= this.downY;
+                this.button.x -= this.downX;
+                this.button.y -= this.downY;
                 this.push = false;
 
                 var e = tm.event.Event("pushed");
                 this.dispatchEvent(e);
             }
         });
-
-        tm.display.OutlineLabel(text, 50)
-            .addChildTo(this)
-            .setParam(this.labelParam);
     },
 });
