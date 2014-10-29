@@ -9,35 +9,27 @@
 tm.define("shotgun.Button", {
     superClass: tm.app.Object2D,
 
-    //ラベル用フォントパラメータ
+    //描画スタイル設定
+    buttonColor: 'rgba(20, 100, 20, 1)',
+    shadowColor: 'rgba(0, 0, 0, 1)',
     labelParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:3 },
 
+    text: "",
     push: false,
 
     //ボタン押下時の移動量
-    downX: 5,
+    downX: 3,
     downY: 10,
 
     init: function(width, height, text, style) {
         this.superInit();
-        this.width = width;
-        this.height = height;
 
-        //ボタン影
-        var shadowColor = 'rgba(0, 0, 0, 1)';
-        this.shadow = tm.display.RectangleShape(width, height, {fillStyle: shadowColor, strokeStyle: shadowColor, lineWidth: 4})
-            .addChildTo(this);
+        this.width = width || 200;
+        this.height = height || 80;
+        this.text = text || "";
 
-        //ボタン本体
-        var buttonColor = 'rgba(20, 100, 20, 1)';
-        this.button = tm.display.RectangleShape(width, height, {fillStyle: buttonColor, strokeStyle: buttonColor, lineWidth: 4})
-            .addChildTo(this)
-            .setPosition(-this.downX, -this.downY);
-
-        //ボタンラベル
-        this.label = tm.display.OutlineLabel(text, 50)
-            .addChildTo(this.button)
-            .setParam(this.labelParam);
+        //セットアップ
+        this.setup();
 
         //判定処理設定
         this.interactive = true;
@@ -77,5 +69,28 @@ tm.define("shotgun.Button", {
                 this.dispatchEvent(e);
             }
         });
+    },
+
+    setup: function() {
+        //登録済みの場合破棄する
+        if (this.shadow) {
+            this.shadow.remove();
+            this.label.remove();
+            this.button.remove();
+        }
+
+        var width = this.width, height = this.height;
+
+        //ボタン影
+        this.shadow = tm.display.RectangleShape(width, height, {fillStyle: this.shadowColor, strokeStyle: this.shadowColor, lineWidth: 4})
+            .addChildTo(this);
+        //ボタン本体
+        this.button = tm.display.RectangleShape(width, height, {fillStyle: this.buttonColor, strokeStyle: this.buttonColor, lineWidth: 4})
+            .addChildTo(this)
+            .setPosition(-this.downX, -this.downY);
+        //ボタンラベル
+        this.label = tm.display.OutlineLabel(this.text, 50)
+            .addChildTo(this.button)
+            .setParam(this.labelParam);
     },
 });
