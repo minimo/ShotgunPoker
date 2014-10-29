@@ -34,7 +34,7 @@ STATUSBAR_COLOR = 'rgba(0,0,0,1)';
 //カードサイズ
 CARD_W = 200;
 CARD_H = 300;
-CARD_SCALE = 0.5;
+CARD_SCALE = 0.7;
 
 //スート
 SUIT_SPADE = 0;
