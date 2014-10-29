@@ -9,12 +9,12 @@
 tm.define("shotgun.Button", {
     superClass: tm.app.Object2D,
 
-    //ƒ‰ƒxƒ‹—pƒtƒHƒ“ƒgƒpƒ‰ƒ[ƒ^
+    //ãƒ©ãƒ™ãƒ«ç”¨ãƒ•ã‚©ãƒ³ãƒˆãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
     labelParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:3 },
 
     push: false,
 
-    //ƒ{ƒ^ƒ“‰Ÿ‰º‚ÌˆÚ“®—Ê
+    //ãƒœã‚¿ãƒ³æŠ¼ä¸‹æ™‚ã®ç§»å‹•é‡
     downX: 5,
     downY: 10,
 
@@ -23,28 +23,28 @@ tm.define("shotgun.Button", {
         this.width = width;
         this.height = height;
 
-        //ƒ{ƒ^ƒ“‰e
+        //ãƒœã‚¿ãƒ³å½±
         var shadowColor = 'rgba(0, 0, 0, 1)';
         this.shadow = tm.display.RectangleShape(width, height, {fillStyle: shadowColor, strokeStyle: shadowColor, lineWidth: 4})
             .addChildTo(this);
 
-        //ƒ{ƒ^ƒ“–{‘Ì
+        //ãƒœã‚¿ãƒ³æœ¬ä½“
         var buttonColor = 'rgba(20, 100, 20, 1)';
         this.button = tm.display.RectangleShape(width, height, {fillStyle: buttonColor, strokeStyle: buttonColor, lineWidth: 4})
             .addChildTo(this)
             .setPosition(-this.downX, -this.downY);
 
-        //ƒ{ƒ^ƒ“ƒ‰ƒxƒ‹
+        //ãƒœã‚¿ãƒ³ãƒ©ãƒ™ãƒ«
         this.label = tm.display.OutlineLabel(text, 50)
             .addChildTo(this.button)
             .setParam(this.labelParam);
 
-        //”»’èˆ—İ’è
+        //åˆ¤å®šå‡¦ç†è¨­å®š
         this.interactive = true;
         this.checkHierarchy = true;
         this.boundingType = "rect";
 
-        //ƒCƒxƒ“ƒgƒŠƒXƒi“o˜^
+        //ã‚¤ãƒ™ãƒ³ãƒˆãƒªã‚¹ãƒŠç™»éŒ²
         this.addEventListener("pointingstart", function() {
             this.push = true;
             this.button.x += this.downX;
