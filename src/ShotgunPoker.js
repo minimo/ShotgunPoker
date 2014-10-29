@@ -29,6 +29,10 @@ tm.define("shotgun.CanvasApp", {
     returnJokerTuen: RETURN_JOKER_TURN,
     handList: null,
 
+    //バックグラウンドカラー
+    bgColor: 'rgba(20, 80, 20, 1)',
+
+    //言語設定
     language: JAPANESE,
 
     init: function(id) {

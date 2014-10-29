@@ -21,8 +21,10 @@ tm.define("shotgun.SettingScene", {
         var that = this;
 
         //バックグラウンド
-        this.bg = tm.display.Sprite("greenback", SC_W, SC_H).addChildTo(this);
-        this.bg.setPosition(SC_W/2, SC_H/2);
+        this.bg = tm.display.Shape(SC_W, SC_H)
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.5)
+            .renderRectangle({fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor});
 
         var lb = this.credit1 = tm.display.OutlineLabel("SETTING", 60).addChildTo(this);
         lb.setParam(this.labelParam);

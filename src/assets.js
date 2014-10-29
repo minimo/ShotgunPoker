@@ -7,7 +7,6 @@
 
 var assets = {
     //images
-    "greenback":    "assets/greenback.png",
     "blackback":    "assets/background.png",
     "card":         "assets/trump.png",
     "tmliblogo":    "assets/tmlib_logo.png",

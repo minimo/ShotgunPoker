@@ -26,20 +26,26 @@ tm.define("shotgun.PauseScene", {
         this.dialog = shotgun.ConfirmDialog("EXIT GAME?", ["YES", "NO"]);
 
         //バックグラウンド
-        this.bg = tm.display.Sprite("greenback", SC_W*2, SC_H*2).addChildTo(this);
+        this.bg = tm.display.Shape(SC_W, SC_H)
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.5)
+            .renderRectangle({fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor});
 
-        var lb = tm.display.OutlineLabel("PAUSE", 60).addChildTo(this);
-        lb.setParam(this.labelParam);
-        lb.setPosition(SC_W*0.5, SC_H*0.1);
+        var lb = tm.display.OutlineLabel("PAUSE", 60)
+            .addChildTo(this)
+            .setParam(this.labelParam)
+            .setPosition(SC_W*0.5, SC_H*0.1);
 
-        var lb = tm.display.OutlineLabel("YOUR HAND LIST", 40).addChildTo(this);
-        lb.setParam(this.labelParam);
-        lb.setPosition(SC_W*0.5, SC_H*0.2);
+        var lb = tm.display.OutlineLabel("YOUR HAND LIST", 40)
+            .addChildTo(this)
+            .setParam(this.labelParam)
+            .setPosition(SC_W*0.5, SC_H*0.2);
 
         for (var i = 0; i < 12; i++) {
-            var lb = tm.display.OutlineLabel(appMain.handList[i].name+":"+this.parentScene.handCount[appMain.handList[i].point], 40).addChildTo(this);
-            lb.setParam(this.scoreParam);
-            lb.setPosition(SC_W*0.2, SC_H*0.28+(i*45));
+            tm.display.OutlineLabel(appMain.handList[i].name+":"+this.parentScene.handCount[appMain.handList[i].point], 40)
+                .addChildTo(this)
+                .setParam(this.scoreParam)
+                .setPosition(SC_W*0.2, SC_H*0.28+(i*45));
         }
 
         var that = this;

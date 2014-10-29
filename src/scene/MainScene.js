@@ -56,8 +56,10 @@ tm.define("shotgun.MainScene", {
         this.background = "rgba(0, 0, 0, 0.0)";
 
         //バックグラウンド
-        this.bg = tm.display.Sprite("greenback", SC_W, SC_H).addChildTo(this);
-        this.bg.setPosition(SC_W/2, SC_H/2);
+        this.bg = tm.display.Shape(SC_W, SC_H)
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.5)
+            .renderRectangle({fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor});
 
         //マルチタッチ初期化
         this.touches = tm.input.TouchesEx(this);
@@ -105,13 +107,13 @@ tm.define("shotgun.MainScene", {
         }
 
         //ポーズボタン
-        this.credit = tm.display.RoundRectangleShape(200, 50, {fillStyle:'rgba(0,80,0,1)', lineWidth:4})
+        var pauseColor = 'rgba(20, 80, 20, 1)';
+        this.pause = tm.display.RoundRectangleShape(200, 60, {fillStyle: pauseColor, strokeStyle: pauseColor, lineWidth: 4})
             .addChildTo(this)
             .setPosition(SC_W*0.84, 72);
-        this.creditLabel = tm.display.OutlineLabel("pause", 50)
-            .addChildTo(this)
-            .setParam(this.labelParamBasicCenter)
-            .setPosition(SC_W*0.84, 64);
+        this.pauseLabel = tm.display.OutlineLabel("PAUSE", 50)
+            .addChildTo(this.pause)
+            .setParam(this.labelParamBasicCenter);
 
         //目隠し
         this.mask = tm.display.Sprite("blackback", SC_W*2, SC_H*2).addChildTo(this);
