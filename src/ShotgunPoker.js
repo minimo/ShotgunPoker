@@ -93,6 +93,7 @@ tm.define("shotgun.CanvasApp", {
             "volumeSE": this.volumeSE,
         };
         localStorage.setItem("config", JSON.stringify(saveObj));
+        return this;
     },
 
     //設定データの読み込み
@@ -106,6 +107,7 @@ tm.define("shotgun.CanvasApp", {
             this.volumeBGM = c.volumeBGM;
             this.volumeSE = c.volumeSE;
         }
+        return this;
     },
 
     playBGM: function(asset) {
@@ -122,7 +124,7 @@ tm.define("shotgun.CanvasApp", {
             this.bgm.play();
             this.bgmIsPlay = true;
         }
-        return this.bgm;
+        return this;
     },
 
     stopBGM: function() {
@@ -133,6 +135,7 @@ tm.define("shotgun.CanvasApp", {
             }
             this.bgm = null;
         }
+        return this;
     },
 
     pauseBGM: function() {
@@ -142,16 +145,25 @@ tm.define("shotgun.CanvasApp", {
                 this.bgmIsPlay = false;
             }
         }
+        return this;
     },
 
     resumeBGM: function() {
         if (this.bgm) {
             if (!this.bgmIsPlay) {
-                this.bgm.resume();
                 this.bgm.volume = this.volumeBGM*0.34;
+                this.bgm.resume();
                 this.bgmIsPlay = true;
             }
         }
+        return this;
+    },
+
+    setVolumeBGM: function(v) {
+        this.pauseBGM();
+        this.volumeBGM = v;
+        this.resumeBGM();
+        return this;
     },
 
     playSE: function(asset) {
@@ -161,7 +173,12 @@ tm.define("shotgun.CanvasApp", {
             se.volume = this.volumeSE*0.34;
             se.play();
         }
-        return se;
+        return this;
+    },
+
+    setVolumeSE: function(v) {
+        this.volumSE = v;
+        return this;
     },
 });
 

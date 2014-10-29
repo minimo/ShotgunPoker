@@ -95,9 +95,7 @@ tm.define("shotgun.SettingScene", {
             if (appMain.volumeBGM != x) {
                 this.bgm[appMain.volumeBGM].fontSize = 30;
                 this.bgm[x].fontSize = 80;
-                appMain.pauseBGM();
-                appMain.volumeBGM = x;
-                appMain.resumeBGM();
+                appMain.setVolumeBGM(x);
             }
         }
         //ＳＥボリューム
