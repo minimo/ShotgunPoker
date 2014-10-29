@@ -52,9 +52,9 @@ tm.define("shotgun.TitleScene", {
     setupTitle: function() {
         var fillStyle = tm.graphics.LinearGradient(-SC_W*0.2, 0, SC_W*0.1, 64)
             .addColorStopList([
-                { offset: 0.1, color: "hsla(130, 90%, 50%, 0.5)"},
-                { offset: 0.5, color: "hsla(130, 80%, 90%, 0.9)"},
-                { offset: 0.9, color: "hsla(140, 90%, 50%, 0.5)"},
+                { offset: 0.1, color: "hsla(130, 90%, 0%, 0.5)"},
+                { offset: 0.5, color: "hsla(130, 90%, 0%, 0.9)"},
+                { offset: 0.9, color: "hsla(140, 90%, 0%, 0.5)"},
             ]).toStyle();
         var shadowColor = 'rgba(0, 0, 0, 1)';
 
@@ -66,16 +66,16 @@ tm.define("shotgun.TitleScene", {
 
         var lb = this.title1 = tm.display.OutlineLabel("SHOTGUN", 130)
             .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.45, SC_H*0.15)
-            .setParam({fontFamily:"'CasinoQueen'", align: "center", baseline:"middle", outlineWidth:2 });
-        lb.fillStyle = fillStyle;
+            .setPosition(SC_W*0.45, SC_H*0.16)
+            .setParam({fontFamily:"'CasinoQueen'", align: "center", baseline:"middle", outlineWidth:5 });
+        lb.fillStyle = "Black";
         lb.fillStyleOutline = "White";
         lb.shadowColor = shadowColor;
         lb.shadowBlur = 10;
 
         var lb = this.title2 = tm.display.OutlineLabel("POKER", 130)
             .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.65, SC_H*0.30)
+            .setPosition(SC_W*0.65, SC_H*0.29)
             .setParam({fontFamily:"'CasinoQueen'", align: "center", baseline:"middle", outlineWidth:2 });
         lb.fillStyle = fillStyle;
         lb.fillStyleOutline = "White";
