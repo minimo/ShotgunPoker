@@ -28,6 +28,7 @@ tm.define("shotgun.TitleScene", {
         //タイトルとチュートリアルを分けてレイヤーを作成
         this.titleLayer = tm.app.Object2D().addChildTo(this);
         this.titleLayer.checkHierarchy = true;
+        this.underLayer = tm.app.Object2D().addChildTo(this.titleLayer);
         this.tutorialLayer = tm.app.Object2D().addChildTo(this);
 
         this.setupTitle();
@@ -51,25 +52,34 @@ tm.define("shotgun.TitleScene", {
     setupTitle: function() {
         var fillStyle = tm.graphics.LinearGradient(-SC_W*0.2, 0, SC_W*0.1, 64)
             .addColorStopList([
-                { offset: 0.1, color: "hsla(230, 90%, 50%, 0.5)"},
-                { offset: 0.5, color: "hsla(230, 80%, 90%, 0.9)"},
-                { offset: 0.9, color: "hsla(230, 90%, 50%, 0.5)"},
+                { offset: 0.1, color: "hsla(130, 90%, 50%, 0.5)"},
+                { offset: 0.5, color: "hsla(130, 80%, 90%, 0.9)"},
+                { offset: 0.9, color: "hsla(140, 90%, 50%, 0.5)"},
             ]).toStyle();
+        var shadowColor = 'rgba(0, 0, 0, 1)';
 
-        var lb = this.title1 = tm.display.OutlineLabel("SHOTGUN", 120)
+        var sg = tm.display.Sprite("shotgun", SC_W, SC_H*0.2)
+                .addChildTo(this.titleLayer)
+                .setPosition(SC_W*0.5, SC_H*0.2);
+        sg.scaleX = -1;
+        sg.rotation = -20;
+
+        var lb = this.title1 = tm.display.OutlineLabel("SHOTGUN", 130)
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.45, SC_H*0.15)
             .setParam({fontFamily:"'CasinoQueen'", align: "center", baseline:"middle", outlineWidth:2 });
         lb.fillStyle = fillStyle;
-        lb.shadowColor = "Black";
+        lb.fillStyleOutline = "White";
+        lb.shadowColor = shadowColor;
         lb.shadowBlur = 10;
 
-        var lb = this.title2 = tm.display.OutlineLabel("POKER", 120)
+        var lb = this.title2 = tm.display.OutlineLabel("POKER", 130)
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.65, SC_H*0.30)
             .setParam({fontFamily:"'CasinoQueen'", align: "center", baseline:"middle", outlineWidth:2 });
         lb.fillStyle = fillStyle;
-        lb.shadowColor = "Black";
+        lb.fillStyleOutline = "White";
+        lb.shadowColor = shadowColor;
         lb.shadowBlur = 10;
 
         var that = this;
@@ -219,6 +229,20 @@ tm.define("shotgun.TitleScene", {
     },
 
     update: function() {
+        if (this.time % 3 == 0) {
+            var c = tm.display.Sprite("card", CARD_W, CARD_H)
+                .addChildTo(this.underLayer)
+                .setPosition(rand(0, SC_W), -100-rand(0, 50))
+                .setFrameIndex(rand(0, 50));
+            c.update = function() {
+                this.rotation+=this.vr;
+                this.y+=this.vy;
+                if (this.y > SC_H*1.2) {this.remove();}
+            }
+            c.vr = rand(-10, 10);
+            c.vy = rand(5, 20);
+            c.setScale(rand(5,10)/10);
+        }
         this.time++;
     },
 
