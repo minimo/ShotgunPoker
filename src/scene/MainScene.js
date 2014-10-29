@@ -313,8 +313,9 @@ tm.define("shotgun.MainScene", {
 
     //役名表示
     dispHand: function(hand) {
-        var name1 = "", name2 = "", name3 = "", size = 80; offset = 10;
-        if (appMain == JAPANESE) {
+        var name1 = "", name2 = "", name3 = "";
+        var size = 80; offset = 10;
+        if (appMain.language == JAPANESE) {
             switch (hand) {
                 case MISS:          name1 = "MISS!"; offset = 50; break;
                 case NOHAND:        name1 = "NO HAND"; size = 70; break;
@@ -339,10 +340,10 @@ tm.define("shotgun.MainScene", {
                 case THREECARD:     name1 = "THREE OF"; name2 = "A KIND"; offset = 50; break;
                 case FULLHOUSE:     name1 = "FULL"; name2 = "HOUSE"; offset = 50; break;
                 case STRAIGHT:      name1 = "STRAIGHT"; size = 70; break;
-                case FOURCARD:      name1 = "FOUR OF"; name2 = "A KIND"; offset = 60; break;
-                case FIVECARD:      name1 = "FIVE OF"; name2 = "A KIND"; offset = 60; break;
+                case FOURCARD:      name1 = "FOUR OF"; name2 = "A KIND"; size = 70; offset = 60; break;
+                case FIVECARD:      name1 = "FIVE OF"; name2 = "A KIND"; size = 70; offset = 60; break;
                 case STRAIGHTFLASH: name1 = "STRAIGHT"; name2 = "FLASH"; size = 70; break;
-                case ROYALSTRAIGHTFLASH: name1 = "ROYAL"; name2 = "FLASH!"; size = 60; break;
+                case ROYALSTRAIGHTFLASH: name1 = "ROYAL"; name2 = "FLASH!"; size = 70; break;
             }
         }
         //役名表示
