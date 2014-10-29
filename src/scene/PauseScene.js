@@ -9,7 +9,6 @@
 tm.define("shotgun.PauseScene", {
     superClass: tm.app.Scene,
 
-    parentScene: null,
     dialog: null,
 
     //ラベル用フォントパラメータ
@@ -20,8 +19,6 @@ tm.define("shotgun.PauseScene", {
         this.superInit();
         this.background = "rgba(0, 0, 0, 0.0)";
 
-        this.parentScene = parentScene;
-        
         //ダイアログ
         this.dialog = shotgun.ConfirmDialog("EXIT GAME?", ["YES", "NO"]);
 
@@ -42,7 +39,7 @@ tm.define("shotgun.PauseScene", {
             .setPosition(SC_W*0.5, SC_H*0.2);
 
         for (var i = 0; i < 12; i++) {
-            tm.display.OutlineLabel(appMain.handList[i].name+":"+this.parentScene.handCount[appMain.handList[i].point], 40)
+            tm.display.OutlineLabel(appMain.handList[i].name+":"+parentScene.handCount[appMain.handList[i].point], 40)
                 .addChildTo(this)
                 .setParam(this.scoreParam)
                 .setPosition(SC_W*0.2, SC_H*0.28+(i*45));
@@ -57,7 +54,7 @@ tm.define("shotgun.PauseScene", {
             .addChildTo(this)
             .setPosition(SC_W*0.25, SC_H*0.9)
             .addEventListener("pushed", function() {
-                that.tweener.clear().call(function(){appMain.popScene();});
+                appMain.popScene();
             });
 
         //終了ボタン
@@ -85,7 +82,7 @@ tm.define("shotgun.PauseScene", {
     ontouchstart: function(e) {
     },
 
-    //タッチorクリック移動処理
+    //タッチorクリック移動処理1
     ontouchmove: function(e) {
     },
 

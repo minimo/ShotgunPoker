@@ -107,13 +107,12 @@ tm.define("shotgun.MainScene", {
         }
 
         //ポーズボタン
-        var pauseColor = 'rgba(20, 80, 20, 1)';
-        this.pause = tm.display.RoundRectangleShape(200, 60, {fillStyle: pauseColor, strokeStyle: pauseColor, lineWidth: 4})
+        shotgun.Button(200, 60, "PAUSE")
             .addChildTo(this)
-            .setPosition(SC_W*0.84, 72);
-        this.pauseLabel = tm.display.OutlineLabel("PAUSE", 50)
-            .addChildTo(this.pause)
-            .setParam(this.labelParamBasicCenter);
+            .setPosition(SC_W*0.84, 72)
+            .addEventListener("pushed", function() {
+                appMain.pushScene(shotgun.PauseScene(this));
+            }.bind(this));
 
         //目隠し
         this.mask = tm.display.Sprite("blackback", SC_W*2, SC_H*2).addChildTo(this);
@@ -311,7 +310,8 @@ tm.define("shotgun.MainScene", {
         appMain.saveConfig();
     },
 
-    //役名表示
+    //役名表示strdpm
+    
     dispHand: function(hand) {
         var name1 = "", name2 = "", name3 = "";
         var size = 80; offset = 10;
@@ -419,11 +419,6 @@ tm.define("shotgun.MainScene", {
             if (c) this.deck.addHand(c);
         }
         this.shuffled = false;
-
-        //ポーズボタン
-        if (SC_W*0.8-100 < sx && sx < SC_W*0.8+100 && 39 < sy && sy < 89 && !this.gameend) {
-            appMain.pushScene(shotgun.PauseScene(this));
-        }
     },
 });
 
