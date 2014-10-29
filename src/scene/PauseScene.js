@@ -105,8 +105,9 @@ tm.define("shotgun.ConfirmDialog", {
         button = button || ["OK", "CANCEL"];
 
         //バックグラウンド
-        var sh = tm.display.RoundRectangleShape(SC_W-20, SC_H*0.3, {fillStyle:'rgba(0,100,0,1)', lineWidth:4}).addChildTo(this);
-        sh.setPosition(SC_W*0.5, SC_H*0.5);
+        tm.display.RoundRectangleShape(SC_W-20, SC_H*0.3, {fillStyle: appMain.bgColor, lineWidth: 4})
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.5);
 
         var that = this;
         var width = 250, height = 70;
@@ -148,8 +149,9 @@ tm.define("shotgun.AlertDialog", {
         button = button || "OK";
 
         //バックグラウンド
-        var sh = tm.display.RoundRectangleShape(SC_W-20, SC_H*0.3, {fillStyle:'rgba(0,100,0,1)', lineWidth:4}).addChildTo(this);
-        sh.setPosition(SC_W*0.5, SC_H*0.5);
+        tm.display.RoundRectangleShape(SC_W-20, SC_H*0.3, {fillStyle: appMain.bgColor, lineWidth: 4})
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.5);
 
         var that = this;
         var width = 250, height = 70;
