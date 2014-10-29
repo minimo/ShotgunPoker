@@ -15,8 +15,8 @@ tm.define("shotgun.Button", {
     push: false,
 
     //ボタン押下時の移動量
-    downX: 0,
-    downY: 5,
+    downX: 5,
+    downY: 10,
 
     init: function(width, height, text, style) {
         this.superInit();
@@ -24,13 +24,15 @@ tm.define("shotgun.Button", {
         this.height = height;
 
         //ボタン影
-        this.shadow = tm.display.RoundRectangleShape(width, height, {fillStyle:'rgba(0,0,0,1)', strokeStyle:'rgba(0,0,0,1)', lineWidth:4})
-            .addChildTo(this)
-            .setPosition(this.downX, this.downY);
+        var shadowColor = 'rgba(0, 0, 0, 1)';
+        this.shadow = tm.display.RectangleShape(width, height, {fillStyle: shadowColor, strokeStyle: shadowColor, lineWidth: 4})
+            .addChildTo(this);
 
         //ボタン本体
-        this.button = tm.display.RoundRectangleShape(width, height, {fillStyle:'rgba(0,80,0,1)', lineWidth:4})
-            .addChildTo(this);
+        var buttonColor = 'rgba(20, 100, 20, 1)';
+        this.button = tm.display.RectangleShape(width, height, {fillStyle: buttonColor, strokeStyle: buttonColor, lineWidth: 4})
+            .addChildTo(this)
+            .setPosition(-this.downX, -this.downY);
 
         //ボタンラベル
         this.label = tm.display.OutlineLabel(text, 50)
