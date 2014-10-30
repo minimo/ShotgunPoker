@@ -50,37 +50,44 @@ tm.define("shotgun.TitleScene", {
     },
 
     setupTitle: function() {
+/*
         var fillStyle = tm.graphics.LinearGradient(-SC_W*0.2, 0, SC_W*0.1, 64)
             .addColorStopList([
                 { offset: 0.1, color: "hsla(130, 90%, 0%, 0.5)"},
                 { offset: 0.5, color: "hsla(130, 90%, 0%, 0.9)"},
                 { offset: 0.9, color: "hsla(140, 90%, 0%, 0.5)"},
             ]).toStyle();
-        var shadowColor = 'rgba(0, 0, 0, 1)';
+*/
+        var fillStyle = "Red";
+        var outlineStyle = "White";
+        var shadowColor = 'rgba(128, 128, 128, 1)';
 
+        //ショットガンシルエット
         var sg = tm.display.Sprite("shotgun", SC_W, SC_H*0.2)
                 .addChildTo(this.titleLayer)
                 .setPosition(SC_W*0.5, SC_H*0.2);
         sg.scaleX = -1;
-        sg.rotation = -20;
+        sg.rotation = -10;
 
+        //タイトルロゴ１
         var lb = this.title1 = tm.display.OutlineLabel("SHOTGUN", 130)
             .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.45, SC_H*0.16)
-            .setParam({fontFamily:"'CasinoQueen'", align: "center", baseline:"middle", outlineWidth:5 });
-        lb.fillStyle = "Black";
-        lb.fillStyleOutline = "White";
+            .setPosition(SC_W*0.5-310, SC_H*0.16)
+            .setParam({fontFamily:"'CasinoRegular'", align: "left", baseline:"middle", outlineWidth:3 });
+        lb.fillStyle = fillStyle;
+        lb.fillStyleOutline = outlineStyle;
         lb.shadowColor = shadowColor;
-        lb.shadowBlur = 10;
+        lb.shadowBlur = 5;
 
+        //タイトルロゴ２
         var lb = this.title2 = tm.display.OutlineLabel("POKER", 130)
             .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.65, SC_H*0.29)
-            .setParam({fontFamily:"'CasinoQueen'", align: "center", baseline:"middle", outlineWidth:2 });
+            .setPosition(SC_W*0.5+280, SC_H*0.29)
+            .setParam({fontFamily:"'CasinoRegular'", align: "right", baseline:"middle", outlineWidth:3 });
         lb.fillStyle = fillStyle;
-        lb.fillStyleOutline = "White";
+        lb.fillStyleOutline = outlineStyle;
         lb.shadowColor = shadowColor;
-        lb.shadowBlur = 10;
+        lb.shadowBlur = 5;
 
         var that = this;
         var width = 300, height = 70;
@@ -233,14 +240,14 @@ tm.define("shotgun.TitleScene", {
             var c = tm.display.Sprite("card", CARD_W, CARD_H)
                 .addChildTo(this.underLayer)
                 .setPosition(rand(0, SC_W), -100-rand(0, 50))
-                .setFrameIndex(rand(0, 50));
+                .setFrameIndex(rand(0, 54));
             c.update = function() {
                 this.rotation+=this.vr;
                 this.y+=this.vy;
                 if (this.y > SC_H*1.2) {this.remove();}
             }
-            c.vr = rand(-10, 10);
-            c.vy = rand(5, 20);
+            c.vr = rand(-5, 5) || 1;
+            c.vy = rand(5, 15);
             c.setScale(rand(5,10)/10);
         }
         this.time++;

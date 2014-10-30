@@ -17154,7 +17154,7 @@ tm.ui = tm.ui || {};
             bar.animationTime = 100;
             
             // ひよこさん
-            this._createHiyoko(param).addChildTo(this.stage.piyoLayer);
+//            this._createHiyoko(param).addChildTo(this.stage.piyoLayer);
 
             // load
             var stage = this.stage;
@@ -17190,7 +17190,7 @@ tm.ui = tm.ui || {};
         onpointingstart: function(app) {
             // ひよこさん生成
             var p = app.pointing;
-            var piyo = this._createHiyoko(this.param).addChildTo(this.stage.piyoLayer);
+//            var piyo = this._createHiyoko(this.param).addChildTo(this.stage.piyoLayer);
             piyo.x = p.x;
             piyo.y = p.y;
         },
