@@ -62,6 +62,17 @@ tm.define("shotgun.TitleScene", {
         var outlineStyle = "White";
         var shadowColor = 'rgba(128, 128, 128, 1)';
 
+        //カード
+/*
+        for (var i = 0; i < 5; i++) {
+            var c = tm.display.Sprite("card", CARD_W, CARD_H)
+                .addChildTo(this.titleLayer)
+                .setPosition(SC_W*0.5+50, SC_H*0.2+CARD_H*0.3)
+                .setFrameIndex(i);
+            c.rotation = -15+i*15;
+            c.originX = c.originY = 0.9;
+        }
+*/
         //ショットガンシルエット
         var sg = tm.display.Sprite("shotgun", SC_W, SC_H*0.2)
                 .addChildTo(this.titleLayer)
@@ -236,7 +247,7 @@ tm.define("shotgun.TitleScene", {
     },
 
     update: function() {
-        if (this.time % 3 == 0) {
+        if (this.time % 10 == 0) {
             var c = tm.display.Sprite("card", CARD_W, CARD_H)
                 .addChildTo(this.underLayer)
                 .setPosition(rand(0, SC_W), -100-rand(0, 50))
@@ -248,7 +259,7 @@ tm.define("shotgun.TitleScene", {
             }
             c.vr = rand(-5, 5) || 1;
             c.vy = rand(5, 15);
-            c.setScale(rand(5,10)/10);
+            c.setScale(rand(5, 8)/10);
         }
         this.time++;
     },
