@@ -261,6 +261,11 @@ tm.define("shotgun.TitleScene", {
             c.vy = rand(5, 15);
             c.setScale(rand(5, 8)/10);
         }
+
+        //スクリーンショット保存
+        var kb = appMain.keyboard;
+        if (kb.getKeyDown("s")) appMain.canvas.saveAsImage();
+
         this.time++;
     },
 

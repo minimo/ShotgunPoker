@@ -271,6 +271,10 @@ tm.define("shotgun.MainScene", {
             appMain.stopBGM();
             appMain.replaceScene(shotgun.TitleScene());
         }
+
+        //スクリーンショット保存
+        var kb = appMain.keyboard;
+        if (kb.getKeyDown("s")) appMain.canvas.saveAsImage();
     },
 
     //ゲームオーバー
