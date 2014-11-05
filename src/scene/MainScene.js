@@ -107,7 +107,7 @@ tm.define("shotgun.MainScene", {
         }
 
         //ポーズボタン
-        shotgun.Button(200, 60, "PAUSE")
+        this.pause = shotgun.Button(200, 60, "PAUSE")
             .addChildTo(this)
             .setPosition(SC_W*0.84, 72)
             .addEventListener("pushed", function() {
@@ -278,6 +278,8 @@ tm.define("shotgun.MainScene", {
         this.start = false;
         this.pick = false;
         this.gameend = true;
+
+        this.pause.lock = true;
 
         //スコア情報更新
         appMain.lastScore = this.score;

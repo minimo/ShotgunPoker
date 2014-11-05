@@ -17,6 +17,7 @@ tm.define("shotgun.Button", {
 
     text: "",
     push: false,
+    lock: false,
 
     //ボタン押下時の移動量
     downX: 3,
@@ -39,11 +40,15 @@ tm.define("shotgun.Button", {
 
         //イベントリスナ登録
         this.addEventListener("pointingstart", function() {
+            if (this.lock) return;
+
             this.push = true;
             this.button.x += this.downX;
             this.button.y += this.downY;
         });
         this.addEventListener("pointingmove", function(e) {
+            if (this.lock) return;
+            
             var pt = e.pointing;
             if (this.isHitPoint(pt.x, pt.y)) {
                 if (!this.push) {
@@ -60,6 +65,8 @@ tm.define("shotgun.Button", {
             }
         });
         this.addEventListener("pointingend", function(e) {
+            if (this.lock) return;
+
             var pt = e.pointing;
             if (this.isHitPoint(pt.x, pt.y)) {
                 this.button.x -= this.downX;
