@@ -30,7 +30,7 @@ tm.define("shotgun.CanvasApp", {
     handList: null,
 
     //バックグラウンドカラー
-    bgColor: 'rgba(20, 80, 20, 1)',
+    bgColor: 'rgba(50, 110, 50, 1)',
 
     //言語設定
     language: JAPANESE,

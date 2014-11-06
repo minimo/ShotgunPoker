@@ -14,6 +14,8 @@ tm.define("shotgun.TitleScene", {
     labelParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:2 },
     scoreParam: {fontFamily:"'azuki'", align: "left", baseline:"middle", outlineWidth:2 },
 
+    bgColor: 'rgba(60, 130, 60, 1)',
+
     init: function() {
         this.superInit();
         this.background = "rgba(0, 0, 0, 0.0)";
@@ -23,7 +25,7 @@ tm.define("shotgun.TitleScene", {
         this.bg = tm.display.Shape(SC_W, SC_H)
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.5)
-            .renderRectangle({fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor});
+            .renderRectangle({fillStyle: this.bgColor, strokeStyle: this.bgColor});
 
         //タイトルとチュートリアルを分けてレイヤーを作成
         this.titleLayer = tm.app.Object2D().addChildTo(this);
@@ -60,7 +62,7 @@ tm.define("shotgun.TitleScene", {
 */
         var fillStyle = "Red";
         var outlineStyle = "White";
-        var shadowColor = 'rgba(128, 128, 128, 1)';
+        var shadowColor = 'rgba(160, 160, 160, 1)';
 
         //カード
 /*
