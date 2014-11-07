@@ -50,6 +50,7 @@ tm.define("shotgun.MainScene", {
     labelParamBasicCenter: {fontFamily: "'azuki'", align: "center", baseline: "middle",outlineWidth: 3},
     labelParamPoker: {fontFamily: "'KS-Kohichi-FeltPen'",align: "center", baseline: "middle", outlineWidth: 3},
     labelParamHand:  {fontFamily: "'KS-Kohichi-FeltPen'",align: "left", baseline: "middle", outlineWidth: 3},
+    labelParamBefore:{fontFamily: "'azuki'",align: "left", baseline: "top", outlineWidth: 3},
 
     init: function() {
         this.superInit();
@@ -107,13 +108,24 @@ tm.define("shotgun.MainScene", {
         }
 
         //直前の役表示
+        var by = SC_H*0.8+CARD_H*CARD_SCALE*0.5;
         this.beforeLabel = tm.display.OutlineLabel("BEFORE:", 30)
             .addChildTo(this)
-            .setParam(this.labelParamBasic)
-            .setPosition(8, 180);
-        this.beforeLabel.handName = "";    
-        this.beforeLabel.update = function() {
-            this.text = "BEFORE:"+this.handName;
+            .setParam(this.labelParamBefore)
+            .setPosition(8, by);
+        this.beforeHand = tm.display.OutlineLabel("nothing", 30)
+            .addChildTo(this)
+            .setParam(this.labelParamBefore)
+            .setPosition(120, by);
+        this.beforeHand.name = "";
+        this.beforeHand.update = function() {
+/*
+            if (that.onePair % 2 == 1) 
+                this.filleStyle = "Red";
+            else
+                this.filleStyle = "White";
+*/
+            this.text = this.name;
         }
 
         //ポーズボタン
@@ -376,7 +388,7 @@ tm.define("shotgun.MainScene", {
                 lb1.remove();
                 that.deck.clearHand();
                 that.pick = true;
-                that.beforeLabel.handName = that.handName(hand);
+                that.beforeHand.name = that.handName(hand);
         });
 
         y += SC_H*0.08;
