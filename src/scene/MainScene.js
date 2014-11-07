@@ -106,6 +106,16 @@ tm.define("shotgun.MainScene", {
             }
         }
 
+        //直前の役表示
+        this.beforeLabel = tm.display.OutlineLabel("BEFORE:", 30)
+            .addChildTo(this)
+            .setParam(this.labelParamBasic)
+            .setPosition(8, 180);
+        this.beforeLabel.handName = "";    
+        this.beforeLabel.update = function() {
+            this.text = "BEFORE:"+this.handName;
+        }
+
         //ポーズボタン
         this.pause = shotgun.Button(200, 60, "PAUSE")
             .addChildTo(this)
@@ -361,7 +371,13 @@ tm.define("shotgun.MainScene", {
         var lb1 = tm.display.OutlineLabel(name1, size).addChildTo(this);
         lb1.setParam(this.labelParamHand);
         lb1.setPosition(x, y);
-        lb1.tweener.clear().wait(1200).call(function(){lb1.remove(); that.deck.clearHand();that.pick = true;});
+        lb1.tweener.clear().wait(1200)
+            .call(function(){
+                lb1.remove();
+                that.deck.clearHand();
+                that.pick = true;
+                that.beforeLabel.handName = that.handName(hand);
+        });
 
         y += SC_H*0.08;
         var lb2 = tm.display.OutlineLabel(name2, size).addChildTo(this);
@@ -374,6 +390,15 @@ tm.define("shotgun.MainScene", {
         lb3.setParam(this.labelParamHand);
         lb3.setPosition(x, y);
         lb3.tweener.clear().wait(1200).call(function(){lb3.remove();});
+    },
+
+    //役名を文字列で取得
+    handName: function(point) {
+        for (var i = 0; i < appMain.handList.length; i++) {
+            var n = appMain.handList[i];
+            if (n.point == point) return n.name;
+        }
+        return null;
     },
 
     //タッチorクリック開始処理
