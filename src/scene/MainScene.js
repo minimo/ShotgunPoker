@@ -263,8 +263,9 @@ tm.define("shotgun.MainScene", {
                 lb.setPosition(SC_W*0.5, SC_H*0.5);
                 lb.tweener.clear().wait(1000).call(lb.remove());
             }
-            this.score += sc;
-            if (this.score < 0) this.score = 0;
+
+            //得点がプラスの時のみスコアに加算
+            if (sc > 0) this.score += sc;
 
             //ゲームオーバー判定
             if (this.life < 0) {
