@@ -83,8 +83,18 @@ tm.define("shotgun.MainScene", {
             .addChildTo(this)
             .setParam(this.labelParamBasic)
             .setPosition(8, 72);
+        this.scoreLabel.score = 0;
         this.scoreLabel.update = function() {
-            this.text = "SCORE:"+that.score;
+            this.text = "SCORE:"+this.score;
+            if (this.score < that.score) {
+                var s = that.score < this.score;
+                if (s > 300) {
+                    this.score += 7;
+                } else {
+                    this.score += 3;
+                }
+                if (this.score > that.score)this.score = that.score;
+            }
         }
 
         //ライフ表示
