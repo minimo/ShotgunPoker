@@ -129,13 +129,13 @@ tm.define("shotgun.MainScene", {
             .setParam(this.labelParamBefore)
             .setPosition(120, by);
         this.beforeHand.name = "";
+        this.beforeHand.alert = false;
         this.beforeHand.update = function() {
-/*
-            if (that.onePair % 2 == 1) 
-                this.filleStyle = "Red";
-            else
-                this.filleStyle = "White";
-*/
+            if (this.alert) {
+                this.fillStyle = "Red";
+            } else {
+                this.fillStyle = "White";
+            }
             this.text = this.name;
         }
 
@@ -410,6 +410,10 @@ tm.define("shotgun.MainScene", {
                 that.deck.clearHand();
                 that.pick = true;
                 that.beforeHand.name = that.handName(hand);
+                if (that.onePair % 2 == 1)
+                    that.beforeHand.alert = true;
+                else
+                    that.beforeHand.alert = false;
         });
 
         y += SC_H*0.08;
