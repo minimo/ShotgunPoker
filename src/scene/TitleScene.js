@@ -249,7 +249,7 @@ tm.define("shotgun.TitleScene", {
     },
 
     update: function() {
-        if (this.time % 10 == 0) {
+        if (this.time % 7 == 0) {
             var c = tm.display.Sprite("card", CARD_W, CARD_H)
                 .addChildTo(this.underLayer)
                 .setPosition(rand(0, SC_W), -100-rand(0, 50))
