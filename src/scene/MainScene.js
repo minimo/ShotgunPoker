@@ -338,42 +338,35 @@ tm.define("shotgun.MainScene", {
         appMain.saveConfig();
     },
 
-    //役名表示strdpm
-    
+    //役名表示
     dispHand: function(hand) {
         var name1 = "", name2 = "", name3 = "";
         var size = 80; offset = 10;
-        if (appMain.language == JAPANESE) {
+        switch (hand) {
+            case MISS:          name1 = "MISS!"; offset = 50; break;
+            case NOHAND:        name1 = "NO HAND"; size = 70; break;
+            case ONEPAIR:       name1 = "ONE"; name2 = "PAIR"; offset = 60; break;
+            case FLASH:         name1 = "FLASH"; offset = 60; break;
+            case TWOPAIR:       name1 = "TWO"; name2 = "PAIR"; offset = 60; break;
+            case THREECARD:     name1 = "THREE"; name2 = "CARD"; offset = 50; break;
+            case FULLHOUSE:     name1 = "FULL"; name2 = "HOUSE"; offset = 50; break;
+            case STRAIGHT:      name1 = "STRAIGHT"; size = 70; break;
+            case FOURCARD:      name1 = "FOUR"; name2 = "CARD"; offset = 60; break;
+            case FIVECARD:      name1 = "FIVE"; name2 = "CARD"; offset = 60; break;
+            case STRAIGHTFLASH: name1 = "STRAIGHT"; name2 = "FLASH"; size = 70; break;
+            case ROYALSTRAIGHTFLASH: name1 = "ROYAL"; name2 = "STRAIGHT"; name3 = "FLASH!"; size = 70; break;
+        }
+        if (appMain.language == ENGLISH) {
             switch (hand) {
-                case MISS:          name1 = "MISS!"; offset = 50; break;
-                case NOHAND:        name1 = "NO HAND"; size = 70; break;
-                case ONEPAIR:       name1 = "ONE"; name2 = "PAIR"; offset = 60; break;
-                case FLASH:         name1 = "FLASH"; offset = 60; break;
-                case TWOPAIR:       name1 = "TWO"; name2 = "PAIR"; offset = 60; break;
-                case THREECARD:     name1 = "THREE"; name2 = "CARD"; offset = 50; break;
-                case FULLHOUSE:     name1 = "FULL"; name2 = "HOUSE"; offset = 50; break;
-                case STRAIGHT:      name1 = "STRAIGHT"; size = 70; break;
-                case FOURCARD:      name1 = "FOUR"; name2 = "CARD"; offset = 60; break;
-                case FIVECARD:      name1 = "FIVE"; name2 = "CARD"; offset = 60; break;
-                case STRAIGHTFLASH: name1 = "STRAIGHT"; name2 = "FLASH"; size = 70; break;
-                case ROYALSTRAIGHTFLASH: name1 = "ROYAL"; name2 = "STRAIGHT"; name3 = "FLASH!"; size = 70; break;
-            }
-        } else {
-            switch (hand) {
-                case MISS:          name1 = "MISS!"; offset = 50; break;
-                case NOHAND:        name1 = "NO PAIR"; size = 70; break;
-                case ONEPAIR:       name1 = "ONE"; name2 = "PAIR"; offset = 60; break;
-                case FLASH:         name1 = "FLASH"; offset = 60; break;
-                case TWOPAIR:       name1 = "TWO"; name2 = "PAIR"; offset = 60; break;
                 case THREECARD:     name1 = "THREE OF"; name2 = "A KIND"; offset = 50; break;
-                case FULLHOUSE:     name1 = "FULL"; name2 = "HOUSE"; offset = 50; break;
-                case STRAIGHT:      name1 = "STRAIGHT"; size = 70; break;
                 case FOURCARD:      name1 = "FOUR OF"; name2 = "A KIND"; size = 70; offset = 60; break;
                 case FIVECARD:      name1 = "FIVE OF"; name2 = "A KIND"; size = 70; offset = 60; break;
-                case STRAIGHTFLASH: name1 = "STRAIGHT"; name2 = "FLASH"; size = 70; break;
                 case ROYALSTRAIGHTFLASH: name1 = "ROYAL"; name2 = "FLASH!"; size = 70; break;
+                default:
+                    break;
             }
         }
+
         //役名表示
         var that = this;
         var x = SC_W*0.55+offset, y = SC_H*0.8;

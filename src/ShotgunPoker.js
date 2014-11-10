@@ -75,6 +75,7 @@ tm.define("shotgun.CanvasApp", {
             this.handList[5]  = {name: "THREE OF A KIND", point: THREECARD};
             this.handList[8]  = {name: "FOUR OF A KIND", point: FOURCARD};
             this.handList[9]  = {name: "FIVE OF A KIND", point: FIVECARD};
+            this.handList[11] = {name: "ROYAL FLASH", point: ROYALSTRAIGHTFLASH};
         }
 
         //設定情報の読み込み
