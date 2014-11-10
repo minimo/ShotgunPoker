@@ -37,6 +37,7 @@ tm.define("shotgun.MainScene", {
     handCount: null,//役の回数
     onePair: 0,     //ワンペアの連続回数
     gameend: false, //ゲーム終了フラグ
+    complete: false,//役コンプリートフラグ
 
     //経過時間
     time: 0,
@@ -233,6 +234,22 @@ tm.define("shotgun.MainScene", {
                 appMain.playSE("nohand");
             } else {
                 appMain.playSE("hand");
+            }
+
+            //役コンプリート判定
+            if (!this.complete) {
+                var cp = true;
+                for (var i = 0; i < 12; i++) {
+                    if (i == 9)continue;    //ファイブカードは対象外
+                    if (this.handCount[appMain.handList[i].point] == 0) cp = false;
+                }
+                if (cp) {
+                    this.complete = true;
+                    var lb = tm.display.OutlineLabel("HAND COMPLETE!", 100).addChildTo(this);
+                    lb.setParam(this.labelParamPoker);
+                    lb.setPosition(SC_W*0.5, SC_H*0.5);
+                    lb.tweener.clear().wait(1000).call(lb.remove());
+                }
             }
 
             //初回R.S.Fの場合はライフ＋１
