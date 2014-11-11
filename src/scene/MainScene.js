@@ -386,6 +386,7 @@ tm.define("shotgun.MainScene", {
         }
         if (appMain.language == ENGLISH) {
             switch (hand) {
+                case NOHAND:        name1 = "NO PAIR"; size = 70; break;
                 case THREECARD:     name1 = "THREE OF"; name2 = "A KIND"; offset = 50; break;
                 case FOURCARD:      name1 = "FOUR OF"; name2 = "A KIND"; size = 70; offset = 60; break;
                 case FIVECARD:      name1 = "FIVE OF"; name2 = "A KIND"; size = 70; offset = 60; break;
@@ -401,6 +402,7 @@ tm.define("shotgun.MainScene", {
         if (name2 != "") y-=SC_H*0.04;
         if (name3 != "") y-=SC_H*0.04;
 
+        //１行目
         var lb1 = tm.display.OutlineLabel(name1, size).addChildTo(this);
         lb1.setParam(this.labelParamHand);
         lb1.setPosition(x, y);
@@ -416,12 +418,14 @@ tm.define("shotgun.MainScene", {
                     that.beforeHand.alert = false;
         });
 
+        //２行目
         y += SC_H*0.08;
         var lb2 = tm.display.OutlineLabel(name2, size).addChildTo(this);
         lb2.setParam(this.labelParamHand);
         lb2.setPosition(x, y);
         lb2.tweener.clear().wait(1200).call(function(){lb2.remove();});
 
+        //３行目
         y += SC_H*0.08;
         var lb3 = tm.display.OutlineLabel(name3, size).addChildTo(this);
         lb3.setParam(this.labelParamHand);
