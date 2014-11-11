@@ -14,7 +14,7 @@ tm.define("shotgun.TitleScene", {
     labelParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:2 },
     scoreParam: {fontFamily:"'azuki'", align: "left", baseline:"middle", outlineWidth:2 },
 
-    bgColor: 'rgba(60, 130, 60, 1)',
+    bgColor: 'rgba(60, 150, 60, 1)',
 
     init: function() {
         this.superInit();
@@ -33,6 +33,13 @@ tm.define("shotgun.TitleScene", {
         this.underLayer = tm.app.Object2D().addChildTo(this.titleLayer);
         this.tutorialLayer = tm.app.Object2D().addChildTo(this);
 
+        //チュートリアル側バックグラウンド
+        this.bg2 = tm.display.Shape(SC_W, SC_H)
+            .addChildTo(this.titleLayer)
+            .setPosition(SC_W*1.5, SC_H*0.5)
+            .renderRectangle({fillStyle: this.bgColor, strokeStyle: this.bgColor});
+
+        //各画面セットアップ
         this.setupTitle();
         this.setupTutorial1();
         this.setupTutorial2();
