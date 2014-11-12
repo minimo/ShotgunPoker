@@ -215,7 +215,7 @@ tm.define("shotgun.TitleScene", {
         tm.display.Sprite("tutorial1")
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5+SC_W*page, SC_H*0.5)
-            .setScale(1.5);
+            .setScale(0.7);
 
         this.addButton(page);
     },
@@ -245,10 +245,10 @@ tm.define("shotgun.TitleScene", {
             .setPosition(SC_W*0.5+SC_W*page, SC_H*0.1)
             .setParam(this.labelParam);
 
-        for (var i = 0; i < 12; i++) {
-            tm.display.OutlineLabel($trans(appMain.handList[i].name)+" : "+appMain.handList[i].point+"pts", 40)
+        for (var i = 0; i < 10; i++) {
+            tm.display.OutlineLabel($trans(appMain.handList[i+2].name)+" : "+appMain.handList[i+2].point+"pts", 40)
                 .addChildTo(this.titleLayer)
-                .setPosition(SC_W*0.1+SC_W*page, SC_H*0.17+(i*55))
+                .setPosition(SC_W*0.1+SC_W*page, SC_H*0.17+(i*70))
                 .setParam(this.scoreParam);
         }
 
