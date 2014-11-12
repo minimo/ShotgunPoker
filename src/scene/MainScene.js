@@ -87,12 +87,9 @@ tm.define("shotgun.MainScene", {
         this.scoreLabel.update = function() {
             this.text = "SCORE:"+this.score;
             if (this.score < that.score) {
-                var s = that.score-this.score;
-                if (s > 300) {
-                    this.score += 7;
-                } else {
-                    this.score += 3;
-                }
+                var s = ~~((that.score-this.score)/11);
+                if (s < 3) s=3;
+                this.score += s;
                 if (this.score > that.score)this.score = that.score;
             }
         }
