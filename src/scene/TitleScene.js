@@ -14,7 +14,7 @@ tm.define("shotgun.TitleScene", {
     labelParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:2 },
     scoreParam: {fontFamily:"'azuki'", align: "left", baseline:"middle", outlineWidth:2 },
 
-    bgColor: 'rgba(60, 150, 60, 1)',
+    bgColor: 'rgba(50, 150, 50, 1)',
 
     init: function() {
         this.superInit();
