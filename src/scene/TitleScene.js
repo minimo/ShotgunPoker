@@ -126,7 +126,11 @@ tm.define("shotgun.TitleScene", {
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.55)
             .addEventListener("pushed", function() {
-                that.titleLayer.tweener.clear().moveBy(-SC_W, 0, 500, "easeOutQuint");
+                that.titleLayer.tweener.clear()
+                    .moveBy(-SC_W, 0, 500, "easeOutQuint")
+                    .call(function(){
+                        appMain.pushScene(shotgun.TutorialScene());
+                    });
             });
 
         //設定

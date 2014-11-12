@@ -23,6 +23,8 @@ tm.define("shotgun.CardDeck", {
     shuffleLimit: SHUFFLE_LIMIT,    //シャッフルが発生する残り枚数
     jokerTurn: 0,   //ジョーカー戻しターンカウンタ
 
+    demo: false,    //デモンストレーションフラグ
+
     init: function(suit, num) {
         //親クラスの初期化
         this.superInit();

@@ -27,9 +27,19 @@ tm.define("shotgun.TutorialScene", {
             .setPosition(SC_W*0.5, SC_H*0.5)
             .renderRectangle({fillStyle: this.bgColor, strokeStyle: this.bgColor});
 
+        this.demo = tm.display.OutlineLabel("DEMONSTRATION", 50)
+            .addChildTo(this)
+            .setParam(this.labelParam)
+            .setPosition(SC_W*0.5, SC_H*0.5);
+        this.demo.time = 1;
+        this.demo.update = function() {
+            if (this.time % 30 == 0) this.visible = !this.visible;
+            this.time++;
+        }
+
         //マスク
-        this.mask = tm.display.Sprite("blackback", SC_W*2, SC_H*2).addChildTo(this);
-        this.mask.tweener.clear().fadeOut(200);
+//        this.mask = tm.display.Sprite("blackback", SC_W*2, SC_H*2).addChildTo(this);
+//        this.mask.tweener.clear().fadeOut(200);
         
         this.time = 0;
     },
