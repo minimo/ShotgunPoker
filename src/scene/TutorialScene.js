@@ -9,10 +9,38 @@
 tm.define("shotgun.TutorialScene", {
     superClass: tm.app.Scene,
 
+    //マルチタッチ補助クラス
+    touches: null,
+    touchID: -1,
+
+    //タッチ情報
+    startX: 0,
+    startY: 0,
+    moveX: 0,
+    moveY: 0,
+    beforeX: 0,
+    beforeY: 0,
+
+    //デモンストレーション用カードデッキ
+    deck: null,
+    shuffled: false,
+
+    //制御情報
+    pick: true,
+    phase: 0,
+    life: 3,
+    score: 0,
+
     //ボタン用フォントパラメータ
     buttonParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:4 },
-    labelParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:2 },
+    labelParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:4 },
     scoreParam: {fontFamily:"'azuki'", align: "left", baseline:"middle", outlineWidth:2 },
+
+    labelParamBasic: {fontFamily: "'azuki'", align: "left", baseline: "middle",outlineWidth: 3},
+    labelParamBasicCenter: {fontFamily: "'azuki'", align: "center", baseline: "middle",outlineWidth: 3},
+    labelParamPoker: {fontFamily: "'KS-Kohichi-FeltPen'",align: "center", baseline: "middle", outlineWidth: 3},
+    labelParamHand:  {fontFamily: "'KS-Kohichi-FeltPen'",align: "left", baseline: "middle", outlineWidth: 3},
+    labelParamBefore:{fontFamily: "'azuki'",align: "left", baseline: "top", outlineWidth: 3},
 
     bgColor: 'rgba(50, 150, 50, 1)',
 
@@ -27,7 +55,81 @@ tm.define("shotgun.TutorialScene", {
             .setPosition(SC_W*0.5, SC_H*0.5)
             .renderRectangle({fillStyle: this.bgColor, strokeStyle: this.bgColor});
 
-        this.demo = tm.display.OutlineLabel("DEMONSTRATION", 50)
+        //カードデッキ
+        this.deck = shotgun.CardDeck().addChildTo(this);
+        this.deck.startup();
+        this.deck.shuffle();
+
+        //スキップ
+        var width = 230, height = 60;
+        shotgun.Button(width, height, "SKIP")
+            .addChildTo(this)
+            .setPosition(SC_W*0.84, 72)
+            .addEventListener("pushed", function() {
+                appMain.popScene();
+            });
+
+        //スコア表示
+        var that = this;
+        this.scoreLabel = tm.display.OutlineLabel("SCORE:", 50)
+            .addChildTo(this)
+            .setParam(this.labelParamBasic)
+            .setPosition(8, 72);
+        this.scoreLabel.score = 0;
+        this.scoreLabel.update = function() {
+            this.text = "SCORE:"+this.score;
+            if (this.score < that.score) {
+                var s = ~~((that.score-this.score)/11);
+                if (s < 3) s=3;
+                this.score += s;
+                if (this.score > that.score)this.score = that.score;
+            }
+        }
+
+        //ライフ表示
+        this.lifeLabel = tm.display.OutlineLabel("LIFE:", 50)
+            .addChildTo(this)
+            .setParam(this.labelParamBasic)
+            .setPosition(8, 128);
+        this.lg = [];
+        for (var i = 0; i < 7; i++ ) {
+            var c = this.lg[i] = shotgun.Card(SUIT_HEART, 0).addChildTo(this);
+            c.setScale(0.2);
+            c.setPosition( 155+i*45, 128);
+            c.life = i;
+            c.update = function() {
+                this.pattern = that.life+this.suit*13-1;
+                if (this.life < that.life) {
+                    this.visible = true;
+                } else {
+                    this.visible = false;
+                }
+            }
+        }
+
+        //直前の役表示
+        var by = SC_H*0.8+CARD_H*CARD_SCALE*0.5;
+        this.beforeLabel = tm.display.OutlineLabel("BEFORE:", 30)
+            .addChildTo(this)
+            .setParam(this.labelParamBefore)
+            .setPosition(8, by);
+        this.beforeHand = tm.display.OutlineLabel("nothing", 30)
+            .addChildTo(this)
+            .setParam(this.labelParamBefore)
+            .setPosition(120, by);
+        this.beforeHand.name = "";
+        this.beforeHand.alert = false;
+        this.beforeHand.update = function() {
+            if (this.alert) {
+                this.fillStyle = "Red";
+            } else {
+                this.fillStyle = "White";
+            }
+            this.text = this.name;
+        }
+
+        //デモンストレーション表示
+        this.demo = tm.display.OutlineLabel("TUTORIAL", 80)
             .addChildTo(this)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.5, SC_H*0.5);
@@ -37,10 +139,9 @@ tm.define("shotgun.TutorialScene", {
             this.time++;
         }
 
-        //マスク
-//        this.mask = tm.display.Sprite("blackback", SC_W*2, SC_H*2).addChildTo(this);
-//        this.mask.tweener.clear().fadeOut(200);
-        
+        //マルチタッチ初期化
+        this.touches = tm.input.TouchesEx(this);
+
         this.time = 0;
     },
 
@@ -88,15 +189,53 @@ tm.define("shotgun.TutorialScene", {
     },
 
     //タッチorクリック開始処理
-    ontouchstart: function(e) {
+    ontouchesstart: function(e) {
+        if (this.touchID > 0)return;
+        this.touchID = e.ID;
+
+        var sx = this.startX = e.pointing.x;
+        var sy = this.startY = e.pointing.y;
+        this.moveX = 0;
+        this.moveY = 0;
+
+        this.beforeX = sx;
+        this.beforeY = sy;
     },
 
     //タッチorクリック移動処理
-    ontouchmove: function(e) {
+    ontouchesmove: function(e) {
+        if (this.touchID != e.ID) return;
+
+        var sx = e.pointing.x;
+        var sy = e.pointing.y;
+        var moveX = Math.abs(sx - this.beforeX);
+        var moveY = Math.abs(sx - this.beforeY);
+
+        if (!this.shuffled) {
+            if (moveX > 300) {
+                this.deck.shuffle();
+                this.shuffled = true;
+            }
+        }
+
+        if (this.time % 10 == 0) {
+            this.beforeX = sx;
+            this.beforeY = sy;
+        }
     },
 
     //タッチorクリック終了処理
-    ontouchend: function(e) {
-    },
+    ontouchesend: function(e) {
+        if (this.touchID != e.ID) return;
+        this.touchID = -1;
 
+        var sx = e.pointing.x;
+        var sy = e.pointing.y;
+
+        if (this.pick && !this.shuffled && !this.deck.busy) {
+            var c = this.deck.pickCard(sx, sy);
+            if (c) this.deck.addHand(c);
+        }
+        this.shuffled = false;
+    },
 });

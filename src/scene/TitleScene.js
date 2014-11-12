@@ -41,10 +41,11 @@ tm.define("shotgun.TitleScene", {
 
         //各画面セットアップ
         this.setupTitle();
+/*
         this.setupTutorial1();
         this.setupTutorial2();
         this.setupScoreList();
-
+*/
         //マスク
         this.mask = tm.display.Sprite("blackback", SC_W*2, SC_H*2).addChildTo(this);
         this.mask.tweener.clear().fadeOut(200);
