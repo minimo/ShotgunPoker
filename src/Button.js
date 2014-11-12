@@ -10,17 +10,19 @@ tm.define("shotgun.Button", {
     superClass: tm.app.Object2D,
 
     //描画スタイル設定
-    buttonColor: 'rgba(50, 100, 200, 1)',
-    lineColor: 'rgba(200, 200, 200, 1)',
-    shadowColor: 'rgba(0, 0, 0, 0.9)',
+    buttonColor: 'rgba(50, 150, 255, 0.8)',
+    lineColor: 'rgba(200, 200, 200, 0.5)',
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
     labelParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:3 },
 
+    type: 0, //0:nomal 1:toggle
     text: "",
     push: false,
     lock: false,
+    toggleOn: false,
 
     //ボタン押下時の移動量
-    downX: 3,
+    downX: 0,
     downY: 10,
 
     init: function(width, height, text, style) {
@@ -92,12 +94,13 @@ tm.define("shotgun.Button", {
         //ボタン影
         this.shadow = tm.display.RectangleShape(width, height, {fillStyle: this.shadowColor, strokeStyle: this.shadowColor, lineWidth: 4})
             .addChildTo(this);
+        this.shadow.blendMode = "source-over";
 
         //ボタン本体
         this.button = tm.display.RectangleShape(width, height, {fillStyle: this.buttonColor, strokeStyle: this.lineColor, lineWidth: 4})
             .addChildTo(this)
             .setPosition(-this.downX, -this.downY);
-        this.button.blendMode = "lighter";
+//        this.button.blendMode = "lighter";
 
         //ボタンラベル
         this.label = tm.display.OutlineLabel(this.text, 50)
