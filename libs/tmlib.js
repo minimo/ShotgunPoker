@@ -17190,9 +17190,11 @@ tm.ui = tm.ui || {};
         onpointingstart: function(app) {
             // ひよこさん生成
             var p = app.pointing;
-//            var piyo = this._createHiyoko(this.param).addChildTo(this.stage.piyoLayer);
+/*
+            var piyo = this._createHiyoko(this.param).addChildTo(this.stage.piyoLayer);
             piyo.x = p.x;
             piyo.y = p.y;
+*/
         },
 
         _createHiyoko: function(param) {
