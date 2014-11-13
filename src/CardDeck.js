@@ -119,7 +119,7 @@ tm.define("shotgun.CardDeck", {
     },
 
     //カードの取得
-    pickCard: function(x, y) {
+    pick: function(x, y) {
         for (var i = 0; i < this.cards.length; i++) {
             var c = this.cards[i];
             if (c.drop || c.hand)continue;

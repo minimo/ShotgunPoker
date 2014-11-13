@@ -220,7 +220,7 @@ tm.define("shotgun.TutorialScene", {
         for (var i = 0; i < 5; i++) {
             this.ctrl.tweener
                 .call(function(){
-                    var c = that.deck.pickCard(SC_W*0.5, SC_H*0.3);
+                    var c = that.deck.pick(SC_W*0.5, SC_H*0.3);
                     if (c) that.deck.addHand(c);
                 }).wait(500);
         }
@@ -275,7 +275,7 @@ tm.define("shotgun.TutorialScene", {
         var sy = e.pointing.y;
 
         if (this.pick && !this.shuffled && !this.deck.busy) {
-            var c = this.deck.pickCard(sx, sy);
+            var c = this.deck.pick(sx, sy);
             if (c) this.deck.addHand(c);
         }
         this.shuffled = false;

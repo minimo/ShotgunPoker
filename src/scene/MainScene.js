@@ -484,7 +484,7 @@ tm.define("shotgun.MainScene", {
         var sy = e.pointing.y;
 
         if (this.pick && !this.shuffled && !this.deck.busy && !this.gameend) {
-            var c = this.deck.pickCard(sx, sy);
+            var c = this.deck.pick(sx, sy);
             if (c) this.deck.addHand(c);
         }
         this.shuffled = false;
