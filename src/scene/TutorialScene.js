@@ -202,7 +202,7 @@ tm.define("shotgun.TutorialScene", {
         var pt = tm.app.Object2D().addChildTo(this);
         pt.tweener.wait(time).call(function(){this.remove();}.bind(pt));
 
-        pt.bg = tm.display.Shape(SC_W, 100)
+        pt.bg = tm.display.Shape(SC_W, 80)
             .addChildTo(pt)
             .setPosition(SC_W*0.5, y)
             .renderRectangle({fillStyle: this.bgColor, strokeStyle: this.bgColor});
@@ -243,7 +243,7 @@ tm.define("shotgun.TutorialScene", {
                 that.deck.sortHand();
             }).wait(3000)
             .call(function(){
-                that.enterMessage(SC_H*0.3, 8000, "完成した役によって得点が入ります", 40);
+                that.enterMessage(SC_H*0.3, 12000, "完成した役によって得点が入ります", 40);
                 shotgun.MainScene.prototype.dispHand.call(that, ROYALSTRAIGHTFLASH, 2400);
                 that.score+=ROYALSTRAIGHTFLASH;
             }).wait(5000)
@@ -263,7 +263,7 @@ tm.define("shotgun.TutorialScene", {
             }).wait(200)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 12));
-            }).wait(500)
+            }).wait(1000)
             .call(function(){
                 that.deck.sortHand();
                 shotgun.MainScene.prototype.dispHand.call(that, ONEPAIR);
@@ -285,7 +285,7 @@ tm.define("shotgun.TutorialScene", {
             }).wait(200)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_DIAMOND, 12));
-            }).wait(500)
+            }).wait(1000)
             .call(function(){
                 that.deck.sortHand();
                 shotgun.MainScene.prototype.dispHand.call(that, THREECARD);
@@ -310,16 +310,23 @@ tm.define("shotgun.TutorialScene", {
             }).wait(200)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 10));
-            }).wait(200)
+            }).wait(1000)
             .call(function(){
+                that.enterMessage(SC_H*0.3, 4000, "左上のライフが一つ減ります", 40);
                 that.deck.sortHand();
+                shotgun.MainScene.prototype.dispHand.call(that, NOHAND, 3000);
+
+                tm.display.OutlineLabel("あ", 60)
+                    .addChildTo(this)
+                    .setParam(that.labelParamMsg)
+                    .setPosition(SC_W*0.0, SC_H*0.0)
+                    .setRotation(90);
             }).wait(3000)
             .call(function(){
-                that.enterMessage(SC_H*0.3, 8000, "左上のライフが一つ減ります", 40);
-                shotgun.MainScene.prototype.dispHand.call(that, NOHAND, 3000);
                 that.life--;
             }).wait(2000)
 
+            //ゲームオーバー説明
 
     },
 
