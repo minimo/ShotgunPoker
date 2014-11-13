@@ -364,7 +364,8 @@ tm.define("shotgun.MainScene", {
     },
 
     //役名表示
-    dispHand: function(hand) {
+    dispHand: function(hand, wait) {
+        wait = wait || 1200;
         var name1 = "", name2 = "", name3 = "";
         var size = 80; offset = 10;
         switch (hand) {
@@ -403,7 +404,7 @@ tm.define("shotgun.MainScene", {
         var lb1 = tm.display.OutlineLabel(name1, size).addChildTo(this);
         lb1.setParam(this.labelParamHand);
         lb1.setPosition(x, y);
-        lb1.tweener.clear().wait(1200)
+        lb1.tweener.clear().wait(wait)
             .call(function(){
                 lb1.remove();
                 that.deck.clearHand();
@@ -420,14 +421,14 @@ tm.define("shotgun.MainScene", {
         var lb2 = tm.display.OutlineLabel(name2, size).addChildTo(this);
         lb2.setParam(this.labelParamHand);
         lb2.setPosition(x, y);
-        lb2.tweener.clear().wait(1200).call(function(){lb2.remove();});
+        lb2.tweener.clear().wait(wait).call(function(){lb2.remove();});
 
         //３行目
         y += SC_H*0.08;
         var lb3 = tm.display.OutlineLabel(name3, size).addChildTo(this);
         lb3.setParam(this.labelParamHand);
         lb3.setPosition(x, y);
-        lb3.tweener.clear().wait(1200).call(function(){lb3.remove();});
+        lb3.tweener.clear().wait(wait).call(function(){lb3.remove();});
     },
 
     //タッチorクリック開始処理
