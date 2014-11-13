@@ -133,7 +133,7 @@ tm.define("shotgun.TutorialScene", {
         this.demo = tm.display.OutlineLabel("TUTORIAL", 80)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.5, SC_H*0.5);
+            .setPosition(SC_W*0.5, SC_H*0.3);
         this.demo.time = 1;
         this.demo.update = function() {
             if (this.time % 30 == 0) this.visible = !this.visible;
@@ -210,7 +210,7 @@ tm.define("shotgun.TutorialScene", {
         pt.m1 = tm.display.OutlineLabel(msg, size)
             .addChildTo(pt)
             .setParam(this.labelParamMsg)
-            .setPosition(SC_W*0.5, SC_H*0.3);
+            .setPosition(SC_W*0.5, y);
     },
 
     //基本操作説明
@@ -218,7 +218,7 @@ tm.define("shotgun.TutorialScene", {
         var that = this;
         this.ctrl.tweener.clear().wait(1000)
             .call(function(){
-                that.enterMessage(SC_H*0.3, 6000, "場にあるカードを５枚選んで");
+                that.enterMessage(SC_H*0.5, 6000, "場にあるカードを５枚選んで");
             }).wait(1000)
 
             //最初にロイヤルストレートフラッシュを作る
@@ -237,13 +237,13 @@ tm.define("shotgun.TutorialScene", {
             .call(function(){
                 var c = that.deck.pickCard(SUIT_SPADE, 13);
                 if (c) that.deck.addHand(c);
-                that.enterMessage(SC_H*0.3, 5000, "ポーカーの役を作ってください");
+                that.enterMessage(SC_H*0.5, 5000, "ポーカーの役を作ってください");
             }).wait(2000)
             .call(function(){
                 that.deck.sortHand();
             }).wait(3000)
             .call(function(){
-                that.enterMessage(SC_H*0.3, 12000, "完成した役によって得点が入ります", 40);
+                that.enterMessage(SC_H*0.5, 12000, "完成した役によって得点が入ります", 40);
                 shotgun.MainScene.prototype.dispHand.call(that, ROYALSTRAIGHTFLASH, 2400);
                 that.score+=ROYALSTRAIGHTFLASH;
             }).wait(5000)
@@ -294,7 +294,7 @@ tm.define("shotgun.TutorialScene", {
 
             //ミス条件の説明
             .call(function(){
-                that.enterMessage(SC_H*0.3, 8000, "役無しまたは時間切れはミスとなり", 40);
+                that.enterMessage(SC_H*0.5, 6000, "役無しまたは時間切れはミスとなり", 40);
             }).wait(1000)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 5));
@@ -312,7 +312,7 @@ tm.define("shotgun.TutorialScene", {
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 10));
             }).wait(1000)
             .call(function(){
-                that.enterMessage(SC_H*0.3, 4000, "左上のライフが一つ減ります", 40);
+                that.enterMessage(SC_H*0.5, 4000, "左上のライフが一つ減ります", 40);
                 that.deck.sortHand();
                 shotgun.MainScene.prototype.dispHand.call(that, NOHAND, 3000);
 
