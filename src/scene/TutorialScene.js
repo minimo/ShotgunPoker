@@ -41,6 +41,7 @@ tm.define("shotgun.TutorialScene", {
     labelParamPoker: {fontFamily: "'KS-Kohichi-FeltPen'",align: "center", baseline: "middle", outlineWidth: 3},
     labelParamHand:  {fontFamily: "'KS-Kohichi-FeltPen'",align: "left", baseline: "middle", outlineWidth: 3},
     labelParamBefore:{fontFamily: "'azuki'",align: "left", baseline: "top", outlineWidth: 3},
+    labelParamMsg: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:1 },
 
     bgColor: 'rgba(50, 150, 50, 1)',
 
@@ -60,9 +61,9 @@ tm.define("shotgun.TutorialScene", {
         this.deck.startup();
         this.deck.shuffle();
 
-        //スキップ
-        var width = 230, height = 60;
-        shotgun.Button(width, height, "SKIP")
+        //戻るボタン
+        var width = 210, height = 60;
+        shotgun.Button(width, height, "←BACK")
             .addChildTo(this)
             .setPosition(SC_W*0.84, 72)
             .addEventListener("pushed", function() {
@@ -142,6 +143,9 @@ tm.define("shotgun.TutorialScene", {
         //マルチタッチ初期化
         this.touches = tm.input.TouchesEx(this);
 
+        //チュートリアルコントローラー
+        this.ctrl = tm.app.Object2D().addChildTo(this);
+
         this.time = 0;
     },
 
@@ -185,7 +189,45 @@ tm.define("shotgun.TutorialScene", {
     },
 
     update: function() {
+        if (this.phase == 0) {
+            this.startPhase1();
+            this.phase++;
+        }
         this.time++;
+    },
+
+    //メッセージ表示
+    enterMessage: function(time, msg1) {
+        var bg = tm.display.Shape(SC_W, 100)
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.3)
+            .renderRectangle({fillStyle: this.bgColor, strokeStyle: this.bgColor});
+//        bg.tweener.wait(time).call(function(){this.remove();}.bind(bg));
+
+        var m1 = tm.display.OutlineLabel(msg1, 45)
+            .addChildTo(this)
+            .setParam(this.labelParamMsg)
+            .setPosition(SC_W*0.5, SC_H*0.3);
+        m1.tweener.wait(time).call(function(){this.remove();}.bind(m1));
+    },
+
+    //基本操作説明
+    startPhase1: function() {
+        this.enterMessage(5000, "場にあるカードを５枚選んで");
+
+        var that = this;
+        this.ctrl.tweener.clear().wait(2000);
+        for (var i = 0; i < 5; i++) {
+            this.ctrl.tweener
+                .call(function(){
+                    var c = that.deck.pickCard(SC_W*0.5, SC_H*0.3);
+                    if (c) that.deck.addHand(c);
+                }).wait(500);
+        }
+        this.ctrl.tweener.call(function(){
+            that.deck.sortHand();
+            that.enterMessage(5000, "ポーカーの役を作ってください");
+        }).wait(500);
     },
 
     //タッチorクリック開始処理
