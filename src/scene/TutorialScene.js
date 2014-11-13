@@ -245,6 +245,7 @@ tm.define("shotgun.TutorialScene", {
             .call(function(){
                 that.enterMessage(SC_H*0.5, 12000, "完成した役によって得点が入ります", 40);
                 shotgun.MainScene.prototype.dispHand.call(that, ROYALSTRAIGHTFLASH, 2400);
+                appMain.playSE("hand");
                 that.score+=ROYALSTRAIGHTFLASH;
             }).wait(5000)
 
@@ -267,6 +268,7 @@ tm.define("shotgun.TutorialScene", {
             .call(function(){
                 that.deck.sortHand();
                 shotgun.MainScene.prototype.dispHand.call(that, ONEPAIR);
+                appMain.playSE("hand");
                 that.score+=ONEPAIR;
             }).wait(2000)
 
@@ -289,6 +291,7 @@ tm.define("shotgun.TutorialScene", {
             .call(function(){
                 that.deck.sortHand();
                 shotgun.MainScene.prototype.dispHand.call(that, THREECARD);
+                appMain.playSE("hand");
                 that.score+=THREECARD;
             }).wait(2000)
 
@@ -315,12 +318,7 @@ tm.define("shotgun.TutorialScene", {
                 that.enterMessage(SC_H*0.5, 4000, "左上のライフが一つ減ります", 40);
                 that.deck.sortHand();
                 shotgun.MainScene.prototype.dispHand.call(that, NOHAND, 3000);
-
-                tm.display.OutlineLabel("あ", 60)
-                    .addChildTo(this)
-                    .setParam(that.labelParamMsg)
-                    .setPosition(SC_W*0.0, SC_H*0.0)
-                    .setRotation(90);
+                appMain.playSE("nohand");
             }).wait(3000)
             .call(function(){
                 that.life--;
