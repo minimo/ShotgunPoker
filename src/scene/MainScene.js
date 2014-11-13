@@ -408,7 +408,7 @@ tm.define("shotgun.MainScene", {
                 lb1.remove();
                 that.deck.clearHand();
                 that.pick = true;
-                that.beforeHand.name = that.handName(hand);
+                that.beforeHand.name = that.deck.handName(hand);
                 if (that.onePair % 2 == 1)
                     that.beforeHand.alert = true;
                 else
@@ -428,15 +428,6 @@ tm.define("shotgun.MainScene", {
         lb3.setParam(this.labelParamHand);
         lb3.setPosition(x, y);
         lb3.tweener.clear().wait(1200).call(function(){lb3.remove();});
-    },
-
-    //役名を文字列で取得
-    handName: function(point) {
-        for (var i = 0; i < appMain.handList.length; i++) {
-            var n = appMain.handList[i];
-            if (n.point == point) return n.name;
-        }
-        return null;
     },
 
     //タッチorクリック開始処理

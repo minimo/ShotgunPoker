@@ -198,36 +198,54 @@ tm.define("shotgun.TutorialScene", {
 
     //メッセージ表示
     enterMessage: function(time, msg1) {
-        var bg = tm.display.Shape(SC_W, 100)
-            .addChildTo(this)
+        var pt = tm.app.Object2D().addChildTo(this);
+        pt.tweener.wait(time).call(function(){this.remove();}.bind(pt));
+
+        pt.bg = tm.display.Shape(SC_W, 100)
+            .addChildTo(pt)
             .setPosition(SC_W*0.5, SC_H*0.3)
             .renderRectangle({fillStyle: this.bgColor, strokeStyle: this.bgColor});
-//        bg.tweener.wait(time).call(function(){this.remove();}.bind(bg));
 
-        var m1 = tm.display.OutlineLabel(msg1, 45)
-            .addChildTo(this)
+        pt.m1 = tm.display.OutlineLabel(msg1, 45)
+            .addChildTo(pt)
             .setParam(this.labelParamMsg)
             .setPosition(SC_W*0.5, SC_H*0.3);
-        m1.tweener.wait(time).call(function(){this.remove();}.bind(m1));
     },
 
     //基本操作説明
     startPhase1: function() {
         this.enterMessage(5000, "場にあるカードを５枚選んで");
 
+//                var c = that.deck.pick(SC_W*0.5, SC_H*0.3);
         var that = this;
-        this.ctrl.tweener.clear().wait(2000);
-        for (var i = 0; i < 5; i++) {
-            this.ctrl.tweener
-                .call(function(){
-                    var c = that.deck.pick(SC_W*0.5, SC_H*0.3);
+        this.ctrl.tweener.clear().wait(2000)
+            .call(function(){
+                var c = that.deck.pickCard(SUIT_SPADE, 10);
                     if (c) that.deck.addHand(c);
-                }).wait(500);
-        }
-        this.ctrl.tweener.call(function(){
-            that.deck.sortHand();
-            that.enterMessage(5000, "ポーカーの役を作ってください");
-        }).wait(500);
+            }).wait(500)
+            .call(function(){
+                var c = that.deck.pickCard(SUIT_SPADE, 12);
+                    if (c) that.deck.addHand(c);
+            }).wait(500)
+            .call(function(){
+                var c = that.deck.pickCard(SUIT_SPADE, 11);
+                    if (c) that.deck.addHand(c);
+            }).wait(500)
+            .call(function(){
+                var c = that.deck.pickCard(SUIT_SPADE, 1);
+                    if (c) that.deck.addHand(c);
+            }).wait(500)
+            .call(function(){
+                var c = that.deck.pickCard(SUIT_SPADE, 13);
+                    if (c) that.deck.addHand(c);
+            }).wait(500)
+            .call(function(){
+                that.deck.sortHand();
+                that.enterMessage(3000, "ポーカーの役を作ってください");
+//                that.dispHand(ROYALSTRAIGHTFLASH);
+                shotgun.MainScene.prototype.dispHand.call(this, ROYALSTRAIGHTFLASH);
+                that.score+=1000;
+            }.bind(this)).wait(500);
     },
 
     //タッチorクリック開始処理
@@ -274,10 +292,12 @@ tm.define("shotgun.TutorialScene", {
         var sx = e.pointing.x;
         var sy = e.pointing.y;
 
+/*
         if (this.pick && !this.shuffled && !this.deck.busy) {
             var c = this.deck.pick(sx, sy);
             if (c) this.deck.addHand(c);
         }
+*/
         this.shuffled = false;
     },
 });

@@ -128,6 +128,15 @@ tm.define("shotgun.CardDeck", {
         return null;
     },
 
+    //指定カードの取得
+    pickCard: function(suit, num) {
+        for (var i = 0; i < this.cards.length; i++) {
+            var c = this.cards[i];
+            if (c.suit == suit && c.number == num) return c;
+        }
+        return null;
+    },
+
     //手札へ追加
     addHand: function(card) {
         if (this.hands.length > 4)return;
@@ -297,6 +306,15 @@ tm.define("shotgun.CardDeck", {
         }
         if (this.jokerInHand) return ONEPAIR;
         return NOHAND;
+    },
+
+    //役名を文字列で取得
+    handName: function(point) {
+        for (var i = 0; i < appMain.handList.length; i++) {
+            var n = appMain.handList[i];
+            if (n.point == point) return n.name;
+        }
+        return null;
     },
 });
 

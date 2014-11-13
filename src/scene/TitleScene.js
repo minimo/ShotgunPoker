@@ -131,7 +131,8 @@ tm.define("shotgun.TitleScene", {
                     .moveBy(-SC_W, 0, 500, "easeOutQuint")
                     .call(function(){
                         appMain.pushScene(shotgun.TutorialScene());
-                    });
+                    })
+                    .moveBy(SC_W, 0, 500, "easeOutQuint")
             });
 
         //設定
