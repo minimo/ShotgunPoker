@@ -305,7 +305,7 @@ tm.define("shotgun.CardDeck", {
             return TWOPAIR;
         }
         if (this.jokerInHand) return ONEPAIR;
-        return NOHAND;
+        return NOPAIR;
     },
 
     //役名を文字列で取得

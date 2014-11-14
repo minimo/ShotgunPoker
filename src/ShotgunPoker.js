@@ -63,7 +63,7 @@ tm.define("shotgun.CanvasApp", {
         //役名一覧
         this.handList = [];
         this.handList[0]  = {name: "MISS", point: MISS};
-        this.handList[1]  = {name: "NO HAND", point: NOHAND};
+        this.handList[1]  = {name: "NO PAIR", point: NOPAIR};
         this.handList[2]  = {name: "ONE PAIR", point: ONEPAIR};
         this.handList[3]  = {name: "TWO PAIR", point: TWOPAIR};
         this.handList[4]  = {name: "FLASH", point: FLASH};
@@ -75,7 +75,7 @@ tm.define("shotgun.CanvasApp", {
         this.handList[10] = {name: "STRAIGHT FLASH", point: STRAIGHTFLASH};
         this.handList[11] = {name: "R.STRAIGHT FLASH", point: ROYALSTRAIGHTFLASH};
         if (this.language == ENGLISH) {
-            this.handList[1]  = {name: "NO PAIR", point: NOHAND};
+            this.handList[1]  = {name: "NO PAIR", point: NOPAIR};
             this.handList[5]  = {name: "THREE OF A KIND", point: THREECARD};
             this.handList[8]  = {name: "FOUR OF A KIND", point: FOURCARD};
             this.handList[9]  = {name: "FIVE OF A KIND", point: FIVECARD};

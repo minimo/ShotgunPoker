@@ -53,7 +53,7 @@ RETURN_JOKER_TURN = 3;  //ジョーカーを戻すターン間隔
 
 //役一覧
 MISS = -20;
-NOHAND = -10;
+NOPAIR = -10;
 ONEPAIR = 10;
 FLASH = 20;
 TWOPAIR = 50;

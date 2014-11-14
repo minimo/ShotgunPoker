@@ -401,10 +401,10 @@ tm.define("shotgun.TutorialScene", {
             .call(function(){
                 that.enterMessage(pos, 4000, "左上のライフが一つ減ります", 40);
                 that.deck.sortHand();
-                shotgun.MainScene.prototype.dispHand.call(that, NOHAND, 3000);
+                shotgun.MainScene.prototype.dispHand.call(that, NOPAIR, 3000);
             }).wait(3000)
             .call(function(){
-                appMain.playSE("nohand");
+                appMain.playSE("nopair");
                 that.life--;
             }).wait(2000)
 
@@ -435,8 +435,8 @@ tm.define("shotgun.TutorialScene", {
             }).wait(1000)
             .call(function(){
                 that.deck.sortHand();
-                shotgun.MainScene.prototype.dispHand.call(that, NOHAND, 3000);
-                appMain.playSE("nohand");
+                shotgun.MainScene.prototype.dispHand.call(that, NOPAIR, 3000);
+                appMain.playSE("nopair");
                 that.life--;
             }).wait(2000)
 
@@ -457,8 +457,8 @@ tm.define("shotgun.TutorialScene", {
             }).wait(1000)
             .call(function(){
                 that.deck.sortHand();
-                shotgun.MainScene.prototype.dispHand.call(that, NOHAND, 3000);
-                appMain.playSE("nohand");
+                shotgun.MainScene.prototype.dispHand.call(that, NOPAIR, 3000);
+                appMain.playSE("nopair");
                 that.life--;
             }).wait(2000)
             .call(function(){

@@ -223,7 +223,7 @@ tm.define("shotgun.MainScene", {
 
             //役無し、手札未成立、ワンペア２連続はペナルティ
             var penalty = 0;
-            if (sc == NOHAND) penalty = 1;
+            if (sc == NOPAIR) penalty = 1;
             if (sc == MISS) penalty = 1;
             if (sc == ONEPAIR) {
                 this.onePair++;
@@ -238,7 +238,7 @@ tm.define("shotgun.MainScene", {
                 lb.setPosition(SC_W*0.8, SC_H*0.8);
                 lb.alpha = 0;
                 lb.tweener.clear().wait(1200).fadeIn(1).to({x: SC_W*0.8, y: SC_H*0.8-20, alpha:0.0},1000).call(lb.remove());
-                appMain.playSE("nohand");
+                appMain.playSE("nopair");
             } else {
                 appMain.playSE("hand");
             }
@@ -370,7 +370,7 @@ tm.define("shotgun.MainScene", {
         var size = 80; offset = 10;
         switch (hand) {
             case MISS:          name1 = "MISS!"; offset = 50; break;
-            case NOHAND:        name1 = "NO HAND"; size = 70; break;
+            case NOPAIR:        name1 = "NO PAIR"; size = 70; break;
             case ONEPAIR:       name1 = "ONE"; name2 = "PAIR"; offset = 60; break;
             case FLASH:         name1 = "FLASH"; offset = 60; break;
             case TWOPAIR:       name1 = "TWO"; name2 = "PAIR"; offset = 60; break;
@@ -384,7 +384,7 @@ tm.define("shotgun.MainScene", {
         }
         if (appMain.language == ENGLISH) {
             switch (hand) {
-                case NOHAND:        name1 = "NO PAIR"; size = 70; break;
+                case NOPAIR:        name1 = "NO PAIR"; size = 70; break;
                 case THREECARD:     name1 = "THREE OF"; name2 = "A KIND"; offset = 50; break;
                 case FOURCARD:      name1 = "FOUR OF"; name2 = "A KIND"; size = 70; offset = 60; break;
                 case FIVECARD:      name1 = "FIVE OF"; name2 = "A KIND"; size = 70; offset = 60; break;

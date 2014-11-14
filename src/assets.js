@@ -23,6 +23,6 @@ var assets = {
     "deal":         "assets/se_deal.mp3",
     "dist":         "assets/se_maoudamashii_se_paper01.mp3",
     "hand":         "assets/se_hand.mp3",
-    "nohand":       "assets/se_nohand.mp3",
+    "nopair":       "assets/se_nopair.mp3",
 }
 
