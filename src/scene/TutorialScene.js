@@ -376,12 +376,12 @@ tm.define("shotgun.TutorialScene", {
             }).wait(3000)
             .call(function(){
                 that.deck.shuffle(false);
-                that.enterMessage(pos, 3000, "画面上のカードをシャッフルする事が出来ます", 40);
+                that.enterMessage(pos, 3000, "カードのシャッフルが出来ます", 40);
             }).wait(4000)
 
             //ミス条件の説明
             .call(function(){
-                that.enterMessage(pos, 6000, "役無しまたは時間切れはミスとなり", 40);
+                that.enterMessage(pos, 6000, "役無し、時間切れはミスとなり", 40);
             }).wait(1000)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 5));
@@ -407,15 +407,12 @@ tm.define("shotgun.TutorialScene", {
                 appMain.playSE("nopair");
                 that.life--;
             }).wait(2000)
-
 /*
             .call(function(){
                 that.enterMessage(pos, 6000, "ワンペアが２回続いた場合も", 40);
-                that.enterMessage(pos, 6000, "ミスとして判定されますので", 40);
-                that.enterMessage(pos, 6000, "注意してください", 40);
+                that.enterMessage(pos, 6000, "ミスとして判定されます", 40);
             }).wait(1000)
 */
-
             //ゲームオーバー説明
             .call(function(){
                 that.enterMessage(pos, 6000, "ライフが０の状態でミスすると", 40);
@@ -435,29 +432,29 @@ tm.define("shotgun.TutorialScene", {
             }).wait(1000)
             .call(function(){
                 that.deck.sortHand();
-                shotgun.MainScene.prototype.dispHand.call(that, NOPAIR, 3000);
+                shotgun.MainScene.prototype.dispHand.call(that, NOPAIR);
                 appMain.playSE("nopair");
                 that.life--;
             }).wait(2000)
 
             .call(function(){
-                that.deck.addHand(that.deck.pickCard(SUIT_DIAMOND, 5));
+                that.deck.addHand(that.deck.pickCard(SUIT_DIAMOND, 11));
             }).wait(200)
             .call(function(){
-                that.deck.addHand(that.deck.pickCard(SUIT_HEART, 8));
+                that.deck.addHand(that.deck.pickCard(SUIT_HEART, 5));
             }).wait(200)
             .call(function(){
-                that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 9));
+                that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 12));
             }).wait(200)
             .call(function(){
-                that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 12));
+                that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 5));
             }).wait(200)
             .call(function(){
-                that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 10));
+                that.deck.addHand(that.deck.pickCard(SUIT_HEART, 4));
             }).wait(1000)
             .call(function(){
                 that.deck.sortHand();
-                shotgun.MainScene.prototype.dispHand.call(that, NOPAIR, 3000);
+                shotgun.MainScene.prototype.dispHand.call(that, NOPAIR);
                 appMain.playSE("nopair");
                 that.life--;
             }).wait(2000)
