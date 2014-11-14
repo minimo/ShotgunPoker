@@ -29,6 +29,10 @@ tm.define("shotgun.CanvasApp", {
     returnJokerTuen: RETURN_JOKER_TURN,
     handList: null,
 
+    //バックグラウンドカラー
+    bgColor: 'rgba(50, 110, 50, 1)',
+
+    //言語設定
     language: JAPANESE,
 
     init: function(id) {
@@ -39,6 +43,9 @@ tm.define("shotgun.CanvasApp", {
         this.keyboard = tm.input.Keyboard(window);
 
         shotgun.core = this;
+
+        //設定情報の読み込み
+        this.loadConfig();
 
         var loadingScene = tm.ui["LoadingScene"]({
             assets: assets,
@@ -67,9 +74,13 @@ tm.define("shotgun.CanvasApp", {
         this.handList[9]  = {name: "FIVE CARD", point: FIVECARD};
         this.handList[10] = {name: "STRAIGHT FLASH", point: STRAIGHTFLASH};
         this.handList[11] = {name: "R.STRAIGHT FLASH", point: ROYALSTRAIGHTFLASH};
-
-        //設定情報の読み込み
-        this.loadConfig();
+        if (this.language == ENGLISH) {
+            this.handList[1]  = {name: "NO PAIR", point: NOHAND};
+            this.handList[5]  = {name: "THREE OF A KIND", point: THREECARD};
+            this.handList[8]  = {name: "FOUR OF A KIND", point: FOURCARD};
+            this.handList[9]  = {name: "FIVE OF A KIND", point: FIVECARD};
+            this.handList[11] = {name: "ROYAL FLASH", point: ROYALSTRAIGHTFLASH};
+        }
     },
 
     _onLoadAssets: function() {
@@ -89,6 +100,7 @@ tm.define("shotgun.CanvasApp", {
             "volumeSE": this.volumeSE,
         };
         localStorage.setItem("config", JSON.stringify(saveObj));
+        return this;
     },
 
     //設定データの読み込み
@@ -102,6 +114,7 @@ tm.define("shotgun.CanvasApp", {
             this.volumeBGM = c.volumeBGM;
             this.volumeSE = c.volumeSE;
         }
+        return this;
     },
 
     playBGM: function(asset) {
@@ -118,7 +131,7 @@ tm.define("shotgun.CanvasApp", {
             this.bgm.play();
             this.bgmIsPlay = true;
         }
-        return this.bgm;
+        return this;
     },
 
     stopBGM: function() {
@@ -129,6 +142,7 @@ tm.define("shotgun.CanvasApp", {
             }
             this.bgm = null;
         }
+        return this;
     },
 
     pauseBGM: function() {
@@ -138,16 +152,25 @@ tm.define("shotgun.CanvasApp", {
                 this.bgmIsPlay = false;
             }
         }
+        return this;
     },
 
     resumeBGM: function() {
         if (this.bgm) {
             if (!this.bgmIsPlay) {
-                this.bgm.resume();
                 this.bgm.volume = this.volumeBGM*0.34;
+                this.bgm.resume();
                 this.bgmIsPlay = true;
             }
         }
+        return this;
+    },
+
+    setVolumeBGM: function(v) {
+        this.pauseBGM();
+        this.volumeBGM = v;
+        this.resumeBGM();
+        return this;
     },
 
     playSE: function(asset) {
@@ -157,7 +180,12 @@ tm.define("shotgun.CanvasApp", {
             se.volume = this.volumeSE*0.34;
             se.play();
         }
-        return se;
+        return this;
+    },
+
+    setVolumeSE: function(v) {
+        this.volumSE = v;
+        return this;
     },
 });
 

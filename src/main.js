@@ -25,7 +25,7 @@ GAMECENTER = false;
 
 //スクリーンサイズ
 SC_W = 640;
-SC_H = 960;
+SC_H = 1136;
 
 //ステータスバー情報
 STATUSBAR_HEIGHT = 30;
@@ -34,7 +34,7 @@ STATUSBAR_COLOR = 'rgba(0,0,0,1)';
 //カードサイズ
 CARD_W = 200;
 CARD_H = 300;
-CARD_SCALE = 0.5;
+CARD_SCALE = 0.7;
 
 //スート
 SUIT_SPADE = 0;
@@ -121,12 +121,8 @@ appMain = {};
 
 //アプリケーションメイン
 tm.main(function() {
-    //PHONEGAPの場合スクリーンサイズ調整
-    if (PHONEGAP) {
-        SC_W = window.innerWidth*2;
-        SC_H = window.innerHeight*2;
-    }
 
+    //使用フォント読み込み終了検出
     for (var i = 0; i < FONT.length; i++) {
         detectFontLoading(FONT[i]);
     }

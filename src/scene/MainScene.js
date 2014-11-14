@@ -37,6 +37,7 @@ tm.define("shotgun.MainScene", {
     handCount: null,//役の回数
     onePair: 0,     //ワンペアの連続回数
     gameend: false, //ゲーム終了フラグ
+    complete: false,//役コンプリートフラグ
 
     //経過時間
     time: 0,
@@ -50,14 +51,17 @@ tm.define("shotgun.MainScene", {
     labelParamBasicCenter: {fontFamily: "'azuki'", align: "center", baseline: "middle",outlineWidth: 3},
     labelParamPoker: {fontFamily: "'KS-Kohichi-FeltPen'",align: "center", baseline: "middle", outlineWidth: 3},
     labelParamHand:  {fontFamily: "'KS-Kohichi-FeltPen'",align: "left", baseline: "middle", outlineWidth: 3},
+    labelParamBefore:{fontFamily: "'azuki'",align: "left", baseline: "top", outlineWidth: 3},
 
     init: function() {
         this.superInit();
         this.background = "rgba(0, 0, 0, 0.0)";
 
         //バックグラウンド
-        this.bg = tm.display.Sprite("greenback", SC_W, SC_H).addChildTo(this);
-        this.bg.setPosition(SC_W/2, SC_H/2);
+        this.bg = tm.display.Shape(SC_W, SC_H)
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.5)
+            .renderRectangle({fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor});
 
         //マルチタッチ初期化
         this.touches = tm.input.TouchesEx(this);
@@ -75,17 +79,26 @@ tm.define("shotgun.MainScene", {
 
         //スコア表示
         var that = this;
-        var lb = this.scoreLabel = tm.display.OutlineLabel("SCORE:", 50).addChildTo(this);
-        lb.setParam(this.labelParamBasic);
-        lb.setPosition(8, 72);
-        lb.update = function() {
-            this.text = "SCORE:"+that.score;
+        this.scoreLabel = tm.display.OutlineLabel("SCORE:", 50)
+            .addChildTo(this)
+            .setParam(this.labelParamBasic)
+            .setPosition(8, 72);
+        this.scoreLabel.score = 0;
+        this.scoreLabel.update = function() {
+            this.text = "SCORE:"+this.score;
+            if (this.score < that.score) {
+                var s = ~~((that.score-this.score)/11);
+                if (s < 3) s=3;
+                this.score += s;
+                if (this.score > that.score)this.score = that.score;
+            }
         }
 
         //ライフ表示
-        var lb = this.lifeLabel = tm.display.OutlineLabel("LIFE:", 50).addChildTo(this);
-        lb.setParam(this.labelParamBasic);
-        lb.setPosition(8, 128);
+        this.lifeLabel = tm.display.OutlineLabel("LIFE:", 50)
+            .addChildTo(this)
+            .setParam(this.labelParamBasic)
+            .setPosition(8, 128);
         this.lg = [];
         for (var i = 0; i < 7; i++ ) {
             var c = this.lg[i] = shotgun.Card(SUIT_HEART, 0).addChildTo(this);
@@ -102,17 +115,34 @@ tm.define("shotgun.MainScene", {
             }
         }
 
-        //ポーズボタン
-        var sh = this.credit = tm.display.RoundRectangleShape(200, 50, {fillStyle:'rgba(0,80,0,1)', lineWidth:4}).addChildTo(this);
-        sh.setPosition(SC_W*0.84, 72);
-        sh.interactive = true;
-        var lb = this.creditLabel = tm.display.OutlineLabel("pause", 50).addChildTo(this);
-        lb.setParam(this.labelParamBasicCenter);
-        lb.setPosition(SC_W*0.84, 64);
+        //直前の役表示
+        var by = SC_H*0.8+CARD_H*CARD_SCALE*0.5;
+        this.beforeLabel = tm.display.OutlineLabel("BEFORE:", 30)
+            .addChildTo(this)
+            .setParam(this.labelParamBefore)
+            .setPosition(8, by);
+        this.beforeHand = tm.display.OutlineLabel("nothing", 30)
+            .addChildTo(this)
+            .setParam(this.labelParamBefore)
+            .setPosition(120, by);
+        this.beforeHand.name = "";
+        this.beforeHand.alert = false;
+        this.beforeHand.update = function() {
+            if (this.alert) {
+                this.fillStyle = "Red";
+            } else {
+                this.fillStyle = "White";
+            }
+            this.text = this.name;
+        }
 
-        //ステータスバー
-        var sh = tm.display.RectangleShape(SC_W, STATUSBAR_HEIGHT, {strokeStyle: STATUSBAR_COLOR,fillStyle: STATUSBAR_COLOR}).addChildTo(this);
-        sh.originX = sh.originY = 0;
+        //ポーズボタン
+        this.pause = shotgun.Button(200, 60, "PAUSE")
+            .addChildTo(this)
+            .setPosition(SC_W*0.84, 72)
+            .addEventListener("pushed", function() {
+                appMain.pushScene(shotgun.PauseScene(this));
+            }.bind(this));
 
         //目隠し
         this.mask = tm.display.Sprite("blackback", SC_W*2, SC_H*2).addChildTo(this);
@@ -125,9 +155,10 @@ tm.define("shotgun.MainScene", {
         appMain.playBGM("mainBGM");
 
         //スタートアップ
-        var lb = this.readyLabel = tm.display.OutlineLabel("READY", 100).addChildTo(this.upperLayer);
-        lb.setParam(this.labelParamPoker);
-        lb.setPosition(SC_W/2, SC_H/2);
+        var lb = this.readyLabel = tm.display.OutlineLabel("READY", 100)
+            .addChildTo(this.upperLayer)
+            .setParam(this.labelParamPoker)
+            .setPosition(SC_W/2, SC_H/2);
         lb.tweener.clear().wait(500).fadeOut(500).wait(300);
         lb.tweener.call(function(){
             that.deck.startup();
@@ -137,9 +168,10 @@ tm.define("shotgun.MainScene", {
         });
 
         //カウントダウン表示
-        var lb = this.countDown = tm.display.OutlineLabel("5", 300).addChildTo(this.upperLayer);
-        lb.setParam(this.labelParamPoker);
-        lb.setPosition(SC_W/2, SC_H/2);
+        var lb = this.countDown = tm.display.OutlineLabel("5", 300)
+            .addChildTo(this.upperLayer)
+            .setParam(this.labelParamPoker)
+            .setPosition(SC_W/2, SC_H/2);
         lb.beforeCount = 9;
         lb.alpha = 1.0;
         lb.update = function() {
@@ -160,9 +192,10 @@ tm.define("shotgun.MainScene", {
         }
 
         if (DEBUG) {
-            var lb = this.creditLabel = tm.display.OutlineLabel("", 40).addChildTo(this);
-            lb.setParam(this.labelParamBasic);
-            lb.setPosition(SC_W*0.0, SC_H*0.9);
+            var lb = this.creditLabel = tm.display.OutlineLabel("", 40)
+                .addChildTo(this)
+                .setParam(this.labelParamBasic)
+                .setPosition(SC_W*0.0, SC_H*0.9);
             lb.update = function() {
                 this.text = "Level:"+that.level;
             }
@@ -210,6 +243,22 @@ tm.define("shotgun.MainScene", {
                 appMain.playSE("hand");
             }
 
+            //役コンプリート判定
+            if (!this.complete) {
+                var cp = true;
+                for (var i = 0; i < 12; i++) {
+                    if (i == 9)continue;    //ファイブカードは対象外
+                    if (this.handCount[appMain.handList[i].point] == 0) cp = false;
+                }
+                if (cp) {
+                    this.complete = true;
+                    var lb = tm.display.OutlineLabel("HAND COMPLETE!", 100).addChildTo(this);
+                    lb.setParam(this.labelParamPoker);
+                    lb.setPosition(SC_W*0.5, SC_H*0.5);
+                    lb.tweener.clear().wait(1000).call(lb.remove());
+                }
+            }
+
             //初回R.S.Fの場合はライフ＋１
             if (sc == ROYALSTRAIGHTFLASH && this.handCount[sc] == 1) {
                 this.life++;
@@ -238,8 +287,9 @@ tm.define("shotgun.MainScene", {
                 lb.setPosition(SC_W*0.5, SC_H*0.5);
                 lb.tweener.clear().wait(1000).call(lb.remove());
             }
-            this.score += sc;
-            if (this.score < 0) this.score = 0;
+
+            //得点がプラスの時のみスコアに加算
+            if (sc > 0) this.score += sc;
 
             //ゲームオーバー判定
             if (this.life < 0) {
@@ -268,6 +318,10 @@ tm.define("shotgun.MainScene", {
             appMain.stopBGM();
             appMain.replaceScene(shotgun.TitleScene());
         }
+
+        //スクリーンショット保存
+        var kb = appMain.keyboard;
+        if (kb.getKeyDown("s")) appMain.canvas.saveAsImage();
     },
 
     //ゲームオーバー
@@ -275,6 +329,8 @@ tm.define("shotgun.MainScene", {
         this.start = false;
         this.pick = false;
         this.gameend = true;
+
+        this.pause.lock = true;
 
         //スコア情報更新
         appMain.lastScore = this.score;
@@ -308,61 +364,71 @@ tm.define("shotgun.MainScene", {
     },
 
     //役名表示
-    dispHand: function(hand) {
-        var name1 = "", name2 = "", name3 = "", size = 80; offset = 10;
-        if (appMain == JAPANESE) {
+    dispHand: function(hand, wait) {
+        wait = wait || 1200;
+        var name1 = "", name2 = "", name3 = "";
+        var size = 80; offset = 10;
+        switch (hand) {
+            case MISS:          name1 = "MISS!"; offset = 50; break;
+            case NOHAND:        name1 = "NO HAND"; size = 70; break;
+            case ONEPAIR:       name1 = "ONE"; name2 = "PAIR"; offset = 60; break;
+            case FLASH:         name1 = "FLASH"; offset = 60; break;
+            case TWOPAIR:       name1 = "TWO"; name2 = "PAIR"; offset = 60; break;
+            case THREECARD:     name1 = "THREE"; name2 = "CARD"; offset = 50; break;
+            case FULLHOUSE:     name1 = "FULL"; name2 = "HOUSE"; offset = 50; break;
+            case STRAIGHT:      name1 = "STRAIGHT"; size = 70; break;
+            case FOURCARD:      name1 = "FOUR"; name2 = "CARD"; offset = 60; break;
+            case FIVECARD:      name1 = "FIVE"; name2 = "CARD"; offset = 60; break;
+            case STRAIGHTFLASH: name1 = "STRAIGHT"; name2 = "FLASH"; size = 70; break;
+            case ROYALSTRAIGHTFLASH: name1 = "ROYAL"; name2 = "STRAIGHT"; name3 = "FLASH!"; size = 70; break;
+        }
+        if (appMain.language == ENGLISH) {
             switch (hand) {
-                case MISS:          name1 = "MISS!"; offset = 50; break;
-                case NOHAND:        name1 = "NO HAND"; size = 70; break;
-                case ONEPAIR:       name1 = "ONE"; name2 = "PAIR"; offset = 60; break;
-                case FLASH:         name1 = "FLASH"; offset = 60; break;
-                case TWOPAIR:       name1 = "TWO"; name2 = "PAIR"; offset = 60; break;
-                case THREECARD:     name1 = "THREE"; name2 = "CARD"; offset = 50; break;
-                case FULLHOUSE:     name1 = "FULL"; name2 = "HOUSE"; offset = 50; break;
-                case STRAIGHT:      name1 = "STRAIGHT"; size = 70; break;
-                case FOURCARD:      name1 = "FOUR"; name2 = "CARD"; offset = 60; break;
-                case FIVECARD:      name1 = "FIVE"; name2 = "CARD"; offset = 60; break;
-                case STRAIGHTFLASH: name1 = "STRAIGHT"; name2 = "FLASH"; size = 70; break;
-                case ROYALSTRAIGHTFLASH: name1 = "ROYAL"; name2 = "STRAIGHT"; name3 = "FLASH!"; size = 70; break;
-            }
-        } else {
-            switch (hand) {
-                case MISS:          name1 = "MISS!"; offset = 50; break;
                 case NOHAND:        name1 = "NO PAIR"; size = 70; break;
-                case ONEPAIR:       name1 = "ONE"; name2 = "PAIR"; offset = 60; break;
-                case FLASH:         name1 = "FLASH"; offset = 60; break;
-                case TWOPAIR:       name1 = "TWO"; name2 = "PAIR"; offset = 60; break;
                 case THREECARD:     name1 = "THREE OF"; name2 = "A KIND"; offset = 50; break;
-                case FULLHOUSE:     name1 = "FULL"; name2 = "HOUSE"; offset = 50; break;
-                case STRAIGHT:      name1 = "STRAIGHT"; size = 70; break;
-                case FOURCARD:      name1 = "FOUR OF"; name2 = "A KIND"; offset = 60; break;
-                case FIVECARD:      name1 = "FIVE OF"; name2 = "A KIND"; offset = 60; break;
-                case STRAIGHTFLASH: name1 = "STRAIGHT"; name2 = "FLASH"; size = 70; break;
-                case ROYALSTRAIGHTFLASH: name1 = "ROYAL"; name2 = "FLASH!"; size = 60; break;
+                case FOURCARD:      name1 = "FOUR OF"; name2 = "A KIND"; size = 70; offset = 60; break;
+                case FIVECARD:      name1 = "FIVE OF"; name2 = "A KIND"; size = 70; offset = 60; break;
+                case ROYALSTRAIGHTFLASH: name1 = "ROYAL"; name2 = "FLASH!"; size = 70; break;
+                default:
+                    break;
             }
         }
+
         //役名表示
         var that = this;
         var x = SC_W*0.55+offset, y = SC_H*0.8;
         if (name2 != "") y-=SC_H*0.04;
         if (name3 != "") y-=SC_H*0.04;
 
+        //１行目
         var lb1 = tm.display.OutlineLabel(name1, size).addChildTo(this);
         lb1.setParam(this.labelParamHand);
         lb1.setPosition(x, y);
-        lb1.tweener.clear().wait(1200).call(function(){lb1.remove(); that.deck.clearHand();that.pick = true;});
+        lb1.tweener.clear().wait(wait)
+            .call(function(){
+                lb1.remove();
+                that.deck.clearHand();
+                that.pick = true;
+                that.beforeHand.name = that.deck.handName(hand);
+                if (that.onePair % 2 == 1)
+                    that.beforeHand.alert = true;
+                else
+                    that.beforeHand.alert = false;
+        });
 
+        //２行目
         y += SC_H*0.08;
         var lb2 = tm.display.OutlineLabel(name2, size).addChildTo(this);
         lb2.setParam(this.labelParamHand);
         lb2.setPosition(x, y);
-        lb2.tweener.clear().wait(1200).call(function(){lb2.remove();});
+        lb2.tweener.clear().wait(wait).call(function(){lb2.remove();});
 
+        //３行目
         y += SC_H*0.08;
         var lb3 = tm.display.OutlineLabel(name3, size).addChildTo(this);
         lb3.setParam(this.labelParamHand);
         lb3.setPosition(x, y);
-        lb3.tweener.clear().wait(1200).call(function(){lb3.remove();});
+        lb3.tweener.clear().wait(wait).call(function(){lb3.remove();});
     },
 
     //タッチorクリック開始処理
@@ -410,15 +476,10 @@ tm.define("shotgun.MainScene", {
         var sy = e.pointing.y;
 
         if (this.pick && !this.shuffled && !this.deck.busy && !this.gameend) {
-            var c = this.deck.pickCard(sx, sy);
+            var c = this.deck.pick(sx, sy);
             if (c) this.deck.addHand(c);
         }
         this.shuffled = false;
-
-        //ポーズボタン
-        if (SC_W*0.8-100 < sx && sx < SC_W*0.8+100 && 39 < sy && sy < 89 && !this.gameend) {
-            appMain.pushScene(shotgun.PauseScene(this));
-        }
     },
 });
 

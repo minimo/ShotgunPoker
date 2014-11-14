@@ -23,6 +23,8 @@ tm.define("shotgun.CardDeck", {
     shuffleLimit: SHUFFLE_LIMIT,    //シャッフルが発生する残り枚数
     jokerTurn: 0,   //ジョーカー戻しターンカウンタ
 
+    demo: false,    //デモンストレーションフラグ
+
     init: function(suit, num) {
         //親クラスの初期化
         this.superInit();
@@ -117,11 +119,20 @@ tm.define("shotgun.CardDeck", {
     },
 
     //カードの取得
-    pickCard: function(x, y) {
+    pick: function(x, y) {
         for (var i = 0; i < this.cards.length; i++) {
             var c = this.cards[i];
             if (c.drop || c.hand)continue;
             if (c.hitTestPoint({x: x, y: y}))return c;
+        }
+        return null;
+    },
+
+    //指定カードの取得
+    pickCard: function(suit, num) {
+        for (var i = 0; i < this.cards.length; i++) {
+            var c = this.cards[i];
+            if (c.suit == suit && c.number == num) return c;
         }
         return null;
     },
@@ -295,6 +306,15 @@ tm.define("shotgun.CardDeck", {
         }
         if (this.jokerInHand) return ONEPAIR;
         return NOHAND;
+    },
+
+    //役名を文字列で取得
+    handName: function(point) {
+        for (var i = 0; i < appMain.handList.length; i++) {
+            var n = appMain.handList[i];
+            if (n.point == point) return n.name;
+        }
+        return null;
     },
 });
 

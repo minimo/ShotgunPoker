@@ -1,0 +1,110 @@
+/*
+ *  Button.js
+ *  2014/06/24
+ *  @auther minimo  
+ *  This Program is MIT license.
+ *
+ */
+
+tm.define("shotgun.Button", {
+    superClass: tm.app.Object2D,
+
+    //描画スタイル設定
+    buttonColor: 'rgba(50, 150, 255, 0.8)',
+    lineColor: 'rgba(200, 200, 200, 0.5)',
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    labelParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:3 },
+
+    type: 0, //0:nomal 1:toggle
+    text: "",
+    push: false,
+    lock: false,
+    toggleOn: false,
+
+    //ボタン押下時の移動量
+    downX: 0,
+    downY: 10,
+
+    init: function(width, height, text, style) {
+        this.superInit();
+
+        this.width = width || 200;
+        this.height = height || 80;
+        this.text = text || "";
+
+        //セットアップ
+        this.setup();
+
+        //判定処理設定
+        this.interactive = true;
+        this.checkHierarchy = true;
+        this.boundingType = "rect";
+
+        //イベントリスナ登録
+        this.addEventListener("pointingstart", function() {
+            if (this.lock) return;
+
+            this.push = true;
+            this.button.x += this.downX;
+            this.button.y += this.downY;
+        });
+        this.addEventListener("pointingmove", function(e) {
+            if (this.lock) return;
+            
+            var pt = e.pointing;
+            if (this.isHitPoint(pt.x, pt.y)) {
+                if (!this.push) {
+                    this.push = true;
+                    this.button.x += this.downX;
+                    this.button.y += this.downY;
+                }
+            } else {
+                if (this.push) {
+                    this.push = false;
+                    this.button.x -= this.downX;
+                    this.button.y -= this.downY;
+                }
+            }
+        });
+        this.addEventListener("pointingend", function(e) {
+            if (this.lock) return;
+
+            var pt = e.pointing;
+            if (this.isHitPoint(pt.x, pt.y)) {
+                this.button.x -= this.downX;
+                this.button.y -= this.downY;
+                this.push = false;
+
+                var e = tm.event.Event("pushed");
+                this.dispatchEvent(e);
+            }
+        });
+    },
+
+    setup: function() {
+        //登録済みの場合破棄する
+        if (this.shadow) {
+            this.shadow.remove();
+            this.label.remove();
+            this.button.remove();
+        }
+
+        var width = this.width, height = this.height;
+
+        //ボタン影
+        this.shadow = tm.display.RectangleShape(width, height, {fillStyle: this.shadowColor, strokeStyle: this.shadowColor, lineWidth: 4})
+            .addChildTo(this);
+        this.shadow.blendMode = "source-over";
+
+        //ボタン本体
+        this.button = tm.display.RectangleShape(width, height, {fillStyle: this.buttonColor, strokeStyle: this.lineColor, lineWidth: 4})
+            .addChildTo(this)
+            .setPosition(-this.downX, -this.downY);
+//        this.button.blendMode = "lighter";
+
+        //ボタンラベル
+        this.label = tm.display.OutlineLabel(this.text, 50)
+            .addChildTo(this.button)
+            .setParam(this.labelParam);
+    },
+});

@@ -7,8 +7,19 @@
 
 //PhoneGap Device Events
 var onDeviceready = function () {
-    if (DEBUG_PHONEGAP) AdvanceAlert('devicereadyイベントが発火しました');
+    if (DEBUG_PHONEGAP) {
+        AdvanceAlert('devicereadyイベントが発火しました');
+        AdvanceAlert('Device:'+device.name+" "+device.platform);
+    }
+
     PHONEGAP = true;
+
+    //スクリーンサイズ調整
+    if (appMain) {
+        SC_W = window.innerWidth*2;
+        SC_H = window.innerHeight*2;
+        appMain.resize(SC_W, SC_H).fitWindow();
+    }
 
     //Game Center Plugin
     gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
@@ -16,6 +27,8 @@ var onDeviceready = function () {
 
 var onPause = function() {
     if (DEBUG_PHONEGAP) AdvanceAlert('pauseイベントが発火しました');
+
+    //ゲーム中の場合ポーズシーンに移行
     var scene = appMain.currentScene;
     if (scene instanceof shotgun.MainScene && !scene.gameend) {
         appMain.pushScene(shotgun.PauseScene(scene));
@@ -56,6 +69,13 @@ document.addEventListener('resume', onResume, false);
 document.addEventListener('online', onOnline, false);
 document.addEventListener('offline', onOffline, false);
 
-//GamecenterPlungin
+//UsingPluginList
+//Gamecenter
 //https://github.com/leecrossley/cordova-plugin-game-center.git
+//Admob
+//https://github.com/floatinghotpot/cordova-plugin-admob.git
+//StatusBar
+//https://github.com/apache/cordova-plugin-statusbar.git
+//Device
+//https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
 

@@ -21,8 +21,10 @@ tm.define("shotgun.SettingScene", {
         var that = this;
 
         //バックグラウンド
-        this.bg = tm.display.Sprite("greenback", SC_W, SC_H).addChildTo(this);
-        this.bg.setPosition(SC_W/2, SC_H/2);
+        this.bg = tm.display.Shape(SC_W, SC_H)
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.5)
+            .renderRectangle({fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor});
 
         var lb = this.credit1 = tm.display.OutlineLabel("SETTING", 60).addChildTo(this);
         lb.setParam(this.labelParam);
@@ -57,22 +59,14 @@ tm.define("shotgun.SettingScene", {
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
         //戻るボタン
-        var sh = tm.display.RoundRectangleShape(width, height, param).addChildTo(this);
-        sh.setPosition(SC_W*0.5, SC_H*0.9);
-        sh.interactive = true;
-        sh.boundingType = "rect";
-        sh.addEventListener("click", function() {
-            that.mask.tweener.clear().fadeOut(200);
-            appMain.saveConfig();
-            appMain.popScene();
-        });
-        var lb = tm.display.OutlineLabel("RETURN", 50).addChildTo(this);
-        lb.setParam(this.labelParam);
-        lb.setPosition(SC_W*0.5, SC_H*0.9);
-
-        //ステータスバー
-        var sh = tm.display.RectangleShape(SC_W, STATUSBAR_HEIGHT, {strokeStyle: STATUSBAR_COLOR,fillStyle: STATUSBAR_COLOR}).addChildTo(this);
-        sh.originX = sh.originY = 0;
+        shotgun.Button(width, height, "RETURN")
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.9)
+            .addEventListener("pushed", function() {
+                that.mask.tweener.clear().fadeOut(200);
+                appMain.saveConfig();
+                appMain.popScene();
+            });
 
         //マスク
         this.mask = tm.display.Sprite("blackback", SC_W*2, SC_H*2).addChildTo(this);
@@ -101,9 +95,7 @@ tm.define("shotgun.SettingScene", {
             if (appMain.volumeBGM != x) {
                 this.bgm[appMain.volumeBGM].fontSize = 30;
                 this.bgm[x].fontSize = 80;
-                appMain.pauseBGM();
-                appMain.volumeBGM = x;
-                appMain.resumeBGM();
+                appMain.setVolumeBGM(x);
             }
         }
         //ＳＥボリューム
