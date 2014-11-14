@@ -218,7 +218,7 @@ tm.define("shotgun.TutorialScene", {
     startPhase1: function() {
         var pos = SC_H*0.3;
         var that = this;
-        this.ctrl.tweener.clear().wait(1000)
+        this.ctrl.tweener.clear().wait(2000)
             .call(function(){
                 that.enterMessage(pos, 6000, "場にあるカードを５枚選んで");
             }).wait(1000)
@@ -244,7 +244,7 @@ tm.define("shotgun.TutorialScene", {
                 that.deck.sortHand();
             }).wait(3000)
             .call(function(){
-                that.enterMessage(pos, 12000, "完成した役によって得点が入ります", 40);
+                that.enterMessage(pos, 12000, "完成した役に応じた得点が入ります", 38);
                 shotgun.MainScene.prototype.dispHand.call(that, ROYALSTRAIGHTFLASH, 2400);
                 appMain.playSE("hand");
                 that.score+=ROYALSTRAIGHTFLASH;
@@ -298,7 +298,7 @@ tm.define("shotgun.TutorialScene", {
 
             //カード補充の説明
             .call(function(){
-                that.enterMessage(pos, 10000, "場のカードがある程度少なくなると", 40);
+                that.enterMessage(pos, 10000, "場のカードがある程度少なくなると", 38);
             }).wait(500)
             //フラッシュ
             .call(function(){
