@@ -28,7 +28,7 @@ tm.define("shotgun.MainScene", {
     //ゲーム内情報
     start: false,   //ゲームスタートフラグ
     score: 0,       //スコア
-    life: 3,        //ライフ
+    life: 2,        //ライフ
     lifeMax: 5,     //ライフ最大値
     pick: false,    //カードピック可能フラグ
     count: 9,       //カード選択カウントダウン用
