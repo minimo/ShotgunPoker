@@ -115,6 +115,12 @@ tm.define("shotgun.MainScene", {
             }
         }
 
+        //タイムリミット表示
+        this.meter = tm.display.Shape(20, 300)
+            .addChildTo(this)
+            .setPosition(20, SC_H*0.8)
+            .renderRectangle({fillStyle: this.bgColor, strokeStyle: this.bgColor});
+
         //直前の役表示
         var by = SC_H*0.8+CARD_H*CARD_SCALE*0.5;
         this.beforeLabel = tm.display.OutlineLabel("BEFORE:", 30)
