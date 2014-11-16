@@ -221,6 +221,7 @@ tm.define("shotgun.TutorialScene", {
         this.ctrl.tweener.clear().wait(2000)
             .call(function(){
                 that.enterMessage(pos, 6000, "場にあるカードを５枚選んで", 40);
+                that.enterMessage(pos+60, 6000, "ポーカーの役を作ってください", 40);
             }).wait(1000)
 
             //最初にロイヤルストレートフラッシュを作る
@@ -238,13 +239,13 @@ tm.define("shotgun.TutorialScene", {
             }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 13));
-                that.enterMessage(pos, 5000, "ポーカーの役を作ってください", 40);
             }).wait(2000)
             .call(function(){
                 that.deck.sortHand();
             }).wait(3000)
             .call(function(){
-                that.enterMessage(pos, 12000, "役に応じた得点が入ります", 40);
+                that.enterMessage(pos, 12000, "完成した役に応じた", 40);
+                that.enterMessage(pos+60, 12000, "得点が入ります", 40);
                 shotgun.MainScene.prototype.dispHand.call(that, ROYALSTRAIGHTFLASH, 2400);
                 appMain.playSE("hand");
                 that.score+=ROYALSTRAIGHTFLASH;
@@ -299,6 +300,7 @@ tm.define("shotgun.TutorialScene", {
             //カード補充の説明
             .call(function(){
                 that.enterMessage(pos, 10000, "場のカードが少なくなると", 40);
+                that.enterMessage(pos+60, 10000, "カード補充してシャッフルされます", 40);
             }).wait(500)
             //フラッシュ
             .call(function(){
@@ -361,7 +363,6 @@ tm.define("shotgun.TutorialScene", {
             }).wait(200)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_DIAMOND, 9));
-                that.enterMessage(pos, 5000, "カード補充してシャッフルされます", 40);
             }).wait(500)
             .call(function(){
                 that.deck.sortHand();
@@ -372,16 +373,20 @@ tm.define("shotgun.TutorialScene", {
 
             //手動シャッフルの説明
             .call(function(){
-                that.enterMessage(pos, 5000, "また、横に大きくスワイプすると", 40);
+                that.enterMessage(pos, 10000, "また、横に大きくスワイプすると", 40);
+                that.enterMessage(pos+60, 10000, "カードのシャッフルが出来ます", 40);
             }).wait(3000)
             .call(function(){
                 that.deck.shuffle(false);
-                that.enterMessage(pos, 3000, "カードのシャッフルが出来ます", 40);
+            }).wait(4000)
+            .call(function(){
+                that.deck.shuffle(false);
             }).wait(4000)
 
             //ミス条件の説明
             .call(function(){
                 that.enterMessage(pos, 6000, "役無し、時間切れはミスとなり", 40);
+                that.enterMessage(pos+60, 6000, "左上のライフが一つ減ります", 40);
             }).wait(1000)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 5));
@@ -399,7 +404,6 @@ tm.define("shotgun.TutorialScene", {
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 10));
             }).wait(500)
             .call(function(){
-                that.enterMessage(pos, 4000, "左上のライフが一つ減ります", 40);
                 that.deck.sortHand();
                 shotgun.MainScene.prototype.dispHand.call(that, NOPAIR, 3000);
             }).wait(3000)
@@ -430,7 +434,7 @@ tm.define("shotgun.TutorialScene", {
             }).wait(200)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 10));
-            }).wait(1000)
+            }).wait(500)
             .call(function(){
                 that.deck.sortHand();
                 shotgun.MainScene.prototype.dispHand.call(that, NOPAIR);
@@ -452,13 +456,13 @@ tm.define("shotgun.TutorialScene", {
             }).wait(200)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 4));
-            }).wait(1000)
+            }).wait(500)
             .call(function(){
                 that.deck.sortHand();
                 shotgun.MainScene.prototype.dispHand.call(that, NOPAIR);
                 appMain.playSE("nopair");
                 that.life--;
-            }).wait(2000)
+            }).wait(1500)
             .call(function(){
                 var lb = tm.display.OutlineLabel("GAME OVER", 100)
                     .addChildTo(that)
