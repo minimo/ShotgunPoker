@@ -117,7 +117,7 @@ tm.define("shotgun.MainScene", {
 
         //タイムリミット表示
         this.meter = tm.display.Shape(20, 300)
-            .addChildTo(this)
+//            .addChildTo(this)
             .setPosition(20, SC_H*0.8)
             .renderRectangle({fillStyle: this.bgColor, strokeStyle: this.bgColor});
 
