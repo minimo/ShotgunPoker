@@ -119,17 +119,19 @@ tm.define("shotgun.MainScene", {
             }
         }
 
-        //タイムリミット表示
-        this.meter = tm.display.Shape(20, 500)
+        //タイムリミットゲージ
+        var color = "hsla({0}, 50%, 50%, 1.0)".format(100);
+        this.meter = tm.display.Shape(30, 500)
             .addChildTo(this)
             .setPosition(20, SC_H*0.7)
-            .renderRectangle({fillStyle: "Blue", strokeStyle: "Blue"});
-        this.meter.originY = 1.0;
+            .renderRectangle({fillStyle: "Blue", strokeStyle: "Blue"})
+            .setOrigin(0.5, 1.0);
         this.meter.update = function() {
-            this.canvas.fillStyle = "hsla({0}, 50%, 50%, 1.0)".format(that.limitCount);
             this.height = that.limitCount*(500/that.limitMax);
+            var color = "hsla({0}, 50%, 50%, 1.0)".format(~~(this.height/5)*3);
+            this.renderRectangle({fillStyle: color, strokeStyle: color});
         }
-        tm.display.Shape(20, 500)
+        tm.display.Shape(30, 500)
             .addChildTo(this)
             .setPosition(20, SC_H*0.7)
             .renderRectangle({fillStyle: "rgba(0,0,0,0)", strokeStyle: "Black", lineWidth: 3})
@@ -231,14 +233,16 @@ tm.define("shotgun.MainScene", {
         if (this.time % interval == 0 && this.pick) {
             this.count--;
         }
-        if (this.count == 9) {
-            //タイムリミットゲージ用カウンタ
-            this.limitMax = this.limitCount = interval*9;
-        } else if (this.count < 9) {
-            this.limitCount--;
-            if (this.limitCount < 0) this.limitCount = 0;
-        }
-            
+
+        //タイムリミットゲージ用カウンタ
+        if (!this.gameend) {
+            if (this.count == 10) {
+                this.limitMax = this.limitCount = interval*10;
+            } else if (this.count < 10) {
+                this.limitCount--;
+                if (this.limitCount < 0) this.limitCount = 0;
+            }
+        }            
 
         //手札が五枚揃ったor時間切れ
         if (this.deck.numHand == 5 || this.count < 0) {
