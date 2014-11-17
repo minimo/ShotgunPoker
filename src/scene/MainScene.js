@@ -228,21 +228,22 @@ tm.define("shotgun.MainScene", {
         if (!this.start) return;
         if (this.deck.busy) return;
 
-        var interval = 45-~~(this.level*10);
-        if (interval < 10) interval = 10;
-        if (this.time % interval == 0 && this.pick) {
-            this.count--;
-        }
+        if (this.pick && !this.gameend) {
+            //カウントダウン間隔
+            var interval = 45-~~(this.level*10);
+            if (interval < 10) interval = 10;
 
-        //タイムリミットゲージ用カウンタ
-        if (!this.gameend) {
+            //タイムリミットゲージ用カウンタ
             if (this.count == 10) {
                 this.limitMax = this.limitCount = interval*10;
             } else if (this.count < 10) {
                 this.limitCount--;
                 if (this.limitCount < 0) this.limitCount = 0;
             }
-        }            
+
+            //カウントダウン
+            if (this.time % interval == 0) this.count--;
+        }
 
         //手札が五枚揃ったor時間切れ
         if (this.deck.numHand == 5 || this.count < 0) {
@@ -341,11 +342,13 @@ tm.define("shotgun.MainScene", {
             }
         }
 
+        //カードピック可能時のみ時間を進める
         if (this.pick) {
             this.time++;
             this.absTime++;
         }
 
+        //ゲーム終了処理
         if (this.exitGame) {
             appMain.stopBGM();
             appMain.replaceScene(shotgun.TitleScene());
