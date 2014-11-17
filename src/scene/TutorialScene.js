@@ -157,38 +157,6 @@ tm.define("shotgun.TutorialScene", {
     setupTitle: function() {
     },
 
-    addButton: function(page, finish) {
-        var that = this;
-        var width = 230, height = 60;
-        var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
-
-        //戻る
-        shotgun.Button(width, height, "PREV")
-            .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.25+SC_W*page, SC_H*0.9)
-            .addEventListener("pushed", function() {
-                that.titleLayer.tweener.clear().moveBy(SC_W, 0, 500, "easeOutQuint");
-            });
-
-        if (!finish) {
-            //次
-            shotgun.Button(width, height, "NEXT")
-                .addChildTo(this.titleLayer)
-                .setPosition(SC_W*0.75+SC_W*page, SC_H*0.9)
-                .addEventListener("pushed", function() {
-                    that.titleLayer.tweener.clear().moveBy(-SC_W, 0, 500, "easeOutQuint");
-                });
-        } else {
-            //終了
-            shotgun.Button(width, height, "EXIT")
-                .addChildTo(this.titleLayer)
-                .setPosition(SC_W*0.75+SC_W*page, SC_H*0.9)
-                .addEventListener("pushed", function() {
-                    that.titleLayer.tweener.clear().moveBy(SC_W*page, 0, 500, "easeOutQuint");
-                });
-        }
-    },
-
     update: function() {
         if (this.phase == 0) {
             this.startPhase1();
@@ -222,7 +190,7 @@ tm.define("shotgun.TutorialScene", {
             .call(function(){
                 that.enterMessage(pos, 6000, "場にあるカードを５枚選んで", 40);
                 that.enterMessage(pos+60, 6000, "ポーカーの役を作ってください", 40);
-            }).wait(1000)
+            }).wait(500)
 
             //最初にロイヤルストレートフラッシュを作る
             .call(function(){
@@ -239,10 +207,10 @@ tm.define("shotgun.TutorialScene", {
             }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 13));
-            }).wait(2000)
+            }).wait(1000)
             .call(function(){
                 that.deck.sortHand();
-            }).wait(3000)
+            }).wait(2000)
             .call(function(){
                 that.enterMessage(pos, 12000, "完成した役に応じた", 40);
                 that.enterMessage(pos+60, 12000, "得点が入ります", 40);
