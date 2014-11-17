@@ -120,7 +120,7 @@ tm.define("shotgun.MainScene", {
         }
 
         //タイムリミットゲージ
-        var color = "hsla({0}, 50%, 50%, 1.0)".format(100);
+        var color = "hsla({0}, 50%, 50%, 1.0)".format(300);
         this.meter = tm.display.Shape(30, 500)
             .addChildTo(this)
             .setPosition(20, SC_H*0.7)
