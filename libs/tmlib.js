@@ -14696,6 +14696,7 @@ tm.display = tm.display || {};
             c.strokeRect(lw_half, lw_half, this.width-lw, this.height-lw);
             
             c.restore();
+            return this;
         },
         
         /**

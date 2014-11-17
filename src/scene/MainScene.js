@@ -31,7 +31,6 @@ tm.define("shotgun.MainScene", {
     life: 2,        //ライフ
     lifeMax: 5,     //ライフ最大値
     pick: false,    //カードピック可能フラグ
-    count: 9,       //カード選択カウントダウン用
     level: 1,       //ゲームレベル
     levelReset: 0,  //レベルリセット回数
     handCount: null,//役の回数
@@ -39,9 +38,14 @@ tm.define("shotgun.MainScene", {
     gameend: false, //ゲーム終了フラグ
     complete: false,//役コンプリートフラグ
 
+    //カウンタ
+    count: 10,      //カード選択カウントダウン用
+    limitCount: 9*44,
+    limitMax: 9*44,
+
     //経過時間
-    time: 0,
-    absTime: 0,
+    time: 1,
+    absTime: 1,
 
     //遷移情報
     exitGame: false,
@@ -116,10 +120,20 @@ tm.define("shotgun.MainScene", {
         }
 
         //タイムリミット表示
-        this.meter = tm.display.Shape(20, 300)
-//            .addChildTo(this)
-            .setPosition(20, SC_H*0.8)
-            .renderRectangle({fillStyle: this.bgColor, strokeStyle: this.bgColor});
+        this.meter = tm.display.Shape(20, 500)
+            .addChildTo(this)
+            .setPosition(20, SC_H*0.7)
+            .renderRectangle({fillStyle: "Blue", strokeStyle: "Blue"});
+        this.meter.originY = 1.0;
+        this.meter.update = function() {
+            this.canvas.fillStyle = "hsla({0}, 50%, 50%, 1.0)".format(that.limitCount);
+            this.height = that.limitCount*(500/that.limitMax);
+        }
+        tm.display.Shape(20, 500)
+            .addChildTo(this)
+            .setPosition(20, SC_H*0.7)
+            .renderRectangle({fillStyle: "rgba(0,0,0,0)", strokeStyle: "Black", lineWidth: 3})
+            .setOrigin(0.5, 1.0);
 
         //直前の役表示
         var by = SC_H*0.8+CARD_H*CARD_SCALE*0.5;
@@ -217,6 +231,14 @@ tm.define("shotgun.MainScene", {
         if (this.time % interval == 0 && this.pick) {
             this.count--;
         }
+        if (this.count == 9) {
+            //タイムリミットゲージ用カウンタ
+            this.limitMax = this.limitCount = interval*9;
+        } else if (this.count < 9) {
+            this.limitCount--;
+            if (this.limitCount < 0) this.limitCount = 0;
+        }
+            
 
         //手札が五枚揃ったor時間切れ
         if (this.deck.numHand == 5 || this.count < 0) {
