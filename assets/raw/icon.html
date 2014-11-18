@@ -2,6 +2,12 @@
 <html lang="ja">
 <head>
 <meta charset=UTF-8>
+        <style>
+            @font-face {
+                font-family: 'CasinoRegular';
+                src: url(../../font/CasinoRegular.TTF) format("truetype");
+            }
+        </style>
 </head>
 <body>
 <div>
@@ -22,21 +28,71 @@
 var app;
 tm.main(function() {
 
+    SC_W = SC_H = 512;
+    CARD_W = 200;
+    CARD_H = 300;
+    CARD_SCALE = 0.7;
+
     app = tm.display.CanvasApp("#app");
     app.background = "rgba(50, 110, 50, 1)";
     app.resize(512, 512);
-    app.run();
 
     app.focus = null;
 
     var moveGridSize = tm.dom.Element("#moveGridSize");
 
-    var scene = app.currentScene;
-    scene.init = function() {
-        this.superInit();
+    app.scene = tm.app.Scene();
+    app.scene.setup = function() {
+        var fillStyle = "Red";
+        var outlineStyle = "White";
+        var shadowColor = 'rgba(160, 160, 160, 1)';
+
+        //カード
+        for (var i = 0; i < 5; i++) {
+            var c = tm.display.Sprite("card", CARD_W, CARD_H)
+                .addChildTo(this)
+                .setPosition(SC_W*0.5+50, SC_H*0.5+CARD_H*0.3)
+                .setFrameIndex(i);
+            c.rotation = -15+i*15;
+            c.originX = c.originY = 0.9;
+        }
+
+        //ロゴ
+        //タイトルロゴ１
+        var lb = this.title1 = tm.display.OutlineLabel("SHOTGUN", 130)
+            .addChildTo(this)
+            .setPosition(SC_W*0.3, SC_H*0.6)
+            .setParam({fontFamily:"'CasinoRegular'", align: "left", baseline:"middle", outlineWidth:3 });
+        lb.fillStyle = fillStyle;
+        lb.fillStyleOutline = outlineStyle;
+        lb.shadowColor = shadowColor;
+        lb.shadowBlur = 5;
+
+        //タイトルロゴ２
+        var lb = this.title2 = tm.display.OutlineLabel("POKER", 130)
+            .addChildTo(this)
+            .setPosition(SC_W*0.8, SC_H*0.7)
+            .setParam({fontFamily:"'CasinoRegular'", align: "right", baseline:"middle", outlineWidth:3 });
+        lb.fillStyle = fillStyle;
+        lb.fillStyleOutline = outlineStyle;
+        lb.shadowColor = shadowColor;
+        lb.shadowBlur = 5;
     }
-    scene.update = function(app) {
-    };
+
+    var loadingScene = tm.ui["LoadingScene"]({
+        assets: {
+            "card": "../trump.png",
+        },
+        width: 512,
+        height: 512,
+        bgColor: "black",
+        nextScene: function() {
+            app.scene.setup();
+            return app.scene;
+        },
+    });
+    app.replaceScene(loadingScene);
+    app.run();
 });
 
 </script>
