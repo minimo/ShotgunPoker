@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset=UTF-8>
+</head>
+<body>
+<div>
+<ul>
+    <li>
+        キャンバスのサイズ<br>
+        width<input type="number" id="canvasWidth" class="canvasSize" value="512"><br>
+        height<input type="number" id="canvasHeight" class="canvasSize" value="512"><br>
+    </li>
+</ul>
+</div>
+
+<canvas id="app"></canvas>
+
+<script src="../../libs/tmlib.js"></script>
+<script src="../../libs/outlinelabel.js"></script>
+<script>
+var app;
+tm.main(function() {
+
+    app = tm.display.CanvasApp("#app");
+    app.background = "rgba(50, 110, 50, 1)";
+    app.resize(512, 512);
+    app.run();
+
+    app.focus = null;
+
+    var moveGridSize = tm.dom.Element("#moveGridSize");
+
+    var scene = app.currentScene;
+    scene.init = function() {
+        this.superInit();
+    }
+    scene.update = function(app) {
+    };
+});
+
+</script>
+</body>
+</html>
