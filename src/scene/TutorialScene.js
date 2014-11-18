@@ -435,14 +435,15 @@ tm.define("shotgun.TutorialScene", {
             .call(function(){
                 that.deck.sortHand();
                 shotgun.MainScene.prototype.dispHand.call(that, ONEPAIR);
-                appMain.playSE("nohand");
+                appMain.playSE("nopair");
                 that.score+=ONEPAIR;
                 that.life--;
-                that.beforeHand.alert = false;
             }).wait(2000)
-
-            //ゲームオーバー説明
             .call(function(){
+                that.beforeHand.alert = false;
+            })
+            //ゲームオーバー説明
+            .call(function() {
                 that.enterMessage(pos, 8000, "ライフが０の状態でミスすると", 40);
                 that.enterMessage(pos+80, 8000, "ゲームオーバーです", 40);
                 that.deck.addHand(that.deck.pickCard(SUIT_DIAMOND, 5));
