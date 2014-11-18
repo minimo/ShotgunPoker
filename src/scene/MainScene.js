@@ -124,12 +124,25 @@ tm.define("shotgun.MainScene", {
         this.meter = tm.display.Shape(30, 500)
             .addChildTo(this)
             .setPosition(20, SC_H*0.7)
-            .renderRectangle({fillStyle: "Blue", strokeStyle: "Blue"})
             .setOrigin(0.5, 1.0);
         this.meter.update = function() {
-            this.height = that.limitCount*(500/that.limitMax);
-            var color = "hsla({0}, 50%, 50%, 1.0)".format(~~(this.height/5)*3);
-            this.renderRectangle({fillStyle: color, strokeStyle: color});
+            var limit = that.limitCount*(500/that.limitMax);
+
+            var color = "hsla({0}, 50%, 50%, 1.0)".format(~~(limit/5)*3);
+            var c = this.canvas;
+
+            c.clear(0,0,30,500);
+
+            // パラメータセット
+            c.fillStyle = color;
+            c.strokeStyle = color;
+            c.lineWidth = 1;
+
+            // 描画
+            var lw      = Number(c.lineWidth);
+            var lw_half = lw/2;
+            c.fillRect(0, 500-limit, this.width, this.height-(500-limit));
+            c.restore();
         }
         tm.display.Shape(30, 500)
             .addChildTo(this)
