@@ -44,44 +44,62 @@ tm.main(function() {
     app.scene = tm.app.Scene();
     app.scene.setup = function() {
         var fillStyle = "Red";
-        var outlineStyle = "White";
+        var outlineStyle = "Black";
         var shadowColor = 'rgba(160, 160, 160, 1)';
 
+        //バックグラウンド
+        this.bg = tm.display.Shape(SC_W, SC_H)
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.5)
+            .renderRectangle({fillStyle: 'rgba(50, 110, 50, 1)', strokeStyle: 'rgba(50, 110, 50, 1)'});
+
         //カード
+        var card = [0,9,10,11,12];
         for (var i = 0; i < 5; i++) {
             var c = tm.display.Sprite("card", CARD_W, CARD_H)
                 .addChildTo(this)
-                .setPosition(SC_W*0.5+50, SC_H*0.5+CARD_H*0.3)
-                .setFrameIndex(i);
+                .setPosition(SC_W*0.55, SC_H*0.5+CARD_H*0.5)
+                .setFrameIndex(card[i])
+                .setScale(1.2);
             c.rotation = -15+i*15;
             c.originX = c.originY = 0.9;
         }
 
+        //ショットガンシルエット
+        var sg = tm.display.Sprite("shotgun", 500, 220)
+                .addChildTo(this)
+                .setPosition(SC_W*0.5, SC_H*0.5);
+        sg.scaleX = -1;
+        sg.rotation = -10;
+
         //ロゴ
         //タイトルロゴ１
-        var lb = this.title1 = tm.display.OutlineLabel("SHOTGUN", 130)
+        var lb = this.title1 = tm.display.OutlineLabel("SHOTGUN", 110)
             .addChildTo(this)
-            .setPosition(SC_W*0.3, SC_H*0.6)
-            .setParam({fontFamily:"'CasinoRegular'", align: "left", baseline:"middle", outlineWidth:3 });
+            .setPosition(SC_W*0.45, SC_H*0.3)
+            .setParam({fontFamily:"'CasinoRegular'", align: "center", baseline:"middle", outlineWidth:3 });
+        lb.scaleY = 1.5;
         lb.fillStyle = fillStyle;
         lb.fillStyleOutline = outlineStyle;
-        lb.shadowColor = shadowColor;
-        lb.shadowBlur = 5;
+//        lb.shadowColor = shadowColor;
+//        lb.shadowBlur = 5;
 
         //タイトルロゴ２
-        var lb = this.title2 = tm.display.OutlineLabel("POKER", 130)
+        var lb = this.title2 = tm.display.OutlineLabel("POKER", 120)
             .addChildTo(this)
-            .setPosition(SC_W*0.8, SC_H*0.7)
-            .setParam({fontFamily:"'CasinoRegular'", align: "right", baseline:"middle", outlineWidth:3 });
+            .setPosition(SC_W*0.5, SC_H*0.8)
+            .setParam({fontFamily:"'CasinoRegular'", align: "center", baseline:"middle", outlineWidth:3 });
+        lb.scaleY = 1.5;
         lb.fillStyle = fillStyle;
         lb.fillStyleOutline = outlineStyle;
-        lb.shadowColor = shadowColor;
-        lb.shadowBlur = 5;
+//        lb.shadowColor = shadowColor;
+//        lb.shadowBlur = 5;
     }
 
     var loadingScene = tm.ui["LoadingScene"]({
         assets: {
             "card": "../trump.png",
+            "shotgun":      "../shotgun.png",
         },
         width: 512,
         height: 512,
