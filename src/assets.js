@@ -12,9 +12,7 @@ var assets = {
     "tmliblogo":    "assets/tmlib_logo.png",
     "shotgun":      "assets/shotgun.png",
 
-    "touch":        "assets/Press_Hold.png",
-    "swipe_right":  "assets/Swipe_Right.png",
-    "swipe_left":   "assets/Swipe_Left.png",
+    "arrow":        "assets/arrow.png",
 
     //BGM
     "titleBGM":     "assets/game_maoudamashii_5_casino02.mp3",

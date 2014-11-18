@@ -28,7 +28,7 @@ tm.define("shotgun.TutorialScene", {
     //制御情報
     pick: true,
     phase: 0,
-    life: 2,
+    life: 3,
     score: 0,
 
     //ボタン用フォントパラメータ
@@ -147,6 +147,14 @@ tm.define("shotgun.TutorialScene", {
         //チュートリアルコントローラー
         this.ctrl = tm.app.Object2D().addChildTo(this);
 
+        //操作説明用
+        this.pointer = tm.display.Sprite("arrow", 300, 32)
+            .addChildTo(this)
+            .setPosition(SC_W*0.2, SC_H*0.5)
+            .setOrigin(0.0, 0.5);
+        this.pointer.scaleX = 0.0;
+        this.pointer.scaleY = 2.0;
+
         this.time = 0;
     },
 
@@ -263,7 +271,7 @@ tm.define("shotgun.TutorialScene", {
                 shotgun.MainScene.prototype.dispHand.call(that, THREECARD);
                 appMain.playSE("hand");
                 that.score+=THREECARD;
-            }).wait(3000)
+            }).wait(2000)
 
             //カード補充の説明
             .call(function(){
@@ -341,15 +349,16 @@ tm.define("shotgun.TutorialScene", {
 
             //手動シャッフルの説明
             .call(function(){
-                that.enterMessage(pos, 10000, "また、横に大きくスワイプすると", 40);
-                that.enterMessage(pos+60, 10000, "カードのシャッフルが出来ます", 40);
+                that.enterMessage(pos, 9000, "また、横に大きくスワイプすると", 40);
+                that.enterMessage(pos+60, 9000, "カードのシャッフルが出来ます", 40);
+//                that.pointer.tweener.clear().to({scaleX:2.0},500);
             }).wait(3000)
             .call(function(){
                 that.deck.shuffle(false);
-            }).wait(4000)
+            }).wait(3000)
             .call(function(){
                 that.deck.shuffle(false);
-            }).wait(4000)
+            }).wait(3000)
 
             //ミス条件の説明
             .call(function(){
@@ -379,12 +388,59 @@ tm.define("shotgun.TutorialScene", {
                 appMain.playSE("nopair");
                 that.life--;
             }).wait(2000)
-/*
+
+            //ワンペア二回ミス説明
             .call(function(){
                 that.enterMessage(pos, 6000, "ワンペアが２回続いた場合も", 40);
-                that.enterMessage(pos, 6000, "ミスとして判定されます", 40);
+                that.enterMessage(pos+60, 6000, "ミスとなります", 40);
             }).wait(1000)
-*/
+            .call(function(){
+                that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 10));
+            }).wait(200)
+            .call(function(){
+                that.deck.addHand(that.deck.pickCard(SUIT_HEART, 8));
+            }).wait(200)
+            .call(function(){
+                that.deck.addHand(that.deck.pickCard(SUIT_DIAMOND, 6));
+            }).wait(200)
+            .call(function(){
+                that.deck.addHand(that.deck.pickCard(SUIT_HEART, 11));
+            }).wait(200)
+            .call(function(){
+                that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 10));
+            }).wait(500)
+            .call(function(){
+                that.deck.sortHand();
+                shotgun.MainScene.prototype.dispHand.call(that, ONEPAIR);
+                appMain.playSE("hand");
+                that.score+=ONEPAIR;
+                that.beforeHand.alert = true;
+            }).wait(2000)
+
+            .call(function(){
+                that.deck.addHand(that.deck.pickCard(SUIT_DIAMOND, 1));
+            }).wait(200)
+            .call(function(){
+                that.deck.addHand(that.deck.pickCard(SUIT_HEART, 11));
+            }).wait(200)
+            .call(function(){
+                that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 3));
+            }).wait(200)
+            .call(function(){
+                that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 1));
+            }).wait(200)
+            .call(function(){
+                that.deck.addHand(that.deck.pickCard(SUIT_HEART, 13));
+            }).wait(500)
+            .call(function(){
+                that.deck.sortHand();
+                shotgun.MainScene.prototype.dispHand.call(that, ONEPAIR);
+                appMain.playSE("nohand");
+                that.score+=ONEPAIR;
+                that.life--;
+                that.beforeHand.alert = false;
+            }).wait(2000)
+
             //ゲームオーバー説明
             .call(function(){
                 that.enterMessage(pos, 8000, "ライフが０の状態でミスすると", 40);
