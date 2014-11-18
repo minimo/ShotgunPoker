@@ -504,7 +504,7 @@ tm.define("shotgun.TutorialScene", {
             .call(function(){
                 appMain.popScene();
             });
-     },
+    },
 
     //タッチorクリック開始処理
     ontouchesstart: function(e) {
@@ -550,12 +550,6 @@ tm.define("shotgun.TutorialScene", {
         var sx = e.pointing.x;
         var sy = e.pointing.y;
 
-/*
-        if (this.pick && !this.shuffled && !this.deck.busy) {
-            var c = this.deck.pick(sx, sy);
-            if (c) this.deck.addHand(c);
-        }
-*/
         this.shuffled = false;
     },
 });
