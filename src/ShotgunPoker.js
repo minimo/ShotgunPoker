@@ -13,6 +13,8 @@ shotgun = {
 tm.define("shotgun.CanvasApp", {
     superClass: tm.app.CanvasApp,
 
+    version: "1.0.0",
+
     //ＢＧＭ＆効果音
     bgm: null,
     bgmIsPlay: false,

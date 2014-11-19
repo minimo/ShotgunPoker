@@ -127,8 +127,8 @@ tm.define("shotgun.MainScene", {
             .setOrigin(0.5, 1.0);
         this.meter.update = function() {
             var limit = that.limitCount*(500/that.limitMax);
-
-            var color = "hsla({0}, 50%, 50%, 1.0)".format(~~(limit/5)*3);
+            var hsl = ~~(that.limitCount*(120/that.limitMax));
+            var color = "hsla({0}, 50%, 50%, 1.0)".format(hsl);
             var c = this.canvas;
 
             c.clear(0,0,30,500);
@@ -230,7 +230,7 @@ tm.define("shotgun.MainScene", {
             var lb = this.creditLabel = tm.display.OutlineLabel("", 40)
                 .addChildTo(this)
                 .setParam(this.labelParamBasic)
-                .setPosition(SC_W*0.0, SC_H*0.9);
+                .setPosition(SC_W*0.0, 15);
             lb.update = function() {
                 this.text = "Level:"+that.level;
             }
@@ -347,8 +347,8 @@ tm.define("shotgun.MainScene", {
             this.time = 0;
 
             //レベル処理
-            this.level = Math.sqrt(this.absTime*(0.0002*(this.levelReset+1)))+1;
-            if (this.level > 2 && this.levelReset < 2) {
+            this.level = Math.sqrt(this.absTime*(0.0004*(this.levelReset+1)))+1;
+            if (this.level > 2 && this.levelReset < 1) {
                 this.absTime = 0;
                 this.level = 1;
                 this.levelReset++;
