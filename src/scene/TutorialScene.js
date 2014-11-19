@@ -196,9 +196,9 @@ tm.define("shotgun.TutorialScene", {
         var that = this;
         this.ctrl.tweener.clear().wait(2000)
             .call(function(){
-                that.enterMessage(pos, 6000, "場にあるカードを５枚選んで", 40);
+                that.enterMessage(pos, 6000, "制限時間内にカードを５枚選んで", 40);
                 that.enterMessage(pos+60, 6000, "ポーカーの役を作ってください", 40);
-            }).wait(500)
+            }).wait(2000)
 
             //最初にロイヤルストレートフラッシュを作る
             .call(function(){
@@ -225,7 +225,7 @@ tm.define("shotgun.TutorialScene", {
                 shotgun.MainScene.prototype.dispHand.call(that, ROYALSTRAIGHTFLASH, 2400);
                 appMain.playSE("hand");
                 that.score+=ROYALSTRAIGHTFLASH;
-            }).wait(3000)
+            }).wait(5000)
 
             //ツーペア作成
             .call(function(){
