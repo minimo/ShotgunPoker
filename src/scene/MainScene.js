@@ -120,7 +120,7 @@ tm.define("shotgun.MainScene", {
         }
 
         //タイムリミットゲージ
-        var color = "hsla({0}, 50%, 50%, 1.0)".format(300);
+        var color = "hsla({0}, 100%, 50%, 1.0)".format(300);
         this.meter = tm.display.Shape(30, 500)
             .addChildTo(this)
             .setPosition(20, SC_H*0.7)
@@ -128,7 +128,7 @@ tm.define("shotgun.MainScene", {
         this.meter.update = function() {
             var limit = that.limitCount*(500/that.limitMax);
             var hsl = ~~(that.limitCount*(120/that.limitMax));
-            var color = "hsla({0}, 50%, 50%, 1.0)".format(hsl);
+            var color = "hsla({0}, 100%, 50%, 1.0)".format(hsl);
             var c = this.canvas;
 
             c.clear(0,0,30,500);
