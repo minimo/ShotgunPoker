@@ -125,7 +125,11 @@ tm.define("shotgun.TitleScene", {
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.65)
             .addEventListener("pushed", function() {
-                that.mask.tweener.clear().fadeIn(200).call(function(){appMain.pushScene(shotgun.SettingScene());});
+                that.mask.tweener.clear()
+                    .fadeIn(200)
+                    .call(function(){
+                        appMain.pushScene(shotgun.SettingScene());
+                    });
             });
 
         //クレジット
@@ -133,7 +137,11 @@ tm.define("shotgun.TitleScene", {
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.75)
             .addEventListener("pushed", function() {
-                that.mask.tweener.clear().fadeIn(200).call(function(){appMain.pushScene(shotgun.CreditScene());});
+                that.mask.tweener.clear()
+                    .fadeIn(200)
+                    .call(function(){
+                        appMain.pushScene(shotgun.CreditScene());
+                    });
             });
 
         //GAMECENTER
