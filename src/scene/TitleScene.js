@@ -121,7 +121,7 @@ tm.define("shotgun.TitleScene", {
             });
 
         //設定
-        shotgun.Button(width, height, "SETTING")
+        shotgun.Button(width, height, "OPTION")
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.65)
             .addEventListener("pushed", function() {
@@ -161,6 +161,12 @@ tm.define("shotgun.TitleScene", {
                 gamecenter.showLeaderboard(function() {}, function() {AdvanceAlert($trans("GAMECENTERのアクセスに失敗しました"));}, data);
 //                that.mask.tweener.clear().fadeIn(200).call(function(){appMain.pushScene(shotgun.CreditScene());});
             });
+
+            //バージョン表示
+            tm.display.OutlineLabel("VER "+appMain.version, 30)
+                .addChildTo(this.titleLayer)
+                .setPosition(SC_W*0.5, SC_H-60)
+                .setParam({fontFamily:"'CasinoRegular'", align: "center", baseline:"middle", outlineWidth:3 });
     },
 
     addButton: function(page, finish) {

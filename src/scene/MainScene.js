@@ -129,18 +129,14 @@ tm.define("shotgun.MainScene", {
             var limit = that.limitCount*(500/that.limitMax);
             var hsl = ~~(that.limitCount*(120/that.limitMax));
             var color = "hsla({0}, 100%, 50%, 1.0)".format(hsl);
+
             var c = this.canvas;
-
             c.clear(0,0,30,500);
-
-            // パラメータセット
             c.fillStyle = color;
             c.strokeStyle = color;
             c.lineWidth = 1;
 
-            // 描画
-            var lw      = Number(c.lineWidth);
-            var lw_half = lw/2;
+            var lw = Number(c.lineWidth);
             c.fillRect(0, 500-limit, this.width, this.height-(500-limit));
             c.restore();
         }
@@ -174,7 +170,7 @@ tm.define("shotgun.MainScene", {
         //ポーズボタン
         this.pause = shotgun.Button(200, 60, "PAUSE")
             .addChildTo(this)
-            .setPosition(SC_W*0.84, 72)
+            .setPosition(SC_W*0.84, 80)
             .addEventListener("pushed", function() {
                 appMain.pushScene(shotgun.PauseScene(this));
             }.bind(this));
