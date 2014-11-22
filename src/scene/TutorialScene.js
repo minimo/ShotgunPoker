@@ -553,17 +553,17 @@ tm.define("shotgun.TutorialScene", {
             }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 13));
-            }).wait(500)
+            }).wait(1000)
             .call(function(){
                 that.countDown = false;
                 that.deck.sortHand();
                 that.onePair++;
-                shotgun.MainScene.prototype.dispHand.call(that, ONEPAIR);
+                shotgun.MainScene.prototype.dispHand.call(that, ONEPAIR, 2400);
                 appMain.playSE("nopair");
                 that.score+=ONEPAIR;
                 that.life--;
                 that.countReset();
-            }).wait(2000)
+            }).wait(5000)
 
             //ゲームオーバー説明
             .call(function() {
