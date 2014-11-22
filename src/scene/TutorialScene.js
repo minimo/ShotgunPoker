@@ -179,7 +179,7 @@ tm.define("shotgun.TutorialScene", {
             .setParam(this.labelParamPoker)
             .setPosition(SC_W/2, SC_H/2);
         lb.beforeCount = 9;
-        lb.alpha = 1.0;
+        lb.alpha = 0.0;
         lb.update = function() {
             if (that.count < 6) {
                 this.visible = true;
@@ -210,6 +210,8 @@ tm.define("shotgun.TutorialScene", {
             .setOrigin(0.0, 0.5);
         this.pointer.scaleX = 0.0;
         this.pointer.scaleY = 2.0;
+
+        appMain.playBGM("tutorialBGM");
 
         this.time = 0;
     },
@@ -271,19 +273,19 @@ tm.define("shotgun.TutorialScene", {
             .call(function(){
                 that.countDown = true;
                 that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 10));
-            }).wait(500)
+            }).wait(1000)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 12));
-            }).wait(500)
+            }).wait(1000)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 11));
-            }).wait(500)
+            }).wait(1000)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 1));
-            }).wait(500)
+            }).wait(1000)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 13));
-            }).wait(1000)
+            }).wait(1500)
             .call(function(){
                 that.countDown = false;
                 that.deck.sortHand();
@@ -301,19 +303,19 @@ tm.define("shotgun.TutorialScene", {
             .call(function(){
                 that.countDown = true;
                 that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 2));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 2));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_DIAMOND, 11));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 11));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 12));
-           }).wait(500)
+            }).wait(500)
             .call(function(){
                 that.countDown = false;
                 that.deck.sortHand();
@@ -327,16 +329,16 @@ tm.define("shotgun.TutorialScene", {
             .call(function(){
                 that.countDown = true;
                 that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 8));
-            }).wait(200)
-            .call(function(){
+            }).wait(500)
+           .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 1));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_DIAMOND, 1));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 1));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_DIAMOND, 12));
             }).wait(500)
@@ -358,16 +360,16 @@ tm.define("shotgun.TutorialScene", {
             .call(function(){
                 that.countDown = true;
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 4));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 12));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 10));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 7));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 13));
             }).wait(500)
@@ -384,16 +386,16 @@ tm.define("shotgun.TutorialScene", {
             .call(function(){
                 that.countDown = true;
                 that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 5));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 6));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 7));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 4));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_DIAMOND, 8));
             }).wait(500)
@@ -410,16 +412,16 @@ tm.define("shotgun.TutorialScene", {
             .call(function(){
                 that.countDown = true;
                 that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 9));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 9));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 11));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 9));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_DIAMOND, 9));
             }).wait(500)
@@ -453,16 +455,16 @@ tm.define("shotgun.TutorialScene", {
             .call(function(){
                 that.countDown = true;
                 that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 5));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 8));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_DIAMOND, 9));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 12));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 10));
             }).wait(500)
@@ -474,27 +476,21 @@ tm.define("shotgun.TutorialScene", {
             .call(function(){
                 appMain.playSE("nopair");
                 that.life--;
-                that.countReset();
+                that.countReset(240);
             }).wait(2000)
 
             //時間切れ
             .call(function(){
                 that.countDown = true;
-                that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 5));
-            }).wait(2000)
-            .call(function(){
-                that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 8));
-            }).wait(3000)
+            }).wait(8000)
             .call(function(){
                 that.countDown = false;
                 that.deck.sortHand();
                 shotgun.MainScene.prototype.dispHand.call(that, MISS, 3000);
-            }).wait(3000)
-            .call(function(){
                 appMain.playSE("nopair");
                 that.life--;
                 that.countReset();
-            }).wait(2000)
+            }).wait(3000)
 
             //ワンペア二回ミス説明
             .call(function(){
@@ -580,32 +576,8 @@ tm.define("shotgun.TutorialScene", {
                 shotgun.MainScene.prototype.dispHand.call(that, NOPAIR);
                 appMain.playSE("nopair");
                 that.life--;
-                that.countReset();
             }).wait(2000)
 
-            .call(function(){
-                that.countDown = true;
-                that.deck.addHand(that.deck.pickCard(SUIT_DIAMOND, 11));
-            }).wait(200)
-            .call(function(){
-                that.deck.addHand(that.deck.pickCard(SUIT_HEART, 5));
-            }).wait(200)
-            .call(function(){
-                that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 12));
-            }).wait(200)
-            .call(function(){
-                that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 5));
-            }).wait(200)
-            .call(function(){
-                that.deck.addHand(that.deck.pickCard(SUIT_HEART, 4));
-            }).wait(500)
-            .call(function(){
-                that.countDown = false;
-                that.deck.sortHand();
-                shotgun.MainScene.prototype.dispHand.call(that, NOPAIR);
-                appMain.playSE("nopair");
-                that.life--;
-            }).wait(1500)
             .call(function(){
                 var lb = tm.display.OutlineLabel("GAME OVER", 100)
                     .addChildTo(that)

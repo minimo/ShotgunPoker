@@ -17,6 +17,7 @@ var assets = {
     //BGM
     "titleBGM":     "assets/game_maoudamashii_5_casino02.mp3",
     "mainBGM":      "assets/game_maoudamashii_5_casino01.mp3",
+    "tutorialBGM":  "assets/game_maoudamashii_5_casino04.mp3",
 
     //SE
     "countdown":    "assets/se_countdown.mp3",

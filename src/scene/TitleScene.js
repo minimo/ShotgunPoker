@@ -118,6 +118,9 @@ tm.define("shotgun.TitleScene", {
                         appMain.pushScene(shotgun.TutorialScene());
                     })
                     .moveBy(SC_W, 0, 500, "easeOutQuint")
+                    .call(function(){
+                        appMain.playBGM("titleBGM");
+                    });
             });
 
         //設定
