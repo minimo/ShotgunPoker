@@ -458,7 +458,7 @@ tm.define("shotgun.MainScene", {
                     that.beforeHand.alert = true;
                 else
                     that.beforeHand.alert = false;
-        });
+            });
 
         //２行目
         y += SC_H*0.08;

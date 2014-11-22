@@ -13,6 +13,7 @@ var assets = {
     "shotgun":      "assets/shotgun.png",
 
     "arrow":        "assets/arrow.png",
+    "finger":       "assets/finger.png",
 
     //BGM
     "titleBGM":     "assets/game_maoudamashii_5_casino02.mp3",
