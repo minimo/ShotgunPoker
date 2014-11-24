@@ -200,25 +200,23 @@ tm.define("shotgun.TutorialScene", {
 
         //ジェスチャー説明用指シルエット
         this.finger = tm.display.Sprite("finger")
-                .addChildTo(this)
-                .setPosition(SC_W*0.2, SC_H*0.5)
-                .setOrigin(0.5, 0.0)
-                .setScale(3)
-                .setAlpha(0);
+            .addChildTo(this)
+            .setPosition(SC_W*0.2, SC_H*0.5)
+            .setOrigin(0.5, 0.0)
+            .setScale(3)
+            .setAlpha(0);
+
+        //操作説明用
+        this.arrow = tm.display.Sprite("arrow", 320, 128)
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.5)
+            .setAlpha(0);
 
         //マルチタッチ初期化
         this.touches = tm.input.TouchesEx(this);
 
         //チュートリアルコントローラー
         this.ctrl = tm.app.Object2D().addChildTo(this);
-
-        //操作説明用
-        this.pointer = tm.display.Sprite("arrow", 300, 32)
-            .addChildTo(this)
-            .setPosition(SC_W*0.2, SC_H*0.5)
-            .setOrigin(0.0, 0.5);
-        this.pointer.scaleX = 0.0;
-        this.pointer.scaleY = 2.0;
 
         appMain.playBGM("tutorialBGM");
 
@@ -454,6 +452,14 @@ tm.define("shotgun.TutorialScene", {
                     .moveBy(-SC_W*0.6, 0, 500, "easeOutCubic")
                     .wait(2000)
                     .to({alpha:0.0},100);
+                that.arrow.tweener.clear().to({alpha:1.0},100)
+                    .wait(2500)
+                    .to({alpha:0.0},500)
+                    .wait(1000)
+                    .to({scaleX:-1},100)
+                    .to({alpha:1.0},100)
+                    .wait(1000)
+                    .to({alpha:0.0},500);
             }).wait(3000)
             .call(function(){
                 that.deck.shuffle(false);
