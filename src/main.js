@@ -10,7 +10,7 @@ mt = new MersenneTwister();
 
 //定数
 //デバッグフラグ
-DEBUG = true;
+DEBUG = false;
 PHONEGAP = false;
 DEBUG_PHONEGAP = true;
 
