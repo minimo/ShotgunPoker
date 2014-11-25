@@ -10,9 +10,12 @@ tm.define("shotgun.Button", {
     superClass: tm.app.Object2D,
 
     //描画スタイル設定
-    buttonColor: 'rgba(50, 150, 255, 0.8)',
-    lineColor: 'rgba(200, 200, 200, 0.5)',
-    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    DEFAULT_STYLE: {
+        buttonColor: 'rgba(50, 150, 255, 0.8)',
+        lineColor: 'rgba(200, 200, 200, 0.5)',
+        lineWidth: 4,
+        shadowColor: 'rgba(0, 0, 0, 0.5)',
+    },
     labelParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:3 },
 
     type: 0, //0:nomal 1:toggle
@@ -33,7 +36,7 @@ tm.define("shotgun.Button", {
         this.text = text || "";
 
         //セットアップ
-        this.setup();
+        this.setup(style);
 
         //判定処理設定
         this.interactive = true;
@@ -50,7 +53,7 @@ tm.define("shotgun.Button", {
         });
         this.addEventListener("pointingmove", function(e) {
             if (this.lock) return;
-            
+
             var pt = e.pointing;
             if (this.isHitPoint(pt.x, pt.y)) {
                 if (!this.push) {
@@ -81,7 +84,10 @@ tm.define("shotgun.Button", {
         });
     },
 
-    setup: function() {
+    setup: function(style) {
+        style = style || {};
+        style.$safe(this.DEFAULT_STYLE)
+
         //登録済みの場合破棄する
         if (this.shadow) {
             this.shadow.remove();
@@ -92,12 +98,12 @@ tm.define("shotgun.Button", {
         var width = this.width, height = this.height;
 
         //ボタン影
-        this.shadow = tm.display.RectangleShape(width, height, {fillStyle: this.shadowColor, strokeStyle: this.shadowColor, lineWidth: 4})
+        this.shadow = tm.display.RectangleShape(width, height, {fillStyle: style.shadowColor, strokeStyle: style.shadowColor, lineWidth: style.lineWidth})
             .addChildTo(this);
         this.shadow.blendMode = "source-over";
 
         //ボタン本体
-        this.button = tm.display.RectangleShape(width, height, {fillStyle: this.buttonColor, strokeStyle: this.lineColor, lineWidth: 4})
+        this.button = tm.display.RectangleShape(width, height, {fillStyle: style.buttonColor, strokeStyle: style.lineColor, lineWidth:  style.lineWidth})
             .addChildTo(this)
             .setPosition(-this.downX, -this.downY);
 //        this.button.blendMode = "lighter";
