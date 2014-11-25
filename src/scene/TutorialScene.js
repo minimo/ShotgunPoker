@@ -211,6 +211,7 @@ tm.define("shotgun.TutorialScene", {
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.5)
             .setAlpha(0);
+        this.arrow.scaleY = 0.5;
 
         //マルチタッチ初期化
         this.touches = tm.input.TouchesEx(this);
@@ -458,7 +459,7 @@ tm.define("shotgun.TutorialScene", {
                     .wait(1000)
                     .to({scaleX:-1},100)
                     .to({alpha:1.0},100)
-                    .wait(1000)
+                    .wait(1300)
                     .to({alpha:0.0},500);
             }).wait(3000)
             .call(function(){
