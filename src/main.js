@@ -34,7 +34,7 @@ STATUSBAR_COLOR = 'rgba(0,0,0,1)';
 //カードサイズ
 CARD_W = 200;
 CARD_H = 300;
-CARD_SCALE = 0.7;
+CARD_SCALE = 0.65;
 
 //スート
 SUIT_SPADE = 0;
@@ -53,7 +53,7 @@ RETURN_JOKER_TURN = 3;  //ジョーカーを戻すターン間隔
 
 //役一覧
 MISS = -20;
-NOHAND = -10;
+NOPAIR = -10;
 ONEPAIR = 10;
 FLASH = 20;
 TWOPAIR = 50;

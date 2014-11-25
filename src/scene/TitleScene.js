@@ -41,13 +41,12 @@ tm.define("shotgun.TitleScene", {
 
         //各画面セットアップ
         this.setupTitle();
-/*
-        this.setupTutorial1();
-        this.setupTutorial2();
-        this.setupScoreList();
-*/
-        //マスク
-        this.mask = tm.display.Sprite("blackback", SC_W*2, SC_H*2).addChildTo(this);
+
+        //目隠し
+        this.mask = tm.display.Shape(SC_W, SC_H)
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.5)
+            .renderRectangle({fillStyle: "rgba(0, 0, 0, 1.0)", strokeStyle: "rgba(0, 0, 0, 1.0)"});
         this.mask.tweener.clear().fadeOut(200);
         
         this.time = 0;
@@ -72,17 +71,6 @@ tm.define("shotgun.TitleScene", {
         var outlineStyle = "White";
         var shadowColor = 'rgba(160, 160, 160, 1)';
 
-        //カード
-/*
-        for (var i = 0; i < 5; i++) {
-            var c = tm.display.Sprite("card", CARD_W, CARD_H)
-                .addChildTo(this.titleLayer)
-                .setPosition(SC_W*0.5+50, SC_H*0.2+CARD_H*0.3)
-                .setFrameIndex(i);
-            c.rotation = -15+i*15;
-            c.originX = c.originY = 0.9;
-        }
-*/
         //ショットガンシルエット
         var sg = tm.display.Sprite("shotgun", SC_W, SC_H*0.2)
                 .addChildTo(this.titleLayer)
@@ -133,14 +121,21 @@ tm.define("shotgun.TitleScene", {
                         appMain.pushScene(shotgun.TutorialScene());
                     })
                     .moveBy(SC_W, 0, 500, "easeOutQuint")
+                    .call(function(){
+                        appMain.playBGM("titleBGM");
+                    });
             });
 
         //設定
-        shotgun.Button(width, height, "SETTING")
+        shotgun.Button(width, height, "OPTION")
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.65)
             .addEventListener("pushed", function() {
-                that.mask.tweener.clear().fadeIn(200).call(function(){appMain.pushScene(shotgun.SettingScene());});
+                that.mask.tweener.clear()
+                    .fadeIn(200)
+                    .call(function(){
+                        appMain.pushScene(shotgun.SettingScene());
+                    });
             });
 
         //クレジット
@@ -148,7 +143,11 @@ tm.define("shotgun.TitleScene", {
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.75)
             .addEventListener("pushed", function() {
-                that.mask.tweener.clear().fadeIn(200).call(function(){appMain.pushScene(shotgun.CreditScene());});
+                that.mask.tweener.clear()
+                    .fadeIn(200)
+                    .call(function(){
+                        appMain.pushScene(shotgun.CreditScene());
+                    });
             });
 
         //GAMECENTER
@@ -168,6 +167,12 @@ tm.define("shotgun.TitleScene", {
                 gamecenter.showLeaderboard(function() {}, function() {AdvanceAlert($trans("GAMECENTERのアクセスに失敗しました"));}, data);
 //                that.mask.tweener.clear().fadeIn(200).call(function(){appMain.pushScene(shotgun.CreditScene());});
             });
+
+            //バージョン表示
+            tm.display.OutlineLabel("VER "+appMain.version, 30)
+                .addChildTo(this.titleLayer)
+                .setPosition(SC_W*0.5, SC_H-60)
+                .setParam({fontFamily:"'CasinoRegular'", align: "center", baseline:"middle", outlineWidth:3 });
     },
 
     addButton: function(page, finish) {
@@ -200,44 +205,6 @@ tm.define("shotgun.TitleScene", {
                     that.titleLayer.tweener.clear().moveBy(SC_W*page, 0, 500, "easeOutQuint");
                 });
         }
-    },
-
-    setupTutorial1: function() {
-        var page = 1;
-        var that = this;
-        var width = 230, height = 60;
-        var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
-
-        tm.display.OutlineLabel("HOW TO PLAY", 40)
-            .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.5+SC_W*page, SC_H*0.05)
-            .setParam(this.labelParam);
-
-        tm.display.OutlineLabel("プレイ画面の説明", 40)
-            .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.5+SC_W*page, SC_H*0.1)
-            .setParam(this.labelParam);
-
-        tm.display.Sprite("tutorial1")
-            .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.5+SC_W*page, SC_H*0.5)
-            .setScale(0.7);
-
-        this.addButton(page);
-    },
-
-    setupTutorial2: function() {
-        var page = 2;
-        var that = this;
-        var width = 230, height = 60;
-        var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
-
-        tm.display.OutlineLabel("プレイ画面の説明", 40)
-            .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.5+SC_W*page, SC_H*0.1)
-            .setParam(this.labelParam);
-
-        this.addButton(page);
     },
 
     setupScoreList: function() {

@@ -72,8 +72,11 @@ tm.define("shotgun.CreditScene", {
             .setPosition(SC_W*0.5, SC_H*0.7)
             .setScale(0.5, 0.5);
 
-        //マスク
-        this.mask = tm.display.Sprite("blackback", SC_W*2, SC_H*2).addChildTo(this);
+        //目隠し
+        this.mask = tm.display.Shape(SC_W, SC_H)
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.5)
+            .renderRectangle({fillStyle: "rgba(0, 0, 0, 1.0)", strokeStyle: "rgba(0, 0, 0, 1.0)"});
         this.mask.tweener.clear().fadeOut(200);
         
         this.time = 0;

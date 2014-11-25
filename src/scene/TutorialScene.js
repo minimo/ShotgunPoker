@@ -28,8 +28,13 @@ tm.define("shotgun.TutorialScene", {
     //制御情報
     pick: true,
     phase: 0,
-    life: 2,
+    life: 3,
     score: 0,
+    limitCount: 300,
+    limitMax: 300,
+    count: 10,
+    countDown: false,
+    onePair: 0,
 
     //ボタン用フォントパラメータ
     buttonParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:4 },
@@ -66,7 +71,7 @@ tm.define("shotgun.TutorialScene", {
         var width = 210, height = 60;
         shotgun.Button(width, height, "←BACK")
             .addChildTo(this)
-            .setPosition(SC_W*0.84, 72)
+            .setPosition(SC_W*0.80, 72)
             .addEventListener("pushed", function() {
                 appMain.popScene();
             });
@@ -76,7 +81,7 @@ tm.define("shotgun.TutorialScene", {
         this.scoreLabel = tm.display.OutlineLabel("SCORE:", 50)
             .addChildTo(this)
             .setParam(this.labelParamBasic)
-            .setPosition(8, 72);
+            .setPosition(8, 32);
         this.scoreLabel.score = 0;
         this.scoreLabel.update = function() {
             this.text = "SCORE:"+this.score;
@@ -92,12 +97,12 @@ tm.define("shotgun.TutorialScene", {
         this.lifeLabel = tm.display.OutlineLabel("LIFE:", 50)
             .addChildTo(this)
             .setParam(this.labelParamBasic)
-            .setPosition(8, 128);
+            .setPosition(8, 96);
         this.lg = [];
         for (var i = 0; i < 7; i++ ) {
             var c = this.lg[i] = shotgun.Card(SUIT_HEART, 0).addChildTo(this);
             c.setScale(0.2);
-            c.setPosition( 155+i*45, 128);
+            c.setPosition( 155+i*45, 96);
             c.life = i;
             c.update = function() {
                 this.pattern = that.life+this.suit*13-1;
@@ -141,11 +146,80 @@ tm.define("shotgun.TutorialScene", {
             this.time++;
         }
 
+        //タイムリミットゲージ
+        var that = this;
+        var color = "hsla({0}, 100%, 50%, 1.0)".format(300);
+        this.meter = tm.display.Shape(30, 500)
+            .addChildTo(this)
+            .setPosition(20, SC_H*0.7)
+            .setOrigin(0.5, 1.0);
+        this.meter.update = function() {
+            var limit = that.limitCount*(500/that.limitMax);
+            var hsl = ~~(that.limitCount*(120/that.limitMax));
+            var color = "hsla({0}, 100%, 50%, 1.0)".format(hsl);
+
+            var c = this.canvas;
+            c.clear(0,0,30,500);
+            c.fillStyle = color;
+            c.strokeStyle = color;
+            c.lineWidth = 1;
+
+            var lw = Number(c.lineWidth);
+            c.fillRect(0, 500-limit, this.width, this.height-(500-limit));
+            c.restore();
+        }
+        tm.display.Shape(30, 500)
+            .addChildTo(this)
+            .setPosition(20, SC_H*0.7)
+            .renderRectangle({fillStyle: "rgba(0,0,0,0)", strokeStyle: "Black", lineWidth: 3})
+            .setOrigin(0.5, 1.0);
+
+        //カウントダウン表示
+        var lb = tm.display.OutlineLabel("5", 300)
+            .addChildTo(this)
+            .setParam(this.labelParamPoker)
+            .setPosition(SC_W/2, SC_H/2);
+        lb.beforeCount = 9;
+        lb.alpha = 0.0;
+        lb.update = function() {
+            if (that.count < 6) {
+                this.visible = true;
+                if (this.beforeCount == that.count) {
+                    this.alpha -= 0.05;
+                    if (this.alpha < 0)this.alpha = 0;
+                } else {
+                    this.alpha = 1.0;
+                    tm.asset.AssetManager.get("countdown").clone().play();
+                }
+            } else {
+                this.visible = false;
+            }
+            this.text = ""+that.count;
+            this.beforeCount = that.count;
+        }
+
+        //ジェスチャー説明用指シルエット
+        this.finger = tm.display.Sprite("finger")
+            .addChildTo(this)
+            .setPosition(SC_W*0.2, SC_H*0.5)
+            .setOrigin(0.5, 0.0)
+            .setScale(3)
+            .setAlpha(0);
+
+        //操作説明用
+        this.arrow = tm.display.Sprite("arrow", 320, 128)
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.5)
+            .setAlpha(0);
+        this.arrow.scaleY = 0.5;
+
         //マルチタッチ初期化
         this.touches = tm.input.TouchesEx(this);
 
         //チュートリアルコントローラー
         this.ctrl = tm.app.Object2D().addChildTo(this);
+
+        appMain.playBGM("tutorialBGM");
 
         this.time = 0;
     },
@@ -157,44 +231,23 @@ tm.define("shotgun.TutorialScene", {
     setupTitle: function() {
     },
 
-    addButton: function(page, finish) {
-        var that = this;
-        var width = 230, height = 60;
-        var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
-
-        //戻る
-        shotgun.Button(width, height, "PREV")
-            .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.25+SC_W*page, SC_H*0.9)
-            .addEventListener("pushed", function() {
-                that.titleLayer.tweener.clear().moveBy(SC_W, 0, 500, "easeOutQuint");
-            });
-
-        if (!finish) {
-            //次
-            shotgun.Button(width, height, "NEXT")
-                .addChildTo(this.titleLayer)
-                .setPosition(SC_W*0.75+SC_W*page, SC_H*0.9)
-                .addEventListener("pushed", function() {
-                    that.titleLayer.tweener.clear().moveBy(-SC_W, 0, 500, "easeOutQuint");
-                });
-        } else {
-            //終了
-            shotgun.Button(width, height, "EXIT")
-                .addChildTo(this.titleLayer)
-                .setPosition(SC_W*0.75+SC_W*page, SC_H*0.9)
-                .addEventListener("pushed", function() {
-                    that.titleLayer.tweener.clear().moveBy(SC_W*page, 0, 500, "easeOutQuint");
-                });
-        }
-    },
-
     update: function() {
         if (this.phase == 0) {
             this.startPhase1();
             this.phase++;
         }
+        if (this.countDown) {
+            this.limitCount--;
+            if (this.limitCount < 0) this.limitCount = 0;
+            this.count = ~~(this.limitCount/this.limitMax*10)
+        }
         this.time++;
+    },
+
+    countReset: function(val) {
+        val = val || 300;
+        this.limitCount = val;
+        this.limitMax = val;
     },
 
     //メッセージ表示
@@ -218,249 +271,334 @@ tm.define("shotgun.TutorialScene", {
     startPhase1: function() {
         var pos = SC_H*0.3;
         var that = this;
-        this.ctrl.tweener.clear().wait(1000)
+        this.ctrl.tweener.clear().wait(2000)
             .call(function(){
-                that.enterMessage(pos, 6000, "場にあるカードを５枚選んで");
-            }).wait(1000)
+                that.enterMessage(pos, 6000, "制限時間内にカードを５枚選んで", 40);
+                that.enterMessage(pos+60, 6000, "ポーカーの役を作ってください", 40);
+            }).wait(2000)
 
             //最初にロイヤルストレートフラッシュを作る
             .call(function(){
+                that.countDown = true;
                 that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 10));
-            }).wait(500)
+            }).wait(1000)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 12));
-            }).wait(500)
+            }).wait(1000)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 11));
-            }).wait(500)
+            }).wait(1000)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 1));
-            }).wait(500)
+            }).wait(1000)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 13));
-                that.enterMessage(pos, 5000, "ポーカーの役を作ってください");
+            }).wait(1500)
+            .call(function(){
+                that.countDown = false;
+                that.deck.sortHand();
             }).wait(2000)
             .call(function(){
-                that.deck.sortHand();
-            }).wait(3000)
-            .call(function(){
-                that.enterMessage(pos, 12000, "完成した役によって得点が入ります", 40);
+                that.enterMessage(pos, 12000, "完成した役に応じた", 40);
+                that.enterMessage(pos+60, 12000, "得点が入ります", 40);
                 shotgun.MainScene.prototype.dispHand.call(that, ROYALSTRAIGHTFLASH, 2400);
                 appMain.playSE("hand");
                 that.score+=ROYALSTRAIGHTFLASH;
-            }).wait(3000)
+                that.countReset();
+            }).wait(5000)
 
             //ツーペア作成
             .call(function(){
+                that.countDown = true;
                 that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 2));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 2));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_DIAMOND, 11));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 11));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 12));
             }).wait(500)
             .call(function(){
+                that.countDown = false;
                 that.deck.sortHand();
                 shotgun.MainScene.prototype.dispHand.call(that, TWOPAIR);
                 appMain.playSE("hand");
                 that.score+=TWOPAIR;
+                that.countReset();
             }).wait(2000)
 
             //スリーカード作成
             .call(function(){
+                that.countDown = true;
                 that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 8));
-            }).wait(200)
-            .call(function(){
+            }).wait(500)
+           .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 1));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_DIAMOND, 1));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 1));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_DIAMOND, 12));
             }).wait(500)
             .call(function(){
+                that.countDown = false;
                 that.deck.sortHand();
                 shotgun.MainScene.prototype.dispHand.call(that, THREECARD);
                 appMain.playSE("hand");
                 that.score+=THREECARD;
-            }).wait(3000)
+                that.countReset();
+            }).wait(2000)
 
             //カード補充の説明
             .call(function(){
-                that.enterMessage(pos, 10000, "場のカードがある程度少なくなると", 40);
+                that.enterMessage(pos, 10000, "場のカードが少なくなると", 40);
+                that.enterMessage(pos+60, 10000, "カード補充してシャッフルされます", 40);
             }).wait(500)
             //フラッシュ
             .call(function(){
+                that.countDown = true;
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 4));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 12));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 10));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 7));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 13));
             }).wait(500)
             .call(function(){
+                that.countDown = false;
                 that.deck.sortHand();
                 shotgun.MainScene.prototype.dispHand.call(that, FLASH);
                 appMain.playSE("hand");
                 that.score+=FLASH;
+                that.countReset();
             }).wait(2000)
 
             //ストレート
             .call(function(){
+                that.countDown = true;
                 that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 5));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 6));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 7));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 4));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_DIAMOND, 8));
             }).wait(500)
             .call(function(){
+                that.countDown = false;
                 that.deck.sortHand();
                 shotgun.MainScene.prototype.dispHand.call(that, STRAIGHT);
                 appMain.playSE("hand");
                 that.score+=STRAIGHT;
+                that.countReset();
             }).wait(2000)
 
             //フォーカード
             .call(function(){
+                that.countDown = true;
                 that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 9));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 9));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 11));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 9));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_DIAMOND, 9));
             }).wait(500)
             .call(function(){
+                that.countDown = false;
                 that.deck.sortHand();
                 shotgun.MainScene.prototype.dispHand.call(that, FOURCARD);
                 appMain.playSE("hand");
                 that.score+=FOURCARD;
-                that.enterMessage(pos, 5000, "カード補充とシャッフルが発生します", 35);
+                that.countReset();
             }).wait(4000)
 
             //手動シャッフルの説明
             .call(function(){
-                that.enterMessage(pos, 5000, "また、横に大きくスワイプすると", 40);
+                that.enterMessage(pos, 9000, "また、横に大きくスワイプすると", 40);
+                that.enterMessage(pos+60, 9000, "カードのシャッフルが出来ます", 40);
+                that.finger.tweener.clear().to({alpha:1.0},100)
+                    .wait(2500)
+                    .moveBy(SC_W*0.6, 0, 500, "easeOutCubic")
+                    .wait(2500)
+                    .moveBy(-SC_W*0.6, 0, 500, "easeOutCubic")
+                    .wait(2000)
+                    .to({alpha:0.0},100);
+                that.arrow.tweener.clear().to({alpha:1.0},100)
+                    .wait(2500)
+                    .to({alpha:0.0},500)
+                    .wait(1000)
+                    .to({scaleX:-1},100)
+                    .to({alpha:1.0},100)
+                    .wait(1300)
+                    .to({alpha:0.0},500);
             }).wait(3000)
             .call(function(){
                 that.deck.shuffle(false);
-                that.enterMessage(pos, 3000, "画面上のカードをシャッフルする事が出来ます", 40);
-            }).wait(4000)
+            }).wait(3000)
+            .call(function(){
+                that.deck.shuffle(false);
+            }).wait(3000)
 
             //ミス条件の説明
             .call(function(){
-                that.enterMessage(pos, 6000, "役無しまたは時間切れはミスとなり", 40);
+                that.enterMessage(pos, 6000, "役無し、時間切れはミスとなり", 40);
+                that.enterMessage(pos+60, 6000, "左上のライフが一つ減ります", 40);
             }).wait(1000)
             .call(function(){
+                that.countDown = true;
                 that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 5));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 8));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_DIAMOND, 9));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 12));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_HEART, 10));
             }).wait(500)
             .call(function(){
-                that.enterMessage(pos, 4000, "左上のライフが一つ減ります", 40);
+                that.countDown = false;
                 that.deck.sortHand();
-                shotgun.MainScene.prototype.dispHand.call(that, NOHAND, 3000);
+                shotgun.MainScene.prototype.dispHand.call(that, NOPAIR, 3000);
             }).wait(3000)
             .call(function(){
-                appMain.playSE("nohand");
+                appMain.playSE("nopair");
                 that.life--;
+                that.countReset(270);
             }).wait(2000)
 
-/*
+            //時間切れ
+            .call(function(){
+                that.countDown = true;
+            }).wait(9500)
+            .call(function(){
+                that.countDown = false;
+                that.deck.sortHand();
+                shotgun.MainScene.prototype.dispHand.call(that, MISS, 3000);
+                appMain.playSE("nopair");
+                that.life--;
+                that.countReset();
+            }).wait(3000)
+
+            //ワンペア二回ミス説明
             .call(function(){
                 that.enterMessage(pos, 6000, "ワンペアが２回続いた場合も", 40);
-                that.enterMessage(pos, 6000, "ミスとして判定されますので", 40);
-                that.enterMessage(pos, 6000, "注意してください", 40);
+                that.enterMessage(pos+60, 6000, "ミスとなります", 40);
             }).wait(1000)
-*/
+            .call(function(){
+                that.countDown = true;
+                that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 10));
+            }).wait(500)
+            .call(function(){
+                that.deck.addHand(that.deck.pickCard(SUIT_HEART, 8));
+            }).wait(500)
+            .call(function(){
+                that.deck.addHand(that.deck.pickCard(SUIT_DIAMOND, 6));
+            }).wait(500)
+            .call(function(){
+                that.deck.addHand(that.deck.pickCard(SUIT_HEART, 11));
+            }).wait(500)
+            .call(function(){
+                that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 10));
+            }).wait(500)
+            .call(function(){
+                that.countDown = false;
+                that.deck.sortHand();
+                that.onePair++;
+                shotgun.MainScene.prototype.dispHand.call(that, ONEPAIR);
+                appMain.playSE("hand");
+                that.score+=ONEPAIR;
+                that.countReset();
+            }).wait(2000)
+
+            .call(function(){
+                that.countDown = true;
+                that.deck.addHand(that.deck.pickCard(SUIT_DIAMOND, 1));
+            }).wait(500)
+            .call(function(){
+                that.deck.addHand(that.deck.pickCard(SUIT_HEART, 5));
+            }).wait(500)
+            .call(function(){
+                that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 3));
+            }).wait(500)
+            .call(function(){
+                that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 1));
+            }).wait(500)
+            .call(function(){
+                that.deck.addHand(that.deck.pickCard(SUIT_HEART, 13));
+            }).wait(1000)
+            .call(function(){
+                that.countDown = false;
+                that.deck.sortHand();
+                that.onePair++;
+                shotgun.MainScene.prototype.dispHand.call(that, ONEPAIR, 2400);
+                appMain.playSE("nopair");
+                that.score+=ONEPAIR;
+                that.life--;
+                that.countReset();
+            }).wait(5000)
 
             //ゲームオーバー説明
-            .call(function(){
-                that.enterMessage(pos, 6000, "ライフが０の状態でミスすると", 40);
+            .call(function() {
+                that.enterMessage(pos, 8000, "ライフが０の状態でミスすると", 40);
+                that.enterMessage(pos+80, 8000, "ゲームオーバーです", 40);
                 that.deck.addHand(that.deck.pickCard(SUIT_DIAMOND, 5));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
-                that.deck.addHand(that.deck.pickCard(SUIT_HEART, 8));
-            }).wait(200)
+                that.countDown = true;
+                that.deck.addHand(that.deck.pickCard(SUIT_HEART, 3));
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 9));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
                 that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 12));
-            }).wait(200)
+            }).wait(500)
             .call(function(){
-                that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 10));
-            }).wait(1000)
+                that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 4));
+            }).wait(500)
             .call(function(){
+                that.countDown = false;
                 that.deck.sortHand();
-                shotgun.MainScene.prototype.dispHand.call(that, NOHAND, 3000);
-                appMain.playSE("nohand");
+                shotgun.MainScene.prototype.dispHand.call(that, NOPAIR);
+                appMain.playSE("nopair");
                 that.life--;
             }).wait(2000)
 
-            .call(function(){
-                that.deck.addHand(that.deck.pickCard(SUIT_DIAMOND, 5));
-            }).wait(200)
-            .call(function(){
-                that.deck.addHand(that.deck.pickCard(SUIT_HEART, 8));
-            }).wait(200)
-            .call(function(){
-                that.deck.addHand(that.deck.pickCard(SUIT_SPADE, 9));
-            }).wait(200)
-            .call(function(){
-                that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 12));
-            }).wait(200)
-            .call(function(){
-                that.deck.addHand(that.deck.pickCard(SUIT_CLOVER, 10));
-            }).wait(1000)
-            .call(function(){
-                that.deck.sortHand();
-                shotgun.MainScene.prototype.dispHand.call(that, NOHAND, 3000);
-                appMain.playSE("nohand");
-                that.life--;
-            }).wait(2000)
             .call(function(){
                 var lb = tm.display.OutlineLabel("GAME OVER", 100)
                     .addChildTo(that)
@@ -470,7 +608,6 @@ tm.define("shotgun.TutorialScene", {
                     .move(SC_W*0.5, SC_H*0.5, 4000,"easeOutBounce")
                     .wait(2000)
                     .call(function(){this.remove()}.bind(lb));
-                that.enterMessage(pos, 5000, "ゲームオーバーになります", 40);
             }).wait(5000)
             .call(function(){
                 that.enterMessage(pos, 6000, "以上でチュートリアルは終了です", 40);
@@ -478,7 +615,7 @@ tm.define("shotgun.TutorialScene", {
             .call(function(){
                 appMain.popScene();
             });
-     },
+    },
 
     //タッチorクリック開始処理
     ontouchesstart: function(e) {
@@ -524,12 +661,6 @@ tm.define("shotgun.TutorialScene", {
         var sx = e.pointing.x;
         var sy = e.pointing.y;
 
-/*
-        if (this.pick && !this.shuffled && !this.deck.busy) {
-            var c = this.deck.pick(sx, sy);
-            if (c) this.deck.addHand(c);
-        }
-*/
         this.shuffled = false;
     },
 });

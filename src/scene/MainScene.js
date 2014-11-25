@@ -28,10 +28,9 @@ tm.define("shotgun.MainScene", {
     //ゲーム内情報
     start: false,   //ゲームスタートフラグ
     score: 0,       //スコア
-    life: 3,        //ライフ
+    life: 2,        //ライフ
     lifeMax: 5,     //ライフ最大値
     pick: false,    //カードピック可能フラグ
-    count: 9,       //カード選択カウントダウン用
     level: 1,       //ゲームレベル
     levelReset: 0,  //レベルリセット回数
     handCount: null,//役の回数
@@ -39,9 +38,14 @@ tm.define("shotgun.MainScene", {
     gameend: false, //ゲーム終了フラグ
     complete: false,//役コンプリートフラグ
 
+    //カウンタ
+    count: 10,      //カード選択カウントダウン用
+    limitCount: 9*44,
+    limitMax: 9*44,
+
     //経過時間
-    time: 0,
-    absTime: 0,
+    time: 1,
+    absTime: 1,
 
     //遷移情報
     exitGame: false,
@@ -82,7 +86,7 @@ tm.define("shotgun.MainScene", {
         this.scoreLabel = tm.display.OutlineLabel("SCORE:", 50)
             .addChildTo(this)
             .setParam(this.labelParamBasic)
-            .setPosition(8, 72);
+            .setPosition(8, 32);
         this.scoreLabel.score = 0;
         this.scoreLabel.update = function() {
             this.text = "SCORE:"+this.score;
@@ -98,12 +102,12 @@ tm.define("shotgun.MainScene", {
         this.lifeLabel = tm.display.OutlineLabel("LIFE:", 50)
             .addChildTo(this)
             .setParam(this.labelParamBasic)
-            .setPosition(8, 128);
+            .setPosition(8, 96);
         this.lg = [];
         for (var i = 0; i < 7; i++ ) {
             var c = this.lg[i] = shotgun.Card(SUIT_HEART, 0).addChildTo(this);
             c.setScale(0.2);
-            c.setPosition( 155+i*45, 128);
+            c.setPosition( 155+i*45, 96);
             c.life = i;
             c.update = function() {
                 this.pattern = that.life+this.suit*13-1;
@@ -114,6 +118,33 @@ tm.define("shotgun.MainScene", {
                 }
             }
         }
+
+        //タイムリミットゲージ
+        var color = "hsla({0}, 100%, 50%, 1.0)".format(300);
+        this.meter = tm.display.Shape(30, 500)
+            .addChildTo(this)
+            .setPosition(20, SC_H*0.7)
+            .setOrigin(0.5, 1.0);
+        this.meter.update = function() {
+            var limit = that.limitCount*(500/that.limitMax);
+            var hsl = ~~(that.limitCount*(120/that.limitMax));
+            var color = "hsla({0}, 100%, 50%, 1.0)".format(hsl);
+
+            var c = this.canvas;
+            c.clear(0,0,30,500);
+            c.fillStyle = color;
+            c.strokeStyle = color;
+            c.lineWidth = 1;
+
+            var lw = Number(c.lineWidth);
+            c.fillRect(0, 500-limit, this.width, this.height-(500-limit));
+            c.restore();
+        }
+        tm.display.Shape(30, 500)
+            .addChildTo(this)
+            .setPosition(20, SC_H*0.7)
+            .renderRectangle({fillStyle: "rgba(0,0,0,0)", strokeStyle: "Black", lineWidth: 3})
+            .setOrigin(0.5, 1.0);
 
         //直前の役表示
         var by = SC_H*0.8+CARD_H*CARD_SCALE*0.5;
@@ -139,14 +170,10 @@ tm.define("shotgun.MainScene", {
         //ポーズボタン
         this.pause = shotgun.Button(200, 60, "PAUSE")
             .addChildTo(this)
-            .setPosition(SC_W*0.84, 72)
+            .setPosition(SC_W*0.84, 80)
             .addEventListener("pushed", function() {
                 appMain.pushScene(shotgun.PauseScene(this));
             }.bind(this));
-
-        //目隠し
-        this.mask = tm.display.Sprite("blackback", SC_W*2, SC_H*2).addChildTo(this);
-        this.mask.tweener.clear().fadeOut(200);
 
         //カードデッキ
         this.deck = shotgun.CardDeck().addChildTo(this.mainLayer);
@@ -195,21 +222,39 @@ tm.define("shotgun.MainScene", {
             var lb = this.creditLabel = tm.display.OutlineLabel("", 40)
                 .addChildTo(this)
                 .setParam(this.labelParamBasic)
-                .setPosition(SC_W*0.0, SC_H*0.9);
+                .setPosition(SC_W*0.0, SC_H-20);
             lb.update = function() {
                 this.text = "Level:"+that.level;
             }
         }
+
+        //目隠し
+        this.mask = tm.display.Shape(SC_W, SC_H)
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.5)
+            .renderRectangle({fillStyle: "rgba(0, 0, 0, 1.0)", strokeStyle: "rgba(0, 0, 0, 1.0)"});
+        this.mask.tweener.clear().fadeOut(200);
     },
     
     update: function() {
         if (!this.start) return;
         if (this.deck.busy) return;
 
-        var interval = 45-~~(this.level*10);
-        if (interval < 10) interval = 10;
-        if (this.time % interval == 0 && this.pick) {
-            this.count--;
+        if (this.pick && !this.gameend) {
+            //カウントダウン間隔
+            var interval = 45-~~(this.level*10);
+            if (interval < 10) interval = 10;
+
+            //タイムリミットゲージ用カウンタ
+            if (this.count == 10) {
+                this.limitMax = this.limitCount = interval*10;
+            } else if (this.count < 10) {
+                this.limitCount--;
+                if (this.limitCount < 0) this.limitCount = 0;
+            }
+
+            //カウントダウン
+            if (this.time % interval == 0) this.count--;
         }
 
         //手札が五枚揃ったor時間切れ
@@ -223,7 +268,7 @@ tm.define("shotgun.MainScene", {
 
             //役無し、手札未成立、ワンペア２連続はペナルティ
             var penalty = 0;
-            if (sc == NOHAND) penalty = 1;
+            if (sc == NOPAIR) penalty = 1;
             if (sc == MISS) penalty = 1;
             if (sc == ONEPAIR) {
                 this.onePair++;
@@ -238,7 +283,7 @@ tm.define("shotgun.MainScene", {
                 lb.setPosition(SC_W*0.8, SC_H*0.8);
                 lb.alpha = 0;
                 lb.tweener.clear().wait(1200).fadeIn(1).to({x: SC_W*0.8, y: SC_H*0.8-20, alpha:0.0},1000).call(lb.remove());
-                appMain.playSE("nohand");
+                appMain.playSE("nopair");
             } else {
                 appMain.playSE("hand");
             }
@@ -301,19 +346,21 @@ tm.define("shotgun.MainScene", {
             this.time = 0;
 
             //レベル処理
-            this.level = Math.sqrt(this.absTime*(0.0002*(this.levelReset+1)))+1;
-            if (this.level > 2 && this.levelReset < 2) {
+            this.level = Math.sqrt(this.absTime*(0.0004*(this.levelReset+1)))+1;
+            if (this.level > 2 && this.levelReset < 1) {
                 this.absTime = 0;
                 this.level = 1;
                 this.levelReset++;
             }
         }
 
+        //カードピック可能時のみ時間を進める
         if (this.pick) {
             this.time++;
             this.absTime++;
         }
 
+        //ゲーム終了処理
         if (this.exitGame) {
             appMain.stopBGM();
             appMain.replaceScene(shotgun.TitleScene());
@@ -370,7 +417,7 @@ tm.define("shotgun.MainScene", {
         var size = 80; offset = 10;
         switch (hand) {
             case MISS:          name1 = "MISS!"; offset = 50; break;
-            case NOHAND:        name1 = "NO HAND"; size = 70; break;
+            case NOPAIR:        name1 = "NO PAIR"; size = 70; break;
             case ONEPAIR:       name1 = "ONE"; name2 = "PAIR"; offset = 60; break;
             case FLASH:         name1 = "FLASH"; offset = 60; break;
             case TWOPAIR:       name1 = "TWO"; name2 = "PAIR"; offset = 60; break;
@@ -384,7 +431,7 @@ tm.define("shotgun.MainScene", {
         }
         if (appMain.language == ENGLISH) {
             switch (hand) {
-                case NOHAND:        name1 = "NO PAIR"; size = 70; break;
+                case NOPAIR:        name1 = "NO PAIR"; size = 70; break;
                 case THREECARD:     name1 = "THREE OF"; name2 = "A KIND"; offset = 50; break;
                 case FOURCARD:      name1 = "FOUR OF"; name2 = "A KIND"; size = 70; offset = 60; break;
                 case FIVECARD:      name1 = "FIVE OF"; name2 = "A KIND"; size = 70; offset = 60; break;
@@ -414,7 +461,7 @@ tm.define("shotgun.MainScene", {
                     that.beforeHand.alert = true;
                 else
                     that.beforeHand.alert = false;
-        });
+            });
 
         //２行目
         y += SC_H*0.08;

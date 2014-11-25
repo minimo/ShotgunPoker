@@ -1,5 +1,5 @@
 /*
- * tmlib.js 0.3.0
+ * tmlib.js 0.4.0
  * http://github.com/phi-jp/tmlib.js
  * MIT Licensed
  * 
@@ -25,7 +25,7 @@ if (typeof module !== 'undefined' && module.exports) {
     /**
      * バージョン
      */
-    tm.VERSION = '0.3.0';
+    tm.VERSION = '0.4.0';
 
     /**
      * tmlib.js のルートパス
@@ -456,7 +456,6 @@ if (typeof module !== 'undefined' && module.exports) {
             enumerable: false,
             configurable: true
         });
-        // this.__defineSetter__(name, fn);
     });
     
     /**
@@ -469,7 +468,6 @@ if (typeof module !== 'undefined' && module.exports) {
             enumerable: false,
             configurable: true
         });
-        // this.__defineGetter__(name, fn);
     });
     
     /**
@@ -483,8 +481,6 @@ if (typeof module !== 'undefined' && module.exports) {
             enumerable: false,
             configurable: true
         });
-        // (param["get"]) && this.getter(name, param["get"]);
-        // (param["set"]) && this.setter(name, param["set"]);
     });
     
     /**
@@ -532,7 +528,7 @@ if (typeof module !== 'undefined' && module.exports) {
     Object.defineInstanceMethod("$safe", function(source) {
         Array.prototype.forEach.call(arguments, function(source) {
             for (var property in source) {
-                if (this[property] === undefined || this[property] === null) this[property] = source[property];
+                if (this[property] === undefined) this[property] = source[property];
             }
         }, this);
         return this;
@@ -583,31 +579,6 @@ if (typeof module !== 'undefined' && module.exports) {
 
         return temp;
     });
-    
-    /**
-     * @method  using
-     * 使う
-     */
-    Object.defineInstanceMethod("$using", function(source) {
-        // TODO:
-        
-        return this;
-    });
-    
-    /**
-     * @method  globalize
-     * グローバル化
-     */
-    Object.defineInstanceMethod("$globalize", function(key) {
-        if (key) {
-            tm.global[key] = this[key];
-        }
-        else {
-            tm.global.$strict(this);
-        }
-        return this;
-    });
-    
     
 })();
 
@@ -808,7 +779,6 @@ if (typeof module !== 'undefined' && module.exports) {
             for (var i=0; i<level; ++i) {
                 arr = Array.prototype.concat.apply([], arr);
             }
-            console.log(arr);
         }
         else {
             // 完全フラット
@@ -818,35 +788,7 @@ if (typeof module !== 'undefined' && module.exports) {
             }, []);
         }
 
-        console.log(arr);
-
         return arr;
-
-
-        /*
-        var temp = Array.flatten(this);
-        
-        this.clear().concat(temp);
-        for (var i=0,len=temp.length; i<len; ++i) this[i] = temp[i];
-            */
-
-
-            /*
-        var arr = [];
-        
-        for (var i=0,len=array.length; i<len; ++i) {
-            var value = array[i];
-            if (value instanceof Array) {
-                arr = arr.concat(Array.flatten(value));
-            }
-            else {
-                arr.push(value);
-            }
-        }
-        */
-
-        
-        return this;
     });
     
     /**
@@ -1164,22 +1106,13 @@ if (typeof module !== 'undefined' && module.exports) {
      * @class global.Math
      * Mathの拡張
      */
-    
-    /**
-     * @method
-     * クランプ
-     */
-    Math.clamp = function(x, a, b) {
-//        return ( Math.max( Math.min(x, ), min ) )
-        return (x < a) ? a : ( (x > b) ? b : x );
-    };
+
     
     /**
      * @property    DEG_TO_RAD
      * Degree to Radian.
      */
     Math.DEG_TO_RAD = Math.PI/180;
-    
     
     /**
      * @property    RAD_TO_DEG
@@ -1203,55 +1136,39 @@ if (typeof module !== 'undefined' && module.exports) {
         return rad * Math.RAD_TO_DEG;
     };
     
+
     
+    /**
+     * @method
+     * クランプ
+     */
+    Math.defineFunction("clamp", function(value, min, max) {
+        return (value < min) ? min : ( (value > max) ? max : value );
+    });
+    
+    /**
+     * @method
+     * min <= value <= max のとき true を返す
+     */
+    Math.defineFunction("inside", function(value, min, max) {
+        return (value >= min) && (value) <= max;
+    });
     
     /**
      * @method
      * ランダムな値を指定された範囲内で生成
      */
-    Math.rand = function(min, max) {
+    Math.defineFunction("rand", function(min, max) {
         return window.Math.floor( Math.random()*(max-min+1) ) + min;
-    };
+    });
     
     /**
      * @method
      * ランダムな値を指定された範囲内で生成
      */
-    Math.randf= function(min, max) {
+    Math.defineFunction("randf", function(min, max) {
         return window.Math.random()*(max-min)+min;
-    };
-
-    /**
-     * @method
-     * 長さを取得
-     */
-    Math.magnitude = function() {
-        return Math.sqrt(Math.magnitudeSq.apply(null, arguments));
-    };
-    
-    
-    /**
-     * @method
-     * 長さの２乗を取得
-     */
-    Math.magnitudeSq = function() {
-        var n = 0;
-        
-        for (var i=0,len=arguments.length; i<len; ++i) {
-            n += arguments[i]*arguments[i];
-        }
-        
-        return n;
-    };
-
-
-    /**
-     * @method
-     * a <= x <= b のとき true を返す
-     */
-    Math.inside = function(x, a, b) {
-        return (x >= a) && (x) <= b;
-    };
+    });
     
 })();
 
@@ -1442,7 +1359,14 @@ if (typeof module !== 'undefined' && module.exports) {
         // オブジェクトの場合
         if (typeof arg == "object") {
             /** @ignore */
-            rep_fn = function(m, k) { return arg[k]; }
+            rep_fn = function(m, k) {
+                if (arg[k] === undefined) {
+                    return '';
+                }
+                else {
+                    return arg[k];
+                }
+            }
         }
         // 複数引数だった場合
         else {
@@ -1573,7 +1497,6 @@ if (typeof module !== 'undefined' && module.exports) {
      */
     String.defineInstanceMethod("count", function(str) {
         var re = new RegExp(str, 'gm');
-        console.log(this.match(re));
         return this.match(re).length;
     });
     
@@ -1611,191 +1534,6 @@ if (typeof module !== 'undefined' && module.exports) {
     
     
 })();
-
-/*
- * list.js
- */
-
-(function() {
-    
-    /**
-     * @class tm.Item
-     * Item クラス
-     */
-    tm.Item = tm.createClass({
-        /** prev */
-        prev: null,
-        /** next */
-        next: null,
-        /** data */
-        data: null,
-        
-        /**
-         * @constructor
-         */
-        init: function() {
-        }
-    });
-    
-    /**
-     * @class tm.List
-     * List クラス
-     * ### Reference
-     * - <http://java.sun.com/javase/ja/6/docs/ja/api/java/util/LinkedList.html>
-     * - <http://www.javadrive.jp/start/linkedlist/>
-     * - <http://www5c.biglobe.ne.jp/~ecb/cpp/07_08.html>
-     * - <http://hextomino.tsukuba.ch/e30895.html>
-     * - <http://www.nczonline.net/blog/2009/04/21/computer-science-in-javascript-doubly-linked-lists/>
-     * - <http://www.nczonline.net/blog/2009/04/13/computer-science-in-javascript-linked-list/>
-     */
-    tm.List = tm.createClass({
-        
-        /**
-         * @constructor
-         */
-        init: function() {
-            this._length = 0;
-            this._head = tm.Item();
-            this._tail = tm.Item();
-            
-            this._head.next = this._tail;
-            this._tail.prev = this._head;
-        },
-        
-        /**
-         * 追加
-         */
-        add: function(data) {
-            var item = tm.Item();
-            item.data = data;
-            
-            item.prev = this._tail.prev;
-            item.next = this._tail;
-            
-            this._tail.prev.next = item;
-            this._tail.prev = item;
-            
-            ++this._length;
-            
-            return this;
-        },
-        
-        /**
-         * 削除
-         */
-        remove: function(index) {
-            var current = this.getItem(index);
-            
-            current.prev.next = current.next;
-            current.next.prev = current.prev;
-            
-            --this._length;
-            
-            return current;
-        },
-        
-        /**
-         * ゲット
-         */
-        get: function(index) {
-            return this.getItem(index).data;
-        },
-        
-        /**
-         * アイテムを取得
-         */
-        getItem: function(index) {
-            var current = this._head.next;
-            var i=0;
-            
-            while (i++ < index) {
-                current = current.next;
-            }
-            
-            return current;
-        },
-        
-        /**
-         * 繰り返し
-         */
-        forEach: function(fn) {
-            // TODO:
-        },
-        
-        /**
-         * クリア
-         */
-        clear: function() {
-            // TODO:
-        },
-        
-        /**
-         * クローン
-         */
-        clone: function() {
-            // TODO:
-        },
-        
-        /**
-         * 最初の要素を取得
-         */
-        getFirst: function() {
-            // TODO:
-        },
-        
-        /**
-         * 最後の要素を取得
-         */
-        getLast: function() {
-            // TODO:
-        },
-        
-        /**
-         * 最初に一致した位置のインデックスを取得
-         */
-        indexOf: function(obj) {
-            // TODO:
-        },
-        
-        /**
-         * 最後に一致した位置のインデックスを取得
-         */
-        lastIndexOf: function(obj) {
-            // TODO:
-        },
-        
-        /**
-         * 配列に変換
-         */
-        toArray: function() {
-            if (this._length <= 0) return [];
-            
-            var current = this._head.next;
-            var arr = [];
-            
-            while (current.data != null) {
-                arr.push(current.data);
-                current = current.next;
-            }
-            
-            return arr;
-        },
-        
-        /**
-         * 文字列に変換
-         */
-        toString: function() {
-            var arr = this.toArray();
-            for (var i=0,len=arr.length; i<len; ++i) {
-                arr[i] = arr[i].toString();
-            }
-            
-            return arr.join(',');
-        },
-    });
-    
-})();
-
 
 /*
  * event/event.js
@@ -2080,8 +1818,11 @@ tm.event = tm.event || {};
         /*
          * イベント名でイベント発火
          */
-        flare: function(eventName) {
+        flare: function(eventName, param) {
             var e = tm.event.Event(eventName);
+            if (param) {
+                e.$extend(param);
+            }
             this.fire(e);
 
             return this;
@@ -7090,10 +6831,11 @@ tm.dom = tm.dom || {};
             }.bind(this));
             
             var loadAsset = function(asset, key) {
+
                 var e = tm.event.Event("progress");
                 e.key = key;
                 e.asset = asset;
-                e.progress = flow.counter/flow.waits; // todo
+                e.progress = (flow.counter+1)/flow.waits; // todo
                 this.dispatchEvent(e);
 
                 flow.pass();
@@ -11832,10 +11574,8 @@ tm.app = tm.app || {};
         stats         : null,
         /** タイマー */
         timer         : null,
-        /** フレームレート */
-        fps           : 30,
         /** 現在更新中か */
-        isPlaying     : null,
+        awake         : null,
         /** @private  シーン情報の管理 */
         _scenes       : null,
         /** @private  シーンのインデックス */
@@ -11862,6 +11602,12 @@ tm.app = tm.app || {};
             
             // ポインティングをセット(PC では Mouse, Mobile では Touch)
             this.pointing   = (tm.isMobile) ? this.touch : this.mouse;
+            this.element.addEventListener("touchstart", function () {
+                this.pointing = this.touch;
+            }.bind(this));
+            this.element.addEventListener("mousedown", function () {
+                this.pointing = this.mouse;
+            }.bind(this));
             
             // 加速度センサーを生成
             this.accelerometer = tm.input.Accelerometer();
@@ -11869,7 +11615,7 @@ tm.app = tm.app || {};
             this.updater = tm.app.Updater(this);
             
             // 再生フラグ
-            this.isPlaying = true;
+            this.awake = true;
             
             // シーン周り
             this._scenes = [ tm.app.Scene() ];
@@ -11890,7 +11636,7 @@ tm.app = tm.app || {};
                 this.currentScene.dispatchEvent(tm.event.Event("blur"));
             }.bind(this));
             // クリック
-            this.element.addEventListener((tm.isMobile) ? "touchstart" : "mousedown", this._onclick.bind(this));
+            this.element.addEventListener((tm.isMobile) ? "touchend" : "mouseup", this._onclick.bind(this));
         },
         
         /**
@@ -11898,28 +11644,30 @@ tm.app = tm.app || {};
          */
         run: function() {
             var self = this;
-            
-            // // requestAnimationFrame version
-            // var fn = function() {
-                // self._loop();
-                // requestAnimationFrame(fn);
-            // }
-            // fn();
-            
-            tm.setLoop(function(){ self._loop(); }, this.timer.frameTime);
-            
-            return ;
-            
-            if (true) {
-                setTimeout(arguments.callee.bind(this), 1000/this.fps);
-                this._loop();
-            }
-            
-            return ;
-            
-            var self = this;
-            // setInterval(function(){ self._loop(); }, 1000/self.fps);
-            tm.setLoop(function(){ self._loop(); }, 1000/self.fps);
+
+            this.startedTime = new Date();
+            this.prevTime = new Date();
+            this.deltaTime = 0;
+
+            var _run = function() {
+                // start
+                var start = (new Date()).getTime();
+
+                // run
+                self._loop();
+
+                // calculate progress time
+                var progress = (new Date()).getTime() - start;
+                // calculate next waiting time
+                var newDelay = self.timer.frameTime-progress;
+
+                // set next running function
+                setTimeout(_run, newDelay);
+            };
+
+            _run();
+
+            return this;
         },
         
         /*
@@ -11934,6 +11682,10 @@ tm.app = tm.app || {};
             // draw
             if (this.draw) this.draw();
             this._draw();
+
+            var now = new Date();
+            this.deltaTime = now - this.prevTime;
+            this.prevTime = now;
             
             // stats update
             if (this.stats) this.stats.update();
@@ -12048,7 +11800,7 @@ tm.app = tm.app || {};
          * シーンのupdateを実行するようにする
          */
         start: function() {
-            this.isPlaying = true;
+            this.awake = true;
 
             return this;
         },
@@ -12057,7 +11809,7 @@ tm.app = tm.app || {};
          * シーンのupdateを実行しないようにする
          */
         stop: function() {
-            this.isPlaying = false;
+            this.awake = false;
 
             return this;
         },
@@ -12073,7 +11825,7 @@ tm.app = tm.app || {};
             this.touch.update();
             // this.touches.update();
             
-            if (this.isPlaying) {
+            if (this.awake) {
                 this.updater.update(this.currentScene);
                 this.timer.update();
             }
@@ -12098,26 +11850,14 @@ tm.app = tm.app || {};
          * @param {Object} e
          */
         _onclick: function(e) {
-            var px = e.pointX;
-            var py = e.pointY;
-
-            if (this.element.style.width) {
-                px *= this.element.width / parseInt(this.element.style.width);
-            }
-            if (this.element.style.height) {
-                py *= this.element.height / parseInt(this.element.style.height);
-            }
-
             var _fn = function(elm) {
                 if (elm.children.length > 0) {
-                    elm.children.each(function(elm) {
-                        if (elm.hasEventListener("click")) {
-                            if (elm.isHitPoint && elm.isHitPoint(px, py)) {
-                                elm.dispatchEvent(tm.event.Event("click"));
-                            }
-                        }
-                    });
+                    elm.children.each(function(elm) { _fn(elm); });
                 }
+                if (elm._clickFlag && elm.hasEventListener("click")) {
+                    elm.dispatchEvent(tm.event.Event("click"));
+                }
+                elm._clickFlag = false;
             };
             _fn(this.currentScene);
         },
@@ -12369,14 +12109,14 @@ tm.app = tm.app || {};
                 if (key == "children") {
                     if (value instanceof Array) {
                         for (var i=0,len=value.length; i<len; ++i) {
-                            var data = value[i];
-                            _fromJSON(data.name, data);
+                            var childData = value[i];
+                            _fromJSON(childData.name, childData);
                         }
                     }
                     else {
                         for (var key in value) {
-                            var data = value[key];
-                            _fromJSON(key, data);
+                            var childData = value[key];
+                            _fromJSON(key, childData);
                         }
                     }
                 }
@@ -12475,6 +12215,7 @@ tm.app = tm.app || {};
             this.interactive = false;
             this.hitFlags = [];
             this.downFlags= [];
+            this._clickFlag = false;
 
             this._worldMatrix = tm.geom.Matrix33();
             this._worldMatrix.identity();
@@ -12817,9 +12558,8 @@ tm.app = tm.app || {};
             var elm = this.element;
             
             var prevHitFlag = this.hitFlags[index];
-            
             this.hitFlags[index]    = this.isHitPoint(p.x, p.y);
-            
+
             if (!prevHitFlag && this.hitFlags[index]) {
                 this._dispatchPointingEvent("mouseover", "touchover", "pointingover", app, p);
             }
@@ -12832,6 +12572,7 @@ tm.app = tm.app || {};
                 if (p.getPointingStart()) {
                     this._dispatchPointingEvent("mousedown", "touchstart", "pointingstart", app, p);
                     this.downFlags[index] = true;
+                    this._clickFlag = true;
                 }
             }
             
@@ -14150,6 +13891,8 @@ tm.display = tm.display || {};
             
             this.canvas.fillStyle   = "white";
             this.canvas.strokeStyle = "white";
+            this.canvas.context.lineJoin = "round";
+            this.canvas.context.lineCap  = "round";
 
             // スタックしたキャンバスを描画
             if (this._canvasCache.last)
@@ -14652,6 +14395,7 @@ tm.display = tm.display || {};
             c.strokeCircle(this.width/2, this.height/2, this.radius-Number(c.lineWidth)/2);
             
             c.restore();
+            return this;
         },
 
         /**
@@ -14673,6 +14417,7 @@ tm.display = tm.display || {};
             c.strokePolygon(this.width/2, this.height/2, this.radius-Number(c.lineWidth)/2, 3);
             
             c.restore();
+            return this;
         },
 
         /**
@@ -14696,6 +14441,7 @@ tm.display = tm.display || {};
             c.strokeRect(lw_half, lw_half, this.width-lw, this.height-lw);
             
             c.restore();
+            return this;
         },
         
         /**
@@ -14719,6 +14465,7 @@ tm.display = tm.display || {};
             c.strokeRoundRect(lw_half, lw_half, this.width-lw, this.height-lw, param.radius);
             
             c.restore();
+            return this;
         },
 
         /**
@@ -14745,6 +14492,7 @@ tm.display = tm.display || {};
             c.strokeStar(this.width/2, this.height/2, this.radius-Number(c.lineWidth)/2, sides, sideIndent, offsetAngle);
             
             c.restore();
+            return this;
         },
 
         /**
@@ -14773,6 +14521,7 @@ tm.display = tm.display || {};
             c.strokePolygon(this.width/2, this.height/2, this.radius-Number(c.lineWidth)/2, sides, offsetAngle);
             
             c.restore();
+            return this;
         },
 
         /**
@@ -14794,6 +14543,7 @@ tm.display = tm.display || {};
             c.strokeHeart(this.width/2, this.height/2, this.radius-Number(c.lineWidth)/2, param.angle);
             
             c.restore();
+            return this;
         },
 
         /**
@@ -14818,6 +14568,7 @@ tm.display = tm.display || {};
             c.fillText(param.text, this.width/2, this.height/2);
             
             c.restore();
+            return this;
         },
         
     });
@@ -15494,6 +15245,7 @@ tm.display = tm.display || {};
             this.height= chipWidth*this.mapSheet.height;
 
             this.tileset = [];
+            this.tilesetInfo = {};
             this._build();
         },
 
@@ -15503,8 +15255,8 @@ tm.display = tm.display || {};
         _build: function() {
             var self = this;
 
-            this.mapSheet.tilesets.each(function(tileset) {
-                self._buildTileset(tileset);
+            this.mapSheet.tilesets.each(function(tileset, index) {
+                self._buildTileset(tileset, index);
             });
 
             this.mapSheet.layers.each(function(layer, hoge) {
@@ -15520,12 +15272,23 @@ tm.display = tm.display || {};
         /**
          * @private
          */
-        _buildTileset: function(tileset) {
+        _buildTileset: function(tileset, index) {
             var self      = this;
             var mapSheet  = this.mapSheet;
             var texture   = tm.asset.Manager.get(tileset.image);
             var xIndexMax = (texture.width / mapSheet.tilewidth)|0;
             var yIndexMax = (texture.height / mapSheet.tileheight)|0;
+
+            var info = {
+                begin: self.tileset.length,
+                end: self.tileset.length + xIndexMax * yIndexMax
+            };
+
+            self.tilesetInfo[index] = info;
+
+            if (tileset.name !== undefined) {
+                self.tilesetInfo[tileset.name] = info;
+            }
 
             yIndexMax.times(function(my) {
                 xIndexMax.times(function(mx) {
@@ -15552,7 +15315,23 @@ tm.display = tm.display || {};
             var shape    = tm.display.Shape(this.width, this.height).addChildTo(this);
             var visible  = (layer.visible === 1) || (layer.visible === undefined);
             var opacity  = layer.opacity === undefined ? 1 : layer.opacity;
+            var tileset  = [];
             shape.origin.set(0, 0);
+
+            if (layer.tilesets !== undefined) {
+                var tilesets = null;
+                if (Array.isArray(layer.tilesets)) {
+                    tilesets = layer.tilesets;
+                } else {
+                    tilesets = [layer.tilesets];
+                }
+                tilesets.each(function(n) {
+                    var info = self.tilesetInfo[n];
+                    tileset = tileset.concat(self.tileset.slice(info.begin, info.end));
+                });
+            } else {
+                tileset = self.tileset;
+            }
 
             if (visible) {
                 layer.data.each(function(d, index) {
@@ -15561,13 +15340,16 @@ tm.display = tm.display || {};
                         return ;
                     }
                     type = Math.abs(type);
+                    if (tileset[type] === undefined) {
+                        return ;
+                    }
 
                     var xIndex = index%mapSheet.width;
                     var yIndex = (index/mapSheet.width)|0;
                     var dx = xIndex*self.chipWidth;
                     var dy = yIndex*self.chipHeight;
 
-                    var tile = self.tileset[type];
+                    var tile = tileset[type];
 
                     var texture = tm.asset.Manager.get(tile.image);
                     var rect = tile.rect;
@@ -15803,18 +15585,8 @@ tm.display = tm.display || {};
         },
         "label": function(canvas) {
             canvas.setText(this.fontStyle, this.align, this.baseline);
-            if (this.fill) {
-                if (this.maxWidth) {
-                    this._lines.each(function(elm, i) {
-                        canvas.fillText(elm, 0, this.textSize*i, this.maxWidth);
-                    }.bind(this));
-                }
-                else {
-                    this._lines.each(function(elm, i) {
-                        canvas.fillText(elm, 0, this.textSize*i);
-                    }.bind(this));
-                }
-            }
+            if (this.lineWidth) canvas.lineWidth = this.lineWidth;
+            
             if (this.stroke) {
                 if (this.maxWidth) {
                     this._lines.each(function(elm, i) {
@@ -15824,6 +15596,18 @@ tm.display = tm.display || {};
                 else {
                     this._lines.each(function(elm, i) {
                         canvas.strokeText(elm, 0, this.textSize*i);
+                    }.bind(this));
+                }
+            }
+            if (this.fill) {
+                if (this.maxWidth) {
+                    this._lines.each(function(elm, i) {
+                        canvas.fillText(elm, 0, this.textSize*i, this.maxWidth);
+                    }.bind(this));
+                }
+                else {
+                    this._lines.each(function(elm, i) {
+                        canvas.fillText(elm, 0, this.textSize*i);
                     }.bind(this));
                 }
             }
@@ -17189,8 +16973,8 @@ tm.ui = tm.ui || {};
 
         onpointingstart: function(app) {
             // ひよこさん生成
-            var p = app.pointing;
 /*
+            var p = app.pointing;
             var piyo = this._createHiyoko(this.param).addChildTo(this.stage.piyoLayer);
             piyo.x = p.x;
             piyo.y = p.y;
@@ -17496,6 +17280,200 @@ tm.ui = tm.ui || {};
 })();
 
 
+/*
+ * loadingscene.js
+ */
+
+
+;(function() {
+    
+    var DEFAULT_PARAM = {
+        width: 465,
+        height: 465,
+        bgColor: "transparent",
+    };
+    
+    tm.define("tm.scene.LoadingScene", {
+        superClass: "tm.app.Scene",
+        
+        init: function(param) {
+            this.superInit();
+            
+            this.param = param = {}.$extend(DEFAULT_PARAM, param);
+
+            this.fromJSON({
+                children: {
+                    stage: {
+                        type: "tm.display.CanvasElement",
+                    },
+                }
+            });
+
+            this.stage.fromJSON({
+                children: {
+                    bg: {
+                        type: "tm.display.Shape",
+                        init: [param.width, param.height],
+                        originX: 0,
+                        originY: 0,
+                    },
+                    piyoLayer: {
+                        type: "tm.display.CanvasElement",
+                    },
+                    label: {
+                        type: "tm.display.Label",
+                        text: "LOADING",
+                        x: param.width/2,
+                        y: param.height/2-20,
+                        align: "center",
+                        baseline: "middle",
+                        fontSize: 46,
+                        shadowBlur: 4,
+                        shadowColor: "hsl(190, 100%, 50%)",
+                    },
+                    // piyo: {
+                    //     type: "tm.display.Shape",
+                    //     init: [84, 84],
+                    // },
+                    bar: {
+                        type: "tm.ui.Gauge",
+                        init: [{
+                            width: param.width,
+                            height: 10,
+                            color: "hsl(200, 100%, 80%)",
+                            bgColor: "transparent",
+                            borderColor: "transparent",
+                            borderWidth: 0,
+                        }],
+                        x: 0,
+                        y: 0,
+                    },
+                }
+            });
+            
+            // bg
+            var bg = this.stage.bg;
+            bg.canvas.clearColor(param.bgColor);
+
+            // label
+            var label = this.stage.label;
+            label.tweener
+                .to({alpha:1}, 1000)
+                .to({alpha:0.5}, 1000)
+                .setLoop(true)
+
+            // bar
+            var bar = this.stage.bar;
+            bar.animationFlag = false;
+            bar.value = 0;
+            bar.animationFlag = true;
+            bar.animationTime = 100;
+            
+            // ひよこさん
+            this._createHiyoko(param).addChildTo(this.stage.piyoLayer);
+
+            // load
+            var stage = this.stage;
+            stage.alpha = 0.0;
+            stage.tweener.clear().fadeIn(100).call(function() {
+                if (param.assets) {
+                    var loader = tm.asset.Loader();
+                    loader.onload = function() {
+                        stage.tweener.clear().wait(200).fadeOut(200).call(function() {
+                            if (param.nextScene) {
+                                this.app.replaceScene(param.nextScene());
+                            }
+                            var e = tm.event.Event("load");
+                            this.fire(e);
+
+                            if (param.autopop == true) {
+                                this.app.popScene();
+                            }
+                        }.bind(this));
+                    }.bind(this);
+                    
+                    loader.onprogress = function(e) {
+                        // update bar
+                        bar.value = e.progress*100;
+
+                        // dispatch event
+                        var event = tm.event.Event("progress");
+                        event.progress = e.progress;
+                        this.fire(event);
+                    }.bind(this);
+                    
+                    loader.load(param.assets);
+                }
+            }.bind(this));
+        },
+
+        onpointingstart: function(app) {
+            // ひよこさん生成
+            var p = app.pointing;
+            var piyo = this._createHiyoko(this.param).addChildTo(this.stage.piyoLayer);
+            piyo.x = p.x;
+            piyo.y = p.y;
+        },
+
+        _createHiyoko: function(param) {
+            // ひよこさん
+            var piyo = tm.display.Shape(84, 84);
+            piyo.x = tm.util.Random.randint(0, param.width);
+            piyo.y = tm.util.Random.randint(0, param.height);
+            piyo.canvas.setColorStyle("white", "yellow").fillCircle(42, 42, 32);
+            piyo.canvas.setColorStyle("white", "black").fillCircle(27, 27, 2);
+            piyo.canvas.setColorStyle("white", "brown").fillRect(40, 70, 4, 15).fillTriangle(0, 40, 11, 35, 11, 45);
+            piyo.dir = tm.geom.Vector2.random(0, 360, 4);
+            var rect = tm.geom.Rect(0, 0, param.width, param.height);
+            rect.padding(42);
+            piyo.update = function(app) {
+                this.position.add(this.dir);
+
+                if (this.x < rect.left) {
+                    this.x = rect.left;
+                    this.dir.x*=-1;
+                }
+                else if (this.x > rect.right) {
+                    this.x = rect.right;
+                    this.dir.x*=-1;
+                }
+                if (this.y < rect.top) {
+                    this.y = rect.top;
+                    this.dir.y*=-1;
+                }
+                else if (this.y > rect.bottom) {
+                    this.y = rect.bottom;
+                    this.dir.y*=-1;
+                }
+
+                if (this.dir.x<0) {
+                    this.rotation -= 7;
+                    this.scaleX = 1;
+                }
+                else {
+                    this.rotation += 7;
+                    this.scaleX = -1;
+                }
+
+                // // 向き更新
+                // if (app.pointing.getPointingStart()) {
+                //     var p = app.pointing.position;
+                //     var v = tm.geom.Vector2.sub(p, this.position);
+                //     this.dir = v.normalize().mul(4);
+                // }
+
+            };
+
+            return piyo;
+        },
+    });
+    
+})();
+
+
+
+
+
 
 
 
@@ -17550,8 +17528,8 @@ tm.ui = tm.ui || {};
             return this.scenes[index];
         },
 
-        setSceneArgument: function(label, key, value) {
-            this.getScene(label).arguments[key] = value;
+        setSceneArguments: function(label, param) {
+            this.getScene(label).arguments.$extend(param);
             return this;
         },
 
@@ -17664,26 +17642,6 @@ tm.ui = tm.ui || {};
 		init: function(param) {
 			this.superInit();
 
-			// var loader = tm.asset.Loader();
-			// loader.load({
-			// 	"ss": "scene/ss.png",
-			// });
-
-			// loader.onload = function() {
-			// 	this.fromJSON({
-			// 		children: {
-			// 			ss: {
-			// 				type: "tm.display.Sprite",
-			// 				init: "ss",
-			// 				originX: 0,
-			// 				originY: 0,
-			// 				y: -88,
-			// 				alpha: 0.1,
-			// 			}
-			// 		}
-			// 	})
-			// }.bind(this);
-
 			this.fromJSON({
 				children: {
 					inputLabel: {
@@ -17721,10 +17679,15 @@ tm.ui = tm.ui || {};
 						self.fire(e);
 					}
 					else if (this.label.text == 'C') {
+						var e = tm.event.Event("push");
 						self.inputLabel.text = "";
+						self.flare("clear");
 					}
 					else {
 						self.inputLabel.text += this.label.text;
+						self.flare("push", {
+							select: this.label.text,
+						});
 					}
 				}
 			});
@@ -18485,17 +18448,9 @@ tm.sound = tm.sound || {};
 
 tm.sound = tm.sound || {};
 
-
 (function() {
 
     var context = null;
-    if (tm.global.webkitAudioContext) {
-        context = new webkitAudioContext();
-    } else if (tm.global.mozAudioContext) {
-        context = new mozAudioContext();
-    } else if (tm.global.AudioContext) {
-        context = new AudioContext();
-    }
 
     /**
      * @class tm.sound.WebAudio
@@ -18513,6 +18468,8 @@ tm.sound = tm.sound || {};
         panner: null,
         /** volume */
         volume: 0.8,
+        /** playing **/
+        playing: false,
 
         _pannerEnabled: true,
 
@@ -18546,10 +18503,13 @@ tm.sound = tm.sound || {};
          * - noteGrainOn ... http://www.html5rocks.com/en/tutorials/casestudies/munkadoo_bouncymouse/
          */
         play: function(time) {
+            if (this.playing == true) { return ; }
+            this.playing = true;
+
             if (time === undefined) time = 0;
 
             this.source.start(this.context.currentTime + time);
-            
+
             var self = this;
             var time = (this.source.buffer.duration/this.source.playbackRate.value)*1000;
             window.setTimeout(function() {
@@ -18564,16 +18524,19 @@ tm.sound = tm.sound || {};
          * 停止
          */
         stop: function(time) {
+            if (this.playing == false) { return ; }
+            this.playing = false;
+
             if (time === undefined) time = 0;
             if (this.source.playbackState == 0) {
                 return ;
             }
             this.source.stop(this.context.currentTime + time);
-            
+
             var buffer = this.buffer;
             var volume = this.volume;
             var loop   = this.loop;
-            
+
             this.source = this.context.createBufferSource();
             this.source.connect(this.gainNode);
             this.buffer = buffer;
@@ -18676,7 +18639,10 @@ tm.sound = tm.sound || {};
          * @private
          */
         _load: function(src) {
-            if (!this.context) return ;
+            if (!this.context) {
+                console.warn("本環境はWebAudio未対応です。(" + src + ")");
+                return;
+            }
 
             var self = this;
             tm.util.Ajax.load({
@@ -18686,9 +18652,15 @@ tm.sound = tm.sound || {};
                 success: function(data) {
                     // console.debug("WebAudio ajax load success");
                     self.context.decodeAudioData(data, function(buffer) {
-                        console.debug("WebAudio decodeAudioData success");
+                        // console.debug("WebAudio decodeAudioData success");
                         self._setup();
                         self.buffer = buffer;
+                        self.loaded = true;
+                        self.dispatchEvent( tm.event.Event("load") );
+                    }, function() {
+                        console.warn("音声ファイルのデコードに失敗しました。(" + src + ")");
+                        self._setup();
+                        self.buffer = context.createBuffer(1, 1, 22050);
                         self.loaded = true;
                         self.dispatchEvent( tm.event.Event("load") );
                     });
@@ -18723,7 +18695,7 @@ tm.sound = tm.sound || {};
             // handle parameter
             hertz   = hertz !== undefined ? hertz : 200;
             seconds = seconds !== undefined ? seconds : 1;
-            // set default value    
+            // set default value
             var nChannels   = 1;
             var sampleRate  = 44100;
             var amplitude   = 2;
@@ -18799,9 +18771,52 @@ tm.sound = tm.sound || {};
         }
     });
 
+    /**
+     * @property    loopStart
+     * ループ開始位置（秒）
+     */
+    tm.sound.WebAudio.prototype.accessor("loopStart", {
+        get: function()  { return this.source.loopStart; },
+        set: function(v) { this.source.loopStart = v; }
+    });
+
+    /**
+     * @property    loopEnd
+     * ループ終了位置（秒）
+     */
+    tm.sound.WebAudio.prototype.accessor("loopEnd", {
+        get: function()  { return this.source.loopEnd; },
+        set: function(v) { this.source.loopEnd = v; }
+    });
+
     /** @static @property */
     tm.sound.WebAudio.isAvailable = (tm.global.webkitAudioContext || tm.global.mozAudioContext || tm.global.AudioContext) ? true : false;
 
+    tm.sound.WebAudio.createContext = function() {
+        if (tm.global.webkitAudioContext) {
+            context = new webkitAudioContext();
+        } else if (tm.global.mozAudioContext) {
+            context = new mozAudioContext();
+        } else if (tm.global.AudioContext) {
+            context = new AudioContext();
+        }
+
+        tm.sound.WebAudio.context = context;
+    };
+
+    /**
+     * @static
+     * iOSでWebAudioを使う場合、window.ontouchend等でこの関数を実行する
+     */
+    tm.sound.WebAudio.unlock = function() {
+        var unlockBuffer = context.createBuffer(1, 1, 22050);
+        var unlockSrc = context.createBufferSource();
+        unlockSrc.buffer = unlockBuffer;
+        unlockSrc.connect(context.destination);
+        unlockSrc.start(0);
+    };
+
+    tm.sound.WebAudio.createContext();
 })();
 
 
