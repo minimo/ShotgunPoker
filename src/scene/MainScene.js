@@ -86,7 +86,7 @@ tm.define("shotgun.MainScene", {
         this.scoreLabel = tm.display.OutlineLabel("SCORE:", 50)
             .addChildTo(this)
             .setParam(this.labelParamBasic)
-            .setPosition(8, 72);
+            .setPosition(8, 32);
         this.scoreLabel.score = 0;
         this.scoreLabel.update = function() {
             this.text = "SCORE:"+this.score;
@@ -102,12 +102,12 @@ tm.define("shotgun.MainScene", {
         this.lifeLabel = tm.display.OutlineLabel("LIFE:", 50)
             .addChildTo(this)
             .setParam(this.labelParamBasic)
-            .setPosition(8, 128);
+            .setPosition(8, 96);
         this.lg = [];
         for (var i = 0; i < 7; i++ ) {
             var c = this.lg[i] = shotgun.Card(SUIT_HEART, 0).addChildTo(this);
             c.setScale(0.2);
-            c.setPosition( 155+i*45, 128);
+            c.setPosition( 155+i*45, 96);
             c.life = i;
             c.update = function() {
                 this.pattern = that.life+this.suit*13-1;
@@ -175,10 +175,6 @@ tm.define("shotgun.MainScene", {
                 appMain.pushScene(shotgun.PauseScene(this));
             }.bind(this));
 
-        //目隠し
-        this.mask = tm.display.Sprite("blackback", SC_W*2, SC_H*2).addChildTo(this);
-        this.mask.tweener.clear().fadeOut(200);
-
         //カードデッキ
         this.deck = shotgun.CardDeck().addChildTo(this.mainLayer);
 
@@ -226,11 +222,18 @@ tm.define("shotgun.MainScene", {
             var lb = this.creditLabel = tm.display.OutlineLabel("", 40)
                 .addChildTo(this)
                 .setParam(this.labelParamBasic)
-                .setPosition(SC_W*0.0, 15);
+                .setPosition(SC_W*0.0, SC_H-20);
             lb.update = function() {
                 this.text = "Level:"+that.level;
             }
         }
+
+        //目隠し
+        this.mask = tm.display.Shape(SC_W, SC_H)
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.5)
+            .renderRectangle({fillStyle: "rgba(0, 0, 0, 1.0)", strokeStyle: "rgba(0, 0, 0, 1.0)"});
+        this.mask.tweener.clear().fadeOut(200);
     },
     
     update: function() {

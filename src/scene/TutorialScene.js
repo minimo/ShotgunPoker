@@ -81,7 +81,7 @@ tm.define("shotgun.TutorialScene", {
         this.scoreLabel = tm.display.OutlineLabel("SCORE:", 50)
             .addChildTo(this)
             .setParam(this.labelParamBasic)
-            .setPosition(8, 72);
+            .setPosition(8, 32);
         this.scoreLabel.score = 0;
         this.scoreLabel.update = function() {
             this.text = "SCORE:"+this.score;
@@ -97,12 +97,12 @@ tm.define("shotgun.TutorialScene", {
         this.lifeLabel = tm.display.OutlineLabel("LIFE:", 50)
             .addChildTo(this)
             .setParam(this.labelParamBasic)
-            .setPosition(8, 128);
+            .setPosition(8, 96);
         this.lg = [];
         for (var i = 0; i < 7; i++ ) {
             var c = this.lg[i] = shotgun.Card(SUIT_HEART, 0).addChildTo(this);
             c.setScale(0.2);
-            c.setPosition( 155+i*45, 128);
+            c.setPosition( 155+i*45, 96);
             c.life = i;
             c.update = function() {
                 this.pattern = that.life+this.suit*13-1;
