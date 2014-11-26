@@ -18,7 +18,7 @@ DEBUG_PHONEGAP = true;
 fontLoadEnd = 0;
 
 //使用フォント
-FONT = ["'KS-Kohichi-FeltPen'", "'azuki'", "'CasinoQueen'", "'CasinoRegular'"];
+FONT = ["'KS-Kohichi-FeltPen'", "'azuki'", "'CasinoRegular'"];
 
 //GAMECENTER使用フラグ
 GAMECENTER = false;
