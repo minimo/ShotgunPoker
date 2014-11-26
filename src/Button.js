@@ -16,7 +16,7 @@ tm.define("shotgun.Button", {
         lineWidth: 4,
         shadowColor: 'rgba(0, 0, 0, 0.5)',
     },
-    labelParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:3 },
+    labelParam: {fontFamily: "azuki", align: "center", baseline:"middle", outlineWidth:3 },
 
     type: 0, //0:nomal 1:toggle
     text: "",

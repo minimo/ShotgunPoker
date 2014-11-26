@@ -16,7 +16,7 @@ tm.define("shotgun.SettingScene", {
     se: null,
 
     //ラベル用フォントパラメータ
-    labelParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:2 },
+    labelParam: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:2 },
 
     init: function() {
         this.superInit();

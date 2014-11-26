@@ -10,9 +10,9 @@ tm.define("shotgun.TitleScene", {
     superClass: tm.app.Scene,
 
     //ボタン用フォントパラメータ
-    buttonParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:4 },
-    labelParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:2 },
-    scoreParam: {fontFamily:"'azuki'", align: "left", baseline:"middle", outlineWidth:2 },
+    buttonParam: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:4 },
+    labelParam: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:2 },
+    scoreParam: {fontFamily:"azuki", align: "left", baseline:"middle", outlineWidth:2 },
 
     bgColor: 'rgba(50, 150, 50, 1)',
 
@@ -82,7 +82,7 @@ tm.define("shotgun.TitleScene", {
         var lb = this.title1 = tm.display.OutlineLabel("SHOTGUN", 130)
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5-310, SC_H*0.16)
-            .setParam({fontFamily:"'CasinoRegular'", align: "left", baseline:"middle", outlineWidth:3 });
+            .setParam({fontFamily:"CasinoRegular", align: "left", baseline:"middle", outlineWidth:3 });
         lb.fillStyle = fillStyle;
         lb.fillStyleOutline = outlineStyle;
         lb.shadowColor = shadowColor;
@@ -92,7 +92,7 @@ tm.define("shotgun.TitleScene", {
         var lb = this.title2 = tm.display.OutlineLabel("POKER", 130)
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5+280, SC_H*0.29)
-            .setParam({fontFamily:"'CasinoRegular'", align: "right", baseline:"middle", outlineWidth:3 });
+            .setParam({fontFamily:"CasinoRegular", align: "right", baseline:"middle", outlineWidth:3 });
         lb.fillStyle = fillStyle;
         lb.fillStyleOutline = outlineStyle;
         lb.shadowColor = shadowColor;
@@ -172,7 +172,7 @@ tm.define("shotgun.TitleScene", {
             tm.display.OutlineLabel("VER "+appMain.version, 30)
                 .addChildTo(this.titleLayer)
                 .setPosition(SC_W*0.5, SC_H-60)
-                .setParam({fontFamily:"'CasinoRegular'", align: "center", baseline:"middle", outlineWidth:3 });
+                .setParam({fontFamily:"CasinoRegular", align: "center", baseline:"middle", outlineWidth:3 });
     },
 
     addButton: function(page, finish) {
@@ -265,23 +265,3 @@ tm.define("shotgun.TitleScene", {
     },
 
 });
-
-tm.define("shotgun.WaitScene", {
-    superClass: tm.app.Scene,
-
-    init: function() {
-        this.superInit();
-    },
-    update: function() {
-        if (fontLoadEnd >= FONT.length) {
-            fontLoadEnd = 0;
-            tm.app.Object2D().addChildTo(this).tweener
-                .wait(100)
-                .call(function(){
-                    appMain.replaceScene(shotgun.TitleScene());
-                });
-        }
-    },
-});
-
-

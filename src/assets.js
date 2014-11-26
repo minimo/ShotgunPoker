@@ -25,4 +25,9 @@ var assets = {
     "dist":         "assets/se_maoudamashii_se_paper01.mp3",
     "hand":         "assets/se_hand.mp3",
     "nopair":       "assets/se_nopair.mp3",
+
+    //Font
+    "KS-Kohichi":   "font/KS-Kohichi-FeltPen.ttf",
+    "azuki":        "font/azuki.ttf",
+    "CasinoRegular":"font/CasinoRegular.ttf",
 }

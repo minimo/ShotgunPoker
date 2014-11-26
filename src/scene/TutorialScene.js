@@ -37,16 +37,16 @@ tm.define("shotgun.TutorialScene", {
     onePair: 0,
 
     //ボタン用フォントパラメータ
-    buttonParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:4 },
-    labelParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:4 },
-    scoreParam: {fontFamily:"'azuki'", align: "left", baseline:"middle", outlineWidth:2 },
+    buttonParam: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:4 },
+    labelParam: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:4 },
+    scoreParam: {fontFamily:"azuki", align: "left", baseline:"middle", outlineWidth:2 },
 
-    labelParamBasic: {fontFamily: "'azuki'", align: "left", baseline: "middle",outlineWidth: 3},
-    labelParamBasicCenter: {fontFamily: "'azuki'", align: "center", baseline: "middle",outlineWidth: 3},
-    labelParamPoker: {fontFamily: "'KS-Kohichi-FeltPen'",align: "center", baseline: "middle", outlineWidth: 3},
-    labelParamHand:  {fontFamily: "'KS-Kohichi-FeltPen'",align: "left", baseline: "middle", outlineWidth: 3},
-    labelParamBefore:{fontFamily: "'azuki'",align: "left", baseline: "top", outlineWidth: 3},
-    labelParamMsg: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:1 },
+    labelParamBasic: {fontFamily: "azuki", align: "left", baseline: "middle",outlineWidth: 3},
+    labelParamBasicCenter: {fontFamily: "azuki", align: "center", baseline: "middle",outlineWidth: 3},
+    labelParamPoker: {fontFamily: "KS-Kohichi",align: "center", baseline: "middle", outlineWidth: 3},
+    labelParamHand:  {fontFamily: "KS-Kohichi",align: "left", baseline: "middle", outlineWidth: 3},
+    labelParamBefore:{fontFamily: "azuki",align: "left", baseline: "top", outlineWidth: 3},
+    labelParamMsg: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:1 },
 
     bgColor: 'rgba(50, 150, 50, 1)',
 

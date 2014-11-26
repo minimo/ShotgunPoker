@@ -10,8 +10,8 @@ tm.define("shotgun.GameoverScene", {
     superClass: tm.app.Scene,
 
     //ラベル用フォントパラメータ
-    labelParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:2 },
-    scoreParam: {fontFamily:"'azuki'", align: "left", baseline:"middle", outlineWidth:2 },
+    labelParam: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:2 },
+    scoreParam: {fontFamily:"azuki", align: "left", baseline:"middle", outlineWidth:2 },
 
     init: function(parentScene) {
         this.superInit();
@@ -84,7 +84,7 @@ tm.define("shotgun.GameoverScene", {
             appMain.replaceScene(shotgun.TitleScene());
         });
         var lb = this.exitLabel = tm.display.OutlineLabel("TWEET", 50).addChildTo(this);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
+        lb.fontFamily = "azuki"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
         lb.setPosition(SC_W*0.5, SC_H*0.7);
 */
         //目隠し
