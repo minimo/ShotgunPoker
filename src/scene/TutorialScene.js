@@ -53,7 +53,6 @@ tm.define("shotgun.TutorialScene", {
     init: function() {
         this.superInit();
         this.background = "rgba(0, 0, 0, 0.0)";
-//        this.checkHierarchy = true;
 
         //バックグラウンド
         this.bg = tm.display.Shape(SC_W, SC_H)

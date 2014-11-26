@@ -40,18 +40,18 @@ tm.define("shotgun.Button", {
 
         //判定処理設定
         this.interactive = true;
-        this.checkHierarchy = true;
         this.boundingType = "rect";
+//        this.checkHierarchy = true;
 
         //イベントリスナ登録
-        this.addEventListener("pointingstart", function() {
+        this.addEventListener("touchstart", function() {
             if (this.lock) return;
 
             this.push = true;
             this.button.x += this.downX;
             this.button.y += this.downY;
         });
-        this.addEventListener("pointingmove", function(e) {
+        this.addEventListener("touchmove", function(e) {
             if (this.lock) return;
 
             var pt = e.pointing;
@@ -69,7 +69,7 @@ tm.define("shotgun.Button", {
                 }
             }
         });
-        this.addEventListener("pointingend", function(e) {
+        this.addEventListener("touchend", function(e) {
             if (this.lock) return;
 
             var pt = e.pointing;
@@ -99,13 +99,13 @@ tm.define("shotgun.Button", {
 
         //ボタン影
         this.shadow = tm.display.RectangleShape(width, height, {fillStyle: style.shadowColor, strokeStyle: style.shadowColor, lineWidth: style.lineWidth})
-            .addChildTo(this);
+            .addChildTo(this)
+            .setPosition(this.downX, this.downY);
         this.shadow.blendMode = "source-over";
 
         //ボタン本体
         this.button = tm.display.RectangleShape(width, height, {fillStyle: style.buttonColor, strokeStyle: style.lineColor, lineWidth:  style.lineWidth})
-            .addChildTo(this)
-            .setPosition(-this.downX, -this.downY);
+            .addChildTo(this);
 //        this.button.blendMode = "lighter";
 
         //ボタンラベル

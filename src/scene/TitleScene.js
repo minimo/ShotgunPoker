@@ -19,7 +19,6 @@ tm.define("shotgun.TitleScene", {
     init: function() {
         this.superInit();
         this.background = "rgba(0, 0, 0, 0.0)";
-//        this.checkHierarchy = true;
 
         //バックグラウンド
         this.bg = tm.display.Shape(SC_W, SC_H)
@@ -29,7 +28,6 @@ tm.define("shotgun.TitleScene", {
 
         //タイトルとチュートリアルを分けてレイヤーを作成
         this.titleLayer = tm.app.Object2D().addChildTo(this);
-        this.titleLayer.checkHierarchy = true;
         this.underLayer = tm.app.Object2D().addChildTo(this.titleLayer);
         this.tutorialLayer = tm.app.Object2D().addChildTo(this);
 

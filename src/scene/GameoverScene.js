@@ -73,20 +73,6 @@ tm.define("shotgun.GameoverScene", {
                 that.mask.tweener.clear().fadeIn(300).call(function(){appMain.replaceScene(shotgun.TitleScene());});
             });
 
-/*
-        //ツイートボタン
-        var sh = this.exit = tm.display.RoundRectangleShape(200, 70, param).addChildTo(this);
-        sh.setPosition(SC_W*0.5, SC_H*0.7);
-        sh.interactive = true;
-        sh.addEventListener("pointingstart", function() {this.y += 10;});
-        sh.addEventListener("pointingend", function() {
-            this.y -= 10;
-            appMain.replaceScene(shotgun.TitleScene());
-        });
-        var lb = this.exitLabel = tm.display.OutlineLabel("TWEET", 50).addChildTo(this);
-        lb.fontFamily = "azuki"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
-        lb.setPosition(SC_W*0.5, SC_H*0.7);
-*/
         //目隠し
         this.mask = tm.display.Shape(SC_W, SC_H)
             .addChildTo(this)
