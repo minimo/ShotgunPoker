@@ -239,7 +239,7 @@ tm.define("shotgun.TitleScene", {
             }
             c.vr = rand(-5, 5) || 1;
             c.vy = rand(5, 15);
-            c.setScale(rand(5, 8)/10);
+            c.setScale(rand(7, 10)/10);
         }
 
         //スクリーンショット保存
