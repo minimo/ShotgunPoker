@@ -9,6 +9,7 @@ var assets = {
     //images
     "card":         "assets/trump.png",
     "tmliblogo":    "assets/tmlib_logo.png",
+    "titlelogo":    "assets/titlelogo.png",
     "shotgun":      "assets/shotgun.png",
 
     "arrow":        "assets/arrow.png",

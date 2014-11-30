@@ -70,12 +70,17 @@ tm.define("shotgun.TitleScene", {
         var shadowColor = 'rgba(160, 160, 160, 1)';
 
         //ショットガンシルエット
-        var sg = tm.display.Sprite("shotgun", SC_W, SC_H*0.2)
-                .addChildTo(this.titleLayer)
-                .setPosition(SC_W*0.5, SC_H*0.2);
+        var sg = tm.display.Sprite("shotgun", 640, 250)
+            .addChildTo(this.titleLayer)
+            .setPosition(SC_W*0.5, SC_H*0.2);
         sg.scaleX = -1;
         sg.rotation = -10;
 
+        //タイトルロゴ
+        tm.display.Sprite("titlelogo", 600, 300)
+            .addChildTo(this.titleLayer)
+            .setPosition(SC_W*0.5, SC_H*0.2);
+/*
         //タイトルロゴ１
         var lb = this.title1 = tm.display.OutlineLabel("SHOTGUN", 130)
             .addChildTo(this.titleLayer)
@@ -95,7 +100,7 @@ tm.define("shotgun.TitleScene", {
         lb.fillStyleOutline = outlineStyle;
         lb.shadowColor = shadowColor;
         lb.shadowBlur = 5;
-
+*/
         var that = this;
         var width = 300, height = 70;
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
