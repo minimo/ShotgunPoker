@@ -7,14 +7,16 @@
  */
 
 //メディアタイプ
-MEDIA_TMLIB = 0;    //tmlibアセット
-MEDIA_PHONEGAP = 1; //PhoneGapメディア
+MEDIA_ASSET = 0;    //tmlibアセット
+MEDIA_URL = 1;      //PhoneGapMedia
 
 //音声メディア管理
 tm.define("shotgun.SoundSet", {
     elements: null,
+
     bgm: null,
     bgmIsPlay: false,
+
     volumeBGM: 3,
     volumeSE: 3,
 
@@ -22,10 +24,11 @@ tm.define("shotgun.SoundSet", {
         elements = [];
     },
 
-    add: function(type, name, url) {
-        if (type === undefined) return null;
-        name = name || null;
+    add: function(name, url) {
+        if (name === undefined) return null;
         url = url || null;
+        var type = 0;
+        if (url) type = MEDIA_URL; else type = MEDIA_ASSET;
         var e = shotgun.SoundElement(type, name, url);
         this.elements.push(e);
         return this;
@@ -41,6 +44,10 @@ tm.define("shotgun.SoundSet", {
     playBGM: function(name) {
         if (this.bgm) {
             this.bgm.stop();
+        }
+        var media = this.find(name);
+        if (media) {
+            media.play(true);
         }
         return this;
     },
@@ -65,6 +72,10 @@ tm.define("shotgun.SoundSet", {
     },
 
     playSE: function(name) {
+        var media = this.find(name);
+        if (media) {
+            media.play(false);
+        }
         return this;
     },
 
@@ -82,18 +93,31 @@ tm.define("shotgun.SoundElement", {
         this.type = type;
         this.name = name;
 
-        if (type == MEDIA_TMLIB) {
+        if (type == MEDIA_ASSET) {
             this.media = tm.asset.AssetManager.get(name);
-        } else if (type == MEDIA_PHONEGAP) {
+        } else if (type == MEDIA_URL) {
             var that = this;
             this.media = new Media(getPath()+url, function(){that.status="OK"}, function(){that.status="NG"});
         }
     },
 
-    play: function() {
-        if (this.type == MEDIA_TMLIB) {
-            this.media.play();
+    play: function(loop) {
+        if (!this.media) return this;
+        if (this.type == MEDIA_URL) {
+            if (loop) {
+                this.media.play({numberOfLoops:9999, playAudioWhenScreenIsLocked : false});
+            } else {
+                this.media.play({playAudioWhenScreenIsLocked : false});
+            }
         } else {
+            this.media.loop = loop;
+            this.media.play();
         }
+        return this;
+    },
+
+    stop: function() {
+        if (!this.media) return this;
+        this.media.stop();
     },
 });

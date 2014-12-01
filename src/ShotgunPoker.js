@@ -86,6 +86,18 @@ tm.define("shotgun.CanvasApp", {
     },
 
     _onLoadAssets: function() {
+        //PhoneGap出ない場合、音声アセットを登録
+        if (!PHONEGAP) {
+            this.sounds
+                .add("titleBGM")
+                .add("mainBGM")
+                .add("tutorialBGM")
+                .add("countdown")
+                .add("deal")
+                .add("dist")
+                .add("hand")
+                .add("nopair");
+        }
     },
 
     exitApp: function() {
