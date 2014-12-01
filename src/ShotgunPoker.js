@@ -16,11 +16,11 @@ tm.define("shotgun.CanvasApp", {
     version: "1.0.0",
 
     //ＢＧＭ＆効果音
-    sounds: null,
     bgm: null,
     bgmIsPlay: false,
     volumeBGM: 3,
     volumeSE: 3,
+    sounds: null,
 
     //スコア保存
     lastScore: 0,
@@ -49,7 +49,6 @@ tm.define("shotgun.CanvasApp", {
 
         //設定情報の読み込み
         this.loadConfig();
-        this.loadSoundFiles();
 
         var loadingScene = tm.ui["LoadingScene"]({
             assets: assets,
@@ -118,26 +117,6 @@ tm.define("shotgun.CanvasApp", {
             this.volumeSE = c.volumeSE;
         }
         return this;
-    },
-
-    loadSoundFiles: function() {
-        //音声ファイル読み込み
-        if (!Media) {
-            var files = [
-                {name: "titleBGM",      url:"assets/game_maoudamashii_5_casino02.mp3"},
-                {name: "mainBGM",       url:"assets/game_maoudamashii_5_casino01.mp3"},
-                {name: "tutorialBGM",   url:"assets/game_maoudamashii_5_casino04.mp3"},
-                {name: "countdown",     url:"assets/se_countdown.mp3"},
-                {name: "deal",          url:"assets/se_deal.mp3"},
-                {name: "dist",          url:"assets/se_maoudamashii_se_paper01.mp3"},
-                {name: "hand",          url:"assets/se_hand.mp3"},
-                {name: "nopair",        url:"assets/se_nopair.mp3"}
-            ];
-
-            for (var i = 0; i < files.length; i++) {
-                this.sounds.add(files[i].name, files[i].url);
-            }
-        }
     },
 
     playBGM: function(asset) {

@@ -14,6 +14,19 @@ var onDeviceready = function () {
 
     PHONEGAP = true;
 
+    //音声ファイル読み込み
+    if (Media) {
+        appMain.sounds
+            .add(MEDIA_PHONEGAP, "titleBGM",    "assets/game_maoudamashii_5_casino02.mp3")
+            .add(MEDIA_PHONEGAP, "mainBGM",     "assets/game_maoudamashii_5_casino01.mp3")
+            .add(MEDIA_PHONEGAP, "tutorialBGM", "assets/game_maoudamashii_5_casino04.mp3")
+            .add(MEDIA_PHONEGAP, "countdown",   "assets/se_countdown.mp3")
+            .add(MEDIA_PHONEGAP, "deal",        "assets/se_deal.mp3")
+            .add(MEDIA_PHONEGAP, "dist",        "assets/se_maoudamashii_se_paper01.mp3")
+            .add(MEDIA_PHONEGAP, "hand",        "assets/se_hand.mp3")
+            .add(MEDIA_PHONEGAP, "nopair",      "assets/se_nopair.mp3")
+    }
+
     //スクリーンサイズ調整
     if (appMain) {
         SC_W = window.innerWidth*2;
