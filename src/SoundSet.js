@@ -21,7 +21,7 @@ tm.define("shotgun.SoundSet", {
     volumeSE: 3,
 
     init: function() {
-        elements = [];
+        this.elements = [];
     },
 
     add: function(name, url) {
