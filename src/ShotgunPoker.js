@@ -135,73 +135,37 @@ tm.define("shotgun.CanvasApp", {
     },
 
     playBGM: function(asset) {
-        if (this.bgm) {
-            if (this.bgmIsPlay) {
-                this.bgm.stop();
-                this.bgmIsPlay = false;
-            }
-        }
-        this.bgm = tm.asset.AssetManager.get(asset).clone();
-        if (this.bgm) {
-            this.bgm.loop = true;
-            this.bgm.volume = this.volumeBGM*0.34;
-            this.bgm.play();
-            this.bgmIsPlay = true;
-        }
+        this.sounds.playBGM(asset);
         return this;
     },
 
     stopBGM: function() {
-        if (this.bgm) {
-            if (this.bgmIsPlay) {
-                this.bgm.stop();
-                this.bgmIsPlay = false;
-            }
-            this.bgm = null;
-        }
+        this.sounds.stopBGM();
         return this;
     },
 
     pauseBGM: function() {
-        if (this.bgm) {
-            if (this.bgmIsPlay) {
-                this.bgm.pause();
-                this.bgmIsPlay = false;
-            }
-        }
+        this.sounds.pauseBGM();
         return this;
     },
 
     resumeBGM: function() {
-        if (this.bgm) {
-            if (!this.bgmIsPlay) {
-                this.bgm.volume = this.volumeBGM*0.34;
-                this.bgm.resume();
-                this.bgmIsPlay = true;
-            }
-        }
+        this.sounds.resumeBGM();
         return this;
     },
 
     setVolumeBGM: function(v) {
-        this.pauseBGM();
-        this.volumeBGM = v;
-        this.resumeBGM();
+        this.sounds.setVolumeBGM(v);
         return this;
     },
 
     playSE: function(asset) {
-        var se = tm.asset.AssetManager.get(asset).clone();
-        if (se) {
-            se.loop = false;
-            se.volume = this.volumeSE*0.34;
-            se.play();
-        }
+        this.sounds.playSE(asset);
         return this;
     },
 
     setVolumeSE: function(v) {
-        this.volumSE = v;
+        this.sounds.setVolumeSE(v);
         return this;
     },
 });
