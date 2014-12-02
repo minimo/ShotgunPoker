@@ -16,15 +16,14 @@ var onDeviceready = function () {
 
     //音声ファイル読み込み
     if (Media) {
-        appMain.sounds
-            .add("titleBGM",    "assets/game_maoudamashii_5_casino02.mp3")
-            .add("mainBGM",     "assets/game_maoudamashii_5_casino01.mp3")
-            .add("tutorialBGM", "assets/game_maoudamashii_5_casino04.mp3")
-            .add("countdown",   "assets/se_countdown.mp3")
-            .add("deal",        "assets/se_deal.mp3")
-            .add("dist",        "assets/se_maoudamashii_se_paper01.mp3")
-            .add("hand",        "assets/se_hand.mp3")
-            .add("nopair",      "assets/se_nopair.mp3")
+        appMain.sounds.add("titleBGM",    "assets/game_maoudamashii_5_casino02.mp3");
+        appMain.sounds.add("mainBGM",     "assets/game_maoudamashii_5_casino01.mp3");
+        appMain.sounds.add("tutorialBGM", "assets/game_maoudamashii_5_casino04.mp3");
+        appMain.sounds.add("countdown",   "assets/se_countdown.mp3");
+        appMain.sounds.add("deal",        "assets/se_deal.mp3");
+        appMain.sounds.add("dist",        "assets/se_maoudamashii_se_paper01.mp3");
+        appMain.sounds.add("hand",        "assets/se_hand.mp3");
+        appMain.sounds.add("nopair",      "assets/se_nopair.mp3");
     }
 
     //スクリーンサイズ調整

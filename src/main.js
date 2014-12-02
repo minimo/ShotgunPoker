@@ -12,7 +12,7 @@ mt = new MersenneTwister();
 //デバッグフラグ
 DEBUG = false;
 PHONEGAP = false;
-DEBUG_PHONEGAP = true;
+DEBUG_PHONEGAP = false;
 
 //フォント読み込み終了カウント
 fontLoadEnd = 0;

@@ -124,11 +124,16 @@ tm.define("shotgun.SoundElement", {
             this.media = tm.asset.AssetManager.get(name);
         } else if (type == MEDIA_URL) {
             var that = this;
-            this.media = new Media(getPath()+url, function(){that.status="OK"}, function(){that.status="NG"});
+            this.media = new Media(url, function(){
+                that.status="OK";
+                AdvanceAlert("OK:"+url);
+            }, function(){
+                that.status="NG";
+                AdvanceAlert("NG:"+url);
+            });
         }
     },
 
-    //çƒê∂
     play: function(loop) {
         if (!this.media) return this;
         if (this.type == MEDIA_URL) {
