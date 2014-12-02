@@ -100,7 +100,7 @@ tm.define("shotgun.SoundElement", {
     init: function(type, name, url) {
         this.type = type;
         this.name = name;
-        this.url = url;
+        this.url = url || null;
 
         if (type == MEDIA_ASSET) {
             this.media = tm.asset.AssetManager.get(name);
