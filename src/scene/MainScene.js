@@ -106,7 +106,7 @@ tm.define("shotgun.MainScene", {
         this.lg = [];
         for (var i = 0; i < 7; i++ ) {
             var c = this.lg[i] = shotgun.Card(SUIT_HEART, 0).addChildTo(this);
-            c.setScale(0.2);
+            c.setScale(0.3);
             c.setPosition( 155+i*45, 96);
             c.life = i;
             c.update = function() {
