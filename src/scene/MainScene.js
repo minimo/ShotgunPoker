@@ -318,23 +318,28 @@ tm.define("shotgun.MainScene", {
                 }
             }
 
-            //早上がりボーナス
-            if (this.count > 7 && sc > 0) {
-                sc = ~~(sc*2);
-                var lb = tm.display.OutlineLabel("FANTASTIC!", 100).addChildTo(this);
-                lb.setParam(this.labelParamPoker);
-                lb.setPosition(SC_W*0.5, SC_H*0.5);
-                lb.tweener.clear().wait(1000).call(function(){lb.remove();});
-            } else if (this.count > 4 && sc > 0) {
-                sc = ~~(sc*1.5);
-                var lb = tm.display.OutlineLabel("EXCELLENT!", 100).addChildTo(this);
-                lb.setParam(this.labelParamPoker);
-                lb.setPosition(SC_W*0.5, SC_H*0.5);
-                lb.tweener.clear().wait(1000).call(lb.remove());
-            }
-
             //得点がプラスの時のみスコアに加算
-            if (sc > 0) this.score += sc;
+            if (sc > 0) {
+                //早上がりボーナス
+                var msg = "";
+                if (this.count > 8) {
+                    sc = ~~(sc*2);
+                    msg = "FANTASTIC!";
+                } else if (this.count > 7) {
+                    sc = ~~(sc*1.5);
+                    msg = "EXCELLENT!";
+                } else if (this.count > 5) {
+                    sc = ~~(sc*1.3);
+                    msg = "GOOD!"
+                }
+                if (msg != "") {
+                    var lb = tm.display.OutlineLabel(msg, 100).addChildTo(this);
+                    lb.setParam(this.labelParamPoker);
+                    lb.setPosition(SC_W*0.5, SC_H*0.5);
+                    lb.tweener.clear().wait(1000).call(function(){lb.remove();});
+                }
+                this.score += sc;
+            }
 
             //ゲームオーバー判定
             if (this.life < 0) {
