@@ -346,7 +346,7 @@ tm.define("shotgun.MainScene", {
             this.time = 0;
 
             //レベル処理
-            this.level = Math.sqrt(this.absTime*(0.0004*(this.levelReset+1)))+1;
+            this.level = Math.sqrt(this.absTime*(0.0002*(this.levelReset+1)))+1;
             if (this.level > 2 && this.levelReset < 1) {
                 this.absTime = 0;
                 this.level = 1;
