@@ -44,29 +44,47 @@ tm.define("shotgun.SoundSet", {
     playBGM: function(name) {
         if (this.bgm) {
             this.bgm.stop();
+            this.bgmIsPlay = false;
         }
         var media = this.find(name);
         if (media) {
             media.play(true);
             media.setVolume(this.volumeBGM);
             this.bgm = media;
+            this.bgmIsPlay = true;
         }
         return this;
     },
 
     stopBGM: function() {
         if (this.bgm) {
-            this.bgm.stop();
+            if (this.bgmIsPlay) {
+                this.bgm.stop();
+                this.bgmIsPlay = false;
+            }
             this.bgm = null;
         }
         return this;
     },
 
     pauseBGM: function() {
+        if (this.bgm) {
+            if (this.bgmIsPlay) {
+                this.bgm.pause();
+                this.bgmIsPlay = false;
+            }
+        }
         return this;
     },
 
     resumeBGM: function() {
+        if (this.bgm) {
+            if (!this.bgmIsPlay) {
+                this.bgm.volume = this.volumeBGM*0.34;
+                this.bgm.resume();
+                this.bgmIsPlay = true;
+            }
+        }
         return this;
     },
 
