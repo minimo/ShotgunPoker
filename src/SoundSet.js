@@ -149,11 +149,10 @@ tm.define("shotgun.SoundElement", {
         return this;
     },
 
-    //クローンを作って再生（リピート無し）
     playClone: function() {
         if (!this.media) return this;
         if (this.type == MEDIA_URL) {
-            var tmp = new Media(getPath()+this.url);
+            var tmp = new Media(this.url);
             tmp.play();
             tmp = null;
         } else {
