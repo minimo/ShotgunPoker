@@ -62,6 +62,7 @@ tm.define("shotgun.GameoverScene", {
             .addChildTo(this)
             .setPosition(SC_W*0.25, SC_H*0.9)
             .addEventListener("pushed", function() {
+                that.parentScene = null;
                 that.mask.tweener.clear().fadeIn(300).call(function(){appMain.replaceScene(shotgun.MainScene());});
             });
 
@@ -70,6 +71,7 @@ tm.define("shotgun.GameoverScene", {
             .addChildTo(this)
             .setPosition(SC_W*0.75, SC_H*0.9)
             .addEventListener("pushed", function() {
+                that.parentScene = null;
                 that.mask.tweener.clear().fadeIn(300).call(function(){appMain.replaceScene(shotgun.TitleScene());});
             });
 
