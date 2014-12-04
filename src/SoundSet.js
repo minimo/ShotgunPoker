@@ -6,11 +6,11 @@
  *
  */
 
-//メディアタイプ
-MEDIA_ASSET = 0;    //tmlibアセット
+//繝｡繝・ぅ繧｢繧ｿ繧､繝・
+MEDIA_ASSET = 0;    //tmlib繧｢繧ｻ繝・ヨ
 MEDIA_URL = 1;      //PhoneGapMedia
 
-//音声メディア管理
+//髻ｳ螢ｰ繝｡繝・ぅ繧｢邂｡逅・
 tm.define("shotgun.SoundSet", {
     elements: null,
 
