@@ -22,6 +22,9 @@ tm.define("shotgun.CanvasApp", {
     volumeSE: 3,
     sounds: null,
 
+    //ボーナスライフ
+    bonusLife: 0,
+
     //スコア保存
     lastScore: 0,
     highScore: 0,

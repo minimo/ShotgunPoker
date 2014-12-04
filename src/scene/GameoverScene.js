@@ -75,6 +75,14 @@ tm.define("shotgun.GameoverScene", {
                 that.mask.tweener.clear().fadeIn(300).call(function(){appMain.replaceScene(shotgun.TitleScene());});
             });
 
+        //全画面広告ボタン
+        shotgun.Button(width*0.8, height, "広告")
+            .addChildTo(this)
+            .setPosition(SC_W*0.25, SC_H*0.8)
+            .addEventListener("pushed", function() {
+                appMain.bonusLife = 1;
+            });
+
         //目隠し
         this.mask = tm.display.Shape(SC_W, SC_H)
             .addChildTo(this)

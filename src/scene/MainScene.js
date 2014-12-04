@@ -61,6 +61,10 @@ tm.define("shotgun.MainScene", {
         this.superInit();
         this.background = "rgba(0, 0, 0, 0.0)";
 
+        //ボーナスライフ加算
+        this.life += appMain.bonusLife;
+        appMain.bonusLife = 0;
+
         //バックグラウンド
         this.bg = tm.display.Shape(SC_W, SC_H)
             .addChildTo(this)
