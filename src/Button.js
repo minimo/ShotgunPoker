@@ -15,6 +15,8 @@ tm.define("shotgun.Button", {
         lineColor: 'rgba(200, 200, 200, 0.5)',
         lineWidth: 4,
         shadowColor: 'rgba(0, 0, 0, 0.5)',
+        fontFamily: "azuki",
+        fontSize: 50,
     },
     labelParam: {fontFamily: "azuki", align: "center", baseline:"middle", outlineWidth:3 },
 
@@ -109,7 +111,8 @@ tm.define("shotgun.Button", {
 //        this.button.blendMode = "lighter";
 
         //ボタンラベル
-        this.label = tm.display.OutlineLabel(this.text, 50)
+        this.labelParam.fontFamily = style.fontFamily;
+        this.label = tm.display.OutlineLabel(this.text, style.fontSize)
             .addChildTo(this.button)
             .setParam(this.labelParam);
     },
