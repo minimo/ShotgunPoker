@@ -13,6 +13,7 @@ var onDeviceready = function () {
     }
 
     PHONEGAP = true;
+    hotjs.Audio.init();
 
     //音声ファイル読み込み
     if (Media) {
