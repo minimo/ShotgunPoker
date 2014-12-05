@@ -213,7 +213,7 @@ tm.define("shotgun.MainScene", {
                     if (this.alpha < 0)this.alpha = 0;
                 } else {
                     this.alpha = 1.0;
-                    tm.asset.AssetManager.get("countdown").clone().play();
+                    appMain.playSE("countdown");
                 }
                 this.setFrameIndex(that.count);
             } else {
