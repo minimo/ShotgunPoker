@@ -11,6 +11,8 @@ var assets = {
     "tmliblogo":    "assets/tmlib_logo.png",
     "titlelogo":    "assets/titlelogo.png",
     "shotgun":      "assets/shotgun.png",
+    "ready":        "assets/ready.png",
+    "count":        "assets/count.png",
 
     "arrow":        "assets/arrow.png",
     "finger":       "assets/finger.png",

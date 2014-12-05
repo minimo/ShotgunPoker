@@ -186,10 +186,10 @@ tm.define("shotgun.MainScene", {
         appMain.playBGM("mainBGM");
 
         //スタートアップ
-        var lb = this.readyLabel = tm.display.OutlineLabel("READY", 100)
+        var lb = this.readyLabel = tm.display.Sprite("ready")
             .addChildTo(this.upperLayer)
-            .setParam(this.labelParamPoker)
-            .setPosition(SC_W/2, SC_H/2);
+            .setPosition(SC_W/2, SC_H/2)
+            .setScale(1.5);
         lb.tweener.clear().wait(500).fadeOut(500).wait(300);
         lb.tweener.call(function(){
             that.deck.startup();
@@ -199,10 +199,10 @@ tm.define("shotgun.MainScene", {
         });
 
         //カウントダウン表示
-        var lb = this.countDown = tm.display.OutlineLabel("5", 300)
+        var lb = this.countDown = tm.display.Sprite("count", 256, 256)
             .addChildTo(this.upperLayer)
-            .setParam(this.labelParamPoker)
-            .setPosition(SC_W/2, SC_H/2);
+            .setPosition(SC_W/2, SC_H/2)
+            .setFrameIndex(4);
         lb.beforeCount = 9;
         lb.alpha = 1.0;
         lb.update = function() {
@@ -215,10 +215,10 @@ tm.define("shotgun.MainScene", {
                     this.alpha = 1.0;
                     tm.asset.AssetManager.get("countdown").clone().play();
                 }
+                this.setFrameIndex(that.count);
             } else {
                 this.visible = false;
             }
-            this.text = ""+that.count;
             this.beforeCount = that.count;
         }
 
