@@ -127,9 +127,9 @@ tm.define("shotgun.SoundElement", {
             this.media = new Media(url, function(){
                 that.status="OK";
                 AdvanceAlert("OK:"+url);
-            }, function(){
+            }, function(err){
                 that.status="NG";
-                AdvanceAlert("NG:"+url);
+                AdvanceAlert("NG:"+err+":"+url);
             });
         }
     },
