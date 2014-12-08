@@ -13,18 +13,18 @@ var onDeviceready = function () {
     }
 
     PHONEGAP = true;
-    hotjs.Audio.init();
 
     //音声ファイル読み込み
     if (Media) {
-        appMain.sounds.add("titleBGM",    "assets/game_maoudamashii_5_casino02.mp3");
-        appMain.sounds.add("mainBGM",     "assets/game_maoudamashii_5_casino01.mp3");
-        appMain.sounds.add("tutorialBGM", "assets/game_maoudamashii_5_casino04.mp3");
-        appMain.sounds.add("countdown",   "assets/se_countdown.mp3");
-        appMain.sounds.add("deal",        "assets/se_deal.mp3");
-        appMain.sounds.add("dist",        "assets/se_maoudamashii_se_paper01.mp3");
-        appMain.sounds.add("hand",        "assets/se_hand.mp3");
-        appMain.sounds.add("nopair",      "assets/se_nopair.mp3");
+        var cp = cordovaPath();
+        appMain.sounds.add("titleBGM",    cp+"assets/game_maoudamashii_5_casino02.mp3");
+        appMain.sounds.add("mainBGM",     cp+"assets/game_maoudamashii_5_casino01.mp3");
+        appMain.sounds.add("tutorialBGM", cp+"assets/game_maoudamashii_5_casino04.mp3");
+        appMain.sounds.add("countdown",   cp+"assets/se_countdown.mp3");
+        appMain.sounds.add("deal",        cp+"assets/se_deal.mp3");
+        appMain.sounds.add("dist",        cp+"assets/se_maoudamashii_se_paper01.mp3");
+        appMain.sounds.add("hand",        cp+"assets/se_hand.mp3");
+        appMain.sounds.add("nopair",      cp+"assets/se_nopair.mp3");
     }
 
     //スクリーンサイズ調整
@@ -91,4 +91,9 @@ document.addEventListener('offline', onOffline, false);
 //https://github.com/apache/cordova-plugin-statusbar.git
 //Device
 //https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
+
+function cordovaPath() {
+ var path = window.location.pathname
+ return path.slice(0, path.indexOf("/www/") + 5)
+}
 

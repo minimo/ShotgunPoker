@@ -126,10 +126,10 @@ tm.define("shotgun.SoundElement", {
             var that = this;
             this.media = new Media(url, function(){
                 that.status="OK";
-                AdvanceAlert("OK:"+url);
+//                AdvanceAlert("OK:"+url);
             }, function(err){
                 that.status="NG";
-                AdvanceAlert("NG:"+err+":"+url);
+//                AdvanceAlert("NG:"+err+":"+url);
             });
         }
     },
