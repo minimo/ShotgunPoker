@@ -32,7 +32,7 @@ tm.define("shotgun.SoundSet", {
                 e = shotgun.SoundElement_WebAudio(name);
                 break;
             case MEDIA_CORDOVA:
-                e = shotgun.SoundElement_Cordova(name, url);
+                e = shotgun.SoundElement_CordovaMedia(name, url);
                 break;
             case MEDIA_LLA:
                 e = shotgun.SoundElement_LLA(name, url);
@@ -168,15 +168,6 @@ tm.define("shotgun.SoundElement_WebAudio", {
     init: function(name) {
         this.superInit(MEDIA_ASSET, name);
         this.media = tm.asset.AssetManager.get(name);
-        if (this.media) {
-            that.status="OK";
-            that.message = "OK:"+url;
-//            AdvanceAlert(that.message);
-        } else {
-            that.status="NG";
-            that.message = "NG:"+err.message+":"+url;
-//            AdvanceAlert(that.message);
-        }
     },
 
     play: function(loop) {
@@ -202,15 +193,15 @@ tm.define("shotgun.SoundElement_CordovaMedia", {
         this.superInit(MEDIA_CORDOVA, name, cordovaPath()+url);
 
         var that = this;
-        this.media = new Media(url,
+        this.media = new Media(this.url,
             function(){
                 that.status="OK";
-                that.message = "OK:"+url;
+                that.message = "OK:"+that.url;
 //                AdvanceAlert(that.message);
             },
             function(err){
                 that.status="NG";
-                that.message = "NG:"+err.message+":"+url;
+                that.message = "NG:"+err.message+":"+that.url;
 //                AdvanceAlert(that.message);
             });
     },
@@ -244,13 +235,13 @@ tm.define("shotgun.SoundElement_LLA", {
             this.lla = window.plugins.LowLatencyAudio;
             this.lla.preloadAudio(this.name, url, this.volume, 1,
                 function(msg){
-                    that.status="OK";
-                    that.message = "OK:"+url;
+                that.status="OK";
+                that.message = "OK:"+that.url;
 //                    AdvanceAlert(that.message);
                 },
                 function(msg){
                     that.status="NG";
-                    that.message = "NG:"+msg+":"+url;
+                    that.message = "NG:"+msg+":"+that.url;
 //                    AdvanceAlert(that.message);
                 });
         }
