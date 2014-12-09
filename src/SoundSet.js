@@ -6,11 +6,6 @@
  *
  */
 
-//MEDIA TYPE
-MEDIA_ASSET = 0;    //tmlib Asset
-MEDIA_CORDOVA = 1;  //CordovaMediaPlugin
-MEDIA_LLA = 2;      //LawLatencyAudioPlugin
-
 //サウンド管理
 tm.define("shotgun.SoundSet", {
     defaultType: MEDIA_ASSET,

@@ -66,6 +66,14 @@ ROYALSTRAIGHTFLASH = 1000;
 JAPANESE = 0;
 ENGLISH = 1;
 
+//Use MEDIA TYPE
+MEDIA_ASSET = 0;    //tmlib Asset
+MEDIA_CORDOVA = 1;  //CordovaMediaPlugin
+MEDIA_LLA = 2;      //LawLatencyAudioPlugin
+
+//デフォルトメディアタイプ
+MEDIA_DEFAULT = MEDIA_ASSET;
+
 //フレームレート
 fps = 30;
 

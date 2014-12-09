@@ -54,7 +54,7 @@ tm.define("shotgun.CanvasApp", {
         this.loadConfig();
 
         //サウンドセット
-        this.sounds = shotgun.SoundSet();
+        this.sounds = shotgun.SoundSet(MEDIA_DEFAULT);
 
         var loadingScene = tm.ui["LoadingScene"]({
             assets: assets,
