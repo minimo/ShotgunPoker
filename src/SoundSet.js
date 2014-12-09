@@ -101,7 +101,7 @@ tm.define("shotgun.SoundSet", {
     },
 
     setVolumeBGM: function(v) {
-        this.volumeSE = Math.Clamp(v, 0, 1);
+        this.volumeSE = Math.clamp(v, 0, 1);
         return this;
     },
 
@@ -115,7 +115,7 @@ tm.define("shotgun.SoundSet", {
     },
 
     setVolumeSE: function(v) {
-        this.volumeSE = Math.Clamp(v, 0, 1);
+        this.volumeSE = Math.clamp(v, 0, 1);
         return this;
     },
 });
