@@ -9,7 +9,7 @@
 //MEDIA TYPE
 MEDIA_ASSET = 0;    //tmlib Asset
 MEDIA_CORDOVA = 1;  //CordovaMediaPlugin
-MEDIA_LLA = 2;      //LawLaytensyAudioPlugin
+MEDIA_LLA = 2;      //LawLatencyAudioPlugin
 
 //サウンド管理
 tm.define("shotgun.SoundSet", {
@@ -228,7 +228,7 @@ tm.define("shotgun.SoundElement_CordovaMedia", {
     },
 });
 
-//SoundElement(LowLaytensyAudioPlugin)
+//SoundElement(LowLatencyAudioPlugin)
 tm.define("shotgun.SoundElement_LLA", {
     lla: null,
     init: function(name, url) {
