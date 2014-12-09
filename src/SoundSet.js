@@ -129,6 +129,7 @@ tm.define("shotgun.SoundElement", {
     media: null,
     volume: 1.0,
     status: null,
+    message: null,
 
     init: function(type, name, url) {
         this.type = type;
@@ -195,13 +196,17 @@ tm.define("shotgun.SoundElement_CordovaMedia", {
         this.superInit(MEDIA_CORDOVA, name, url);
 
         var that = this;
-        this.media = new Media(url, function(){
-            that.status="OK";
-//            AdvanceAlert("OK:"+url);
-        }, function(err){
-            that.status="NG";
-//            AdvanceAlert("NG:"+err+":"+url);
-        });
+        this.media = new Media(url,
+            function(){
+                that.status="OK";
+                that.message = "OK:"+url;
+//                AdvanceAlert(that.message);
+            },
+            function(err){
+                that.status="NG";
+                that.message = "NG:"+err.message+":"+url;
+//                AdvanceAlert(that.message);
+            });
     },
 
     play: function(loop) {
@@ -225,45 +230,59 @@ tm.define("shotgun.SoundElement_CordovaMedia", {
 
 //SoundElement(LowLaytensyAudioPlugin)
 tm.define("shotgun.SoundElement_LLA", {
+    lla: null,
     init: function(name, url) {
         this.superInit(MEDIA_LLA, name, url);
 
-        window.plugins.LowLatencyAudio.preloadFX(this.name, url, function(msg){}, function(msg){alert( 'Error: ' + msg)});
+        if (window.plugins.LowLatencyAudio) {
+            this.lla = window.plugins.LowLatencyAudio;
+            this.lla.preloadAudio(this.name, url, this.volume, 1,
+                function(msg){
+                    that.status="OK";
+                    that.message = "OK:"+url;
+//                    AdvanceAlert(that.message);
+                },
+                function(msg){
+                    that.status="NG";
+                    that.message = "NG:"+msg+":"+url;
+//                    AdvanceAlert(that.message);
+                });
+        }
     },
 
     play: function(loop) {
-        if (!this.media) return this;
+        if (!this.lla) return this;
         if (loop) {
-            window.plugins.LowLatencyAudio.loop(this.name);
+            this.lla.loop(this.name);
         } else {
-            window.plugins.LowLatencyAudio.play(this.name);
+            this.lla.play(this.name);
         }
         return this;
     },
 
     playClone: function() {
-        if (!this.media) return this;
-        window.plugins.LowLatencyAudio.play(this.name);
+        if (!this.lla) return this;
+        this.lla.play(this.name);
         return this;
     },
 
     stop: function() {
-        if (!this.media) return this;
-        window.plugins.LowLatencyAudio.stop(this.name);
+        if (!this.lla) return this;
+        this.lla.stop(this.name);
         return this;
     },
 
     pause: function () {
-        if (!this.media) return this;
-        window.plugins.LowLatencyAudio.stop(this.name);
+        if (!this.lla) return this;
+        this.lla.stop(this.name);
     },
 
     setVolume: function(vol) {
-        if (!this.media) return this;
+        if (!this.lla) return this;
         vol = vol || 1.0;
         this.volume = vol;
-        window.plugins.LowLatencyAudio.unload(this.name);
-        window.plugins.LowLatencyAudio.preloadAudio(this.name, url, vol, 1, function(msg){}, function(msg){alert( 'Error: ' + msg)});
+        this.lla.unload(this.name);
+        this.lla.preloadAudio(this.name, url, vol, 1, function(msg){}, function(msg){alert( 'Error: ' + msg)});
         return this;
     },
 });
