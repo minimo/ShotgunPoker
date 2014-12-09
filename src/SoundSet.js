@@ -227,6 +227,7 @@ tm.define("shotgun.SoundElement_CordovaMedia", {
 
 //SoundElement(LowLatencyAudioPlugin)
 tm.define("shotgun.SoundElement_LLA", {
+    superClass: shotgun.SoundElement,
     lla: null,
     init: function(name, url) {
         this.superInit(MEDIA_LLA, name, url);
