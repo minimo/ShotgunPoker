@@ -14,26 +14,6 @@ var onDeviceready = function () {
 
     PHONEGAP = true;
 
-    //音声ファイル読み込み
-    if (Media) {
-        var cp = cordovaPath();
-        appMain.sounds.add("titleBGM",    cp+"assets/game_maoudamashii_5_casino02.mp3");
-        appMain.sounds.add("mainBGM",     cp+"assets/game_maoudamashii_5_casino01.mp3");
-        appMain.sounds.add("tutorialBGM", cp+"assets/game_maoudamashii_5_casino04.mp3");
-        appMain.sounds.add("countdown",   cp+"assets/se_countdown.mp3");
-        appMain.sounds.add("deal",        cp+"assets/se_deal.mp3");
-        appMain.sounds.add("dist",        cp+"assets/se_maoudamashii_se_paper01.mp3");
-        appMain.sounds.add("hand",        cp+"assets/se_hand.mp3");
-        appMain.sounds.add("nopair",      cp+"assets/se_nopair.mp3");
-    }
-
-    //スクリーンサイズ調整
-    if (appMain) {
-        SC_W = window.innerWidth*2;
-        SC_H = window.innerHeight*2;
-        appMain.resize(SC_W, SC_H).fitWindow();
-    }
-
     //Game Center Plugin
     gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
 }
@@ -71,7 +51,7 @@ var onGamecenterSuccess = function() {
 }
 
 var onGamecenterFailure = function(result) {
-    AdvanceAlert('GAMECENTERに接続できませんでした。\n'+result);
+    if (DEBUG_PHONEGAP) AdvanceAlert('GAMECENTERに接続できませんでした。\n'+result);
     GAMECENTER = false;
 }
 

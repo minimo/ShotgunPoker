@@ -50,24 +50,6 @@ tm.define("shotgun.CanvasApp", {
 
         shotgun.core = this;
 
-        //設定情報の読み込み
-        this.loadConfig();
-
-        //サウンドセット
-        this.sounds = shotgun.SoundSet(MEDIA_DEFAULT);
-
-        var loadingScene = tm.ui["LoadingScene"]({
-            assets: assets,
-            width: SC_W,
-            height: SC_H,
-            bgColor: "black",
-            nextScene: function() {
-                this._onLoadAssets();
-                return shotgun.TitleScene();
-            }.bind(this),
-        });
-        this.replaceScene(loadingScene);
-
         //役名一覧
         this.handList = [];
         this.handList[0]  = {name: "MISS", point: MISS};
@@ -89,6 +71,16 @@ tm.define("shotgun.CanvasApp", {
             this.handList[9]  = {name: "FIVE OF A KIND", point: FIVECARD};
             this.handList[11] = {name: "ROYAL FLASH", point: ROYALSTRAIGHTFLASH};
         }
+
+        //設定情報の読み込み
+        this.loadConfig();
+
+        //サウンドセット
+        this.sounds = shotgun.SoundSet(MEDIA_DEFAULT);
+
+        //アセット読み込み
+        var loadingScene = shotgun.LoadingScene();
+        this.replaceScene(loadingScene);
     },
 
     _onLoadAssets: function() {
