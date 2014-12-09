@@ -76,4 +76,3 @@ function cordovaPath() {
  var path = window.location.pathname
  return path.slice(0, path.indexOf("/www/") + 5)
 }
-

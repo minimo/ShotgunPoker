@@ -25,6 +25,7 @@ tm.define("shotgun.SoundSet", {
     add: function(name, url) {
         if (name === undefined) return null;
         url = url || null;
+
         var e = null;
         switch(this.defaultType) {
             case MEDIA_ASSET:
@@ -188,7 +189,7 @@ tm.define("shotgun.SoundElement_CordovaMedia", {
     superClass: shotgun.SoundElement,
 
     init: function(name, url) {
-        this.superInit(MEDIA_CORDOVA, name, url);
+        this.superInit(MEDIA_CORDOVA, name, cordovaPath()+url);
 
         var that = this;
         this.media = new Media(url,
