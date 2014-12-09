@@ -8,10 +8,12 @@
 
 //メディアタイプ
 MEDIA_ASSET = 0;    //tmlibアセット
-MEDIA_URL = 1;      //PhoneGapMedia
+MEDIA_CORDOVA = 1;  //CordovaMediaPlugin
+MEDIA_LLA = 2;      //LawLaytensyAudioPlugin
 
 //音声メディア管理
 tm.define("shotgun.SoundSet", {
+    defaultType = MEDIA_ASSET,
     elements: null,
 
     bgm: null,
@@ -29,7 +31,18 @@ tm.define("shotgun.SoundSet", {
         url = url || null;
         var type = 0;
         if (url) type = MEDIA_URL; else type = MEDIA_ASSET;
-        var e = shotgun.SoundElement(type, name, url);
+        var e
+        switch(this.defaultType) {
+            case MEDIA_ASSET:
+                e = shotgun.SoundElement_WebAudio(name);
+                break;
+            case MEDIA_CORDOVA:
+                e = shotgun.SoundElement_Cordova(name, url);
+                break;
+            case MEDIA_LLA:
+                e = shotgun.SoundElement_LLA(name, url);
+                break;
+        }
         this.elements.push(e);
         return this;
     },
@@ -108,58 +121,33 @@ tm.define("shotgun.SoundSet", {
     },
 });
 
+//サウンド要素基本
 tm.define("shotgun.SoundElement", {
+
     type: 0,
     name: null,
     url: null,
     media: null,
     volume: 1.0,
     status: null,
+
     init: function(type, name, url) {
         this.type = type;
         this.name = name;
         this.url = url || null;
-
-        if (type == MEDIA_ASSET) {
-            this.media = tm.asset.AssetManager.get(name);
-        } else if (type == MEDIA_URL) {
-            var that = this;
-            this.media = new Media(url, function(){
-                that.status="OK";
-//                AdvanceAlert("OK:"+url);
-            }, function(err){
-                that.status="NG";
-//                AdvanceAlert("NG:"+err+":"+url);
-            });
-        }
     },
 
     play: function(loop) {
-        if (!this.media) return this;
-        if (this.type == MEDIA_URL) {
-            if (loop) {
-                this.media.play({numberOfLoops:9999, playAudioWhenScreenIsLocked : false});
-            } else {
-                this.media.play({playAudioWhenScreenIsLocked : false});
-            }
-        } else {
-            this.media.loop = loop;
-            this.media.play();
-        }
         return this;
     },
 
     playClone: function() {
-        if (!this.media) return this;
-        if (this.type == MEDIA_URL) {
-            var tmp = new Media(this.url);
-            tmp.play();
-            tmp = null;
-        } else {
-            this.media.loop = false;
-            this.media.clone().play();
-        }
         return this;
+    },
+
+    pause: function () {
+        if (!this.media) return this;
+        this.media.pause();
     },
 
     stop: function() {
@@ -173,6 +161,110 @@ tm.define("shotgun.SoundElement", {
         vol = vol || 1.0;
         this.volume = Math.clamp(vol, 0.0, 1.0);
         this.media.volume = this.volume;
+        return this;
+    },
+});
+
+//サウンド要素(WebAudio/tmlibAsset)
+tm.define("shotgun.SoundElement_WebAudio", {
+    superClass: shotgun.SoundElement,
+
+    init: function(name) {
+        this.superInit(MEDIA_ASSET, name);
+        this.media = tm.asset.AssetManager.get(name);
+    },
+
+    play: function(loop) {
+        if (!this.media) return this;
+        this.media.loop = loop;
+        this.media.play();
+        return this;
+    },
+
+    playClone: function() {
+        this.media.loop = false;
+        this.media.clone().play();
+        return this;
+    },
+});
+
+//サウンド要素(CordovaMediaPlugin)
+tm.define("shotgun.SoundElement_CordovaMedia", {
+    superClass: shotgun.SoundElement,
+
+    init: function(name, url) {
+        this.superInit(MEDIA_CORDOVA, name, url);
+
+        var that = this;
+        this.media = new Media(url, function(){
+            that.status="OK";
+//            AdvanceAlert("OK:"+url);
+        }, function(err){
+            that.status="NG";
+//            AdvanceAlert("NG:"+err+":"+url);
+        });
+    },
+
+    play: function(loop) {
+        if (!this.media) return this;
+        if (loop) {
+            this.media.play({numberOfLoops:9999, playAudioWhenScreenIsLocked : false});
+        } else {
+            this.media.play({playAudioWhenScreenIsLocked : false});
+        }
+        return this;
+    },
+
+    playClone: function() {
+        if (!this.media) return this;
+        var tmp = new Media(this.url);
+        tmp.play();
+        tmp = null;
+        return this;
+    },
+});
+
+//サウンド要素(LowLaytensyAudioPlugin)
+tm.define("shotgun.SoundElement_LLA", {
+    init: function(name, url) {
+        this.superInit(MEDIA_LLA, name, url);
+
+        window.plugins.LowLatencyAudio.preloadFX(this.name, url, function(msg){}, function(msg){alert( 'Error: ' + msg)});
+    },
+
+    play: function(loop) {
+        if (!this.media) return this;
+        if (loop) {
+            window.plugins.LowLatencyAudio.loop(this.name);
+        } else {
+            window.plugins.LowLatencyAudio.play(this.name);
+        }
+        return this;
+    },
+
+    playClone: function() {
+        if (!this.media) return this;
+        window.plugins.LowLatencyAudio.play(this.name);
+        return this;
+    },
+
+    stop: function() {
+        if (!this.media) return this;
+        window.plugins.LowLatencyAudio.stop(this.name);
+        return this;
+    },
+
+    pause: function () {
+        if (!this.media) return this;
+        window.plugins.LowLatencyAudio.stop(this.name);
+    },
+
+    setVolume: function(vol) {
+        if (!this.media) return this;
+        vol = vol || 1.0;
+        this.volume = vol;
+        window.plugins.LowLatencyAudio.unload(this.name);
+        window.plugins.LowLatencyAudio.preloadAudio(this.name, url, vol, 1, function(msg){}, function(msg){alert( 'Error: ' + msg)});
         return this;
     },
 });
