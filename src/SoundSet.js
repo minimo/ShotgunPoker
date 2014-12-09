@@ -168,6 +168,15 @@ tm.define("shotgun.SoundElement_WebAudio", {
     init: function(name) {
         this.superInit(MEDIA_ASSET, name);
         this.media = tm.asset.AssetManager.get(name);
+        if (this.media) {
+            that.status="OK";
+            that.message = "OK:"+url;
+//            AdvanceAlert(that.message);
+        } else {
+            that.status="NG";
+            that.message = "NG:"+err.message+":"+url;
+//            AdvanceAlert(that.message);
+        }
     },
 
     play: function(loop) {
@@ -178,6 +187,7 @@ tm.define("shotgun.SoundElement_WebAudio", {
     },
 
     playClone: function() {
+        if (!this.media) return this;
         this.media.loop = false;
         this.media.clone().play();
         return this;
@@ -278,7 +288,17 @@ tm.define("shotgun.SoundElement_LLA", {
         vol = vol || 1.0;
         this.volume = vol;
         this.lla.unload(this.name);
-        this.lla.preloadAudio(this.name, url, vol, 1, function(msg){}, function(msg){alert( 'Error: ' + msg)});
+        this.lla.preloadAudio(this.name, url, this.volume, 1,
+            function(msg){
+                that.status="OK";
+                that.message = "OK:"+url;
+//                AdvanceAlert(that.message);
+            },
+            function(msg){
+                that.status="NG";
+                that.message = "NG:"+msg+":"+url;
+//                AdvanceAlert(that.message);
+            });
         return this;
     },
 });
