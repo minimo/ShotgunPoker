@@ -18640,6 +18640,7 @@ tm.sound = tm.sound || {};
         _load: function(src) {
             if (!this.context) {
                 console.warn("本環境はWebAudio未対応です。(" + src + ")");
+                Alert("本環境はWebAudio未対応です。(" + src + ")");
                 return;
             }
 
