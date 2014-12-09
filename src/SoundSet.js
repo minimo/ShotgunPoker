@@ -6,14 +6,14 @@
  *
  */
 
-//メディアタイプ
-MEDIA_ASSET = 0;    //tmlibアセット
+//MEDIA TYPE
+MEDIA_ASSET = 0;    //tmlib Asset
 MEDIA_CORDOVA = 1;  //CordovaMediaPlugin
 MEDIA_LLA = 2;      //LawLaytensyAudioPlugin
 
-//音声メディア管理
+//繧ｵ繧ｦ繝ｳ繝臥ｮ｡逅�
 tm.define("shotgun.SoundSet", {
-    defaultType = MEDIA_ASSET,
+    defaultType: MEDIA_ASSET,
     elements: null,
 
     bgm: null,
@@ -22,16 +22,15 @@ tm.define("shotgun.SoundSet", {
     volumeBGM: 3,
     volumeSE: 3,
 
-    init: function() {
+    init: function(type) {
+        this.defaultType = type || MEDIA_ASSET;
         this.elements = [];
     },
 
     add: function(name, url) {
         if (name === undefined) return null;
         url = url || null;
-        var type = 0;
-        if (url) type = MEDIA_URL; else type = MEDIA_ASSET;
-        var e
+        var e = null;
         switch(this.defaultType) {
             case MEDIA_ASSET:
                 e = shotgun.SoundElement_WebAudio(name);
@@ -121,7 +120,7 @@ tm.define("shotgun.SoundSet", {
     },
 });
 
-//サウンド要素基本
+//SoundElement Basic
 tm.define("shotgun.SoundElement", {
 
     type: 0,
@@ -165,7 +164,7 @@ tm.define("shotgun.SoundElement", {
     },
 });
 
-//サウンド要素(WebAudio/tmlibAsset)
+//SoundElement(WebAudio/tmlibAsset)
 tm.define("shotgun.SoundElement_WebAudio", {
     superClass: shotgun.SoundElement,
 
@@ -188,7 +187,7 @@ tm.define("shotgun.SoundElement_WebAudio", {
     },
 });
 
-//サウンド要素(CordovaMediaPlugin)
+//SoundElement(CordovaMediaPlugin)
 tm.define("shotgun.SoundElement_CordovaMedia", {
     superClass: shotgun.SoundElement,
 
@@ -224,7 +223,7 @@ tm.define("shotgun.SoundElement_CordovaMedia", {
     },
 });
 
-//サウンド要素(LowLaytensyAudioPlugin)
+//SoundElement(LowLaytensyAudioPlugin)
 tm.define("shotgun.SoundElement_LLA", {
     init: function(name, url) {
         this.superInit(MEDIA_LLA, name, url);
