@@ -278,6 +278,7 @@ tm.define("shotgun.SoundElement_LLA", {
 
     setVolume: function(vol) {
         if (!this.lla) return this;
+        return this;
         vol = vol || 1.0;
         this.volume = vol;
         this.lla.unload(this.name);
