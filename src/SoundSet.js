@@ -232,12 +232,13 @@ tm.define("shotgun.SoundElement_LLA", {
     init: function(name, url) {
         this.superInit(MEDIA_LLA, name, url);
 
-        if (window.plugins.LowLatencyAudio) {
+        if (window.plugins && window.plugins.LowLatencyAudio) {
             this.lla = window.plugins.LowLatencyAudio;
+            var that = this;
             this.lla.preloadAudio(this.name, url, this.volume, 1,
                 function(msg){
-                that.status="OK";
-                that.message = "OK:"+that.url;
+                    that.status="OK";
+                    that.message = "OK:"+that.url;
 //                    AdvanceAlert(that.message);
                 },
                 function(msg){
