@@ -84,6 +84,61 @@ tm.define("shotgun.SettingScene", {
             .renderRectangle({fillStyle: "rgba(0, 0, 0, 1.0)", strokeStyle: "rgba(0, 0, 0, 1.0)"});
         this.mask.tweener.clear().fadeOut(200);
 
+
+        //サウンドテスト
+        var width = 150, height = 70;
+        shotgun.Button(width, height, "BGM1")
+            .addChildTo(this)
+            .setPosition(SC_W*0.2, SC_H*0.7)
+            .addEventListener("pushed", function() {
+                tm.asset.AssetManager.get("titleBGM").clone().play();
+            });
+        shotgun.Button(width, height, "BGM2")
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.7)
+            .addEventListener("pushed", function() {
+                tm.asset.AssetManager.get("mainBGM").clone().play();
+            });
+        shotgun.Button(width, height, "BGM3")
+            .addChildTo(this)
+            .setPosition(SC_W*0.8, SC_H*0.7)
+            .addEventListener("pushed", function() {
+                tm.asset.AssetManager.get("tutorialBGM").clone().play();
+            });
+
+        var width = 100, height = 70;
+        shotgun.Button(width, height, "SE1")
+            .addChildTo(this)
+            .setPosition(SC_W*0.1, SC_H*0.8)
+            .addEventListener("pushed", function() {
+                tm.asset.AssetManager.get("countdown").clone().play();
+            });
+        shotgun.Button(width, height, "SE2")
+            .addChildTo(this)
+            .setPosition(SC_W*0.3, SC_H*0.8)
+            .addEventListener("pushed", function() {
+                tm.asset.AssetManager.get("deal").clone().play();
+            });
+        shotgun.Button(width, height, "SE3")
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.8)
+            .addEventListener("pushed", function() {
+                tm.asset.AssetManager.get("dist").clone().play();
+            });
+        shotgun.Button(width, height, "SE4")
+            .addChildTo(this)
+            .setPosition(SC_W*0.7, SC_H*0.8)
+            .addEventListener("pushed", function() {
+                tm.asset.AssetManager.get("hand").clone().play();
+            });
+        shotgun.Button(width, height, "SE5")
+            .addChildTo(this)
+            .setPosition(SC_W*0.9, SC_H*0.8)
+            .addEventListener("pushed", function() {
+                tm.asset.AssetManager.get("nopair").clone().play();
+            });
+
+
         this.time = 0;
     },
 
