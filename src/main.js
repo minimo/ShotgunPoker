@@ -72,7 +72,7 @@ MEDIA_CORDOVA = 1;  //CordovaMediaPlugin
 MEDIA_LLA = 2;      //LawLatencyAudioPlugin
 
 //デフォルトメディアタイプ
-MEDIA_DEFAULT = MEDIA_LLA;
+MEDIA_DEFAULT = MEDIA_ASSET;
 
 //フレームレート
 fps = 30;
