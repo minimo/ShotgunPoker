@@ -12,13 +12,10 @@ mt = new MersenneTwister();
 //デバッグフラグ
 DEBUG = false;
 PHONEGAP = false;
-DEBUG_PHONEGAP = true;
+DEBUG_PHONEGAP = false;
 
 //フォント読み込み終了カウント
 fontLoadEnd = 0;
-
-//使用フォント
-FONT = ["'KS-Kohichi-FeltPen'", "'azuki'", "'CasinoQueen'", "'CasinoRegular'"];
 
 //GAMECENTER使用フラグ
 GAMECENTER = false;
@@ -32,9 +29,9 @@ STATUSBAR_HEIGHT = 30;
 STATUSBAR_COLOR = 'rgba(0,0,0,1)';
 
 //カードサイズ
-CARD_W = 200;
-CARD_H = 300;
-CARD_SCALE = 0.65;
+CARD_W = 200*0.7;
+CARD_H = 300*0.7;
+CARD_SCALE = 1;
 
 //スート
 SUIT_SPADE = 0;
@@ -68,6 +65,14 @@ ROYALSTRAIGHTFLASH = 1000;
 //使用言語
 JAPANESE = 0;
 ENGLISH = 1;
+
+//Use MEDIA TYPE
+MEDIA_ASSET = 0;    //tmlib Asset
+MEDIA_CORDOVA = 1;  //CordovaMediaPlugin
+MEDIA_LLA = 2;      //LawLatencyAudioPlugin
+
+//デフォルトメディアタイプ
+MEDIA_DEFAULT = MEDIA_LLA;
 
 //フレームレート
 fps = 30;
@@ -121,32 +126,6 @@ appMain = {};
 
 //アプリケーションメイン
 tm.main(function() {
-
-    //使用フォント読み込み終了検出
-    for (var i = 0; i < FONT.length; i++) {
-        detectFontLoading(FONT[i]);
-    }
-
     appMain = shotgun.CanvasApp("#world");
     appMain.run();
 });
-
-//フォント読み込み終了検出
-detectFontLoading = function(fontName) {    
-    var tester = document.createElement('span');
-    tester.style.fontFamily = '"' + fontName + '", "Adobe Blank"';
-    tester.style.position = 'absolute';
-    tester.style.top = '-100px';
-    tester.appendChild(document.createTextNode('a'));
-    document.body.appendChild(tester);
-
-    var timerId = setInterval(checkWidth, 500);
-    function checkWidth() {
-        if (tester.offsetWidth > 0) {
-            clearInterval(timerId);
-            document.documentElement.className += ' ' + fontName.toLowerCase().replace(/\s/g, '_');
-            fontLoadEnd++;
-            tester.parentNode.removeChild(tester);
-        }
-    }
-}

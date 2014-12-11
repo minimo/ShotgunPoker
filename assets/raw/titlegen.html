@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset=UTF-8>
+        <style>
+            @font-face {
+                font-family: 'CasinoRegular';
+                src: url(../../font/CasinoRegular.TTF) format("truetype");
+            }
+        </style>
+</head>
+<body>
+<div>
+<ul>
+    <li>
+        キャンバスのサイズ<br>
+        width<input type="number" id="canvasWidth" class="canvasSize" value="640"><br>
+        height<input type="number" id="canvasHeight" class="canvasSize" value="1136"><br>
+    </li>
+</ul>
+</div>
+
+<canvas id="app"></canvas>
+
+<script src="../../libs/tmlib.js"></script>
+<script src="../../libs/outlinelabel.js"></script>
+<script>
+var app;
+tm.main(function() {
+
+    SC_W = 640;
+    SC_H = 1136;
+
+    app = tm.display.CanvasApp("#app");
+    app.background = "rgba(50, 110, 50, 1)";
+    app.resize(SC_W, SC_H);
+
+    app.focus = null;
+
+    var moveGridSize = tm.dom.Element("#moveGridSize");
+
+    app.scene = tm.app.Scene();
+    app.scene.setup = function() {
+        var fillStyle = "Red";
+        var outlineStyle = "Black";
+        var shadowColor = 'rgba(160, 160, 160, 1)';
+
+        //タイトルロゴ１
+        var lb = this.title1 = tm.display.OutlineLabel("SHOTGUN", 130)
+            .addChildTo(this)
+            .setPosition(SC_W*0.5-310, SC_H*0.16)
+            .setParam({fontFamily:"CasinoRegular", align: "left", baseline:"middle", outlineWidth:3 });
+        lb.fillStyle = fillStyle;
+        lb.fillStyleOutline = outlineStyle;
+        lb.shadowColor = shadowColor;
+        lb.shadowBlur = 5;
+
+        //タイトルロゴ２
+        var lb = this.title2 = tm.display.OutlineLabel("POKER", 130)
+            .addChildTo(this)
+            .setPosition(SC_W*0.5+280, SC_H*0.29)
+            .setParam({fontFamily:"CasinoRegular", align: "right", baseline:"middle", outlineWidth:3 });
+        lb.fillStyle = fillStyle;
+        lb.fillStyleOutline = outlineStyle;
+        lb.shadowColor = shadowColor;
+        lb.shadowBlur = 5;
+    }
+
+    var loadingScene = tm.ui["LoadingScene"]({
+        assets: {
+            "card": "../trump.png",
+            "shotgun":      "../shotgun.png",
+        },
+        width: 512,
+        height: 512,
+        bgColor: "black",
+        nextScene: function() {
+            app.scene.setup();
+            return app.scene;
+        },
+    });
+    app.replaceScene(loadingScene);
+    app.run();
+});
+
+</script>
+</body>
+</html>

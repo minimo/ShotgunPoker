@@ -14,13 +14,6 @@ var onDeviceready = function () {
 
     PHONEGAP = true;
 
-    //スクリーンサイズ調整
-    if (appMain) {
-        SC_W = window.innerWidth*2;
-        SC_H = window.innerHeight*2;
-        appMain.resize(SC_W, SC_H).fitWindow();
-    }
-
     //Game Center Plugin
     gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
 }
@@ -58,7 +51,7 @@ var onGamecenterSuccess = function() {
 }
 
 var onGamecenterFailure = function(result) {
-    AdvanceAlert('GAMECENTERに接続できませんでした。\n'+result);
+    if (DEBUG_PHONEGAP) AdvanceAlert('GAMECENTERに接続できませんでした。\n'+result);
     GAMECENTER = false;
 }
 
@@ -79,3 +72,7 @@ document.addEventListener('offline', onOffline, false);
 //Device
 //https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
 
+function cordovaPath() {
+ var path = window.location.pathname
+ return path.slice(0, path.indexOf("/www/") + 5)
+}

@@ -20,6 +20,10 @@ tm.define("shotgun.CanvasApp", {
     bgmIsPlay: false,
     volumeBGM: 3,
     volumeSE: 3,
+    sounds: null,
+
+    //ボーナスライフ
+    bonusLife: 0,
 
     //スコア保存
     lastScore: 0,
@@ -46,22 +50,6 @@ tm.define("shotgun.CanvasApp", {
 
         shotgun.core = this;
 
-        //設定情報の読み込み
-        this.loadConfig();
-
-        var loadingScene = tm.ui["LoadingScene"]({
-            assets: assets,
-            width: SC_W,
-            height: SC_H,
-            bgColor: "black",
-            nextScene: function() {
-                this._onLoadAssets();
-                return shotgun.WaitScene();
-//                return shotgun.TitleScene();
-            }.bind(this),
-        });
-        this.replaceScene(loadingScene);
-
         //役名一覧
         this.handList = [];
         this.handList[0]  = {name: "MISS", point: MISS};
@@ -83,9 +71,31 @@ tm.define("shotgun.CanvasApp", {
             this.handList[9]  = {name: "FIVE OF A KIND", point: FIVECARD};
             this.handList[11] = {name: "ROYAL FLASH", point: ROYALSTRAIGHTFLASH};
         }
+
+        //設定情報の読み込み
+        this.loadConfig();
+
+        //サウンドセット
+        this.sounds = shotgun.SoundSet(MEDIA_DEFAULT);
+
+        //アセット読み込み
+        var loadingScene = shotgun.LoadingScene();
+        this.replaceScene(loadingScene);
     },
 
     _onLoadAssets: function() {
+        //PhoneGap出ない場合、音声アセットを登録
+        if (!PHONEGAP) {
+            this.sounds
+                .add("titleBGM")
+                .add("mainBGM")
+                .add("tutorialBGM")
+                .add("countdown")
+                .add("deal")
+                .add("dist")
+                .add("hand")
+                .add("nopair");
+        }
     },
 
     exitApp: function() {
@@ -120,73 +130,37 @@ tm.define("shotgun.CanvasApp", {
     },
 
     playBGM: function(asset) {
-        if (this.bgm) {
-            if (this.bgmIsPlay) {
-                this.bgm.stop();
-                this.bgmIsPlay = false;
-            }
-        }
-        this.bgm = tm.asset.AssetManager.get(asset).clone();
-        if (this.bgm) {
-            this.bgm.loop = true;
-            this.bgm.volume = this.volumeBGM*0.34;
-            this.bgm.play();
-            this.bgmIsPlay = true;
-        }
+        this.sounds.playBGM(asset);
         return this;
     },
 
     stopBGM: function() {
-        if (this.bgm) {
-            if (this.bgmIsPlay) {
-                this.bgm.stop();
-                this.bgmIsPlay = false;
-            }
-            this.bgm = null;
-        }
+        this.sounds.stopBGM();
         return this;
     },
 
     pauseBGM: function() {
-        if (this.bgm) {
-            if (this.bgmIsPlay) {
-                this.bgm.pause();
-                this.bgmIsPlay = false;
-            }
-        }
+        this.sounds.pauseBGM();
         return this;
     },
 
     resumeBGM: function() {
-        if (this.bgm) {
-            if (!this.bgmIsPlay) {
-                this.bgm.volume = this.volumeBGM*0.34;
-                this.bgm.resume();
-                this.bgmIsPlay = true;
-            }
-        }
+        this.sounds.resumeBGM();
         return this;
     },
 
     setVolumeBGM: function(v) {
-        this.pauseBGM();
-        this.volumeBGM = v;
-        this.resumeBGM();
+        this.sounds.setVolumeBGM(v);
         return this;
     },
 
     playSE: function(asset) {
-        var se = tm.asset.AssetManager.get(asset).clone();
-        if (se) {
-            se.loop = false;
-            se.volume = this.volumeSE*0.34;
-            se.play();
-        }
+        this.sounds.playSE(asset);
         return this;
     },
 
     setVolumeSE: function(v) {
-        this.volumSE = v;
+        this.sounds.setVolumeSE(v);
         return this;
     },
 });

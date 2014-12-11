@@ -10,16 +10,15 @@ tm.define("shotgun.TitleScene", {
     superClass: tm.app.Scene,
 
     //ボタン用フォントパラメータ
-    buttonParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:4 },
-    labelParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:2 },
-    scoreParam: {fontFamily:"'azuki'", align: "left", baseline:"middle", outlineWidth:2 },
+    buttonParam: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:4 },
+    labelParam: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:2 },
+    scoreParam: {fontFamily:"azuki", align: "left", baseline:"middle", outlineWidth:2 },
 
     bgColor: 'rgba(50, 150, 50, 1)',
 
     init: function() {
         this.superInit();
         this.background = "rgba(0, 0, 0, 0.0)";
-//        this.checkHierarchy = true;
 
         //バックグラウンド
         this.bg = tm.display.Shape(SC_W, SC_H)
@@ -29,7 +28,6 @@ tm.define("shotgun.TitleScene", {
 
         //タイトルとチュートリアルを分けてレイヤーを作成
         this.titleLayer = tm.app.Object2D().addChildTo(this);
-        this.titleLayer.checkHierarchy = true;
         this.underLayer = tm.app.Object2D().addChildTo(this.titleLayer);
         this.tutorialLayer = tm.app.Object2D().addChildTo(this);
 
@@ -72,17 +70,22 @@ tm.define("shotgun.TitleScene", {
         var shadowColor = 'rgba(160, 160, 160, 1)';
 
         //ショットガンシルエット
-        var sg = tm.display.Sprite("shotgun", SC_W, SC_H*0.2)
-                .addChildTo(this.titleLayer)
-                .setPosition(SC_W*0.5, SC_H*0.2);
+        var sg = tm.display.Sprite("shotgun", 640, 250)
+            .addChildTo(this.titleLayer)
+            .setPosition(SC_W*0.5, SC_H*0.2);
         sg.scaleX = -1;
         sg.rotation = -10;
 
+        //タイトルロゴ
+        tm.display.Sprite("titlelogo", 600, 300)
+            .addChildTo(this.titleLayer)
+            .setPosition(SC_W*0.5, SC_H*0.2);
+/*
         //タイトルロゴ１
         var lb = this.title1 = tm.display.OutlineLabel("SHOTGUN", 130)
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5-310, SC_H*0.16)
-            .setParam({fontFamily:"'CasinoRegular'", align: "left", baseline:"middle", outlineWidth:3 });
+            .setParam({fontFamily:"CasinoRegular", align: "left", baseline:"middle", outlineWidth:3 });
         lb.fillStyle = fillStyle;
         lb.fillStyleOutline = outlineStyle;
         lb.shadowColor = shadowColor;
@@ -92,12 +95,12 @@ tm.define("shotgun.TitleScene", {
         var lb = this.title2 = tm.display.OutlineLabel("POKER", 130)
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5+280, SC_H*0.29)
-            .setParam({fontFamily:"'CasinoRegular'", align: "right", baseline:"middle", outlineWidth:3 });
+            .setParam({fontFamily:"CasinoRegular", align: "right", baseline:"middle", outlineWidth:3 });
         lb.fillStyle = fillStyle;
         lb.fillStyleOutline = outlineStyle;
         lb.shadowColor = shadowColor;
         lb.shadowBlur = 5;
-
+*/
         var that = this;
         var width = 300, height = 70;
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
@@ -172,7 +175,7 @@ tm.define("shotgun.TitleScene", {
             tm.display.OutlineLabel("VER "+appMain.version, 30)
                 .addChildTo(this.titleLayer)
                 .setPosition(SC_W*0.5, SC_H-60)
-                .setParam({fontFamily:"'CasinoRegular'", align: "center", baseline:"middle", outlineWidth:3 });
+                .setParam({fontFamily:"CasinoRegular", align: "center", baseline:"middle", outlineWidth:3 });
     },
 
     addButton: function(page, finish) {
@@ -241,7 +244,7 @@ tm.define("shotgun.TitleScene", {
             }
             c.vr = rand(-5, 5) || 1;
             c.vy = rand(5, 15);
-            c.setScale(rand(5, 8)/10);
+            c.setScale(rand(7, 10)/10);
         }
 
         //スクリーンショット保存
@@ -261,27 +264,8 @@ tm.define("shotgun.TitleScene", {
 
     //タッチorクリック終了処理
     ontouchend: function(e) {
+        tm.sound.WebAudio.unlock();
 //        if (this.time > 30) appMain.replaceScene(shotgun.MainScene());
     },
 
 });
-
-tm.define("shotgun.WaitScene", {
-    superClass: tm.app.Scene,
-
-    init: function() {
-        this.superInit();
-    },
-    update: function() {
-        if (fontLoadEnd >= FONT.length) {
-            fontLoadEnd = 0;
-            tm.app.Object2D().addChildTo(this).tweener
-                .wait(100)
-                .call(function(){
-                    appMain.replaceScene(shotgun.TitleScene());
-                });
-        }
-    },
-});
-
-

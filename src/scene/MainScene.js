@@ -51,15 +51,19 @@ tm.define("shotgun.MainScene", {
     exitGame: false,
 
     //ラベル用パラメータ
-    labelParamBasic: {fontFamily: "'azuki'", align: "left", baseline: "middle",outlineWidth: 3},
-    labelParamBasicCenter: {fontFamily: "'azuki'", align: "center", baseline: "middle",outlineWidth: 3},
-    labelParamPoker: {fontFamily: "'KS-Kohichi-FeltPen'",align: "center", baseline: "middle", outlineWidth: 3},
-    labelParamHand:  {fontFamily: "'KS-Kohichi-FeltPen'",align: "left", baseline: "middle", outlineWidth: 3},
-    labelParamBefore:{fontFamily: "'azuki'",align: "left", baseline: "top", outlineWidth: 3},
+    labelParamBasic: {fontFamily: "azuki", align: "left", baseline: "middle",outlineWidth: 3},
+    labelParamBasicCenter: {fontFamily: "azuki'", align: "center", baseline: "middle",outlineWidth: 3},
+    labelParamPoker: {fontFamily: "KS-Kohichi",align: "center", baseline: "middle", outlineWidth: 3},
+    labelParamHand:  {fontFamily: "KS-Kohichi",align: "left", baseline: "middle", outlineWidth: 3},
+    labelParamBefore:{fontFamily: "azuki",align: "left", baseline: "top", outlineWidth: 3},
 
     init: function() {
         this.superInit();
         this.background = "rgba(0, 0, 0, 0.0)";
+
+        //ボーナスライフ加算
+        this.life += appMain.bonusLife;
+        appMain.bonusLife = 0;
 
         //バックグラウンド
         this.bg = tm.display.Shape(SC_W, SC_H)
@@ -106,7 +110,7 @@ tm.define("shotgun.MainScene", {
         this.lg = [];
         for (var i = 0; i < 7; i++ ) {
             var c = this.lg[i] = shotgun.Card(SUIT_HEART, 0).addChildTo(this);
-            c.setScale(0.2);
+            c.setScale(0.3);
             c.setPosition( 155+i*45, 96);
             c.life = i;
             c.update = function() {
@@ -182,10 +186,10 @@ tm.define("shotgun.MainScene", {
         appMain.playBGM("mainBGM");
 
         //スタートアップ
-        var lb = this.readyLabel = tm.display.OutlineLabel("READY", 100)
+        var lb = this.readyLabel = tm.display.Sprite("ready")
             .addChildTo(this.upperLayer)
-            .setParam(this.labelParamPoker)
-            .setPosition(SC_W/2, SC_H/2);
+            .setPosition(SC_W/2, SC_H/2)
+            .setScale(1.5);
         lb.tweener.clear().wait(500).fadeOut(500).wait(300);
         lb.tweener.call(function(){
             that.deck.startup();
@@ -195,10 +199,10 @@ tm.define("shotgun.MainScene", {
         });
 
         //カウントダウン表示
-        var lb = this.countDown = tm.display.OutlineLabel("5", 300)
+        var lb = this.countDown = tm.display.Sprite("count", 256, 256)
             .addChildTo(this.upperLayer)
-            .setParam(this.labelParamPoker)
-            .setPosition(SC_W/2, SC_H/2);
+            .setPosition(SC_W/2, SC_H/2)
+            .setFrameIndex(4);
         lb.beforeCount = 9;
         lb.alpha = 1.0;
         lb.update = function() {
@@ -209,12 +213,12 @@ tm.define("shotgun.MainScene", {
                     if (this.alpha < 0)this.alpha = 0;
                 } else {
                     this.alpha = 1.0;
-                    tm.asset.AssetManager.get("countdown").clone().play();
+                    appMain.playSE("countdown");
                 }
+                this.setFrameIndex(that.count);
             } else {
                 this.visible = false;
             }
-            this.text = ""+that.count;
             this.beforeCount = that.count;
         }
 
@@ -318,23 +322,28 @@ tm.define("shotgun.MainScene", {
                 }
             }
 
-            //早上がりボーナス
-            if (this.count > 7 && sc > 0) {
-                sc = ~~(sc*2);
-                var lb = tm.display.OutlineLabel("FANTASTIC!", 100).addChildTo(this);
-                lb.setParam(this.labelParamPoker);
-                lb.setPosition(SC_W*0.5, SC_H*0.5);
-                lb.tweener.clear().wait(1000).call(function(){lb.remove();});
-            } else if (this.count > 4 && sc > 0) {
-                sc = ~~(sc*1.5);
-                var lb = tm.display.OutlineLabel("EXCELLENT!", 100).addChildTo(this);
-                lb.setParam(this.labelParamPoker);
-                lb.setPosition(SC_W*0.5, SC_H*0.5);
-                lb.tweener.clear().wait(1000).call(lb.remove());
-            }
-
             //得点がプラスの時のみスコアに加算
-            if (sc > 0) this.score += sc;
+            if (sc > 0) {
+                //早上がりボーナス
+                var msg = "";
+                if (this.count > 8) {
+                    sc = ~~(sc*2);
+                    msg = "FANTASTIC!";
+                } else if (this.count > 7) {
+                    sc = ~~(sc*1.5);
+                    msg = "EXCELLENT!";
+                } else if (this.count > 5) {
+                    sc = ~~(sc*1.3);
+                    msg = "GOOD!"
+                }
+                if (msg != "") {
+                    var lb = tm.display.OutlineLabel(msg, 100).addChildTo(this);
+                    lb.setParam(this.labelParamPoker);
+                    lb.setPosition(SC_W*0.5, SC_H*0.5);
+                    lb.tweener.clear().wait(1000).call(function(){lb.remove();});
+                }
+                this.score += sc;
+            }
 
             //ゲームオーバー判定
             if (this.life < 0) {
@@ -346,7 +355,7 @@ tm.define("shotgun.MainScene", {
             this.time = 0;
 
             //レベル処理
-            this.level = Math.sqrt(this.absTime*(0.0004*(this.levelReset+1)))+1;
+            this.level = Math.sqrt(this.absTime*(0.0002*(this.levelReset+1)))+1;
             if (this.level > 2 && this.levelReset < 1) {
                 this.absTime = 0;
                 this.level = 1;

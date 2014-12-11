@@ -10,8 +10,8 @@ tm.define("shotgun.GameoverScene", {
     superClass: tm.app.Scene,
 
     //ラベル用フォントパラメータ
-    labelParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:2 },
-    scoreParam: {fontFamily:"'azuki'", align: "left", baseline:"middle", outlineWidth:2 },
+    labelParam: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:2 },
+    scoreParam: {fontFamily:"azuki", align: "left", baseline:"middle", outlineWidth:2 },
 
     init: function(parentScene) {
         this.superInit();
@@ -62,6 +62,7 @@ tm.define("shotgun.GameoverScene", {
             .addChildTo(this)
             .setPosition(SC_W*0.25, SC_H*0.9)
             .addEventListener("pushed", function() {
+                that.parentScene = null;
                 that.mask.tweener.clear().fadeIn(300).call(function(){appMain.replaceScene(shotgun.MainScene());});
             });
 
@@ -70,23 +71,18 @@ tm.define("shotgun.GameoverScene", {
             .addChildTo(this)
             .setPosition(SC_W*0.75, SC_H*0.9)
             .addEventListener("pushed", function() {
+                that.parentScene = null;
                 that.mask.tweener.clear().fadeIn(300).call(function(){appMain.replaceScene(shotgun.TitleScene());});
             });
 
-/*
-        //ツイートボタン
-        var sh = this.exit = tm.display.RoundRectangleShape(200, 70, param).addChildTo(this);
-        sh.setPosition(SC_W*0.5, SC_H*0.7);
-        sh.interactive = true;
-        sh.addEventListener("pointingstart", function() {this.y += 10;});
-        sh.addEventListener("pointingend", function() {
-            this.y -= 10;
-            appMain.replaceScene(shotgun.TitleScene());
-        });
-        var lb = this.exitLabel = tm.display.OutlineLabel("TWEET", 50).addChildTo(this);
-        lb.fontFamily = "'azuki'"; lb.align = "center"; lb.baseline = "middle"; lb.outlineWidth = 2;
-        lb.setPosition(SC_W*0.5, SC_H*0.7);
-*/
+        //全画面広告ボタン
+        shotgun.Button(width*0.8, height, "広告")
+            .addChildTo(this)
+            .setPosition(SC_W*0.25, SC_H*0.8)
+            .addEventListener("pushed", function() {
+                appMain.bonusLife = 1;
+            });
+
         //目隠し
         this.mask = tm.display.Shape(SC_W, SC_H)
             .addChildTo(this)

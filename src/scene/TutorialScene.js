@@ -37,23 +37,22 @@ tm.define("shotgun.TutorialScene", {
     onePair: 0,
 
     //ボタン用フォントパラメータ
-    buttonParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:4 },
-    labelParam: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:4 },
-    scoreParam: {fontFamily:"'azuki'", align: "left", baseline:"middle", outlineWidth:2 },
+    buttonParam: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:4 },
+    labelParam: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:4 },
+    scoreParam: {fontFamily:"azuki", align: "left", baseline:"middle", outlineWidth:2 },
 
-    labelParamBasic: {fontFamily: "'azuki'", align: "left", baseline: "middle",outlineWidth: 3},
-    labelParamBasicCenter: {fontFamily: "'azuki'", align: "center", baseline: "middle",outlineWidth: 3},
-    labelParamPoker: {fontFamily: "'KS-Kohichi-FeltPen'",align: "center", baseline: "middle", outlineWidth: 3},
-    labelParamHand:  {fontFamily: "'KS-Kohichi-FeltPen'",align: "left", baseline: "middle", outlineWidth: 3},
-    labelParamBefore:{fontFamily: "'azuki'",align: "left", baseline: "top", outlineWidth: 3},
-    labelParamMsg: {fontFamily:"'azuki'", align: "center", baseline:"middle", outlineWidth:1 },
+    labelParamBasic: {fontFamily: "azuki", align: "left", baseline: "middle",outlineWidth: 3},
+    labelParamBasicCenter: {fontFamily: "azuki", align: "center", baseline: "middle",outlineWidth: 3},
+    labelParamPoker: {fontFamily: "KS-Kohichi",align: "center", baseline: "middle", outlineWidth: 3},
+    labelParamHand:  {fontFamily: "KS-Kohichi",align: "left", baseline: "middle", outlineWidth: 3},
+    labelParamBefore:{fontFamily: "azuki",align: "left", baseline: "top", outlineWidth: 3},
+    labelParamMsg: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:1 },
 
     bgColor: 'rgba(50, 150, 50, 1)',
 
     init: function() {
         this.superInit();
         this.background = "rgba(0, 0, 0, 0.0)";
-//        this.checkHierarchy = true;
 
         //バックグラウンド
         this.bg = tm.display.Shape(SC_W, SC_H)
@@ -101,7 +100,7 @@ tm.define("shotgun.TutorialScene", {
         this.lg = [];
         for (var i = 0; i < 7; i++ ) {
             var c = this.lg[i] = shotgun.Card(SUIT_HEART, 0).addChildTo(this);
-            c.setScale(0.2);
+            c.setScale(0.3);
             c.setPosition( 155+i*45, 96);
             c.life = i;
             c.update = function() {
