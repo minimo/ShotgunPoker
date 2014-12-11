@@ -264,6 +264,7 @@ tm.define("shotgun.TitleScene", {
 
     //タッチorクリック終了処理
     ontouchend: function(e) {
+        tm.sound.WebAudio.unlock();
 //        if (this.time > 30) appMain.replaceScene(shotgun.MainScene());
     },
 
