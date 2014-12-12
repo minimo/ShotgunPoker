@@ -13,6 +13,7 @@ tm.define("shotgun.SettingScene", {
     se: null,
 
     //ラベル用フォントパラメータ
+    headerParam: {fontFamily:"CasinoRegular", align: "center", baseline:"middle", outlineWidth:2 },
     labelParam: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:2 },
 
     init: function() {
@@ -28,7 +29,7 @@ tm.define("shotgun.SettingScene", {
 
         tm.display.OutlineLabel("OPTION", 60)
             .addChildTo(this)
-            .setParam(this.labelParam)
+            .setParam(this.headerParam)
             .setPosition(SC_W*0.5, SC_H*0.1);
 
         tm.display.OutlineLabel("SOUND VOLUME", 50)

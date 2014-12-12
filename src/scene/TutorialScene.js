@@ -599,10 +599,9 @@ tm.define("shotgun.TutorialScene", {
             }).wait(2000)
 
             .call(function(){
-                var lb = tm.display.OutlineLabel("GAME OVER", 100)
-                    .addChildTo(that)
-                    .setParam(that.labelParamBasicCenter)
-                    .setPosition(SC_W*0.5, SC_H*0.5-SC_H)
+                var lb = tm.display.Sprite("gameover")
+                    .addChildTo(this.upperLayer)
+                    .setPosition(SC_W*0.5, SC_H*0.5-SC_H);
                 lb.tweener.wait(500)
                     .move(SC_W*0.5, SC_H*0.5, 4000,"easeOutBounce")
                     .wait(2000)

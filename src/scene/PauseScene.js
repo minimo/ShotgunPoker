@@ -12,6 +12,7 @@ tm.define("shotgun.PauseScene", {
     dialog: null,
 
     //ラベル用フォントパラメータ
+    headerParam: {fontFamily:"CasinoRegular", align: "center", baseline:"middle", outlineWidth:2 },
     labelParam: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:2 },
     scoreParam: {fontFamily:"azuki", align: "left", baseline:"middle", outlineWidth:2 },
 
@@ -30,7 +31,7 @@ tm.define("shotgun.PauseScene", {
 
         var lb = tm.display.OutlineLabel("PAUSE", 60)
             .addChildTo(this)
-            .setParam(this.labelParam)
+            .setParam(this.headerParam)
             .setPosition(SC_W*0.5, SC_H*0.1);
 
         var lb = tm.display.OutlineLabel("YOUR HAND LIST", 40)

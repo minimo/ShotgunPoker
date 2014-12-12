@@ -10,6 +10,7 @@ tm.define("shotgun.CreditScene", {
     superClass: tm.app.Scene,
 
     //クレジットラベル用パラメータ
+    headerParam: {fontFamily:"CasinoRegular", align: "center", baseline:"middle", outlineWidth:2 },
     labelParam: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:2 },
 
     init: function() {
@@ -30,7 +31,7 @@ tm.define("shotgun.CreditScene", {
 
         this.credit0 = tm.display.OutlineLabel("CREDIT", 40)
             .addChildTo(this.titleLayer)
-            .setParam(this.labelParam)
+            .setParam(this.headerParam)
             .setPosition(SC_W*0.5, SC_H*0.1);
 
         this.credit1 = tm.display.OutlineLabel("ＢＧＭ：魔王魂様", sizeCredit)
