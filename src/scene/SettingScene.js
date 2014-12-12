@@ -101,6 +101,7 @@ tm.define("shotgun.SettingScene", {
     },
 
     setVolumeBGM: function(vol) {
+        vol = Math.clamp(vol, 0, 10);
         appMain.sounds.volumeBGM = vol;
         for (var i = 0; i < 10; i++) {
             if (i < vol) {
@@ -112,6 +113,9 @@ tm.define("shotgun.SettingScene", {
     },
 
     setVolumeSE: function(vol) {
+        vol = Math.clamp(vol, 0, 10);
+        if (vol != appMain.sounds.volumeSE) appMain.playSE("hand");
+
         appMain.sounds.volumeSE = vol;
         for (var i = 0; i < 10; i++) {
             if (i < vol) {
@@ -190,13 +194,26 @@ tm.define("shotgun.SettingScene", {
         var sx = e.pointing.x;
         var sy = e.pointing.y;
 
-        if (SC_W*0.3-22 < sx && sx < SC_W*0.4-22+440) {
+        sx += 22;
+        if (SC_W*0.10 < sx && sx < SC_W*0.25+440) {
             var x = ~~((sx-(SC_W*0.25))/44)+1;
             //ＢＧＭボリューム
-            if ( SC_H*0.25 < sy && sy < SC_H*0.35) this.setVolumeBGM(x);
+            if ( SC_H*0.25 < sy && sy < SC_H*0.35) {
+                if (sx < SC_W*0.25) {
+                    this.setVolumeBGM(0);
+                } else {
+                    this.setVolumeBGM(x);
+                }
+            }
 
             //ＳＥボリューム
-            if ( SC_H*0.35 < sy && sy < SC_H*0.45) this.setVolumeSE(x);
+            if ( SC_H*0.35 < sy && sy < SC_H*0.45) {
+                if (sx < SC_W*0.25) {
+                    this.setVolumeSE(0);
+                } else {
+                    this.setVolumeSE(x);
+                }
+            }
         }
     },
 
