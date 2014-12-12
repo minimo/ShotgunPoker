@@ -217,6 +217,9 @@ tm.define("shotgun.TitleScene", {
                 .addChildTo(this.underLayer)
                 .setPosition(rand(0, SC_W), -100-rand(0, 50))
                 .setFrameIndex(rand(0, 54));
+            var d = rand(0, 10);
+            if (d == 3) c.setFrameIndex(52);
+            if (d == 4) c.setFrameIndex(53);
             c.update = function() {
                 this.rotation+=this.vr;
                 this.y+=this.vy;
