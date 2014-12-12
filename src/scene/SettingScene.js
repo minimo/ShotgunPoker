@@ -104,10 +104,12 @@ tm.define("shotgun.SettingScene", {
         vol = Math.clamp(vol, 0, 10);
         appMain.sounds.volumeBGM = vol;
         for (var i = 0; i < 10; i++) {
-            if (i < vol) {
-                this.bgm[i].setFrameIndex(i);
+            this.bgm[i].setFrameIndex(52).setScale(0.3);
+            if (i == vol-1) {
+                this.bgm[i].remove().addChildTo(this);
+                this.bgm[i].setFrameIndex(i).setScale(0.5);
             } else {
-                this.bgm[i].setFrameIndex(52);
+                this.bgm[i].setFrameIndex(52).setScale(0.3);
             }
         }
     },
@@ -115,13 +117,14 @@ tm.define("shotgun.SettingScene", {
     setVolumeSE: function(vol) {
         vol = Math.clamp(vol, 0, 10);
         if (vol != appMain.sounds.volumeSE) appMain.playSE("hand");
-
         appMain.sounds.volumeSE = vol;
         for (var i = 0; i < 10; i++) {
+            this.se[i].setFrameIndex(53).setScale(0.3);
             if (i < vol) {
-                this.se[i].setFrameIndex(i+13*3);
+                this.se[i].remove().addChildTo(this);
+                this.se[i].setFrameIndex(i).setScale(0.5);
             } else {
-                this.se[i].setFrameIndex(53);
+                this.se[i].setFrameIndex(53).setScale(0.3);
             }
         }
     },
@@ -196,10 +199,11 @@ tm.define("shotgun.SettingScene", {
 
         sx += 22;
         if (SC_W*0.10 < sx && sx < SC_W*0.25+440) {
-            var x = ~~((sx-(SC_W*0.25))/44)+1;
+            sx -= SC_W*0.25;
+            var x = ~~(sx/44)+1;
             //ＢＧＭボリューム
             if ( SC_H*0.25 < sy && sy < SC_H*0.35) {
-                if (sx < SC_W*0.25) {
+                if (sx < 0) {
                     this.setVolumeBGM(0);
                 } else {
                     this.setVolumeBGM(x);
@@ -208,7 +212,7 @@ tm.define("shotgun.SettingScene", {
 
             //ＳＥボリューム
             if ( SC_H*0.35 < sy && sy < SC_H*0.45) {
-                if (sx < SC_W*0.25) {
+                if (sx < 0) {
                     this.setVolumeSE(0);
                 } else {
                     this.setVolumeSE(x);
