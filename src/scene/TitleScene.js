@@ -80,27 +80,7 @@ tm.define("shotgun.TitleScene", {
         tm.display.Sprite("titlelogo", 600, 300)
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.2);
-/*
-        //タイトルロゴ１
-        var lb = this.title1 = tm.display.OutlineLabel("SHOTGUN", 130)
-            .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.5-310, SC_H*0.16)
-            .setParam({fontFamily:"CasinoRegular", align: "left", baseline:"middle", outlineWidth:3 });
-        lb.fillStyle = fillStyle;
-        lb.fillStyleOutline = outlineStyle;
-        lb.shadowColor = shadowColor;
-        lb.shadowBlur = 5;
 
-        //タイトルロゴ２
-        var lb = this.title2 = tm.display.OutlineLabel("POKER", 130)
-            .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.5+280, SC_H*0.29)
-            .setParam({fontFamily:"CasinoRegular", align: "right", baseline:"middle", outlineWidth:3 });
-        lb.fillStyle = fillStyle;
-        lb.fillStyleOutline = outlineStyle;
-        lb.shadowColor = shadowColor;
-        lb.shadowBlur = 5;
-*/
         var that = this;
         var width = 300, height = 70;
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
@@ -108,7 +88,7 @@ tm.define("shotgun.TitleScene", {
         //プレイスタート
         shotgun.Button(width, height, "START")
             .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.5, SC_H*0.45)
+            .setPosition(SC_W*0.5, SC_H*0.40)
             .addEventListener("pushed", function() {
                 that.mask.tweener.clear().fadeIn(200).call(function(){appMain.replaceScene(shotgun.MainScene());});
             });
@@ -116,7 +96,7 @@ tm.define("shotgun.TitleScene", {
         //チュートリアル
         shotgun.Button(width, height, "TUTORIAL")
             .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.5, SC_H*0.55)
+            .setPosition(SC_W*0.5, SC_H*0.50)
             .addEventListener("pushed", function() {
                 that.titleLayer.tweener.clear()
                     .moveBy(-SC_W, 0, 500, "easeOutQuint")
@@ -132,7 +112,7 @@ tm.define("shotgun.TitleScene", {
         //設定
         shotgun.Button(width, height, "OPTION")
             .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.5, SC_H*0.65)
+            .setPosition(SC_W*0.5, SC_H*0.60)
             .addEventListener("pushed", function() {
                 that.mask.tweener.clear()
                     .fadeIn(200)
@@ -144,7 +124,7 @@ tm.define("shotgun.TitleScene", {
         //クレジット
         shotgun.Button(width, height, "CREDIT")
             .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.5, SC_H*0.75)
+            .setPosition(SC_W*0.5, SC_H*0.70)
             .addEventListener("pushed", function() {
                 that.mask.tweener.clear()
                     .fadeIn(200)
@@ -156,7 +136,7 @@ tm.define("shotgun.TitleScene", {
         //GAMECENTER
         shotgun.Button(width, height, "GAME CENTER")
             .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.5, SC_H*0.85)
+            .setPosition(SC_W*0.5, SC_H*0.80)
             .addEventListener("pushed", function() {
                 if (!PHONEGAP) return;
                 if (!GAMECENTER) {
@@ -172,9 +152,9 @@ tm.define("shotgun.TitleScene", {
             });
 
             //バージョン表示
-            tm.display.OutlineLabel("VER "+appMain.version, 30)
+            tm.display.OutlineLabel("Version "+appMain.version, 30)
                 .addChildTo(this.titleLayer)
-                .setPosition(SC_W*0.5, SC_H-60)
+                .setPosition(SC_W*0.5, SC_H*0.9)
                 .setParam({fontFamily:"CasinoRegular", align: "center", baseline:"middle", outlineWidth:3 });
     },
 
