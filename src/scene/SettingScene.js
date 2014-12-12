@@ -48,13 +48,8 @@ tm.define("shotgun.SettingScene", {
                 .addChildTo(this)
                 .setScale(0.3)
                 .setPosition(SC_W*0.25+i*44, SC_H*0.3)
-            this.bgm[i].num = i;
-            if (i < volBGM) {
-                this.bgm[i].setFrameIndex(i);
-            } else {
-                this.bgm[i].setFrameIndex(52);
-            }
         }
+        this.setVolumeBGM(appMain.sounds.volumeBGM);
 
         //ＳＥ音量
         var volSE = appMain.sounds.volumeSE;
@@ -68,13 +63,8 @@ tm.define("shotgun.SettingScene", {
                 .addChildTo(this)
                 .setScale(0.3)
                 .setPosition(SC_W*0.25+i*44, SC_H*0.4)
-            this.se[i].num = i;
-            if (i < volSE) {
-                this.se[i].setFrameIndex(i+13*3);
-            } else {
-                this.se[i].setFrameIndex(53);
-            }
         }
+        this.setVolumeSE(appMain.sounds.volumeSE);
 
         //戻るボタン
         var width = 300, height = 70;
@@ -120,9 +110,9 @@ tm.define("shotgun.SettingScene", {
         appMain.sounds.volumeSE = vol;
         for (var i = 0; i < 10; i++) {
             this.se[i].setFrameIndex(53).setScale(0.3);
-            if (i < vol) {
+            if (i == vol-1) {
                 this.se[i].remove().addChildTo(this);
-                this.se[i].setFrameIndex(i).setScale(0.5);
+                this.se[i].setFrameIndex(i+13*3).setScale(0.5);
             } else {
                 this.se[i].setFrameIndex(53).setScale(0.3);
             }
