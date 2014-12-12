@@ -84,8 +84,14 @@ tm.define("shotgun.SettingScene", {
             .renderRectangle({fillStyle: "rgba(0, 0, 0, 1.0)", strokeStyle: "rgba(0, 0, 0, 1.0)"});
         this.mask.tweener.clear().fadeOut(200);
 
-
         //サウンドテスト
+//        this.addSountTestButton();
+
+        this.time = 0;
+    },
+
+    //サウンドテストボタン追加
+    addSoundTestButton: function() {
         var width = 150, height = 70;
         shotgun.Button(width, height, "BGM1")
             .addChildTo(this)
@@ -137,9 +143,6 @@ tm.define("shotgun.SettingScene", {
             .addEventListener("pushed", function() {
                 tm.asset.AssetManager.get("nopair").clone().play();
             });
-
-
-        this.time = 0;
     },
 
     update: function() {
