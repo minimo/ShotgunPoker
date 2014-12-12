@@ -14,8 +14,8 @@ tm.define("shotgun.SoundSet", {
     bgm: null,
     bgmIsPlay: false,
 
-    volumeBGM: 3,
-    volumeSE: 3,
+    volumeBGM: 5,
+    volumeSE: 5,
 
     init: function(type) {
         this.defaultType = type || MEDIA_ASSET;
@@ -88,7 +88,7 @@ tm.define("shotgun.SoundSet", {
     resumeBGM: function() {
         if (this.bgm) {
             if (!this.bgmIsPlay) {
-                this.bgm.volume = this.volumeBGM*0.34;
+                this.bgm.volume = this.volumeBGM;
                 this.bgm.resume();
                 this.bgmIsPlay = true;
             }
@@ -97,7 +97,7 @@ tm.define("shotgun.SoundSet", {
     },
 
     setVolumeBGM: function(v) {
-        this.volumeSE = Math.clamp(v, 0, 1);
+        this.volumeBGM = Math.clamp(v, 0, 10);
         return this;
     },
 
@@ -111,7 +111,7 @@ tm.define("shotgun.SoundSet", {
     },
 
     setVolumeSE: function(v) {
-        this.volumeSE = Math.clamp(v, 0, 1);
+        this.volumeSE = Math.clamp(v, 0, 10);
         return this;
     },
 });
@@ -155,7 +155,7 @@ tm.define("shotgun.SoundElement", {
     setVolume: function(vol) {
         if (!this.media) return this;
         vol = vol || 1.0;
-        this.volume = Math.clamp(vol, 0.0, 1.0);
+        this.volume = vol*0.1;
         this.media.volume = this.volume;
         return this;
     },

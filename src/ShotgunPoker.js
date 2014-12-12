@@ -18,8 +18,6 @@ tm.define("shotgun.CanvasApp", {
     //ＢＧＭ＆効果音
     bgm: null,
     bgmIsPlay: false,
-    volumeBGM: 3,
-    volumeSE: 3,
     sounds: null,
 
     //ボーナスライフ
@@ -72,11 +70,11 @@ tm.define("shotgun.CanvasApp", {
             this.handList[11] = {name: "ROYAL FLASH", point: ROYALSTRAIGHTFLASH};
         }
 
-        //設定情報の読み込み
-        this.loadConfig();
-
         //サウンドセット
         this.sounds = shotgun.SoundSet(MEDIA_DEFAULT);
+
+        //設定情報の読み込み
+        this.loadConfig();
 
         //アセット読み込み
         var loadingScene = shotgun.LoadingScene();
@@ -108,8 +106,8 @@ tm.define("shotgun.CanvasApp", {
             "language": this.language,
             "lastScore": this.lastScore,
             "highScore": this.highScore,
-            "volumeBGM": this.volumeBGM,
-            "volumeSE": this.volumeSE,
+            "volumeBGM": this.sounds.volumeBGM,
+            "volumeSE": this.sounds.volumeSE,
         };
         localStorage.setItem("config", JSON.stringify(saveObj));
         return this;
@@ -123,8 +121,8 @@ tm.define("shotgun.CanvasApp", {
             this.language = c.language;
             this.lastScore = c.lastScore;
             this.highScore = c.highScore;
-            this.volumeBGM = c.volumeBGM;
-            this.volumeSE = c.volumeSE;
+            this.sounds.volumeBGM = c.volumeBGM;
+            this.sounds.volumeSE = c.volumeSE;
         }
         return this;
     },
@@ -139,28 +137,8 @@ tm.define("shotgun.CanvasApp", {
         return this;
     },
 
-    pauseBGM: function() {
-        this.sounds.pauseBGM();
-        return this;
-    },
-
-    resumeBGM: function() {
-        this.sounds.resumeBGM();
-        return this;
-    },
-
-    setVolumeBGM: function(v) {
-        this.sounds.setVolumeBGM(v);
-        return this;
-    },
-
     playSE: function(asset) {
         this.sounds.playSE(asset);
-        return this;
-    },
-
-    setVolumeSE: function(v) {
-        this.sounds.setVolumeSE(v);
         return this;
     },
 });

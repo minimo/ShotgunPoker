@@ -9,9 +9,6 @@
 tm.define("shotgun.SettingScene", {
     superClass: tm.app.Scene,
 
-    volBgm: 50,
-    volSe: 50,
-
     bgm: null,
     se: null,
 
@@ -40,30 +37,43 @@ tm.define("shotgun.SettingScene", {
             .setPosition(SC_W*0.5, SC_H*0.2);
 
         //ＢＧＭ音量
+        var volBGM = appMain.sounds.volumeBGM;
         tm.display.OutlineLabel("BGM", 60)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.2, SC_H*0.3);
+            .setPosition(SC_W*0.1, SC_H*0.3);
         this.bgm = [];
-        for (var i = 0; i < 6; i++) {
-            this.bgm[i] = tm.display.OutlineLabel(""+i, 30)
+        for (var i = 0; i < 10; i++) {
+            this.bgm[i] = tm.display.Sprite("card", CARD_W, CARD_H)
                 .addChildTo(this)
-                .setParam(this.labelParam)
-                .setPosition(SC_W*0.4+i*60, SC_H*0.3);
-            if (appMain.volumeBGM == i) this.bgm[i].fontSize = 80;
+                .setScale(0.3)
+                .setPosition(SC_W*0.25+i*44, SC_H*0.3)
+            this.bgm[i].num = i;
+            if (i < volBGM) {
+                this.bgm[i].setFrameIndex(i);
+            } else {
+                this.bgm[i].setFrameIndex(52);
+            }
         }
 
         //ＳＥ音量
+        var volSE = appMain.sounds.volumeSE;
         tm.display.OutlineLabel("SE", 60)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.2, SC_H*0.4);
+            .setPosition(SC_W*0.1, SC_H*0.4);
         this.se = [];
-        for (var i = 0; i < 6; i++) {
-            this.se[i] = tm.display.OutlineLabel(""+i, 30).addChildTo(this)
-                .setParam(this.labelParam)
-                .setPosition(SC_W*0.4+i*60, SC_H*0.4);
-            if (appMain.volumeSE == i) this.se[i].fontSize = 80;
+        for (var i = 0; i < 10; i++) {
+            this.se[i] = tm.display.Sprite("card", CARD_W, CARD_H)
+                .addChildTo(this)
+                .setScale(0.3)
+                .setPosition(SC_W*0.25+i*44, SC_H*0.4)
+            this.se[i].num = i;
+            if (i < volSE) {
+                this.se[i].setFrameIndex(i+13*3);
+            } else {
+                this.se[i].setFrameIndex(53);
+            }
         }
 
         //戻るボタン
@@ -88,6 +98,28 @@ tm.define("shotgun.SettingScene", {
 //        this.addSountTestButton();
 
         this.time = 0;
+    },
+
+    setVolumeBGM: function(vol) {
+        appMain.sounds.volumeBGM = vol;
+        for (var i = 0; i < 10; i++) {
+            if (i < vol) {
+                this.bgm[i].setFrameIndex(i);
+            } else {
+                this.bgm[i].setFrameIndex(52);
+            }
+        }
+    },
+
+    setVolumeSE: function(vol) {
+        appMain.sounds.volumeSE = vol;
+        for (var i = 0; i < 10; i++) {
+            if (i < vol) {
+                this.se[i].setFrameIndex(i+13*3);
+            } else {
+                this.se[i].setFrameIndex(53);
+            }
+        }
     },
 
     //サウンドテストボタン追加
@@ -158,26 +190,13 @@ tm.define("shotgun.SettingScene", {
         var sx = e.pointing.x;
         var sy = e.pointing.y;
 
-        //ＢＧＭボリューム
-        if ( SC_H*0.25 < sy && sy < SC_H*0.35 && sx > SC_W*0.4-30 && sx < SC_W*0.4-30+360) {
-            var x = sx-(SC_W*0.4-30);
-            x = ~~(x/60);
-            if (appMain.volumeBGM != x) {
-                this.bgm[appMain.volumeBGM].fontSize = 30;
-                this.bgm[x].fontSize = 80;
-                appMain.setVolumeBGM(x);
-            }
-        }
-        //ＳＥボリューム
-        if ( SC_H*0.35 < sy && sy < SC_H*0.45 && SC_W*0.4-30 < sx && sx < SC_W*0.4-30+360) {
-            var x = sx-(SC_W*0.4-30);
-            x = ~~(x/60);
-            if (appMain.volumeSE != x) {
-                this.se[appMain.volumeSE].fontSize = 30;
-                this.se[x].fontSize = 80;
-                appMain.volumeSE = x;
-                appMain.playSE("hand");
-            }
+        if (SC_W*0.3-22 < sx && sx < SC_W*0.4-22+440) {
+            var x = ~~((sx-(SC_W*0.25))/44)+1;
+            //ＢＧＭボリューム
+            if ( SC_H*0.25 < sy && sy < SC_H*0.35) this.setVolumeBGM(x);
+
+            //ＳＥボリューム
+            if ( SC_H*0.35 < sy && sy < SC_H*0.45) this.setVolumeSE(x);
         }
     },
 
