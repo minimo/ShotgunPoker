@@ -16,6 +16,9 @@ tm.define("shotgun.CreditScene", {
         this.superInit();
         this.background = "rgba(0, 0, 0, 0.0)";
 
+        var sizeCredit = 30;
+        var sizeURL = 25;
+
         //バックグラウンド
         this.bg = tm.display.Shape(SC_W, SC_H)
             .addChildTo(this)
@@ -30,38 +33,38 @@ tm.define("shotgun.CreditScene", {
             .setParam(this.labelParam)
             .setPosition(SC_W*0.5, SC_H*0.1);
 
-        this.credit1 = tm.display.OutlineLabel("ＢＧＭ：魔王魂様", 30)
+        this.credit1 = tm.display.OutlineLabel("ＢＧＭ：魔王魂様", sizeCredit)
             .addChildTo(this.titleLayer)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.5, SC_H*0.15);
-        this.credit1url = tm.display.OutlineLabel("http://maoudamashii.jokersounds.com/", 20)
+        this.credit1url = tm.display.OutlineLabel("http://maoudamashii.jokersounds.com/", sizeURL)
             .addChildTo(this.titleLayer)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.5, SC_H*0.15+45);
 
-        this.credit2 = tm.display.OutlineLabel("効果音：ＯＮ－ＪＩＮ様", 30)
+        this.credit2 = tm.display.OutlineLabel("効果音：ＯＮ－ＪＩＮ様", sizeCredit)
             .addChildTo(this.titleLayer)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.5, SC_H*0.25);
-        this.credit1url = tm.display.OutlineLabel("http://on-jin.com/", 20)
+        this.credit1url = tm.display.OutlineLabel("http://on-jin.com/", sizeURL)
             .addChildTo(this.titleLayer)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.5, SC_H*0.25+45);
 
-        this.credit3 = tm.display.OutlineLabel("CARD GRAPHIC：無料素材倶楽部様", 30)
+        this.credit3 = tm.display.OutlineLabel("CARD GRAPHIC：無料素材倶楽部様", sizeCredit)
             .addChildTo(this.titleLayer)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.5, SC_H*0.35);
-        this.credit1url = tm.display.OutlineLabel("http://sozai.7gates.net/", 20)
+        this.credit1url = tm.display.OutlineLabel("http://sozai.7gates.net/", sizeURL)
             .addChildTo(this.titleLayer)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.5, SC_H*0.35+45);
 
-        this.credit4 = tm.display.OutlineLabel("Powered by tmlib.js", 30)
+        this.credit4 = tm.display.OutlineLabel("Powered by tmlib.js", sizeCredit)
             .addChildTo(this.titleLayer)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.5, SC_H*0.5);
-        this.credit3url = tm.display.OutlineLabel("http://phi-jp.github.io/tmlib.js/", 20)
+        this.credit3url = tm.display.OutlineLabel("http://phi-jp.github.io/tmlib.js/", sizeURL)
             .addChildTo(this.titleLayer)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.5, SC_H*0.5+45);
