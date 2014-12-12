@@ -188,7 +188,7 @@ tm.define("shotgun.TutorialScene", {
                     if (this.alpha < 0)this.alpha = 0;
                 } else {
                     this.alpha = 1.0;
-                    tm.asset.AssetManager.get("countdown").clone().play();
+                    appMain.playSE("countdown");
                 }
             } else {
                 this.visible = false;

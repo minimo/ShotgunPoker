@@ -115,7 +115,7 @@ tm.define("shotgun.CardDeck", {
             var r = rand(0, 360);
             this.cards[i].tweener.clear().to({x: x, y: y, rotation: r}, 1000, "easeOutQuint");
         }
-        tm.asset.AssetManager.get("dist").clone().play();
+        appMain.playSE("dist");
     },
 
     //カードの取得
