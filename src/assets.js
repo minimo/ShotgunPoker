@@ -12,6 +12,7 @@ var assets = {
     "titlelogo":    "assets/titlelogo.png",
     "shotgun":      "assets/shotgun.png",
     "ready":        "assets/ready.png",
+    "gameover":     "assets/gameover.png",
     "count":        "assets/count.png",
 
     "arrow":        "assets/arrow.png",

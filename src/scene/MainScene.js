@@ -409,11 +409,17 @@ tm.define("shotgun.MainScene", {
 
         //メッセージ
         var that = this;
-        var lb = this.title2 = tm.display.OutlineLabel("GAME OVER", 100).addChildTo(this.upperLayer);
-        lb.setParam(this.labelParamBasicCenter);
-        lb.setPosition(SC_W*0.5, SC_H*0.5-SC_H);
-        lb.tweener.wait(500).move(SC_W*0.5, SC_H*0.5, 4000,"easeOutBounce").wait(2000);
-        lb.tweener.call(function(){appMain.replaceScene(shotgun.GameoverScene(that));});
+        var lb = tm.display.Sprite("gameover")
+            .addChildTo(this.upperLayer)
+            .setPosition(SC_W*0.5, SC_H*0.5-SC_H);
+        lb.tweener
+            .wait(500)
+            .move(SC_W*0.5, SC_H*0.5, 4000,"easeOutBounce")
+            .wait(2000)
+            .call(function() {
+                this.remove();
+                appMain.replaceScene(shotgun.GameoverScene(that));
+            }.bind(lb));
 
         //設定保存
         appMain.saveConfig();

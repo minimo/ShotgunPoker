@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset=UTF-8>
+</head>
+<body>
+<div>
+<ul>
+    <li>
+        キャンバスのサイズ<br>
+        width<input type="number" id="canvasWidth" class="canvasSize" value="512"><br>
+        height<input type="number" id="canvasHeight" class="canvasSize" value="512"><br>
+    </li>
+</ul>
+</div>
+
+<canvas id="app"></canvas>
+
+<script src="../../libs/tmlib_custom.js"></script>
+<script src="../../libs/font.js"></script>
+<script src="../../libs/outlinelabel.js"></script>
+<script>
+var app;
+tm.main(function() {
+
+    SC_W = 640;
+    SC_H = 128;
+    CARD_W = 200;
+    CARD_H = 300;
+    CARD_SCALE = 0.7;
+
+    app = tm.display.CanvasApp("#app");
+    app.background = "rgba(50, 110, 50, 1)";
+    app.resize(SC_W, SC_H);
+
+    app.focus = null;
+
+    var moveGridSize = tm.dom.Element("#moveGridSize");
+
+    app.scene = tm.app.Scene();
+    app.scene.setup = function() {
+        labelParamPoker = {fontFamily: "KS-Kohichi",align: "center", baseline: "middle", outlineWidth: 3};
+	    labelParamBasicCenter = {fontFamily: "CasinoRegular'", align: "center", baseline: "middle",outlineWidth: 3};
+
+        tm.display.OutlineLabel("GAME OVER", 100)
+            .addChildTo(this)
+            .setParam(labelParamBasicCenter)
+            .setPosition(SC_W*0.5, SC_H*0.55);
+    }
+
+    var loadingScene = tm.ui["LoadingScene"]({
+        assets: {
+            "KS-Kohichi":   "../../font/KS-Kohichi-FeltPen.ttf",
+            "azuki":        "../../font/azuki.ttf",
+            "CasinoRegular":"../../font/CasinoRegular.ttf",
+        },
+        width: SC_W,
+        height: SC_H,
+        bgColor: "black",
+        nextScene: function() {
+            app.scene.setup();
+            return app.scene;
+        },
+    });
+    app.replaceScene(loadingScene);
+    app.run();
+});
+
+</script>
+</body>
+</html>
