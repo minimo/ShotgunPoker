@@ -150,7 +150,7 @@ tm.define("shotgun.TutorialScene", {
         var color = "hsla({0}, 100%, 50%, 1.0)".format(300);
         this.meter = tm.display.Shape(30, 500)
             .addChildTo(this)
-            .setPosition(20, SC_H*0.7)
+            .setPosition(20, SC_H*0.65)
             .setOrigin(0.5, 1.0);
         this.meter.update = function() {
             var limit = that.limitCount*(500/that.limitMax);
@@ -169,7 +169,7 @@ tm.define("shotgun.TutorialScene", {
         }
         tm.display.Shape(30, 500)
             .addChildTo(this)
-            .setPosition(20, SC_H*0.7)
+            .setPosition(20, SC_H*0.65)
             .renderRectangle({fillStyle: "rgba(0,0,0,0)", strokeStyle: "Black", lineWidth: 3})
             .setOrigin(0.5, 1.0);
 

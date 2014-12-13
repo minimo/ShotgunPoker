@@ -51,7 +51,7 @@ tm.define("shotgun.TitleScene", {
 
         appMain.playBGM("titleBGM");
 
-        if(AdMob) {
+        if(ENABLE_ADMOB && AdMob) {
             AdMob.showBannerAtXY(0, 0);
         }
     },
