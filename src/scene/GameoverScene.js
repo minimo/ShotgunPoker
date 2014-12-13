@@ -10,6 +10,7 @@ tm.define("shotgun.GameoverScene", {
     superClass: tm.app.Scene,
 
     //ラベル用フォントパラメータ
+    headerParam: {fontFamily:"CasinoRegular", align: "center", baseline:"middle", outlineWidth:2 },
     labelParam: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:2 },
     scoreParam: {fontFamily:"azuki", align: "left", baseline:"middle", outlineWidth:2 },
 
@@ -35,7 +36,7 @@ tm.define("shotgun.GameoverScene", {
 
         this.top = tm.display.OutlineLabel("RESULT", 40)
             .addChildTo(this)
-            .setParam(this.labelParam)
+            .setParam(this.headerParam)
             .setPosition(SC_W*0.5, SC_H*0.1);
 
         //スコア表示
@@ -54,7 +55,7 @@ tm.define("shotgun.GameoverScene", {
             tm.display.OutlineLabel(appMain.handList[i].name+":"+this.parentScene.handCount[appMain.handList[i].point], 40)
                 .addChildTo(this.resultLayer)
                 .setParam(this.scoreParam)
-                .setPosition(SC_W*0.2, SC_H*0.28+(i*45));
+                .setPosition(SC_W*0.2, SC_H*0.25+(i*45));
         }
 
         //リトライボタン
@@ -78,9 +79,9 @@ tm.define("shotgun.GameoverScene", {
         //全画面広告ボタン
         shotgun.Button(width*0.8, height, "広告")
             .addChildTo(this)
-            .setPosition(SC_W*0.25, SC_H*0.8)
+            .setPosition(SC_W*0.25, SC_H*0.78)
             .addEventListener("pushed", function() {
-                if(AdMob) {
+                if(ENABLE_ADMOB && AdMob) {
                     AdMob.prepareInterstitial({adId:admobid.interstitial, autoShow:true});
                 }
                 appMain.bonusLife = 1;
