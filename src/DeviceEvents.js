@@ -70,7 +70,7 @@ function cordovaPath() {
 var ad_units = {
     ios : {
         banner: '/6253334/dfp_example_ad', // or DFP format "/6253334/dfp_example_ad"
-        interstitial: '/6253334/dfp_example_ad"'
+        interstitial: '/6253334/dfp_example_ad'
     },
     android : {
         banner: 'ca-app-pub-4753786498901311/7270571985', // or DFP format "/6253334/dfp_example_ad"

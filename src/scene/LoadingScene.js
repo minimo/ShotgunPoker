@@ -35,7 +35,8 @@ tm.define("shotgun.LoadingScene", {
 
         if(AdMob) {
             AdMob.createBanner({
-                adId:admobid.banner, 
+                adId:admobid.banner,
+                position: AdMob.AD_POSITION.BOTTOM_CENTER,
                 autoShow:false
             });
         }

@@ -60,7 +60,7 @@ tm.define("shotgun.PauseScene", {
         //戻るボタン
         shotgun.Button(width, height, "RESUME")
             .addChildTo(this)
-            .setPosition(SC_W*0.25, SC_H*0.9)
+            .setPosition(SC_W*0.25, SC_H*0.85)
             .addEventListener("pushed", function() {
                 appMain.popScene();
             });
@@ -68,7 +68,7 @@ tm.define("shotgun.PauseScene", {
         //終了ボタン
         shotgun.Button(width, height, "EXIT")
             .addChildTo(this)
-            .setPosition(SC_W*0.75, SC_H*0.9)
+            .setPosition(SC_W*0.75, SC_H*0.85)
             .addEventListener("pushed", function() {
                 appMain.pushScene(that.dialog);
             });

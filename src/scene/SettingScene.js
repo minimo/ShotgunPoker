@@ -71,7 +71,7 @@ tm.define("shotgun.SettingScene", {
         var width = 300, height = 70;
         shotgun.Button(width, height, "RETURN")
             .addChildTo(this)
-            .setPosition(SC_W*0.5, SC_H*0.9)
+            .setPosition(SC_W*0.5, SC_H*0.85)
             .addEventListener("pushed", function() {
                 that.mask.tweener.clear().fadeOut(200);
                 appMain.saveConfig();

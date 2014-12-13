@@ -147,7 +147,7 @@ tm.define("shotgun.CardDeck", {
 
         var that = this;
         card.remove().addChildTo(this);
-        card.tweener.clear().to({x: (CARD_W/2)*CARD_SCALE+(this.hands.length-1)*60, y: SC_H*0.8, rotation: 0}, 500, "easeOutQuint");
+        card.tweener.clear().to({x: (CARD_W/2)*CARD_SCALE+(this.hands.length-1)*60, y: SC_H*0.8-10, rotation: 0}, 500, "easeOutQuint");
         card.tweener.call(function(){that.numHand++;});
         appMain.playSE("deal");
     },
@@ -179,7 +179,7 @@ tm.define("shotgun.CardDeck", {
         if (this.hands.length < 5)return;
 
         for( var i = 0; i < 5; i++ ){
-            this.hands[i].tweener.clear().move((CARD_W/2)*CARD_SCALE, SC_H*0.8, 100).wait(100);
+            this.hands[i].tweener.clear().move((CARD_W/2)*CARD_SCALE, SC_H*0.8-10, 100).wait(100);
         }
         this.hands.sort(compairFunc);
         for( var i = 0; i < 5; i++ ){
@@ -187,7 +187,7 @@ tm.define("shotgun.CardDeck", {
             if (c) {
                 c.remove().addChildTo(this);
                 c.rotation = 0;
-                c.tweener.move((CARD_W/2)*CARD_SCALE+i*60, SC_H*0.8, 100);
+                c.tweener.move((CARD_W/2)*CARD_SCALE+i*60, SC_H*0.8-10, 100);
             }
         }
     },

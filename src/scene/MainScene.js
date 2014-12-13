@@ -151,7 +151,7 @@ tm.define("shotgun.MainScene", {
             .setOrigin(0.5, 1.0);
 
         //直前の役表示
-        var by = SC_H*0.8+CARD_H*CARD_SCALE*0.5;
+        var by = SC_H*0.8+CARD_H*CARD_SCALE*0.5-10;
         this.beforeLabel = tm.display.OutlineLabel("BEFORE:", 30)
             .addChildTo(this)
             .setParam(this.labelParamBefore)

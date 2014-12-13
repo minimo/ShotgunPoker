@@ -60,7 +60,7 @@ tm.define("shotgun.GameoverScene", {
         //リトライボタン
         shotgun.Button(width, height, "RETRY")
             .addChildTo(this)
-            .setPosition(SC_W*0.25, SC_H*0.9)
+            .setPosition(SC_W*0.25, SC_H*0.85)
             .addEventListener("pushed", function() {
                 that.parentScene = null;
                 that.mask.tweener.clear().fadeIn(300).call(function(){appMain.replaceScene(shotgun.MainScene());});
@@ -69,7 +69,7 @@ tm.define("shotgun.GameoverScene", {
         //戻るボタン
         shotgun.Button(width, height, "EXIT")
             .addChildTo(this)
-            .setPosition(SC_W*0.75, SC_H*0.9)
+            .setPosition(SC_W*0.75, SC_H*0.85)
             .addEventListener("pushed", function() {
                 that.parentScene = null;
                 that.mask.tweener.clear().fadeIn(300).call(function(){appMain.replaceScene(shotgun.TitleScene());});
