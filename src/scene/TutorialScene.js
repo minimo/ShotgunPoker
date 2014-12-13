@@ -600,7 +600,7 @@ tm.define("shotgun.TutorialScene", {
 
             .call(function(){
                 var lb = tm.display.Sprite("gameover")
-                    .addChildTo(this.upperLayer)
+                    .addChildTo(this)
                     .setPosition(SC_W*0.5, SC_H*0.5-SC_H);
                 lb.tweener.wait(500)
                     .move(SC_W*0.5, SC_H*0.5, 4000,"easeOutBounce")
