@@ -54,13 +54,13 @@ tm.main(function() {
             .renderRectangle({fillStyle: 'rgba(50, 110, 50, 1)', strokeStyle: 'rgba(50, 110, 50, 1)'});
 
         //カード
-        var card = [0,9,10,11,12];
+        var card = [51,26,39,13,0];
         for (var i = 0; i < 5; i++) {
             var c = tm.display.Sprite("card", CARD_W, CARD_H)
                 .addChildTo(this)
-                .setPosition(SC_W*0.55, SC_H*0.5+CARD_H*0.5)
+                .setPosition(SC_W*0.55, SC_H*0.6+CARD_H*0.5)
                 .setFrameIndex(card[i])
-                .setScale(1.2);
+                .setScale(1.7);
             c.rotation = -15+i*15;
             c.originX = c.originY = 0.9;
         }
@@ -68,14 +68,14 @@ tm.main(function() {
         //ショットガンシルエット
         var sg = tm.display.Sprite("shotgun", 500, 220)
                 .addChildTo(this)
-                .setPosition(SC_W*0.5, SC_H*0.6);
-        sg.scaleX = -1;
-        sg.rotation = -10;
+                .setPosition(SC_W*0.5, SC_H*0.5)
+        sg.scaleX *= -1;
+        sg.rotation = -30;
 
         //ロゴ
         //タイトルロゴ１
         var lb = this.title1 = tm.display.OutlineLabel("SHOTGUN", 110)
-            .addChildTo(this)
+//            .addChildTo(this)
             .setPosition(SC_W*0.45, SC_H*0.3)
             .setParam({fontFamily:"'CasinoRegular'", align: "center", baseline:"middle", outlineWidth:3 });
         lb.scaleY = 1.5;
@@ -86,7 +86,7 @@ tm.main(function() {
 
         //タイトルロゴ２
         var lb = this.title2 = tm.display.OutlineLabel("POKER", 120)
-            .addChildTo(this)
+//           .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.8)
             .setParam({fontFamily:"'CasinoRegular'", align: "center", baseline:"middle", outlineWidth:3 });
         lb.scaleY = 1.5;
