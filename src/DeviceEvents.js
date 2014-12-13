@@ -62,6 +62,25 @@ document.addEventListener('resume', onResume, false);
 document.addEventListener('online', onOnline, false);
 document.addEventListener('offline', onOffline, false);
 
+function cordovaPath() {
+ var path = window.location.pathname
+ return path.slice(0, path.indexOf("/www/") + 5)
+}
+
+var ad_units = {
+    ios : {
+        banner: '/6253334/dfp_example_ad', // or DFP format "/6253334/dfp_example_ad"
+        interstitial: '/6253334/dfp_example_ad"'
+    },
+    android : {
+        banner: 'ca-app-pub-4753786498901311/7270571985', // or DFP format "/6253334/dfp_example_ad"
+        interstitial: 'ca-app-pub-4753786498901311/7270571985'
+    }
+};
+
+// select the right Ad Id according to platform
+var admobid = ( /(android)/i.test(navigator.userAgent) ) ? ad_units.android : ad_units.ios;
+
 //UsingPluginList
 //Gamecenter
 //https://github.com/leecrossley/cordova-plugin-game-center.git
@@ -71,8 +90,3 @@ document.addEventListener('offline', onOffline, false);
 //https://github.com/apache/cordova-plugin-statusbar.git
 //Device
 //https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
-
-function cordovaPath() {
- var path = window.location.pathname
- return path.slice(0, path.indexOf("/www/") + 5)
-}

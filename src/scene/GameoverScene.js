@@ -80,6 +80,9 @@ tm.define("shotgun.GameoverScene", {
             .addChildTo(this)
             .setPosition(SC_W*0.25, SC_H*0.8)
             .addEventListener("pushed", function() {
+                if(AdMob) {
+                    AdMob.prepareInterstitial({adId:admobid.interstitial, autoShow:true});
+                }
                 appMain.bonusLife = 1;
             });
 

@@ -32,5 +32,12 @@ tm.define("shotgun.LoadingScene", {
         appMain.sounds.add("dist",        "assets/se_maoudamashii_se_paper01.mp3");
         appMain.sounds.add("hand",        "assets/se_hand.mp3");
         appMain.sounds.add("nopair",      "assets/se_nopair.mp3");
+
+        if(AdMob) {
+            AdMob.createBanner({
+                adId:admobid.banner, 
+                autoShow:false
+            });
+        }
     },
 });

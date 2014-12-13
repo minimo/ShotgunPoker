@@ -50,6 +50,10 @@ tm.define("shotgun.TitleScene", {
         this.time = 0;
 
         appMain.playBGM("titleBGM");
+
+        if(AdMob) {
+            AdMob.showBannerAtXY(0, 0);
+        }
     },
 
     onresume: function() {
