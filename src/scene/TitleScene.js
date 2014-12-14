@@ -50,10 +50,6 @@ tm.define("shotgun.TitleScene", {
         this.time = 0;
 
         appMain.playBGM("titleBGM");
-
-        if(ENABLE_ADMOB && AdMob) {
-            AdMob.showBannerAtXY(0, 0);
-        }
     },
 
     onresume: function() {
@@ -94,6 +90,7 @@ tm.define("shotgun.TitleScene", {
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.40)
             .addEventListener("pushed", function() {
+                appMain.bonusLife = 0;
                 that.mask.tweener.clear().fadeIn(200).call(function(){appMain.replaceScene(shotgun.MainScene());});
             });
 
