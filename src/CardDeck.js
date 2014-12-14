@@ -160,7 +160,7 @@ tm.define("shotgun.CardDeck", {
             if (c) {
                 c.hand = false;
                 c.drop = true;
-                c.tweener.clear().wait(300).moveBy(0, SC_H*0.3, 500, "easeOutQuint");
+                c.tweener.clear().wait(300).moveBy(0, SC_H*0.3+10, 500, "easeOutQuint");
             }
         }
         this.hands = [];
