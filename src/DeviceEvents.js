@@ -81,6 +81,18 @@ var ad_units = {
 // select the right Ad Id according to platform
 var admobid = ( /(android)/i.test(navigator.userAgent) ) ? ad_units.android : ad_units.ios;
 
+var alreadyBanner = false;
+var CreateBanner = function() {
+    if(!alreadyBanner && PHONEGAP && AdMob) {
+        alreadyBanner = true;
+        AdMob.createBanner({
+            adId:admobid.banner,
+            position: AdMob.AD_POSITION.BOTTOM_CENTER,
+            autoShow:true
+        });
+    }
+}
+
 //UsingPluginList
 //Gamecenter
 //https://github.com/leecrossley/cordova-plugin-game-center.git
