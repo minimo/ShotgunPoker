@@ -174,12 +174,12 @@ tm.define("shotgun.TutorialScene", {
             .setOrigin(0.5, 1.0);
 
         //カウントダウン表示
-        var lb = tm.display.OutlineLabel("5", 300)
+        var lb = tm.display.Sprite("count", 256, 256)
             .addChildTo(this)
-            .setParam(this.labelParamPoker)
-            .setPosition(SC_W/2, SC_H/2);
+            .setPosition(SC_W/2, SC_H/2)
+            .setFrameIndex(4);
         lb.beforeCount = 9;
-        lb.alpha = 0.0;
+        lb.alpha = 1.0;
         lb.update = function() {
             if (that.count < 6) {
                 this.visible = true;
@@ -190,10 +190,10 @@ tm.define("shotgun.TutorialScene", {
                     this.alpha = 1.0;
                     appMain.playSE("countdown");
                 }
+                this.setFrameIndex(that.count);
             } else {
                 this.visible = false;
             }
-            this.text = ""+that.count;
             this.beforeCount = that.count;
         }
 
@@ -600,7 +600,7 @@ tm.define("shotgun.TutorialScene", {
 
             .call(function(){
                 var lb = tm.display.Sprite("gameover")
-                    .addChildTo(this)
+                    .addChildTo(that)
                     .setPosition(SC_W*0.5, SC_H*0.5-SC_H);
                 lb.tweener.wait(500)
                     .move(SC_W*0.5, SC_H*0.5, 4000,"easeOutBounce")
