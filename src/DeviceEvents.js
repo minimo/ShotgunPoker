@@ -46,12 +46,12 @@ var onOffline = function() {
 }
 
 var onGamecenterSuccess = function() {
-    if (DEBUG_PHONEGAP) AdvanceAlertt('GAMECENTER connect success');
+    if (DEBUG_GAMECENTER) AdvanceAlertt('GAMECENTER connect success');
     GAMECENTER = true;
 }
 
 var onGamecenterFailure = function(result) {
-    if (DEBUG_PHONEGAP) AdvanceAlert('GAMECENTERに接続できませんでした。\n'+result);
+    if (DEBUG_GAMECENTER) AdvanceAlert('GAMECENTERに接続できませんでした。\n'+result);
     GAMECENTER = false;
 }
 
