@@ -141,6 +141,12 @@ tm.define("shotgun.SoundElement", {
         return this;
     },
 
+    resume: function() {
+        if (!this.media) return this;
+        this.media.resume();
+        return this;
+    },
+
     pause: function () {
         if (!this.media) return this;
         this.media.pause();

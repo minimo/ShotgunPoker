@@ -93,7 +93,11 @@ tm.define("shotgun.SettingScene", {
 
     setVolumeBGM: function(vol) {
         vol = Math.clamp(vol, 0, 10);
-        appMain.sounds.volumeBGM = vol;
+        if (vol != appMain.sounds.volumeSE) {
+            appMain.sounds.pauseBGM();
+            appMain.sounds.volumeBGM = vol;
+            appMain.sounds.resumeBGM();
+        }
         for (var i = 0; i < 10; i++) {
             this.bgm[i].setFrameIndex(52).setScale(0.3);
             if (i == vol-1) {
@@ -107,8 +111,10 @@ tm.define("shotgun.SettingScene", {
 
     setVolumeSE: function(vol) {
         vol = Math.clamp(vol, 0, 10);
-        if (vol != appMain.sounds.volumeSE) appMain.playSE("hand");
-        appMain.sounds.volumeSE = vol;
+        if (vol != appMain.sounds.volumeSE) {
+            appMain.sounds.volumeSE = vol;
+            appMain.playSE("hand");
+        }
         for (var i = 0; i < 10; i++) {
             this.se[i].setFrameIndex(53).setScale(0.3);
             if (i == vol-1) {
