@@ -14,6 +14,10 @@ var onDeviceready = function () {
 
     PHONEGAP = true;
 
+    //Admob option set
+    prepareAdmob();
+    createBanner();
+
     //Game Center Plugin
     gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
 }
@@ -63,8 +67,8 @@ document.addEventListener('online', onOnline, false);
 document.addEventListener('offline', onOffline, false);
 
 function cordovaPath() {
- var path = window.location.pathname
- return path.slice(0, path.indexOf("/www/") + 5)
+    var path = window.location.pathname
+    return path.slice(0, path.indexOf("/www/") + 5)
 }
 
 var ad_units = {
@@ -81,17 +85,33 @@ var ad_units = {
 // select the right Ad Id according to platform
 var admobid = ( /(android)/i.test(navigator.userAgent) ) ? ad_units.android : ad_units.ios;
 
-var alreadyBanner = false;
+var bannerIsReady = false;
 var CreateBanner = function() {
-    if(!alreadyBanner && PHONEGAP && AdMob) {
-        alreadyBanner = true;
+    if(!bannerIsReady && PHONEGAP && AdMob) {
         AdMob.createBanner({
             adId:admobid.banner,
-            position: AdMob.AD_POSITION.BOTTOM_CENTER,
-            autoShow:true
+            position: AdMob.AD_POSITION.BOTTOM_CENTER
+//            autoShow:true,
+//            isTesting: true
+        }, function() {
+            bannerIsReady = true;
+        }, function() {
         });
     }
 }
+
+var prepareAdmob = function() {
+    var defaultOptions = {
+        bannerId: admobid.banner,
+        interstitialId: admobid.interstitial,
+        position: AdMob.AD_POSITION.BOTTOM_CENTER,
+        bgColor: 'black',
+        isTesting: true,
+        autoShow: true
+    };
+    AdMob.setOptions(defaultOptions);
+}
+
 
 //UsingPluginList
 //Gamecenter
