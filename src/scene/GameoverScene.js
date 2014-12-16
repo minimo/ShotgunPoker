@@ -77,12 +77,15 @@ tm.define("shotgun.GameoverScene", {
             });
 
         //全画面広告ボタン
-        shotgun.Button(width*0.8, height, "Advertise")
+        shotgun.Button(width, height, "Advertise")
             .addChildTo(this)
             .setPosition(SC_W*0.25, SC_H*0.78)
             .addEventListener("pushed", function() {
                 if(PHONEGAP && AdMob) {
-                    AdMob.prepareInterstitial({adId:admobid.interstitial, autoShow:true});
+                    AdMob.prepareInterstitial({
+                        adId:admobid.interstitial,
+                        autoShow:true
+                    });
                 }
                 appMain.bonusLife = 1;
             });

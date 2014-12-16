@@ -16,7 +16,6 @@ var onDeviceready = function () {
 
     //Admob option set
     prepareAdmob();
-    createBanner();
 
     //Game Center Plugin
     gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
@@ -86,7 +85,8 @@ var ad_units = {
 var admobid = ( /(android)/i.test(navigator.userAgent) ) ? ad_units.android : ad_units.ios;
 
 var bannerIsReady = false;
-var CreateBanner = function() {
+
+var createBanner = function() {
     if(!bannerIsReady && PHONEGAP && AdMob) {
         AdMob.createBanner({
             adId:admobid.banner,
