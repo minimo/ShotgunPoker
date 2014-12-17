@@ -6,7 +6,7 @@
  */
 
 //PhoneGap Device Events
-var onDeviceready = function () {
+var onDeviceReady = function () {
     if (DEBUG_PHONEGAP) {
         AdvanceAlert('devicereadyイベントが発火しました');
         AdvanceAlert('Device:'+device.name+" "+device.platform);
@@ -60,7 +60,7 @@ var onGamecenterFailure = function(result) {
 }
 
 //Phonegap Event listener
-document.addEventListener('deviceready', onDeviceready, false);
+document.addEventListener("deviceready", onDeviceReady, false);
 document.addEventListener('pause', onPause, false);
 document.addEventListener('resume', onResume, false);
 document.addEventListener('online', onOnline, false);
@@ -86,7 +86,6 @@ var ad_units = {
 var admobid = ( /(android)/i.test(navigator.userAgent) ) ? ad_units.android : ad_units.ios;
 
 var bannerIsReady = false;
-
 var createBanner = function() {
     if(!bannerIsReady && PHONEGAP && AdMob) {
         AdMob.createBanner({
