@@ -59,22 +59,12 @@ var onGamecenterFailure = function(result) {
     GAMECENTER = false;
 }
 
-document.addEventListener('onAdFailLoad', function(data){ 
-    AdvanceAlert(
-        'error: '+data.error+
-        ', reason: '+data.reason+
-        ', adNetwork:'+data.adNetwork+
-        ', adType:'+data.adType+
-        ', adEvent:'+data.adEvent);
-}
-
 //Phonegap Event listener
 document.addEventListener('deviceready', onDeviceready, false);
 document.addEventListener('pause', onPause, false);
 document.addEventListener('resume', onResume, false);
 document.addEventListener('online', onOnline, false);
 document.addEventListener('offline', onOffline, false);
-document.addEventListener('onAdFailLoad', onAdFailLoad, false);
 
 function cordovaPath() {
     var path = window.location.pathname
