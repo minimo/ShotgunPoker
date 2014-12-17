@@ -113,13 +113,14 @@ var prepareAdmob = function() {
     AdMob.setOptions(defaultOptions);
 }
 
-
 //UsingPluginList
 //Gamecenter
 //https://github.com/leecrossley/cordova-plugin-game-center.git
 //Admob
-//https://github.com/floatinghotpot/cordova-plugin-admob.git
+//https://github.com/floatinghotpot/cordova-admob-pro.git
 //StatusBar
 //https://github.com/apache/cordova-plugin-statusbar.git
 //Device
 //https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
+//WKWebView
+//https://github.com/Telerik-Verified-Plugins/WKWebView.git
