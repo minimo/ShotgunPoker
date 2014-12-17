@@ -11,12 +11,11 @@ mt = new MersenneTwister();
 //定数
 //デバッグフラグ
 DEBUG = false;
-PHONEGAP = false;
 DEBUG_PHONEGAP = false;
 DEBUG_GAMECENTER = true;
 
-//フォント読み込み終了カウント
-fontLoadEnd = 0;
+//PhoneGap使用フラグ
+PHONEGAP = false;
 
 //GAMECENTER使用フラグ
 GAMECENTER = false;
@@ -30,8 +29,8 @@ STATUSBAR_HEIGHT = 30;
 STATUSBAR_COLOR = 'rgba(0,0,0,1)';
 
 //カードサイズ
-CARD_W = 200*0.7;
-CARD_H = 300*0.7;
+CARD_W = 140;
+CARD_H = 210;
 CARD_SCALE = 1;
 
 //スート
