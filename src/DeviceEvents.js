@@ -23,26 +23,6 @@ var onDeviceReady = function () {
 
     ENABLE_PHONEGAP = true;
 
-    //Admob setting
-    if (AdMob) {
-        var defaultOptions = {
-            bannerId: admobid.banner,
-            interstitialId: admobid.interstitial,
-            position: AdMob.AD_POSITION.BOTTOM_CENTER,
-            bgColor: 'black',
-            isTesting: true,
-            autoShow: true
-        };
-        AdMob.setOptions(defaultOptions);
-
-        AdMob.createBanner({
-            adId:admobid.banner,
-            position: AdMob.AD_POSITION.BOTTOM_CENTER
-//            autoShow:true,
-//            isTesting: true
-        });
-    }
-
     //Game Center Plugin
     gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
 }
