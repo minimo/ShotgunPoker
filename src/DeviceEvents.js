@@ -5,6 +5,15 @@
  *  This Program is MIT license.
  */
 
+//定数
+//PhoneGap使用フラグ
+ENABLE_PHONEGAP = false;
+DEBUG_PHONEGAP = false;
+
+//GAMECENTER使用フラグ
+ENABLE_GAMECENTER = false;
+DEBUG_GAMECENTER = true;
+
 //PhoneGap Device Events
 var onDeviceReady = function () {
     if (DEBUG_PHONEGAP) {
@@ -14,9 +23,25 @@ var onDeviceReady = function () {
 
     PHONEGAP = true;
 
-    //Admob option set
-    prepareAdmob();
-    createBanner();
+    //Admob setting
+    if(AdMob) {
+        var defaultOptions = {
+            bannerId: admobid.banner,
+            interstitialId: admobid.interstitial,
+            position: AdMob.AD_POSITION.BOTTOM_CENTER,
+            bgColor: 'black',
+            isTesting: true,
+            autoShow: true
+        };
+        AdMob.setOptions(defaultOptions);
+
+        AdMob.createBanner({
+            adId:admobid.banner,
+            position: AdMob.AD_POSITION.BOTTOM_CENTER
+//            autoShow:true,
+//            isTesting: true
+        });
+    }
 
     //Game Center Plugin
     gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
@@ -51,12 +76,12 @@ var onOffline = function() {
 
 var onGamecenterSuccess = function() {
     if (DEBUG_GAMECENTER) AdvanceAlertt('GAMECENTER connect success');
-    GAMECENTER = true;
+    ENABLE_GAMECENTER = true;
 }
 
 var onGamecenterFailure = function(result) {
     if (DEBUG_GAMECENTER) AdvanceAlert('GAMECENTERに接続できませんでした。\n'+result);
-    GAMECENTER = false;
+    ENABLE_GAMECENTER = false;
 }
 
 //Phonegap Event listener
@@ -65,6 +90,7 @@ document.addEventListener('pause', onPause, false);
 document.addEventListener('resume', onResume, false);
 document.addEventListener('online', onOnline, false);
 document.addEventListener('offline', onOffline, false);
+
 
 function cordovaPath() {
     var path = window.location.pathname
@@ -85,41 +111,3 @@ var ad_units = {
 // select the right Ad Id according to platform
 var admobid = ( /(android)/i.test(navigator.userAgent) ) ? ad_units.android : ad_units.ios;
 
-var bannerIsReady = false;
-var createBanner = function() {
-    if(!bannerIsReady && PHONEGAP && AdMob) {
-        AdMob.createBanner({
-            adId:admobid.banner,
-            position: AdMob.AD_POSITION.BOTTOM_CENTER
-//            autoShow:true,
-//            isTesting: true
-        }, function() {
-            bannerIsReady = true;
-        }, function() {
-        });
-    }
-}
-
-var prepareAdmob = function() {
-    var defaultOptions = {
-        bannerId: admobid.banner,
-        interstitialId: admobid.interstitial,
-        position: AdMob.AD_POSITION.BOTTOM_CENTER,
-        bgColor: 'black',
-        isTesting: true,
-        autoShow: true
-    };
-    AdMob.setOptions(defaultOptions);
-}
-
-//UsingPluginList
-//Gamecenter
-//https://github.com/leecrossley/cordova-plugin-game-center.git
-//Admob
-//https://github.com/floatinghotpot/cordova-admob-pro.git
-//StatusBar
-//https://github.com/apache/cordova-plugin-statusbar.git
-//Device
-//https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
-//WKWebView
-//https://github.com/Telerik-Verified-Plugins/WKWebView.git

@@ -7,18 +7,11 @@
  
 //乱数発生器
 mt = new MersenneTwister();
+var rand = function(min, max) { return mt.nextInt(min, max); };    //乱数発生
 
 //定数
 //デバッグフラグ
 DEBUG = false;
-DEBUG_PHONEGAP = false;
-DEBUG_GAMECENTER = true;
-
-//PhoneGap使用フラグ
-PHONEGAP = false;
-
-//GAMECENTER使用フラグ
-GAMECENTER = false;
 
 //スクリーンサイズ
 SC_W = 640;
@@ -76,11 +69,7 @@ MEDIA_DEFAULT = MEDIA_ASSET;
 
 //フレームレート
 fps = 30;
-
-var toRad = 3.14159/180;    //弧度法toラジアン変換
-var toDeg = 180/3.14159;    //ラジアンto弧度法変換
 var sec = function(s) { return ~~(fps * s);}    //秒からフレーム数へ変換
-var rand = function(min, max) { return mt.nextInt(min, max); };    //乱数発生
 
 //距離計算
 var distance = function(from, to) {
@@ -95,31 +84,6 @@ var distanceSq = function(from, to) {
     var y = from.y - to.y;
     return x*x+y*y;
 }
-
-//数値の制限
-var clamp = function(x, min, max) {
-    return (x<min)?min:((x>max)?max:x);
-};
-
-//タイトル無しダイアログ
-var AdvanceAlert = function(str) {
-    var tmpFrame = document.createElement('iframe');
-    tmpFrame.setAttribute('src', 'data:text/plain,');
-    document.documentElement.appendChild(tmpFrame);
-
-    window.frames[0].window.alert(str);
-    tmpFrame.parentNode.removeChild(tmpFrame);
-};
-var AdvanceConfirm = function(str) {
-    var tmpFrame = document.createElement('iframe');
-    tmpFrame.setAttribute('src', 'data:text/plain,');
-    document.documentElement.appendChild(tmpFrame);
-
-    var result = window.frames[0].window.confirm(str);
-    tmpFrame.parentNode.removeChild(tmpFrame);
-
-    return result;
-};
 
 //インスタンス
 appMain = {};
