@@ -1,0 +1,7 @@
+ステータスバー非表示
+
+<key>UIStatusBarHidden</key>
+<true/>
+<key>UIViewControllerBasedStatusBarAppearance</key>
+<false/>
+
