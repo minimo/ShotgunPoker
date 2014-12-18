@@ -21,7 +21,7 @@ var onDeviceReady = function () {
         AdvanceAlert('Device:'+device.name+" "+device.platform);
     }
 
-    PHONEGAP = true;
+    ENABLE_PHONEGAP = true;
 
     //Admob setting
     if(AdMob) {

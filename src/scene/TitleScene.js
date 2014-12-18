@@ -139,8 +139,8 @@ tm.define("shotgun.TitleScene", {
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.80)
             .addEventListener("pushed", function() {
-                if (!PHONEGAP) return;
-                if (!GAMECENTER) {
+                if (!ENABLE_PHONEGAP) return;
+                if (!ENABLE_GAMECENTER) {
                     gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
 //                    AdvanceAlert('GAMECENTERの準備が出来ていません');
                 }

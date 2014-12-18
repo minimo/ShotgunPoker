@@ -81,7 +81,7 @@ tm.define("shotgun.GameoverScene", {
             .addChildTo(this)
             .setPosition(SC_W*0.25, SC_H*0.78)
             .addEventListener("pushed", function() {
-                if(PHONEGAP && AdMob) {
+                if(ENABLE_PHONEGAP && AdMob) {
                     AdMob.prepareInterstitial({
                         adId:admobid.interstitial,
                         autoShow:true
