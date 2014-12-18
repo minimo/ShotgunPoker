@@ -393,7 +393,7 @@ tm.define("shotgun.MainScene", {
         if (this.score > appMain.highScore) appMain.highScore = this.score;
 
         //GAMECENTERにスコアを登録
-        if (GAMECENTER) {
+        if (ENABLE_GAMECENTER) {
             var data = {
                 score: this.score,
                 leaderboardId: "board"

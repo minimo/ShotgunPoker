@@ -24,7 +24,7 @@ var onDeviceReady = function () {
     ENABLE_PHONEGAP = true;
 
     //Admob setting
-    if(AdMob) {
+    if (AdMob) {
         var defaultOptions = {
             bannerId: admobid.banner,
             interstitialId: admobid.interstitial,
