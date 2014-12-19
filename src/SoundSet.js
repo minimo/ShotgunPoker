@@ -98,6 +98,11 @@ tm.define("shotgun.SoundSet", {
 
     setVolumeBGM: function(v) {
         this.volumeBGM = Math.clamp(v, 0, 10);
+        if (this.bgm) {
+            this.bgm.pause();
+            this.bgm.setVolume(this.volumeBGM);
+            this.bgm.resume();
+        }
         return this;
     },
 
