@@ -17,10 +17,6 @@ DEBUG = false;
 SC_W = 640;
 SC_H = 1136;
 
-//ステータスバー情報
-STATUSBAR_HEIGHT = 30;
-STATUSBAR_COLOR = 'rgba(0,0,0,1)';
-
 //カードサイズ
 CARD_W = 140;
 CARD_H = 210;
@@ -70,20 +66,6 @@ MEDIA_DEFAULT = MEDIA_ASSET;
 //フレームレート
 fps = 30;
 var sec = function(s) { return ~~(fps * s);}    //秒からフレーム数へ変換
-
-//距離計算
-var distance = function(from, to) {
-    var x = from.x-to.x;
-    var y = from.y-to.y;
-    return Math.sqrt(x*x+y*y);
-}
-
-//距離計算（ルート無し版）
-var distanceSq = function(from, to) {
-    var x = from.x-to.x;
-    var y = from.y - to.y;
-    return x*x+y*y;
-}
 
 //インスタンス
 appMain = {};
