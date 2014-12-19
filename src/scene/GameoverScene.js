@@ -9,10 +9,13 @@
 tm.define("shotgun.GameoverScene", {
     superClass: tm.app.Scene,
 
+    dispExtend: false,
+
     //ラベル用フォントパラメータ
     headerParam: {fontFamily:"CasinoRegular", align: "center", baseline:"middle", outlineWidth:2 },
     labelParam: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:2 },
     scoreParam: {fontFamily:"azuki", align: "left", baseline:"middle", outlineWidth:2 },
+    extendParam: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:2, fillStyle: "red" },
 
     init: function(parentScene) {
         this.superInit();
@@ -59,7 +62,7 @@ tm.define("shotgun.GameoverScene", {
         }
 
         //リトライボタン
-        shotgun.Button(width, height, "RETRY")
+        this.retry = shotgun.Button(width, height, "RETRY")
             .addChildTo(this)
             .setPosition(SC_W*0.25, SC_H*0.85)
             .addEventListener("pushed", function() {
@@ -68,7 +71,7 @@ tm.define("shotgun.GameoverScene", {
             });
 
         //戻るボタン
-        shotgun.Button(width, height, "EXIT")
+        this.back = shotgun.Button(width, height, "EXIT")
             .addChildTo(this)
             .setPosition(SC_W*0.75, SC_H*0.85)
             .addEventListener("pushed", function() {
@@ -77,9 +80,9 @@ tm.define("shotgun.GameoverScene", {
             });
 
         //全画面広告ボタン
-        shotgun.Button(width, height, "Ad")
+        this.Ad = shotgun.Button(width*0.5, height, "Ad")
             .addChildTo(this)
-            .setPosition(SC_W*0.25, SC_H*0.78)
+            .setPosition(SC_W*0.25-width*0.25, SC_H*0.78)
             .addEventListener("pushed", function() {
                 if(ENABLE_PHONEGAP && AdMob) {
                     AdMob.prepareInterstitial({
@@ -99,6 +102,27 @@ tm.define("shotgun.GameoverScene", {
     },
 
     update: function() {
+        if (!this.dispExtend && appMain.bonusLife != 0) {
+            var that = this;
+            var c = tm.display.Sprite("card", CARD_W, CARD_H)
+                .addChildTo(this.retry)
+//                .setPosition(SC_W*0.40, SC_H*0.85)
+                .setPosition(130, 0)
+                .setFrameIndex(13*3)
+                .tweener.clear()
+                .fadeOut(1)
+                .wait(2000)
+                .fadeIn(1)
+                .scale(0.3, 1000, "easeOutBounce")
+                .call(function(){
+                    tm.display.OutlineLabel("+", 70)
+                        .addChildTo(that.retry)
+                        .setParam(that.extendParam)
+                        .setPosition(90, 0);
+                });
+            this.dispExtend = true;
+            this.Ad.remove();
+        }
     },
 
     //タッチorクリック開始処理
