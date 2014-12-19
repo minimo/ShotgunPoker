@@ -27,6 +27,7 @@ var onDeviceReady = function () {
 
     ENABLE_PHONEGAP = true;
 
+    //AdMob plugin
     if (AdMob) {
         var defaultOptions = {
             bannerId: admobid.banner,
@@ -110,9 +111,13 @@ document.addEventListener('pause', onPause, false);
 document.addEventListener('resume', onResume, false);
 document.addEventListener('online', onOnline, false);
 document.addEventListener('offline', onOffline, false);
+
+//AdMob Event listener
 document.addEventListener('onBannerLeaveApp', onBannerLeaveApp, false);
+document.addEventListener('onBannerDismiss', onBannerDismiss, false);
 document.addEventListener('onInterstitialPresent', onInterstitialPresent, false);
 document.addEventListener('onInterstitialLeaveApp', onInterstitialLeaveApp, false);
+document.addEventListener('onInterstitialDissmiss', onInterstitialDissmiss, false);
 
 function cordovaPath() {
     var path = window.location.pathname
