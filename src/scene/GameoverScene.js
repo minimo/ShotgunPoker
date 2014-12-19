@@ -77,7 +77,7 @@ tm.define("shotgun.GameoverScene", {
             });
 
         //全画面広告ボタン
-        shotgun.Button(width, height, "Advertise")
+        shotgun.Button(width, height, "Ad")
             .addChildTo(this)
             .setPosition(SC_W*0.25, SC_H*0.78)
             .addEventListener("pushed", function() {
