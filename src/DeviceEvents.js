@@ -6,13 +6,17 @@
  */
 
 //定数
-//PhoneGap使用フラグ
+//PhoneGap使用可能フラグ
 ENABLE_PHONEGAP = false;
 DEBUG_PHONEGAP = false;
 
-//GAMECENTER使用フラグ
+//GAMECENTER使用可能フラグ
 ENABLE_GAMECENTER = false;
-DEBUG_GAMECENTER = true;
+DEBUG_GAMECENTER = false;
+
+//AdMob使用可能フラグ
+ENABLE_ADMOB = false;
+DEBUG_ADMOB = false;
 
 //PhoneGap Device Events
 var onDeviceReady = function () {
@@ -22,6 +26,19 @@ var onDeviceReady = function () {
     }
 
     ENABLE_PHONEGAP = true;
+
+    if (AdMob) {
+        var defaultOptions = {
+            bannerId: admobid.banner,
+            interstitialId: admobid.interstitial,
+            position: AdMob.AD_POSITION.BOTTOM_CENTER,
+            bgColor: 'black',
+            isTesting: true,
+            autoShow: true
+        };
+        AdMob.setOptions(defaultOptions);
+        ENABLE_ADMOB = true;
+    }
 
     //Game Center Plugin
     gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
@@ -41,7 +58,7 @@ var onResume = function() {
     if (DEBUG_PHONEGAP) AdvanceAlert('resumeイベントが発火しました');
 
     //GAME CENTERに再度接続を行う
-    if (!GAMECENTER) {
+    if (!ENABLE_GAMECENTER) {
         gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
     }
 }
@@ -54,6 +71,7 @@ var onOffline = function() {
     if (DEBUG_PHONEGAP) AdvanceAlert('offlineイベントが発火しました');
 }
 
+// GAMECENTER CallBack
 var onGamecenterSuccess = function() {
     if (DEBUG_GAMECENTER) AdvanceAlertt('GAMECENTER connect success');
     ENABLE_GAMECENTER = true;
@@ -64,13 +82,37 @@ var onGamecenterFailure = function(result) {
     ENABLE_GAMECENTER = false;
 }
 
+// AdMob CallBack
+var onBannerLeaveApp = function(result) {
+    if (DEBUG_ADMOB) AdvanceAlert('OnBannerLeaveApp\n'+result);
+}
+
+var onBannerDismiss = function(result) {
+    if (DEBUG_ADMOB) AdvanceAlert('OnBannerDismiss\n'+result);
+}
+
+var onInterstitialPresent = function(result) {
+    if (DEBUG_ADMOB) AdvanceAlert('onInterstitialPresent\n'+result);
+}
+
+var onInterstitialLeaveApp = function(result) {
+    if (DEBUG_ADMOB) AdvanceAlert('onInterstitialLeaveApp\n'+result);
+}
+
+var onInterstitialDissmiss = function(result) {
+    if (DEBUG_ADMOB) AdvanceAlert('onInterstitialDissmiss\n'+result);
+}
+
+
 //Phonegap Event listener
 document.addEventListener("deviceready", onDeviceReady, false);
 document.addEventListener('pause', onPause, false);
 document.addEventListener('resume', onResume, false);
 document.addEventListener('online', onOnline, false);
 document.addEventListener('offline', onOffline, false);
-
+document.addEventListener('onBannerLeaveApp', onBannerLeaveApp, false);
+document.addEventListener('onInterstitialPresent', onInterstitialPresent, false);
+document.addEventListener('onInterstitialLeaveApp', onInterstitialLeaveApp, false);
 
 function cordovaPath() {
     var path = window.location.pathname

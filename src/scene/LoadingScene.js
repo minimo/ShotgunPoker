@@ -35,16 +35,6 @@ tm.define("shotgun.LoadingScene", {
 
         //Admob setting
         if (ENABLE_PHONEGAP && AdMob) {
-            var defaultOptions = {
-                bannerId: admobid.banner,
-                interstitialId: admobid.interstitial,
-                position: AdMob.AD_POSITION.BOTTOM_CENTER,
-                bgColor: 'black',
-                isTesting: true,
-                autoShow: true
-            };
-            AdMob.setOptions(defaultOptions);
-
             AdMob.createBanner({
                 adId:admobid.banner,
                 position: AdMob.AD_POSITION.BOTTOM_CENTER
