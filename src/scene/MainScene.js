@@ -113,13 +113,19 @@ tm.define("shotgun.MainScene", {
             c.setScale(0.3);
             c.setPosition( 155+i*45, 96);
             c.life = i;
+            c.beforeLife = 0;
+            c.alpha = 0;
             c.update = function() {
-                this.pattern = that.life+this.suit*13-1;
-                if (this.life < that.life) {
-                    this.visible = true;
-                } else {
-                    this.visible = false;
+                if (this.life != this.beforeLife) {
+                    this.pattern = that.life+this.suit*13-1;
+                    if (this.life < that.life) {
+                        this.setScale(0.5);
+                        this.tweener.clear().fadeIn(100).scale(0.3, 1000, "easeOutBounce");
+                    } else {
+                        this.tweener.clear().fadeOut(300);
+                    }
                 }
+                this.beforeLife = that.life;
             }
         }
 
