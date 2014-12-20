@@ -104,16 +104,17 @@ tm.define("shotgun.TutorialScene", {
                 .addChildTo(this.lifeLabel)
                 .setScale(0.3)
                 .setPosition(150+i*45, 0)
-                .setFrameIndex(13*3+this.life-1);
+                .setFrameIndex(13*3+i);
             c.alpha = 0;
             if (i < this.life) c.alpha = 1;
         }
         this.lifeLabel.update = function() {
-            if (this.beforeLife == 0) return;
+            if (this.beforeLife == that.life || this.beforeLife == 0) return;
+            if (that.lifeMax < that.life ) return;
             if (that.life < this.beforeLife) {
-                this.lg[this.beforeLife-1].tweener.clear().scale(0.0, 1000, "easeOutBounce");
+                this.lg[this.beforeLife-1].tweener.clear().scale(0.0, 500);
             } else if (that.life > this.beforeLife) {
-                this.lg[this.beforeLife-1].tweener.clear().scale(0.3, 1000, "easeOutBounce");
+                this.lg[that.life-1].tweener.clear().scale(1,1).fadeIn(1).scale(0.3, 1000, "easeOutBounce");
             }
             this.beforeLife = that.life;
         }
@@ -184,7 +185,7 @@ tm.define("shotgun.TutorialScene", {
             .setPosition(SC_W/2, SC_H/2)
             .setFrameIndex(4);
         lb.beforeCount = 9;
-        lb.alpha = 1.0;
+        lb.alpha = 0;
         lb.update = function() {
             if (that.count < 6) {
                 this.visible = true;
