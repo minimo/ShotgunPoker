@@ -107,26 +107,25 @@ tm.define("shotgun.MainScene", {
             .addChildTo(this)
             .setParam(this.labelParamBasic)
             .setPosition(8, 96);
-        this.lg = [];
-        for (var i = 0; i < 7; i++ ) {
-            var c = this.lg[i] = shotgun.Card(SUIT_HEART, 0).addChildTo(this);
-            c.setScale(0.3);
-            c.setPosition( 155+i*45, 96);
-            c.life = i;
-            c.beforeLife = 0;
+        this.lifeLabel.beforeLife = this.life;
+        this.lifeLabel.lg = [];
+        for (var i = 0; i < 5; i++ ) {
+            var c = this.lifeLabel.lg[i] = tm.display.Sprite("card", CARD_W, CARD_H)
+                .addChildTo(this.lifeLabel)
+                .setScale(0.3)
+                .setPosition(150+i*45, 0)
+                .setFrameIndex(13*3+this.life-1);
             c.alpha = 0;
-            c.update = function() {
-                if (this.life != this.beforeLife) {
-                    this.pattern = that.life+this.suit*13-1;
-                    if (this.life < that.life) {
-                        this.setScale(0.5);
-                        this.tweener.clear().fadeIn(100).scale(0.3, 1000, "easeOutBounce");
-                    } else {
-                        this.tweener.clear().fadeOut(300);
-                    }
-                }
-                this.beforeLife = that.life;
+            if (i < this.life) c.alpha = 1;
+        }
+        this.lifeLabel.update = function() {
+            if (this.beforeLife == 0) return;
+            if (that.life < this.beforeLife) {
+                this.lg[this.beforeLife-1].tweener.clear().scale(0.0, 500, "easeOutBounce");
+            } else if (that.life > this.beforeLife) {
+                this.lg[this.beforeLife-1].tweener.clear().scale(0.3, 1000, "easeOutBounce");
             }
+            this.beforeLife = that.life;
         }
 
         //タイムリミットゲージ
