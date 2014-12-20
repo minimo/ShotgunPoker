@@ -384,7 +384,6 @@ tm.define("shotgun.MainScene", {
         //スクリーンショット保存
         var kb = appMain.keyboard;
         if (kb.getKeyDown("s")) appMain.canvas.saveAsImage();
-        if (kb.getKeyDown("a")) this.life++;
     },
 
     //ゲームオーバー
