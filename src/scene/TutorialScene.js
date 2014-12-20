@@ -246,6 +246,11 @@ tm.define("shotgun.TutorialScene", {
             if (this.limitCount < 0) this.limitCount = 0;
             this.count = ~~(this.limitCount/this.limitMax*10)
         }
+
+        //スクリーンショット保存
+        var kb = appMain.keyboard;
+        if (kb.getKeyDown("s")) appMain.canvas.saveAsImage();
+
         this.time++;
     },
 
