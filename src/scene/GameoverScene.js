@@ -111,7 +111,11 @@ tm.define("shotgun.GameoverScene", {
                 .setFrameIndex(13*3)
                 .tweener.clear()
                 .fadeOut(1)
-                .wait(2000)
+                .wait(1000)
+                .call(function(){
+                    that.Ad.remove();
+                })
+                .wait(1000)
                 .fadeIn(1)
                 .scale(0.3, 1000, "easeOutBounce")
                 .call(function(){
@@ -121,7 +125,6 @@ tm.define("shotgun.GameoverScene", {
                         .setPosition(90, 0);
                 });
             this.dispExtend = true;
-            this.Ad.remove();
         }
     },
 
