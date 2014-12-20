@@ -117,7 +117,7 @@ tm.define("shotgun.GameoverScene", {
                 })
                 .wait(1000)
                 .fadeIn(1)
-                .scale(0.3, 1000, "easeOutBounce")
+                .scale(0.4, 1000, "easeOutBounce")
                 .call(function(){
                     tm.display.OutlineLabel("+", 70)
                         .addChildTo(that.retry)
