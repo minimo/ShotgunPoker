@@ -298,6 +298,9 @@ tm.define("shotgun.MainScene", {
                 appMain.playSE("hand");
             }
 
+            //Life1up判定
+            var oneUp = true;
+
             //役コンプリート判定
             if (!this.complete) {
                 var cp = true;
@@ -306,25 +309,39 @@ tm.define("shotgun.MainScene", {
                     if (this.handCount[appMain.handList[i].point] == 0) cp = false;
                 }
                 if (cp) {
+                    oneUp = true;
                     this.complete = true;
-                    var lb = tm.display.OutlineLabel("HAND COMPLETE!", 100).addChildTo(this);
-                    lb.setParam(this.labelParamPoker);
-                    lb.setPosition(SC_W*0.5, SC_H*0.5);
-                    lb.tweener.clear().wait(1000).call(lb.remove());
+                    var lb = tm.display.OutlineLabel("HAND COMPLETE!", 100)
+                        .addChildTo(this)
+                        .setParam(this.labelParamPoker)
+                        .setPosition(SC_W*0.5, SC_H*0.5)
+                        .tweener.clear().wait(1000).call(lb.remove());
                 }
             }
 
             //初回R.S.Fの場合はライフ＋１
             if (sc == ROYALSTRAIGHTFLASH && this.handCount[sc] == 1) {
+                var lb = tm.display.OutlineLabel("1UP!!", 50)
+                    .addChildTo(this)
+                    .setParam(this.labelParamPoker)
+                    .setPosition(SC_W*0.8, SC_H*0.8)
+                    .tweener.clear().wait(1200).fadeIn(1).to({x: SC_W*0.8, y: SC_H*0.8-20, alpha:0.0},1000).call(lb.remove());
+                lb.alpha = 0;
+                oneUp = true;
+            }
+
+            if (oneUp) {
                 this.life++;
                 if (this.life > this.lifeMax) {
                     this.life = this.lifeMax;
                 } else {
-                    var lb = tm.display.OutlineLabel("1UP!!", 50).addChildTo(this);
-                    lb.setParam(this.labelParamPoker);
-                    lb.setPosition(SC_W*0.8, SC_H*0.8);
-                    lb.alpha = 0;
-                    lb.tweener.clear().wait(1200).fadeIn(1).to({x: SC_W*0.8, y: SC_H*0.8-20, alpha:0.0},1000).call(lb.remove());
+                    var tmp = tm.app.Object2D()
+                        .addChildTo(this)
+                        .tweener.clear()
+                        .wait(1000)
+                        .call(function(){
+                            appMain.playSE("extend");
+                        });
                 }
             }
 
