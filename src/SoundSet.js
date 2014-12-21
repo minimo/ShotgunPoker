@@ -97,7 +97,7 @@ tm.define("shotgun.SoundSet", {
     },
 
     setVolumeBGM: function(v) {
-        this.volumeBGM = Math.clamp(v, 0, 10);
+        this.volumeBGM = Math.clamp(v, 0, 1);
         if (this.bgm) {
             this.bgm.pause();
             this.bgm.setVolume(this.volumeBGM);
@@ -116,7 +116,7 @@ tm.define("shotgun.SoundSet", {
     },
 
     setVolumeSE: function(v) {
-        this.volumeSE = Math.clamp(v, 0, 10);
+        this.volumeSE = Math.clamp(v, 0, 1);
         return this;
     },
 });
@@ -166,7 +166,6 @@ tm.define("shotgun.SoundElement", {
     setVolume: function(vol) {
         if (!this.media) return this;
         vol = vol || 1.0;
-        this.volume = vol*0.1;
         this.media.volume = this.volume;
         return this;
     },
