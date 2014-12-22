@@ -317,7 +317,6 @@ tm.define("shotgun.MainScene", {
             }
             if (penalty > 0) {
                 this.life -= penalty;
-                this.messageStack.addMessage("LIFE -"+penalty, 100);
                 appMain.playSE("nopair");
             } else {
                 appMain.playSE("hand");
@@ -346,7 +345,7 @@ tm.define("shotgun.MainScene", {
             }
 
             //Life1up判定
-            var oneUp = true;
+            var oneUp = false;
 
             //役コンプリート判定
             if (!this.complete) {
@@ -370,7 +369,6 @@ tm.define("shotgun.MainScene", {
                 if (this.life > this.lifeMax) {
                     this.life = this.lifeMax;
                 } else {
-                    this.messageStack.addMessage("LIFE +1", 100);
                     var tmp = tm.app.Object2D()
                         .addChildTo(this)
                         .tweener.clear()
