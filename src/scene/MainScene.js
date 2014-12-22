@@ -228,8 +228,37 @@ tm.define("shotgun.MainScene", {
             this.beforeCount = that.count;
         }
 
+        //メッセージ表示用スタック
+        var ms = this.messageStack = tm.display.OutlineLabel("", 100)
+            .addChildTo(this.upperLayer)
+            .setParam(this.labelParamPoker)
+            .setPosition(SC_W*0.5, SC_H*0.5);
+        ms.duration = -1;
+        ms.stack = [];
+        ms.update = function() {
+            this.duration--;
+            if (this.duration == 0) this.text = "";
+            if (this.duration < 0) {
+                if (this.stack.length > 0) {
+                    var p = this.stack[0];
+                    this.text = p.text;
+                    this.setFontSize(p.size);
+                    this.duration = p.duration;
+                    this.stack.splice(0, 1);
+
+                    this.tweener.clear().fadeIn(1);
+                }
+            }
+        }
+        ms.addMessage = function(text, size, duration) {
+            duration = duration || 50;
+            var param = {text: text, size: size, duration: duration};
+            this.stack.push(param);
+        }
+
+        //デバッグ用レベル表示
         if (DEBUG) {
-            var lb = this.creditLabel = tm.display.OutlineLabel("", 40)
+            var lb = tm.display.OutlineLabel("", 40)
                 .addChildTo(this)
                 .setParam(this.labelParamBasic)
                 .setPosition(SC_W*0.0, SC_H-20);
@@ -288,14 +317,32 @@ tm.define("shotgun.MainScene", {
             }
             if (penalty > 0) {
                 this.life -= penalty;
-                var lb = tm.display.OutlineLabel("LIFE -"+penalty, 50).addChildTo(this);
-                lb.setParam(this.labelParamPoker);
-                lb.setPosition(SC_W*0.8, SC_H*0.8);
-                lb.alpha = 0;
-                lb.tweener.clear().wait(1200).fadeIn(1).to({x: SC_W*0.8, y: SC_H*0.8-20, alpha:0.0},1000).call(lb.remove());
+                this.messageStack.addMessage("LIFE -"+penalty, 100);
                 appMain.playSE("nopair");
             } else {
                 appMain.playSE("hand");
+            }
+
+            //得点がプラスの時のみスコアに加算
+            if (sc > 0) {
+                var ps = sc;    //加算スコア
+
+                //早上がりボーナス判定
+                var msg = "";
+                if (this.count > 8) {
+                    ps = ~~(sc*2);
+                    msg = "FANTASTIC!";
+                } else if (this.count > 7) {
+                    ps = ~~(sc*1.5);
+                    msg = "EXCELLENT!";
+                } else if (this.count > 5) {
+                    ps = ~~(sc*1.3);
+                    msg = "GOOD!"
+                }
+                if (msg != "") {
+                    this.messageStack.addMessage(msg, 100);
+                }
+                this.score += ps;
             }
 
             //Life1up判定
@@ -311,30 +358,19 @@ tm.define("shotgun.MainScene", {
                 if (cp) {
                     oneUp = true;
                     this.complete = true;
-                    var lb = tm.display.OutlineLabel("HAND COMPLETE!", 100)
-                        .addChildTo(this)
-                        .setParam(this.labelParamPoker)
-                        .setPosition(SC_W*0.5, SC_H*0.5)
-                        .tweener.clear().wait(1000).call(lb.remove());
+                    this.messageStack.addMessage("HAND COMPLETE!", 100);
                 }
             }
 
             //初回R.S.Fの場合はライフ＋１
-            if (sc == ROYALSTRAIGHTFLASH && this.handCount[sc] == 1) {
-                var lb = tm.display.OutlineLabel("1UP!!", 50)
-                    .addChildTo(this)
-                    .setParam(this.labelParamPoker)
-                    .setPosition(SC_W*0.8, SC_H*0.8)
-                    .tweener.clear().wait(1200).fadeIn(1).to({x: SC_W*0.8, y: SC_H*0.8-20, alpha:0.0},1000).call(lb.remove());
-                lb.alpha = 0;
-                oneUp = true;
-            }
+            if (sc == ROYALSTRAIGHTFLASH && this.handCount[sc] == 1) oneUp = true;
 
             if (oneUp) {
                 this.life++;
                 if (this.life > this.lifeMax) {
                     this.life = this.lifeMax;
                 } else {
+                    this.messageStack.addMessage("LIFE +1", 100);
                     var tmp = tm.app.Object2D()
                         .addChildTo(this)
                         .tweener.clear()
@@ -343,29 +379,6 @@ tm.define("shotgun.MainScene", {
                             appMain.playSE("extend");
                         });
                 }
-            }
-
-            //得点がプラスの時のみスコアに加算
-            if (sc > 0) {
-                //早上がりボーナス
-                var msg = "";
-                if (this.count > 8) {
-                    sc = ~~(sc*2);
-                    msg = "FANTASTIC!";
-                } else if (this.count > 7) {
-                    sc = ~~(sc*1.5);
-                    msg = "EXCELLENT!";
-                } else if (this.count > 5) {
-                    sc = ~~(sc*1.3);
-                    msg = "GOOD!"
-                }
-                if (msg != "") {
-                    var lb = tm.display.OutlineLabel(msg, 100).addChildTo(this);
-                    lb.setParam(this.labelParamPoker);
-                    lb.setPosition(SC_W*0.5, SC_H*0.5);
-                    lb.tweener.clear().wait(1000).call(function(){lb.remove();});
-                }
-                this.score += sc;
             }
 
             //ゲームオーバー判定
