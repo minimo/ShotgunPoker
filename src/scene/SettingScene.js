@@ -67,6 +67,20 @@ tm.define("shotgun.SettingScene", {
         }
         this.setVolumeSE(appMain.sounds.volumeSE);
 
+        //ジョーカー戻り設定ボタン
+        var that = this;
+        tm.display.OutlineLabel("RETURN JOKER", 50)
+            .addChildTo(this)
+            .setParam(this.labelParam)
+            .setPosition(SC_W*0.3, SC_H*0.7);
+        var width = 150, height = 70;
+        this.retJoker = shotgun.ToggleButton(width, height, "あり", "なし")
+            .addChildTo(this)
+            .setPosition(SC_W*0.7, SC_H*0.7)
+            .addEventListener("pushed", function() {
+                appMain.returnJoker = that.retJoker.toggleON;
+            });
+
         //戻るボタン
         var width = 300, height = 70;
         shotgun.Button(width, height, "RETURN")
