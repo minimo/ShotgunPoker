@@ -80,6 +80,7 @@ tm.define("shotgun.SettingScene", {
             .addEventListener("pushed", function() {
                 appMain.returnJoker = that.retJoker.toggleON;
             });
+        this.retJoker.toggleON = appMain.returnJoker;
 
         //戻るボタン
         var width = 300, height = 70;

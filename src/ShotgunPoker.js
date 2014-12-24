@@ -93,6 +93,7 @@ tm.define("shotgun.CanvasApp", {
             "highScore": this.highScore,
             "volumeBGM": this.sounds.volumeBGM,
             "volumeSE": this.sounds.volumeSE,
+            "returnJoker": this.returnJoker,
         };
         localStorage.setItem("config", JSON.stringify(saveObj));
         return this;
@@ -108,6 +109,7 @@ tm.define("shotgun.CanvasApp", {
             this.highScore = c.highScore;
             this.sounds.volumeBGM = c.volumeBGM;
             this.sounds.volumeSE = c.volumeSE;
+            this.returnJoker = c.returnJoker;
         }
         return this;
     },
