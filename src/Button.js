@@ -222,7 +222,7 @@ tm.define("shotgun.ToggleButton", {
                     this.button.x -= this.downX*1.5;
                     this.button.y -= this.downY*1.5;
                 }
-                var e = tm.event.Event("push");
+                var e = tm.event.Event("pushed");
                 this.dispatchEvent(e);
             }
         });
