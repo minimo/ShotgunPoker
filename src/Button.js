@@ -136,7 +136,7 @@ tm.define("shotgun.ToggleButton", {
     offText: "",
     push: false,
     lock: false,
-    toggleON: false,
+    _toggleON: false,
 
     //ボタン押下時の移動量
     downX: 0,
@@ -165,7 +165,7 @@ tm.define("shotgun.ToggleButton", {
             if (this.lock) return;
 
             this.push = true;
-            if (this.toggleON) {
+            if (this._toggleON) {
                 this.button.x += this.downX*0.5;
                 this.button.y += this.downY*0.5;
             } else {
@@ -183,7 +183,7 @@ tm.define("shotgun.ToggleButton", {
             if (this.isHitPoint(pt.x, pt.y)) {
                 if (!this.push) {
                     this.push = true;
-                    if (this.toggleON) {
+                    if (this._toggleON) {
                         this.button.x += this.downX*0.5;
                         this.button.y += this.downY*0.5;
                     } else {
@@ -194,7 +194,7 @@ tm.define("shotgun.ToggleButton", {
             } else {
                 if (this.push) {
                     this.push = false;
-                    if (this.toggleON) {
+                    if (this._toggleON) {
                         this.button.x -= this.downX*0.5;
                         this.button.y -= this.downY*0.5;
                     } else {
@@ -210,18 +210,17 @@ tm.define("shotgun.ToggleButton", {
             var pt = e.pointing;
             if (this.isHitPoint(pt.x, pt.y)) {
                 this.push = false;
-                this.toggleON = !this.toggleON;
-                if (this.toggleON) {
+                this._toggleON = !this._toggleON;
+                if (this._toggleON) {
                     this.text = this.onText;
-                    this.label.text = this.text;
                     this.button.x -= this.downX*0.5;
                     this.button.y -= this.downY*0.5;
                 } else {
                     this.text = this.offText;
-                    this.label.text = this.text;
                     this.button.x -= this.downX*1.5;
                     this.button.y -= this.downY*1.5;
                 }
+                this.label.text = this.text;
                 var e = tm.event.Event("pushed");
                 this.dispatchEvent(e);
             }
@@ -257,5 +256,26 @@ tm.define("shotgun.ToggleButton", {
         this.label = tm.display.OutlineLabel(this.text, style.fontSize)
             .addChildTo(this.button)
             .setParam(this.labelParam);
+    },
+});
+
+shotgun.ToggleButton.prototype.accessor("toggleON", {
+    "set": function(b) {
+        this._toggleON = b;
+
+        if (this._toggleON) {
+            this.button.x = this.downX;
+            this.button.y = this.downY;
+            this.text = this.onText;
+        } else {
+            this.button.x = 0;
+            this.button.y = 0;
+            this.text = this.offText;
+        }
+        this.label.text = this.text;
+    },
+
+    "get": function() {
+        return this._toggleON;
     },
 });
