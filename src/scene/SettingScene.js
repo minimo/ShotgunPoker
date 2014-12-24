@@ -92,15 +92,14 @@ tm.define("shotgun.SettingScene", {
     },
 
     setVolumeBGM: function(vol) {
-        vol = Math.clamp(vol, 0, 10);
-        if (vol != appMain.sounds.volumeBGM*10) {
+        if (vol != appMain.sounds.volumeBGM) {
             appMain.sounds.pauseBGM();
-            appMain.sounds.setVolumeBGM(vol*0.1);
+            appMain.sounds.setVolumeBGM(vol);
             appMain.sounds.resumeBGM();
         }
         for (var i = 0; i < 10; i++) {
             this.bgm[i].setFrameIndex(52).setScale(0.3);
-            if (i == vol*10-1) {
+            if (i == vol-1) {
                 this.bgm[i].remove().addChildTo(this);
                 this.bgm[i].setFrameIndex(i).setScale(0.5);
             } else {
@@ -110,14 +109,13 @@ tm.define("shotgun.SettingScene", {
     },
 
     setVolumeSE: function(vol) {
-        vol = Math.clamp(vol, 0, 10);
-        if (vol != appMain.sounds.volumeSE*10) {
-            appMain.sounds.setVolumeSE(vol*0.1);
+        if (vol != appMain.sounds.volumeSE) {
+            appMain.sounds.setVolumeSE(vol);
             appMain.playSE("hand");
         }
         for (var i = 0; i < 10; i++) {
             this.se[i].setFrameIndex(53).setScale(0.3);
-            if (i == vol*10-1) {
+            if (i == vol-1) {
                 this.se[i].remove().addChildTo(this);
                 this.se[i].setFrameIndex(i+13*3).setScale(0.5);
             } else {
@@ -203,7 +201,7 @@ tm.define("shotgun.SettingScene", {
                 if (sx < 0) {
                     this.setVolumeBGM(0);
                 } else {
-                    this.setVolumeBGM(x*0.1);
+                    this.setVolumeBGM(x);
                 }
             }
 
@@ -212,7 +210,7 @@ tm.define("shotgun.SettingScene", {
                 if (sx < 0) {
                     this.setVolumeSE(0);
                 } else {
-                    this.setVolumeSE(x*0.1);
+                    this.setVolumeSE(x);
                 }
             }
         }

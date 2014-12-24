@@ -96,8 +96,8 @@ tm.define("shotgun.SoundSet", {
         return this;
     },
 
-    setVolumeBGM: function(v) {
-        this.volumeBGM = Math.clamp(v, 0, 1);
+    setVolumeBGM: function(vol) {
+        this.volumeBGM = vol;
         if (this.bgm) {
             this.bgm.pause();
             this.bgm.setVolume(this.volumeBGM);
@@ -115,8 +115,8 @@ tm.define("shotgun.SoundSet", {
         return this;
     },
 
-    setVolumeSE: function(v) {
-        this.volumeSE = Math.clamp(v, 0, 1);
+    setVolumeSE: function(vol) {
+        this.volumeSE = vol;
         return this;
     },
 });
@@ -128,7 +128,7 @@ tm.define("shotgun.SoundElement", {
     name: null,
     url: null,
     media: null,
-    volume: 1.0,
+    volume: 10,
     status: null,
     message: null,
 
@@ -165,8 +165,8 @@ tm.define("shotgun.SoundElement", {
 
     setVolume: function(vol) {
         if (!this.media) return this;
-        vol = vol || 1.0;
-        this.media.volume = this.volume;
+        vol = vol || 10;
+        this.media.volume = this.volume*0.1;
         return this;
     },
 });
@@ -245,7 +245,7 @@ tm.define("shotgun.SoundElement_LLA", {
         if (window.plugins && window.plugins.LowLatencyAudio) {
             this.lla = window.plugins.LowLatencyAudio;
             var that = this;
-            this.lla.preloadAudio(this.name, url, this.volume, 1,
+            this.lla.preloadAudio(this.name, url, this.volume*0.1, 1,
                 function(msg){
                     that.status="OK";
                     that.message = "OK:"+that.url;
@@ -289,10 +289,10 @@ tm.define("shotgun.SoundElement_LLA", {
     setVolume: function(vol) {
         if (!this.lla) return this;
         return this;
-        vol = vol || 1.0;
+        vol = vol || 10;
         this.volume = vol;
         this.lla.unload(this.name);
-        this.lla.preloadAudio(this.name, url, this.volume, 1,
+        this.lla.preloadAudio(this.name, url, this.volume*0.1, 1,
             function(msg){
                 that.status="OK";
                 that.message = "OK:"+url;
