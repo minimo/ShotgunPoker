@@ -279,3 +279,97 @@ shotgun.ToggleButton.prototype.accessor("toggleON", {
         return this._toggleON;
     },
 });
+
+
+
+tm.define("shotgun.SlideButton", {
+    superClass: tm.app.Object2D,
+
+    //描画スタイル設定
+    DEFAULT_STYLE: {
+        width: 160,
+        height: 80,
+
+        buttonWitdh: 80,
+        buttonHeight: 80,
+
+        //ボタン色
+        buttonColor: 'rgba(255, 255, 255, 1.0)',
+        buttonLine:  'rgba(200, 200, 200, 1.0)',
+        lineWidth: 2,
+
+        //ベース(on/off)色
+        onColor: 'rgba(0, 255, 0, 1.0)',
+        offColor: 'rgba(200, 200, 200, 1.0)',
+    },
+
+    style: null,
+
+    _slideON: false,
+
+    init: function(style) {
+        this.superInit();
+
+        this.style = style || {};
+        this.style.$safe(this.DEFAULT_STYLE)
+
+        this.width = style.width || 160;
+        this.height = style.height || 80;
+
+        this.text = this.offText;
+
+        //セットアップ
+        this.setup();
+
+        //判定処理設定
+        this.interactive = true;
+        this.boundingType = "rect";
+//        this.checkHierarchy = true;
+
+        //イベントリスナ登録
+        this.addEventListener("touchstart", function() {
+            if (this._slideON) {
+            } else {
+            }
+            var e = tm.event.Event("slide");
+            this.dispatchEvent(e);
+        });
+    },
+
+    setup: function() {
+        //登録済みの場合破棄する
+        if (this.shadow) {
+            this.shadow.remove();
+            this.label.remove();
+            this.button.remove();
+        }
+
+        var style = this.style;
+        var width = this.width, height = this.height;
+        var buttonWidth = this.button, heightButton = this.heightButton;
+
+        //ボタンベース
+        var baseStyle = {fillStyle: style.offColor, strokeStyle: style.offColor, lineWidth:  style.lineWidth};
+        this.button = tm.display.RectangleShape(width, height, buttonStyle)
+            .addChildTo(this);
+
+        //ボタン本体
+        var buttonStyle = {fillStyle: style.buttonColor, strokeStyle: style.lineColor, lineWidth:  style.lineWidth};
+        this.button = tm.display.RectangleShape(buttonWidth, buttonHeight, buttonStyle)
+            .addChildTo(this);
+    },
+});
+
+shotgun.SlideButton.prototype.accessor("slideON", {
+    "set": function(b) {
+        this._slideON = b;
+
+        if (this._slideON) {
+        } else {
+        }
+    },
+
+    "get": function() {
+        return this._slideON;
+    },
+});
