@@ -113,7 +113,7 @@ tm.define("shotgun.MainScene", {
             var c = this.lifeLabel.lg[i] = tm.display.Sprite("card", CARD_W, CARD_H)
                 .addChildTo(this.lifeLabel)
                 .setScale(0.3)
-                .setPosition(130+i*45, 0)
+                .setPosition(150+i*45, 0)
                 .setFrameIndex(13*3+i);
             c.alpha = 0;
             if (i < this.life) c.alpha = 1;
