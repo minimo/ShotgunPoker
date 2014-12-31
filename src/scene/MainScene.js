@@ -430,11 +430,11 @@ tm.define("shotgun.MainScene", {
         if (ENABLE_GAMECENTER) {
             var data = {
                 score: this.score,
-                leaderboardId: "board"
+                leaderboardId: "DefaultSetting"
             };
             gamecenter.submitScore(
                 function() {
-                    if (PHONEGAP_DEBUG) AdvanceAlert('スコア登録に成功しました');
+                    if (DEBUG_GAMECENTER) AdvanceAlert('スコア登録に成功しました');
                 },
                 function() {
                     AdvanceAlert('GAMECENTERへのスコア登録に失敗しました');

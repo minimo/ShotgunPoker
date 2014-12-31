@@ -146,7 +146,7 @@ tm.define("shotgun.TitleScene", {
                 }
                 var data = {
                     period: "today",
-                    leaderboardId: "board"
+                    leaderboardId: "DefaultSetting"
                 };
                 gamecenter.showLeaderboard(function() {}, function() {AdvanceAlert($trans("GAMECENTERのアクセスに失敗しました"));}, data);
 //                that.mask.tweener.clear().fadeIn(200).call(function(){appMain.pushScene(shotgun.CreditScene());});
