@@ -92,6 +92,7 @@ tm.define("shotgun.TitleScene", {
             .addEventListener("pushed", function() {
                 appMain.bonusLife = 0;
                 that.mask.tweener.clear().fadeIn(200).call(function(){appMain.replaceScene(shotgun.MainScene());});
+                appMain.playSE("button1");
             });
 
         //チュートリアル

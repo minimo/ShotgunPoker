@@ -30,6 +30,7 @@ var assets = {
     "hand":         "assets/se_hand.mp3",
     "nopair":       "assets/se_nopair.mp3",
     "extend":       "assets/ata_a17.mp3",
+    "button1":      "assets/botan_b19.mp3",
 
     //Font
     "KS-Kohichi":   "font/KS-Kohichi-FeltPen.ttf",
