@@ -59,7 +59,7 @@ tm.main(function() {
         for (var i = 0; i < 5; i++) {
             var c = tm.display.Sprite("card", CARD_W, CARD_H)
                 .addChildTo(this)
-                .setPosition(SC_W*0.55, SC_H*0.5+CARD_H*0.5)
+                .setPosition(SC_W*0.55, SC_H*0.47+CARD_H*0.5)
                 .setFrameIndex(card[i])
                 .setScale(1);
             c.rotation = -15+i*15;
@@ -68,8 +68,9 @@ tm.main(function() {
 
         //ショットガンシルエット
         var sg = tm.display.Sprite("shotgun", 500, 220)
-//                .addChildTo(this)
+                .addChildTo(this)
                 .setPosition(SC_W*0.5, SC_H*0.5)
+                .setScale(0.7);
         sg.scaleX *= -1;
         sg.rotation = -30;
 
