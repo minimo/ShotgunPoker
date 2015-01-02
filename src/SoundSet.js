@@ -165,7 +165,8 @@ tm.define("shotgun.SoundElement", {
 
     setVolume: function(vol) {
         if (!this.media) return this;
-        this.volume = vol || 1;
+        if (vol === undefined) vol = 1;
+        this.volume = vol;
         this.media.volume = this.volume*0.1;
         return this;
     },
@@ -289,7 +290,8 @@ tm.define("shotgun.SoundElement_LLA", {
     setVolume: function(vol) {
         if (!this.lla) return this;
         return this;
-        this.volume = vol || 1;
+        if (vol === undefined) vol = 1;
+        this.volume = vol;
         this.lla.unload(this.name);
         this.lla.preloadAudio(this.name, url, this.volume*0.1, 1,
             function(msg){
