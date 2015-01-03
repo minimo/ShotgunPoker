@@ -45,7 +45,7 @@ tm.define("shotgun.TitleScene", {
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.5)
             .renderRectangle({fillStyle: "rgba(0, 0, 0, 1.0)", strokeStyle: "rgba(0, 0, 0, 1.0)"});
-        this.mask.tweener.clear().fadeOut(200);
+        this.mask.tweener.clear().fadeOut(300);
         
         this.time = 0;
 
