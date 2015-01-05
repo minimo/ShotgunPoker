@@ -39,26 +39,12 @@ tm.define("shotgun.LoadingScene", {
                     originX: 0,
                     originY: 0,
                 },
-                piyoLayer: {
-                    type: "tm.display.CanvasElement",
-                },
-                label: {
-                    type: "tm.display.Label",
-                    text: "LOADING",
-                    x: param.width/2,
-                    y: param.height/2-20,
-                    align: "center",
-                    baseline: "middle",
-                    fontSize: 46,
-                    shadowBlur: 4,
-                    shadowColor: "hsl(190, 100%, 50%)",
-                },
                 bar: {
                     type: "tm.ui.Gauge",
                     init: [{
                         width: SC_W*0.4,
                         height: 20,
-                        color: "hsl(200, 100%, 80%)",
+                        color: "red",
                         bgColor: "rgba(20, 50, 20, 1)",
                         borderColor: "transparent",
                         borderWidth: 0,
@@ -73,12 +59,46 @@ tm.define("shotgun.LoadingScene", {
         var bg = this.stage.bg;
         bg.canvas.clearColor(param.bgColor);
 
-        // label
-        var label = this.stage.label;
-        label.tweener
-            .to({alpha:1}, 1000)
-            .to({alpha:0.5}, 1000)
-            .setLoop(true)
+        var text = "LOADING";
+        var text_space = [0,31,31,30,20,20,30];
+                        //L O  A  D  I  N  G
+        var spc = 0;
+        for (var i = 0; i < text.length; i++) {
+            spc += text_space[i];
+            var x = param.width/2-84+spc;
+            var y = param.height/2-20;
+
+            var base = tm.app.Object2D()
+                .addChildTo(this.stage)
+                .setPosition(x, y);
+            base.tweener
+                .wait(500+150*i)
+                .moveBy(0, -30, 300, "easeOutSine")
+                .moveBy(0, 30, 600, "easeOutBounce")
+                .wait(1000)
+                .moveBy(0, -30, 300, "easeOutSine")
+                .moveBy(0, 30, 600, "easeOutBounce")
+                .wait(1000)
+                .moveBy(0, -30, 300, "easeOutSine")
+                .moveBy(0, 30, 600, "easeOutBounce")
+                .wait(1000)
+                .moveBy(0, -30, 300, "easeOutSine")
+                .moveBy(0, 30, 600, "easeOutBounce")
+                .wait(1000)
+                .moveBy(0, -30, 300, "easeOutSine")
+                .moveBy(0, 30, 600, "easeOutBounce")
+
+            var chr = tm.display.Label(text.charAt(i), 46)
+                .addChildTo(base)
+                .setAlign("center")
+                .setBaseline("middle")
+                .setShadowBlur(4)
+                .setShadowColor("hsl(190, 100%, 50%)");
+            chr.tweener
+                .to({alpha:1}, 1000)
+                .to({alpha:0.5}, 1000)
+                .setLoop(true)
+        }
 
         // bar
         var bar = this.stage.bar;

@@ -448,7 +448,7 @@ tm.define("shotgun.MainScene", {
             .setPosition(SC_W*0.5, SC_H*0.5-SC_H);
         lb.tweener
             .wait(500)
-            .move(SC_W*0.5, SC_H*0.5, 4000,"easeOutBounce")
+            .move(SC_W*0.5, SC_H*0.5, 4000, "easeOutBounce")
             .wait(2000)
             .call(function() {
                 this.remove();
