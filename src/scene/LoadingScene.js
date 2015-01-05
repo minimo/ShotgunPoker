@@ -95,8 +95,8 @@ tm.define("shotgun.LoadingScene", {
                 .setShadowBlur(4)
                 .setShadowColor("hsl(190, 100%, 50%)");
             chr.tweener
-                .to({alpha:1}, 1000)
-                .to({alpha:0.5}, 1000)
+                .to({alpha:0.3}, 1000, "easeInOutSine")
+                .to({alpha:1}, 1000, "easeInOutSine")
                 .setLoop(true)
         }
 
