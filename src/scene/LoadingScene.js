@@ -56,15 +56,15 @@ tm.define("shotgun.LoadingScene", {
                 bar: {
                     type: "tm.ui.Gauge",
                     init: [{
-                        width: param.width,
-                        height: 10,
+                        width: SC_W*0.4,
+                        height: 20,
                         color: "hsl(200, 100%, 80%)",
-                        bgColor: "transparent",
+                        bgColor: "rgba(20, 50, 20, 1)",
                         borderColor: "transparent",
                         borderWidth: 0,
                     }],
-                    x: 0,
-                    y: 0,
+                    x: SC_W*0.3,
+                    y: SC_H*0.5+20,
                 },
             }
         });
