@@ -80,7 +80,11 @@ var onGamecenterSuccess = function() {
 }
 
 var onGamecenterFailure = function(result) {
-    if (DEBUG_GAMECENTER) AdvanceAlert('GAMECENTERに接続できませんでした。\n'+result);
+    if (DEBUG_GAMECENTER) {
+        AdvanceAlert('GAMECENTERに接続できませんでした。\n'+result);
+    } else {
+        shotgun.AlertDialog("GAMECENTERに接続できませんでした。");
+    }
     ENABLE_GAMECENTER = false;
 }
 

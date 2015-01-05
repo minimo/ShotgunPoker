@@ -141,23 +141,27 @@ tm.define("shotgun.TitleScene", {
             .setPosition(SC_W*0.5, SC_H*0.80)
             .addEventListener("pushed", function() {
                 if (!ENABLE_PHONEGAP) return;
+
+                //GAMECENTERに接続してない場合は再接続
                 if (!ENABLE_GAMECENTER) {
                     gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
-//                    AdvanceAlert('GAMECENTERの準備が出来ていません');
+
+                    //再接続失敗
+                    if (!ENABLE_GAMECENTER) return;
                 }
+
                 var data = {
                     period: "today",
                     leaderboardId: "DefaultSetting"
                 };
-                gamecenter.showLeaderboard(function() {}, function() {AdvanceAlert($trans("GAMECENTERのアクセスに失敗しました"));}, data);
-//                that.mask.tweener.clear().fadeIn(200).call(function(){appMain.pushScene(shotgun.CreditScene());});
+                gamecenter.showLeaderboard(onGamecenterSuccess, onGamecenterFailure, data);
             });
 
             //バージョン表示
             tm.display.OutlineLabel("Version "+appMain.version, 30)
                 .addChildTo(this.titleLayer)
                 .setPosition(SC_W*0.5, SC_H*0.9)
-                .setParam({fontFamily:"CasinoRegular", align: "center", baseline:"middle", outlineWidth:3 });
+                .setParam({fontFamily: "CasinoRegular", align: "center", baseline: "middle", outlineWidth: 3 });
     },
 
     addButton: function(page, finish) {
