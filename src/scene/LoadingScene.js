@@ -39,6 +39,18 @@ tm.define("shotgun.LoadingScene", {
                     originX: 0,
                     originY: 0,
                 },
+                label: {
+                    type: "tm.display.Label",
+                    text: "Asset read error!!",
+                    x: param.width/2,
+                    y: param.height/2-20,
+                    align: "center",
+                    baseline: "middle",
+                    fontSize: 46,
+                    shadowBlur: 4,
+                    shadowColor: "hsl(190, 100%, 50%)",
+                    alpha: 0,
+                },
                 bar: {
                     type: "tm.ui.Gauge",
                     init: [{
@@ -97,8 +109,19 @@ tm.define("shotgun.LoadingScene", {
             chr.tweener
                 .to({alpha:0.3}, 1000, "easeInOutSine")
                 .to({alpha:1}, 1000, "easeInOutSine")
-                .setLoop(true)
+                .to({alpha:0.3}, 1000, "easeInOutSine")
+                .to({alpha:1}, 1000, "easeInOutSine")
+                .to({alpha:0.3}, 1000, "easeInOutSine")
+                .to({alpha:1}, 1000, "easeInOutSine")
+                .to({alpha:0.3}, 1000, "easeInOutSine")
+                .to({alpha:1}, 1000, "easeInOutSine")
+                .to({alpha:0.3}, 1000, "easeInOutSine")
+                .to({alpha:1}, 1000, "easeInOutSine")
+                .to({alpha:0.0}, 1000, "easeInOutSine");
+//                .setLoop(true);
         }
+
+        this.stage.label.tweener.wait(11000).fadeIn(10);
 
         // bar
         var bar = this.stage.bar;
