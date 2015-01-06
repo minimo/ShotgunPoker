@@ -24,7 +24,7 @@ tm.define("shotgun.TitleScene", {
         this.bg = tm.display.Shape(SC_W, SC_H)
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.5)
-            .renderRectangle({fillStyle: this.bgColor, strokeStyle: this.bgColor});
+            .renderRectangle({fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor});
 
         //タイトルとチュートリアルを分けてレイヤーを作成
         this.titleLayer = tm.app.Object2D().addChildTo(this);
@@ -35,7 +35,7 @@ tm.define("shotgun.TitleScene", {
         this.bg2 = tm.display.Shape(SC_W, SC_H)
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*1.5, SC_H*0.5)
-            .renderRectangle({fillStyle: this.bgColor, strokeStyle: this.bgColor});
+            .renderRectangle({fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor});
 
         //各画面セットアップ
         this.setupTitle();
@@ -136,7 +136,7 @@ tm.define("shotgun.TitleScene", {
             });
 
         //GAMECENTER
-        shotgun.Button(width, height, "RANKING")
+        shotgun.Button(width, height, "Ga")
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.80)
             .addEventListener("pushed", function() {

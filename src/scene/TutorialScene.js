@@ -58,7 +58,7 @@ tm.define("shotgun.TutorialScene", {
         this.bg = tm.display.Shape(SC_W, SC_H)
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.5)
-            .renderRectangle({fillStyle: this.bgColor, strokeStyle: this.bgColor});
+            .renderRectangle({fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor});
 
         //カードデッキ
         this.deck = shotgun.CardDeck().addChildTo(this);
