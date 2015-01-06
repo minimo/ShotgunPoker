@@ -146,32 +146,57 @@ tm.define("shotgun.ConfirmDialog", {
     },
 });
 
+var DEFALT_ALERTPARAM = {
+    height: SC_H*0.3,
+    text1: "text",
+    text2: null,
+    text3: null,
+    fontSize: 32,
+    button: "OK",
+}
+
 tm.define("shotgun.AlertDialog", {
     superClass: tm.app.Scene,
 
     //ラベル用フォントパラメータ
     labelParam: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:2 },
 
-    init: function(caption, button) {
+    init: function(param) {
         this.superInit();
-        button = button || "OK";
+        param = {}.$extend(DEFALT_ALERTPARAM, param);
 
         //バックグラウンド
-        tm.display.RoundRectangleShape(SC_W-20, SC_H*0.3, {fillStyle: appMain.bgColor, lineWidth: 4})
+        tm.display.RoundRectangleShape(SC_W-20, param.height, {fillStyle: appMain.bgColor, lineWidth: 4})
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.5);
 
         var that = this;
         var width = 250, height = 70;
-        var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
         //キャプション
-        var lb = tm.display.OutlineLabel(caption, 50).addChildTo(this);
+        var pos = SC_H*0.47;
+        if (param.text2) pos -= SC_H*0.05;
+        if (param.text3) pos -= SC_H*0.05;
+
+        var lb = tm.display.OutlineLabel(param.text1, param.fontSize).addChildTo(this);
         lb.setParam(this.labelParam);
-        lb.setPosition(SC_W*0.5, SC_H*0.45);
+        lb.setPosition(SC_W*0.5, pos);
+
+        if (param.text2) {
+            pos += SC_H*0.05;
+            var lb = tm.display.OutlineLabel(param.text2, param.fontSize).addChildTo(this);
+            lb.setParam(this.labelParam);
+            lb.setPosition(SC_W*0.5, pos);
+        }
+        if (param.text3) {
+            pos += SC_H*0.05;
+            var lb = tm.display.OutlineLabel(param.text3, param.fontSize).addChildTo(this);
+            lb.setParam(this.labelParam);
+            lb.setPosition(SC_W*0.5, pos);
+        }
 
         //ボタン
-        shotgun.Button(width, height, button)
+        shotgun.Button(width, height, param.button)
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.55)
             .addEventListener("pushed", function() {
