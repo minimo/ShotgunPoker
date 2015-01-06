@@ -75,15 +75,22 @@ var onOffline = function() {
 
 // GAMECENTER CallBack
 var onGamecenterSuccess = function() {
-    if (DEBUG_GAMECENTER) AdvanceAlertt('GAMECENTER connect success');
+    if (DEBUG_GAMECENTER) AdvanceAlertt('GameCenter connect success');
     ENABLE_GAMECENTER = true;
 }
 
 var onGamecenterFailure = function(result) {
     if (DEBUG_GAMECENTER) {
-        AdvanceAlert('GAMECENTERに接続できませんでした。\n'+result);
+        AdvanceAlert('GameCenterに接続できませんでした。\n'+result);
     } else {
-        shotgun.AlertDialog("GAMECENTERに接続できませんでした。");
+/*
+        appMain.pushScene(shotgun.AlertDialog({
+            height: SC_H*0.2,
+            text1: "GameCenterに接続できませんでした。",
+            fontSize: 32,
+            button: "OK"
+        }));
+*/
     }
     ENABLE_GAMECENTER = false;
 }
@@ -143,3 +150,29 @@ var ad_units = {
 // select the right Ad Id according to platform
 var admobid = ( /(android)/i.test(navigator.userAgent) ) ? ad_units.android : ad_units.ios;
 
+var showLeadersBoard = function(id) {
+    if (!ENABLE_PHONEGAP) {
+        appMain.pushScene(shotgun.AlertDialog({
+            height: SC_H*0.2,
+            text1: "GameCenterに接続できませんでした。",
+            fontSize: 32,
+            button: "OK"
+        }));
+        return false;
+    }
+
+    //GAMECENTERに接続してない場合は再接続
+    if (!ENABLE_GAMECENTER) {
+        gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
+
+        //再接続失敗
+        if (!ENABLE_GAMECENTER) return false;
+    }
+
+    var data = {
+        period: "today",
+        leaderboardId: id,
+    };
+    gamecenter.showLeaderboard(onGamecenterSuccess, onGamecenterFailure, data);
+    return true;
+}

@@ -136,25 +136,11 @@ tm.define("shotgun.TitleScene", {
             });
 
         //GAMECENTER
-        shotgun.Button(width, height, "GAME CENTER")
+        shotgun.Button(width, height, "RANKING")
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.80)
             .addEventListener("pushed", function() {
-                if (!ENABLE_PHONEGAP) return;
-
-                //GAMECENTERに接続してない場合は再接続
-                if (!ENABLE_GAMECENTER) {
-                    gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
-
-                    //再接続失敗
-                    if (!ENABLE_GAMECENTER) return;
-                }
-
-                var data = {
-                    period: "today",
-                    leaderboardId: "DefaultSetting"
-                };
-                gamecenter.showLeaderboard(onGamecenterSuccess, onGamecenterFailure, data);
+                showLeadersBoard();
             });
 
             //バージョン表示
