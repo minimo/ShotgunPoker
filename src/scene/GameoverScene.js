@@ -40,18 +40,18 @@ tm.define("shotgun.GameoverScene", {
         this.top = tm.display.OutlineLabel("RESULT", 40)
             .addChildTo(this)
             .setParam(this.headerParam)
-            .setPosition(SC_W*0.5, SC_H*0.1);
+            .setPosition(SC_W*0.5, SC_H*0.05);
 
         //スコア表示
         this.score = tm.display.OutlineLabel("SCORE: "+appMain.lastScore, 50)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.5, SC_H*0.15);
+            .setPosition(SC_W*0.5, SC_H*0.10);
 
-        this.score = tm.display.OutlineLabel("YOUR BEST SCORE: "+appMain.highScore, 30)
+        this.score = tm.display.OutlineLabel("YOUR BEST SCORE: "+appMain.highScore, 35)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.5, SC_H*0.2);
+            .setPosition(SC_W*0.5, SC_H*0.15);
 
         //役一覧
         for (var i = 0; i < 12; i++) {
@@ -91,6 +91,14 @@ tm.define("shotgun.GameoverScene", {
                     });
                 }
                 appMain.bonusLife = 1;
+            });
+
+        //GAMECENTER
+        shotgun.Button(width, height, "RANKING")
+            .addChildTo(this)
+            .setPosition(SC_W*0.75, SC_H*0.78)
+            .addEventListener("pushed", function() {
+                showLeadersBoard();
             });
 
         //目隠し
