@@ -6,6 +6,11 @@
  */
 
 var assets = {
+    //BGM
+    "titleBGM":     "assets/game_maoudamashii_5_casino02.mp3",
+    "mainBGM":      "assets/game_maoudamashii_5_casino01.mp3",
+    "tutorialBGM":  "assets/game_maoudamashii_5_casino04.mp3",
+
     //images
     "card":         "assets/trump.png",
     "tmliblogo":    "assets/tmlib_logo.png",
@@ -18,10 +23,10 @@ var assets = {
     "arrow":        "assets/arrow.png",
     "finger":       "assets/finger.png",
 
-    //BGM
-    "titleBGM":     "assets/game_maoudamashii_5_casino02.mp3",
-    "mainBGM":      "assets/game_maoudamashii_5_casino01.mp3",
-    "tutorialBGM":  "assets/game_maoudamashii_5_casino04.mp3",
+    //Font
+    "KS-Kohichi":   "font/KS-Kohichi-FeltPen.ttf",
+    "azuki":        "font/azuki.ttf",
+    "CasinoRegular":"font/CasinoRegular.ttf",
 
     //SE
     "countdown":    "assets/se_countdown.mp3",
@@ -30,10 +35,5 @@ var assets = {
     "hand":         "assets/se_hand.mp3",
     "nopair":       "assets/se_nopair.mp3",
     "extend":       "assets/ata_a17.mp3",
-    "button1":      "assets/botan_b19.mp3",
-
-    //Font
-    "KS-Kohichi":   "font/KS-Kohichi-FeltPen.ttf",
-    "azuki":        "font/azuki.ttf",
-    "CasinoRegular":"font/CasinoRegular.ttf",
+//    "button1":      "assets/botan_b19.mp3",
 }
