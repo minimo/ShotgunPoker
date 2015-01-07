@@ -26,6 +26,7 @@ tm.define("shotgun.MainScene", {
     shuffled: false,
 
     //ゲーム内情報
+    mode: 0,
     start: false,   //ゲームスタートフラグ
     score: 0,       //スコア
     life: 2,        //ライフ
@@ -57,9 +58,13 @@ tm.define("shotgun.MainScene", {
     labelParamHand:  {fontFamily: "KS-Kohichi",align: "left", baseline: "middle", outlineWidth: 3},
     labelParamBefore:{fontFamily: "azuki",align: "left", baseline: "top", outlineWidth: 3},
 
-    init: function() {
+    init: function(mode) {
         this.superInit();
         this.background = "rgba(0, 0, 0, 0.0)";
+
+        //ゲームモード
+        if (mode === undefined) mode = GAMEMODE_NORMAL;
+        this.mode = mode;
 
         //ボーナスライフ加算
         this.life += appMain.bonusLife;
