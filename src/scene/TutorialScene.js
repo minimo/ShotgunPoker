@@ -55,10 +55,9 @@ tm.define("shotgun.TutorialScene", {
         this.background = "rgba(0, 0, 0, 0.0)";
 
         //バックグラウンド
-        this.bg = tm.display.Shape(SC_W, SC_H)
+        this.bg = tm.display.RectangleShape(SC_W, SC_H, {fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor})
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.5)
-            .renderRectangle({fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor});
 
         //カードデッキ
         this.deck = shotgun.CardDeck().addChildTo(this);
@@ -173,10 +172,9 @@ tm.define("shotgun.TutorialScene", {
             c.fillRect(0, 500-limit, this.width, this.height-(500-limit));
             c.restore();
         }
-        tm.display.Shape(30, 500)
+        tm.display.RectangleShape(30, 500, {fillStyle: "rgba(0,0,0,0)", strokeStyle: "Black", lineWidth: 3})
             .addChildTo(this)
             .setPosition(20, SC_H*0.65)
-            .renderRectangle({fillStyle: "rgba(0,0,0,0)", strokeStyle: "Black", lineWidth: 3})
             .setOrigin(0.5, 1.0);
 
         //カウントダウン表示
@@ -266,10 +264,9 @@ tm.define("shotgun.TutorialScene", {
         var pt = tm.app.Object2D().addChildTo(this);
         pt.tweener.wait(time).call(function(){this.remove();}.bind(pt));
 
-        pt.bg = tm.display.Shape(SC_W, 80)
+        pt.bg = tm.display.RectangleShape(SC_W, 80, {fillStyle: this.bgColor, strokeStyle: this.bgColor})
             .addChildTo(pt)
-            .setPosition(SC_W*0.5, y)
-            .renderRectangle({fillStyle: this.bgColor, strokeStyle: this.bgColor});
+            .setPosition(SC_W*0.5, y);
 
         pt.m1 = tm.display.OutlineLabel(msg, size)
             .addChildTo(pt)

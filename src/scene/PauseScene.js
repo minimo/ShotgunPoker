@@ -24,10 +24,9 @@ tm.define("shotgun.PauseScene", {
         this.dialog = shotgun.ConfirmDialog("EXIT GAME?", ["YES", "NO"]);
 
         //バックグラウンド
-        this.bg = tm.display.Shape(SC_W, SC_H)
+        this.bg = tm.display.RectangleShape(SC_W, SC_H, {fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor})
             .addChildTo(this)
-            .setPosition(SC_W*0.5, SC_H*0.5)
-            .renderRectangle({fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor});
+            .setPosition(SC_W*0.5, SC_H*0.5);
 
         var lb = tm.display.OutlineLabel("PAUSE", 60)
             .addChildTo(this)

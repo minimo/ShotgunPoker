@@ -21,10 +21,9 @@ tm.define("shotgun.CreditScene", {
         var sizeURL = 25;
 
         //バックグラウンド
-        this.bg = tm.display.Shape(SC_W, SC_H)
+        this.bg = tm.display.RectangleShape(SC_W, SC_H, {fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor})
             .addChildTo(this)
-            .setPosition(SC_W*0.5, SC_H*0.5)
-            .renderRectangle({fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor});
+            .setPosition(SC_W*0.5, SC_H*0.5);
         
         this.titleLayer = tm.app.Object2D().addChildTo(this);
         this.tutorialLayer = tm.app.Object2D().addChildTo(this);
@@ -77,10 +76,9 @@ tm.define("shotgun.CreditScene", {
             .setScale(0.5, 0.5);
 
         //目隠し
-        this.mask = tm.display.Shape(SC_W, SC_H)
+        this.mask = tm.display.RectangleShape(SC_W, SC_H, {fillStyle: "rgba(0, 0, 0, 1.0)", strokeStyle: "rgba(0, 0, 0, 1.0)"})
             .addChildTo(this)
-            .setPosition(SC_W*0.5, SC_H*0.5)
-            .renderRectangle({fillStyle: "rgba(0, 0, 0, 1.0)", strokeStyle: "rgba(0, 0, 0, 1.0)"});
+            .setPosition(SC_W*0.5, SC_H*0.5);
         this.mask.tweener.clear().fadeOut(200);
         
         this.time = 0;
