@@ -98,7 +98,9 @@ tm.define("shotgun.GameoverScene", {
             .addChildTo(this)
             .setPosition(SC_W*0.75, SC_H*0.78)
             .addEventListener("pushed", function() {
-                showLeadersBoard();
+                var lb = "DefaultSetting";
+                if (appMain.returnJoker) lb = "ReturnJoker";
+                showLeadersBoard(lb);
             });
 
         //目隠し

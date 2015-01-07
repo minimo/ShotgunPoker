@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  TitleScene.js
  *  2014/06/19
  *  @auther minimo  
@@ -136,7 +136,7 @@ tm.define("shotgun.TitleScene", {
             });
 
         //GAMECENTER
-        shotgun.Button(width, height, "Ga")
+        shotgun.Button(width, height, "RANKING")
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.80)
             .addEventListener("pushed", function() {

@@ -151,6 +151,8 @@ var ad_units = {
 var admobid = ( /(android)/i.test(navigator.userAgent) ) ? ad_units.android : ad_units.ios;
 
 var showLeadersBoard = function(id) {
+    id = id || "";
+
     if (!ENABLE_PHONEGAP) {
         appMain.pushScene(shotgun.AlertDialog({
             height: SC_H*0.2,
@@ -170,7 +172,7 @@ var showLeadersBoard = function(id) {
     }
 
     var data = {
-        period: "today",
+//        period: "today",
         leaderboardId: id,
     };
     gamecenter.showLeaderboard(onGamecenterSuccess, onGamecenterFailure, data);
