@@ -168,7 +168,15 @@ var showLeadersBoard = function(id) {
         gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
 
         //再接続失敗
-        if (!ENABLE_GAMECENTER) return false;
+        if (!ENABLE_GAMECENTER) {
+            appMain.pushScene(shotgun.AlertDialog({
+                height: SC_H*0.2,
+                text1: "GameCenterに接続できませんでした。",
+                fontSize: 32,
+                button: "OK"
+            }));
+            return false;
+        }
     }
 
     var data = {
