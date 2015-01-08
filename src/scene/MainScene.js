@@ -73,7 +73,8 @@ tm.define("shotgun.MainScene", {
         //ハードモードはライフ無し
         if (this.mode == GAMEMODE_HARD) {
             this.life = 0;
-            this.level = 5;
+            this.level = 3;
+            this.levelReset = 1;
         }
 
         //バックグラウンド
@@ -396,14 +397,12 @@ tm.define("shotgun.MainScene", {
             this.count = 10;
             this.time = 0;
 
-            //レベル処理（通常モードのみ）
-            if (this.mode == GAMEMODE_NORMAL) {
-                this.level = Math.sqrt(this.absTime*(0.0002*(this.levelReset+1)))+1;
-                if (this.level > 2 && this.levelReset < 1) {
-                    this.absTime = 0;
-                    this.level = 1;
-                    this.levelReset++;
-                }
+            //レベル処理
+            this.level = Math.sqrt(this.absTime*(0.0002*(this.levelReset+1)))+1;
+            if (this.level > 2 && this.levelReset < 1) {
+                this.absTime = 0;
+                this.level = 1;
+                this.levelReset++;
             }
         }
 

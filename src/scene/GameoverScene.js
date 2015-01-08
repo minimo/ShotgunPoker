@@ -65,8 +65,9 @@ tm.define("shotgun.GameoverScene", {
             .addChildTo(this)
             .setPosition(SC_W*0.25, SC_H*0.85)
             .addEventListener("pushed", function() {
+                var mode = that.parentScene.mode;
                 that.parentScene = null;
-                that.mask.tweener.clear().fadeIn(300).call(function(){appMain.replaceScene(shotgun.MainScene());});
+                that.mask.tweener.clear().fadeIn(300).call(function(){appMain.replaceScene(shotgun.MainScene(mode));});
             });
 
         //戻るボタン
@@ -89,7 +90,7 @@ tm.define("shotgun.GameoverScene", {
                         autoShow:true
                     });
                 }
-                appMain.bonusLife = 1;
+                if (parentScene.mode != GAMEMODE_HARD) appMain.bonusLife = 1;
             });
 
         //GAMECENTER
@@ -97,8 +98,9 @@ tm.define("shotgun.GameoverScene", {
             .addChildTo(this)
             .setPosition(SC_W*0.75, SC_H*0.78)
             .addEventListener("pushed", function() {
-                var lb = "DefaultSetting";
-                if (appMain.returnJoker) lb = "ReturnJoker";
+                var lb = "Normal";
+                if (parentScene.mode == GAMEMODE_HARD) lb = "Hard";
+                if (appMain.returnJoker) lb += "_ReturnJoker";
                 showLeadersBoard(lb);
             });
 
