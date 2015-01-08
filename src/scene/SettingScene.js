@@ -76,11 +76,11 @@ tm.define("shotgun.SettingScene", {
         tm.display.OutlineLabel("RETURN JOKER", 50)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.3, SC_H*0.7);
+            .setPosition(SC_W*0.3, SC_H*0.6);
         var width = 150, height = 70;
         this.retJoker = shotgun.ToggleButton(width, height, "ON", "OFF")
             .addChildTo(this)
-            .setPosition(SC_W*0.8, SC_H*0.7)
+            .setPosition(SC_W*0.8, SC_H*0.6)
             .addEventListener("pushed", function() {
                 appMain.returnJoker = that.retJoker.toggleON;
             });
