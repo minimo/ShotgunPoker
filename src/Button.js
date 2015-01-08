@@ -7,7 +7,7 @@
  */
 
 tm.define("shotgun.Button", {
-    superClass: tm.app.Object2D,
+    superClass: tm.display.CanvasElement,
 
     //描画スタイル設定
     DEFAULT_STYLE: {
@@ -126,10 +126,21 @@ tm.define("shotgun.Button", {
             .addChildTo(this.button)
             .setParam(this.labelParam);
     },
+    setVisible: function(b) {
+        this.shadow.visible = b;
+        this.button.visible = b;
+        this.label.visible = b;
+        this.lock = !b;
+        return this;
+    },
+    setLock: function(b) {
+        this.lock = b;
+        return this;
+    },
 });
 
 tm.define("shotgun.RoundButton", {
-    superClass: tm.app.Object2D,
+    superClass: tm.display.CanvasElement,
 
     //描画スタイル設定
     DEFAULT_STYLE: {
@@ -250,6 +261,10 @@ tm.define("shotgun.RoundButton", {
         this.label = tm.display.OutlineLabel(this.text, style.fontSize)
             .addChildTo(this.button)
             .setParam(this.labelParam);
+    },
+    setLock: function(b) {
+        this.lock = b;
+        return this;
     },
 });
 
@@ -400,6 +415,10 @@ tm.define("shotgun.ToggleButton", {
         this.label = tm.display.OutlineLabel(this.text, style.fontSize)
             .addChildTo(this.button)
             .setParam(this.labelParam);
+    },
+    setLock: function(b) {
+        this.lock = b;
+        return this;
     },
 });
 
