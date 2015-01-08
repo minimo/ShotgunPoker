@@ -57,6 +57,7 @@ tm.define("shotgun.MainScene", {
     labelParamPoker: {fontFamily: "KS-Kohichi",align: "center", baseline: "middle", outlineWidth: 3},
     labelParamHand:  {fontFamily: "KS-Kohichi",align: "left", baseline: "middle", outlineWidth: 3},
     labelParamBefore:{fontFamily: "azuki",align: "left", baseline: "top", outlineWidth: 3},
+    labelParamModeName: {fontFamily: "azuki'", align: "right", baseline: "middle",outlineWidth: 3},
 
     init: function(mode) {
         this.superInit();
@@ -190,10 +191,28 @@ tm.define("shotgun.MainScene", {
         //ポーズボタン
         this.pause = shotgun.Button(200, 60, "PAUSE")
             .addChildTo(this)
-            .setPosition(SC_W*0.84, 80)
+            .setPosition(SC_W*0.84, 90)
             .addEventListener("pushed", function() {
                 appMain.pushScene(shotgun.PauseScene(this));
             }.bind(this));
+
+        //モード名称表示
+        var modeName;
+        switch(mode) {
+            case GAMEMODE_NORMAL:
+                modeName = "NORMAL";
+                break;
+            case GAMEMODE_HARD:
+                modeName = "HARD";
+                break;
+            case GAMEMODE_PRACTICE:
+                modeName = "PRACTICE";
+                break;
+        }
+        this.beforeLabel = tm.display.OutlineLabel(modeName, 50)
+            .addChildTo(this)
+            .setParam(this.labelParamModeName)
+            .setPosition(SC_W, 32);
 
         //カードデッキ
         this.deck = shotgun.CardDeck().addChildTo(this.mainLayer);
