@@ -209,7 +209,7 @@ tm.define("shotgun.MainScene", {
                 modeName = "PRACTICE";
                 break;
         }
-        this.beforeLabel = tm.display.OutlineLabel(modeName, 50)
+        this.beforeLabel = tm.display.OutlineLabel(modeName, 40)
             .addChildTo(this)
             .setParam(this.labelParamModeName)
             .setPosition(SC_W, 32);
