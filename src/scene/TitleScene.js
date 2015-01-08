@@ -83,16 +83,26 @@ tm.define("shotgun.TitleScene", {
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
         //プレイスタート
-        shotgun.Button(width, height, "START")
+        this.start = shotgun.Button(width, height, "START")
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.40)
             .addEventListener("pushed", function() {
-                appMain.bonusLife = 0;
-                that.mask.tweener.clear().fadeIn(200).call(function(){appMain.replaceScene(shotgun.MainScene());});
+//                appMain.bonusLife = 0;
+//                that.mask.tweener.clear().fadeIn(200).call(function(){appMain.replaceScene(shotgun.MainScene());});
+                that.start.tweener.clear().moveBy(0, SC_H, 500, "easeInQuint");
+                that.tutorial.tweener.clear().moveBy(0, SC_H, 500, "easeInQuint");
+                that.option.tweener.clear().moveBy(0, SC_H, 500, "easeInQuint");
+                that.credit.tweener.clear().moveBy(0, SC_H, 500, "easeInQuint");
+                that.ranking.tweener.clear().moveBy(0, SC_H, 500, "easeInQuint");
+
+                that.normal.tweener.clear().wait(300).fadeIn(300).call(function(){that.normal.setLock(false);});
+                that.hard.tweener.clear().wait(300).fadeIn(300).call(function(){that.hard.setLock(false);});
+                that.practice.tweener.clear().wait(300).fadeIn(300).call(function(){that.practice.setLock(false);});
+                that.ret.tweener.clear().wait(300).fadeIn(300).call(function(){that.ret.setLock(false);});
             });
 
         //チュートリアル
-        shotgun.Button(width, height, "TUTORIAL")
+        this.tutorial = shotgun.Button(width, height, "TUTORIAL")
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.50)
             .addEventListener("pushed", function() {
@@ -108,7 +118,7 @@ tm.define("shotgun.TitleScene", {
             });
 
         //設定
-        shotgun.Button(width, height, "OPTION")
+        this.option = shotgun.Button(width, height, "OPTION")
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.60)
             .addEventListener("pushed", function() {
@@ -120,7 +130,7 @@ tm.define("shotgun.TitleScene", {
             });
 
         //クレジット
-        shotgun.Button(width, height, "CREDIT")
+        this.credit = shotgun.Button(width, height, "CREDIT")
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.70)
             .addEventListener("pushed", function() {
@@ -131,19 +141,71 @@ tm.define("shotgun.TitleScene", {
                     });
             });
 
-        //GAMECENTER
-        shotgun.Button(width, height, "RANKING")
+        //RANKING
+        this.ranking = shotgun.Button(width, height, "RANKING")
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.80)
             .addEventListener("pushed", function() {
                 showLeadersBoard();
             });
 
-            //バージョン表示
-            tm.display.OutlineLabel("Version "+appMain.version, 30)
-                .addChildTo(this.titleLayer)
-                .setPosition(SC_W*0.5, SC_H*0.9)
-                .setParam({fontFamily: "CasinoRegular", align: "center", baseline: "middle", outlineWidth: 3 });
+        //ノーマルモード
+        this.normal = shotgun.Button(width, height, "NORMAL")
+            .addChildTo(this.titleLayer)
+            .setPosition(SC_W*0.5, SC_H*0.40)
+            .setAlpha(0)
+            .setLock(true)
+            .addEventListener("pushed", function() {
+                appMain.bonusLife = 0;
+                that.mask.tweener.clear().fadeIn(200).call(function(){appMain.replaceScene(shotgun.MainScene());});
+            });
+
+        //ハードモード
+        this.hard = shotgun.Button(width, height, "HARD")
+            .addChildTo(this.titleLayer)
+            .setPosition(SC_W*0.5, SC_H*0.50)
+            .setAlpha(0)
+            .setLock(true)
+            .addEventListener("pushed", function() {
+                appMain.bonusLife = 0;
+                that.mask.tweener.clear().fadeIn(200).call(function(){appMain.replaceScene(shotgun.MainScene(GAMEMODE_HARD));});
+            });
+
+        //プラクティスモード
+        this.practice = shotgun.Button(width, height, "PRACTICE")
+            .addChildTo(this.titleLayer)
+            .setPosition(SC_W*0.5, SC_H*0.60)
+            .setAlpha(0)
+            .setLock(true)
+            .addEventListener("pushed", function() {
+                appMain.bonusLife = 0;
+                that.mask.tweener.clear().fadeIn(200).call(function(){appMain.replaceScene(shotgun.MainScene(GAMEMODE_PRACTICE));});
+            });
+
+        //戻る
+        this.ret = shotgun.Button(width, height, "RETURN")
+            .addChildTo(this.titleLayer)
+            .setPosition(SC_W*0.5, SC_H*0.70)
+            .setAlpha(0)
+            .setLock(true)
+            .addEventListener("pushed", function() {
+                that.start.tweener.clear().moveBy(0, -SC_H, 500, "easeOutQuint");
+                that.tutorial.tweener.clear().moveBy(0, -SC_H, 500, "easeOutQuint");
+                that.option.tweener.clear().moveBy(0, -SC_H, 500, "easeOutQuint");
+                that.credit.tweener.clear().moveBy(0, -SC_H, 500, "easeOutQuint");
+                that.ranking.tweener.clear().moveBy(0, -SC_H, 500, "easeOutQuint");
+
+                that.normal.tweener.clear().call(function(){that.normal.setLock(true);}).fadeOut(300);
+                that.hard.tweener.clear().call(function(){that.hard.setLock(true);}).fadeOut(300);
+                that.practice.tweener.clear().call(function(){that.practice.setLock(true);}).fadeOut(300);
+                that.ret.tweener.clear().call(function(){that.ret.setLock(true);}).fadeOut(300);
+            });
+
+        //バージョン表示
+        tm.display.OutlineLabel("Version "+appMain.version, 30)
+            .addChildTo(this.titleLayer)
+            .setPosition(SC_W*0.5, SC_H*0.9)
+            .setParam({fontFamily: "CasinoRegular", align: "center", baseline: "middle", outlineWidth: 3 });
     },
 
     addButton: function(page, finish) {
