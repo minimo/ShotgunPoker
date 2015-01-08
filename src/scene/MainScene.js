@@ -70,6 +70,12 @@ tm.define("shotgun.MainScene", {
         this.life += appMain.bonusLife;
         appMain.bonusLife = 0;
 
+        //ハードモードはライフ無し
+        if (this.mode == GAMEMODE_HARD) {
+            this.life = 0;
+            this.level = 5;
+        }
+
         //バックグラウンド
         this.bg = tm.display.RectangleShape(SC_W, SC_H, {fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor})
             .addChildTo(this)
@@ -318,7 +324,7 @@ tm.define("shotgun.MainScene", {
                 this.onePair = 0;
             }
             if (penalty > 0) {
-                this.life -= penalty;
+                if (this.mode != GAMEMODE_PRACTICE) this.life -= penalty;
                 appMain.playSE("nopair");
             } else {
                 appMain.playSE("hand");
@@ -366,7 +372,7 @@ tm.define("shotgun.MainScene", {
             //初回R.S.Fの場合はライフ＋１
             if (sc == ROYALSTRAIGHTFLASH && this.handCount[sc] == 1) oneUp = true;
 
-            if (oneUp) {
+            if (oneUp && this.mode != GAMEMODE_PRACTICE) {
                 this.life++;
                 if (this.life > this.lifeMax) {
                     this.life = this.lifeMax;
@@ -390,12 +396,14 @@ tm.define("shotgun.MainScene", {
             this.count = 10;
             this.time = 0;
 
-            //レベル処理
-            this.level = Math.sqrt(this.absTime*(0.0002*(this.levelReset+1)))+1;
-            if (this.level > 2 && this.levelReset < 1) {
-                this.absTime = 0;
-                this.level = 1;
-                this.levelReset++;
+            //レベル処理（通常モードのみ）
+            if (this.mode == GAMEMODE_NORMAL) {
+                this.level = Math.sqrt(this.absTime*(0.0002*(this.levelReset+1)))+1;
+                if (this.level > 2 && this.levelReset < 1) {
+                    this.absTime = 0;
+                    this.level = 1;
+                    this.levelReset++;
+                }
             }
         }
 

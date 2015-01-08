@@ -157,7 +157,7 @@ tm.define("shotgun.TitleScene", {
             .setLock(true)
             .addEventListener("pushed", function() {
                 appMain.bonusLife = 0;
-                that.mask.tweener.clear().fadeIn(200).call(function(){appMain.replaceScene(shotgun.MainScene());});
+                that.mask.tweener.clear().fadeIn(200).call(function(){appMain.replaceScene(shotgun.MainScene(GAMEMODE_NORMAL));});
             });
 
         //ハードモード
