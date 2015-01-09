@@ -74,8 +74,9 @@ tm.define("shotgun.MainScene", {
         //ハードモードはライフ無し
         if (this.mode == GAMEMODE_HARD) {
             this.life = 0;
-            this.level = 3;
+            this.level = 2.5;
             this.levelReset = 1;
+            this.absTime = ~~(30*60*3.5);
         }
 
         //バックグラウンド
@@ -115,30 +116,32 @@ tm.define("shotgun.MainScene", {
         }
 
         //ライフ表示
-        this.lifeLabel = tm.display.OutlineLabel("LIFE:", 50)
-            .addChildTo(this)
-            .setParam(this.labelParamBasic)
-            .setPosition(8, 96);
-        this.lifeLabel.beforeLife = this.life;
-        this.lifeLabel.lg = [];
-        for (var i = 0; i < this.lifeMax; i++ ) {
-            var c = this.lifeLabel.lg[i] = tm.display.Sprite("card", CARD_W, CARD_H)
-                .addChildTo(this.lifeLabel)
-                .setScale(0.3)
-                .setPosition(150+i*45, 0)
-                .setFrameIndex(13*3+i);
-            c.alpha = 0;
-            if (i < this.life) c.alpha = 1;
-        }
-        this.lifeLabel.update = function() {
-            if (this.beforeLife == that.life || this.beforeLife == 0) return;
-            if (that.lifeMax < that.life ) return;
-            if (that.life < this.beforeLife) {
-                this.lg[this.beforeLife-1].tweener.clear().scale(0.0, 500);
-            } else if (that.life > this.beforeLife) {
-                this.lg[that.life-1].tweener.clear().scale(1,1).fadeIn(1).scale(0.3, 1000, "easeOutBounce");
+        if (this.mode != GAMEMODE_HARD) {
+            this.lifeLabel = tm.display.OutlineLabel("LIFE:", 50)
+                .addChildTo(this)
+                .setParam(this.labelParamBasic)
+                .setPosition(8, 96);
+            this.lifeLabel.beforeLife = this.life;
+            this.lifeLabel.lg = [];
+            for (var i = 0; i < this.lifeMax; i++ ) {
+                var c = this.lifeLabel.lg[i] = tm.display.Sprite("card", CARD_W, CARD_H)
+                    .addChildTo(this.lifeLabel)
+                    .setScale(0.3)
+                    .setPosition(150+i*45, 0)
+                    .setFrameIndex(13*3+i);
+                c.alpha = 0;
+                if (i < this.life) c.alpha = 1;
             }
-            this.beforeLife = that.life;
+            this.lifeLabel.update = function() {
+                if (this.beforeLife == that.life || this.beforeLife == 0) return;
+                if (that.lifeMax < that.life ) return;
+                if (that.life < this.beforeLife) {
+                    this.lg[this.beforeLife-1].tweener.clear().scale(0.0, 500);
+                } else if (that.life > this.beforeLife) {
+                    this.lg[that.life-1].tweener.clear().scale(1,1).fadeIn(1).scale(0.3, 1000, "easeOutBounce");
+                }
+                this.beforeLife = that.life;
+            }
         }
 
         //タイムリミットゲージ
