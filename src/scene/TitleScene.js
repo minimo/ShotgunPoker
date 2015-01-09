@@ -50,6 +50,7 @@ tm.define("shotgun.TitleScene", {
     },
 
     onresume: function() {
+        this.buttonLock(false);
         this.mask.tweener.clear().fadeOut(200);
     },
 
@@ -89,6 +90,7 @@ tm.define("shotgun.TitleScene", {
             .addEventListener("pushed", function() {
 //                appMain.bonusLife = 0;
 //                that.mask.tweener.clear().fadeIn(200).call(function(){appMain.replaceScene(shotgun.MainScene());});
+                that.buttonLock(true);
                 that.start.tweener.clear().moveBy(0, SC_H, 500, "easeInQuint");
                 that.tutorial.tweener.clear().moveBy(0, SC_H, 500, "easeInQuint");
                 that.option.tweener.clear().moveBy(0, SC_H, 500, "easeInQuint");
@@ -106,6 +108,7 @@ tm.define("shotgun.TitleScene", {
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.50)
             .addEventListener("pushed", function() {
+                that.buttonLock(true);
                 that.titleLayer.tweener.clear()
                     .moveBy(-SC_W, 0, 500, "easeOutQuint")
                     .call(function(){
@@ -122,6 +125,7 @@ tm.define("shotgun.TitleScene", {
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.60)
             .addEventListener("pushed", function() {
+                that.buttonLock(true);
                 that.mask.tweener.clear()
                     .fadeIn(200)
                     .call(function(){
@@ -134,6 +138,7 @@ tm.define("shotgun.TitleScene", {
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.70)
             .addEventListener("pushed", function() {
+                that.buttonLock(true);
                 that.mask.tweener.clear()
                     .fadeIn(200)
                     .call(function(){
@@ -146,6 +151,7 @@ tm.define("shotgun.TitleScene", {
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.80)
             .addEventListener("pushed", function() {
+                that.buttonLock(true);
                 showLeadersBoard();
             });
 
@@ -189,6 +195,7 @@ tm.define("shotgun.TitleScene", {
             .setAlpha(0)
             .setLock(true)
             .addEventListener("pushed", function() {
+                that.buttonLock(false);
                 that.start.tweener.clear().moveBy(0, -SC_H, 500, "easeOutQuint");
                 that.tutorial.tweener.clear().moveBy(0, -SC_H, 500, "easeOutQuint");
                 that.option.tweener.clear().moveBy(0, -SC_H, 500, "easeOutQuint");
@@ -206,6 +213,14 @@ tm.define("shotgun.TitleScene", {
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.9)
             .setParam({fontFamily: "CasinoRegular", align: "center", baseline: "middle", outlineWidth: 3 });
+    },
+
+    buttonLock: function(b) {
+        this.start.setLock(b);
+        this.tutorial.setLock(b);
+        this.option.setLock(b);
+        this.credit.setLock(b);
+        this.ranking.setLock(b);
     },
 
     addButton: function(page, finish) {
