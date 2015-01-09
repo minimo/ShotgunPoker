@@ -36,7 +36,7 @@ tm.define("shotgun.GameoverScene", {
         this.mainLayer = tm.app.Object2D().addChildTo(this);
         this.resultLayer = tm.app.Object2D().addChildTo(this);
 
-        this.top = tm.display.OutlineLabel("RESULT", 40)
+        this.top = tm.display.OutlineLabel("RESULT", 60)
             .addChildTo(this)
             .setParam(this.headerParam)
             .setPosition(SC_W*0.5, SC_H*0.05);
@@ -45,12 +45,12 @@ tm.define("shotgun.GameoverScene", {
         this.score = tm.display.OutlineLabel("SCORE: "+appMain.lastScore, 50)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.5, SC_H*0.10);
+            .setPosition(SC_W*0.5, SC_H*0.125);
 
-        this.score = tm.display.OutlineLabel("YOUR BEST SCORE: "+appMain.highScore, 35)
+        this.score = tm.display.OutlineLabel("YOUR BEST SCORE: "+appMain.highScore, 40)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.5, SC_H*0.15);
+            .setPosition(SC_W*0.5, SC_H*0.175);
 
         //役一覧
         for (var i = 0; i < 12; i++) {
