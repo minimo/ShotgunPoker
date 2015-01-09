@@ -82,7 +82,7 @@ tm.define("shotgun.CardDeck", {
 
         //カードのシャッフル
         for( var i = 0; i < 200; i++ ){
-            var a = rand(0, num);
+            var a = rand(0, num);   //仕様上num未満が返る
             var b = rand(0, num);
             if (a == b)continue;
             if (!flag){
