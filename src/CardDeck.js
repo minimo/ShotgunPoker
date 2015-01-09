@@ -82,8 +82,8 @@ tm.define("shotgun.CardDeck", {
 
         //カードのシャッフル
         for( var i = 0; i < 200; i++ ){
-            var a = rand(0, num-1);
-            var b = rand(0, num-1);
+            var a = rand(0, num);
+            var b = rand(0, num);
             if (a == b)continue;
             if (!flag){
                 if (this.cards[a].drop || this.cards[a].hand) continue;
@@ -95,7 +95,7 @@ tm.define("shotgun.CardDeck", {
         }
 
         //表示順を考慮する為、逆に追加
-        for( var i = num-1; i > -1; i-- ){
+        for (var i = num-1; i > -1; i--) {
             if (!flag){
                 if (this.cards[i].drop || this.cards[i].hand) continue;
             }
