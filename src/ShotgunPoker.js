@@ -24,8 +24,8 @@ tm.define("shotgun.CanvasApp", {
     bonusLife: 0,
 
     //スコア保存
-    lastScore: 0,
-    highScore: 0,
+    lastScore: [],
+    highScore: [],
 
     //各種設定
     useJoker: USE_JOKER,
