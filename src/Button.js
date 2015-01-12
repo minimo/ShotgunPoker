@@ -269,7 +269,7 @@ tm.define("shotgun.RoundButton", {
 });
 
 tm.define("shotgun.ToggleButton", {
-    superClass: tm.app.Object2D,
+    superClass: tm.display.CanvasElement,
 
     //描画スタイル設定
     DEFAULT_STYLE: {
@@ -446,7 +446,7 @@ shotgun.ToggleButton.prototype.accessor("toggleON", {
 
 
 tm.define("shotgun.SlideButton", {
-    superClass: tm.app.Object2D,
+    superClass: tm.display.CanvasElement,
 
     //描画スタイル設定
     DEFAULT_STYLE: {
