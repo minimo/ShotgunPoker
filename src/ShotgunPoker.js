@@ -30,7 +30,6 @@ tm.define("shotgun.CanvasApp", {
     //各種設定
     useJoker: USE_JOKER,
     returnJoker: RETURN_JOKER,
-    returnJokerTurn: RETURN_JOKER_TURN,
     handList: null,
 
     //バックグラウンドカラー

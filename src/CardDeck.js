@@ -21,7 +21,6 @@ tm.define("shotgun.CardDeck", {
     joker: false,   //ジョーカー有りフラグ
     busy: false,    //処理中フラグ
     shuffleLimit: SHUFFLE_LIMIT,    //シャッフルが発生する残り枚数
-    jokerTurn: 0,   //ジョーカー戻しターンカウンタ
 
     demo: false,    //デモンストレーションフラグ
 
@@ -66,16 +65,14 @@ tm.define("shotgun.CardDeck", {
     //flagがtrueの場合、全カードのシャッフル。falseの場合、場に有るカードのみ
     shuffle: function(flag) {
         var num = this.cards.length;
-        if (appMain.returnJoker) this.jokerTurn++;
 
         //ドロップしたカードを場に戻す
         if (flag) {
             for (var i = 0; i < num; i++) {
                 var c = this.cards[i];
-                if (c.drop && c.suit != 5 || c.drop && c.suit == 5 && appMain.returnJoker && appMain.returnJokerTurn<this.jokerTurn) {
+                if (c.drop && c.suit != 5 || c.drop && c.suit == 5 && appMain.returnJoker) {
                     c.setPosition(rand(0, SC_W), -100);
                     c.drop = false;
-                    this.jokerTurn = 0;
                 }
             }
         }
