@@ -73,6 +73,17 @@ tm.define("shotgun.CanvasApp", {
         //サウンドセット
         this.sounds = shotgun.SoundSet(MEDIA_DEFAULT);
 
+        //スコア
+        this.highScore[GAMEMODE_NORMAL] = 0;
+        this.highScore[GAMEMODE_HARD] = 0;
+        this.highScore[GAMEMODE_NORMAL+10] = 0; //ReturnJoker
+        this.highScore[GAMEMODE_HARD+10] = 0;
+
+        this.lastScore[GAMEMODE_NORMAL] = 0;
+        this.lastScore[GAMEMODE_HARD] = 0;
+        this.lastScore[GAMEMODE_NORMAL+10] = 0; //ReturnJoker
+        this.lastScore[GAMEMODE_HARD+10] = 0;
+
         //設定情報の読み込み
         this.loadConfig();
 
@@ -89,11 +100,18 @@ tm.define("shotgun.CanvasApp", {
     saveConfig: function() {
         var saveObj = {
             "language": this.language,
-            "lastScore": this.lastScore,
-            "highScore": this.highScore,
             "volumeBGM": this.sounds.volumeBGM,
             "volumeSE": this.sounds.volumeSE,
             "returnJoker": this.returnJoker,
+
+            "highScore_normal":     this.highScore[GAMEMODE_NORMAL],
+            "lastScore_normal":     this.lastScore[GAMEMODE_NORMAL],
+            "highScore_normal_ret": this.highScore[GAMEMODE_NORMAL+10],
+            "lastScore_normal_ret": this.lastScore[GAMEMODE_NORMAL+10],
+            "highScore_hard":       this.highScore[GAMEMODE_HARD],
+            "lastScore_hard":       this.lastScore[GAMEMODE_HARD],
+            "highScore_hard_ret":   this.highScore[GAMEMODE_HARD+10],
+            "lastScore_hard_ret":   this.lastScore[GAMEMODE_HARD+10],
         };
         localStorage.setItem("config", JSON.stringify(saveObj));
         return this;
@@ -105,11 +123,18 @@ tm.define("shotgun.CanvasApp", {
         if (cfg) {
             var c = JSON.parse(cfg);
             this.language = c.language;
-            this.lastScore = c.lastScore;
-            this.highScore = c.highScore;
             this.sounds.volumeBGM = c.volumeBGM;
             this.sounds.volumeSE = c.volumeSE;
             this.returnJoker = c.returnJoker;
+
+            this.highScore[GAMEMODE_NORMAL] = c.highScore_normal;
+            this.lastScore[GAMEMODE_NORMAL] = c.lastScore_normal;
+            this.highScore[GAMEMODE_NORMAL+10] = c.highScore_normal_ret;
+            this.lastScore[GAMEMODE_NORMAL+10] = c.lastScore_normal_ret;
+            this.highScore[GAMEMODE_HARD] = c.highScore_hard;
+            this.lastScore[GAMEMODE_HARD] = c.lastScore_hard;
+            this.highScore[GAMEMODE_HARD+10] = c.highScore_hard_ret;
+            this.lastScore[GAMEMODE_HARD+10] = c.lastScore_hard_ret;
         }
         return this;
     },
