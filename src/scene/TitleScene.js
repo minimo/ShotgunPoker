@@ -100,6 +100,8 @@ tm.define("shotgun.TitleScene", {
                 that.normal.tweener.clear().wait(300).fadeIn(300).call(function(){that.normal.setLock(false);});
                 that.hard.tweener.clear().wait(300).fadeIn(300).call(function(){that.hard.setLock(false);});
                 that.practice.tweener.clear().wait(300).fadeIn(300).call(function(){that.practice.setLock(false);});
+                that.retJoker_label.tweener.clear().wait(300).fadeIn(300);
+                that.retJoker.tweener.clear().wait(300).fadeIn(300).call(function(){that.retJoker.setLock(false);});
                 that.ret.tweener.clear().wait(300).fadeIn(300).call(function(){that.ret.setLock(false);});
             });
 
@@ -188,10 +190,27 @@ tm.define("shotgun.TitleScene", {
                 that.mask.tweener.clear().fadeIn(200).call(function(){appMain.replaceScene(shotgun.MainScene(GAMEMODE_PRACTICE));});
             });
 
+        //ジョーカー戻り設定ボタン
+        var that = this;
+        this.retJoker_label = tm.display.OutlineLabel("RETURN JOKER", 50)
+            .addChildTo(this)
+            .setParam(this.labelParam)
+            .setPosition(SC_W*0.5, SC_H*0.675)
+            .setAlpha(0);
+        this.retJoker = shotgun.ToggleButton(150, 70, "ON", "OFF")
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.75)
+            .setAlpha(0)
+            .setLock(true)
+            .addEventListener("pushed", function() {
+                appMain.returnJoker = that.retJoker.toggleON;
+            });
+        this.retJoker.toggleON = appMain.returnJoker;
+
         //戻る
         this.ret = shotgun.Button(width, height, "RETURN")
             .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.5, SC_H*0.70)
+            .setPosition(SC_W*0.5, SC_H*0.85)
             .setAlpha(0)
             .setLock(true)
             .addEventListener("pushed", function() {
@@ -205,13 +224,15 @@ tm.define("shotgun.TitleScene", {
                 that.normal.tweener.clear().call(function(){that.normal.setLock(true);}).fadeOut(300);
                 that.hard.tweener.clear().call(function(){that.hard.setLock(true);}).fadeOut(300);
                 that.practice.tweener.clear().call(function(){that.practice.setLock(true);}).fadeOut(300);
+                that.retJoker_label.tweener.clear().fadeOut(300);
+                that.retJoker.tweener.clear().call(function(){that.retJoker.setLock(true);}).fadeOut(300);
                 that.ret.tweener.clear().call(function(){that.ret.setLock(true);}).fadeOut(300);
             });
 
         //バージョン表示
         tm.display.OutlineLabel("Version "+appMain.version, 30)
             .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.5, SC_H*0.9)
+            .setPosition(SC_W*0.5, SC_H*0.05)
             .setParam({fontFamily: "CasinoRegular", align: "center", baseline: "middle", outlineWidth: 3 });
     },
 
