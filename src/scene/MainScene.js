@@ -461,14 +461,19 @@ tm.define("shotgun.MainScene", {
         this.pause.lock = true;
 
         //スコア情報更新
-        appMain.lastScore = this.score;
-        if (this.score > appMain.highScore) appMain.highScore = this.score;
+        var mode = this.mode;
+        if (this.returnJoker) mode+=10;
+        appMain.lastScore[mode] = this.score;
+        if (this.score > appMain.highScore[mode]) appMain.highScore[mode] = this.score;
 
         //GAMECENTERにスコアを登録
         if (ENABLE_GAMECENTER) {
+            var lb = "Normal";
+            if (parentScene.mode == GAMEMODE_HARD) lb = "Hard";
+            if (appMain.returnJoker) lb += "_ReturnJoker";
             var data = {
                 score: this.score,
-                leaderboardId: "DefaultSetting"
+                leaderboardId: lb,
             };
             gamecenter.submitScore(
                 function() {
