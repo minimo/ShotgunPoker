@@ -122,7 +122,25 @@ tm.define("shotgun.CanvasApp", {
     loadConfig: function() {
         var cfg = localStorage.getItem("config");
         if (cfg) {
+            var cfgDef = {
+                "language": JAPANESE,
+                "volumeBGM": 5,
+                "volumeSE": 5,
+                "returnJoker": false,
+
+                "highScore_normal": 0,
+                "lastScore_normal": 0,
+                "highScore_normal_ret": 0,
+                "lastScore_normal_ret": 0,
+
+                "highScore_hard": 0,
+                "lastScore_hard": 0,
+                "highScore_hard_ret": 0,
+                "lastScore_hard_ret": 0,
+            }
             var c = JSON.parse(cfg);
+            c.$safe(cfgDef);
+
             this.language = c.language;
             this.sounds.volumeBGM = c.volumeBGM;
             this.sounds.volumeSE = c.volumeSE;

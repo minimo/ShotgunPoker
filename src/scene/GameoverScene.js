@@ -42,12 +42,14 @@ tm.define("shotgun.GameoverScene", {
             .setPosition(SC_W*0.5, SC_H*0.05);
 
         //スコア表示
-        this.score = tm.display.OutlineLabel("SCORE: "+appMain.lastScore, 50)
+        var mode = parentScene.mode;
+        if (parentScene.returnJoker) mode+=10;
+        this.score = tm.display.OutlineLabel("SCORE: "+appMain.lastScore[mode], 50)
             .addChildTo(this)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.5, SC_H*0.125);
 
-        this.score = tm.display.OutlineLabel("YOUR BEST SCORE: "+appMain.highScore, 40)
+        this.score = tm.display.OutlineLabel("YOUR BEST SCORE: "+appMain.highScore[mode], 40)
             .addChildTo(this)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.5, SC_H*0.175);
