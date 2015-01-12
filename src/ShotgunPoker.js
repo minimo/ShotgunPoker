@@ -75,13 +75,13 @@ tm.define("shotgun.CanvasApp", {
 
         //スコア
         this.highScore[GAMEMODE_NORMAL] = 0;
-        this.highScore[GAMEMODE_HARD] = 0;
-        this.highScore[GAMEMODE_NORMAL+10] = 0; //ReturnJoker
-        this.highScore[GAMEMODE_HARD+10] = 0;
-
         this.lastScore[GAMEMODE_NORMAL] = 0;
+        this.highScore[GAMEMODE_HARD] = 0;
         this.lastScore[GAMEMODE_HARD] = 0;
-        this.lastScore[GAMEMODE_NORMAL+10] = 0; //ReturnJoker
+
+        this.highScore[GAMEMODE_NORMAL+10] = 0; //ReturnJoker
+        this.lastScore[GAMEMODE_NORMAL+10] = 0;
+        this.highScore[GAMEMODE_HARD+10] = 0;
         this.lastScore[GAMEMODE_HARD+10] = 0;
 
         //設定情報の読み込み
@@ -108,6 +108,7 @@ tm.define("shotgun.CanvasApp", {
             "lastScore_normal":     this.lastScore[GAMEMODE_NORMAL],
             "highScore_normal_ret": this.highScore[GAMEMODE_NORMAL+10],
             "lastScore_normal_ret": this.lastScore[GAMEMODE_NORMAL+10],
+
             "highScore_hard":       this.highScore[GAMEMODE_HARD],
             "lastScore_hard":       this.lastScore[GAMEMODE_HARD],
             "highScore_hard_ret":   this.highScore[GAMEMODE_HARD+10],
