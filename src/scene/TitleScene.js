@@ -84,7 +84,7 @@ tm.define("shotgun.TitleScene", {
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
         //プレイスタート
-        this.start = shotgun.Button(width, height, "START",{flat: true})
+        this.start = shotgun.Button(width, height, "START", {flat: true})
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.40)
             .addEventListener("pushed", function() {
@@ -107,7 +107,7 @@ tm.define("shotgun.TitleScene", {
             });
 
         //チュートリアル
-        this.tutorial = shotgun.Button(width, height, "TUTORIAL")
+        this.tutorial = shotgun.Button(width, height, "TUTORIAL", {flat: true})
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.50)
             .addEventListener("pushed", function() {
@@ -124,7 +124,7 @@ tm.define("shotgun.TitleScene", {
             });
 
         //設定
-        this.option = shotgun.FlatButton(width, height, "OPTION")
+        this.option = shotgun.Button(width, height, "OPTION", {flat: true})
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.60)
             .addEventListener("pushed", function() {
@@ -137,7 +137,7 @@ tm.define("shotgun.TitleScene", {
             });
 
         //クレジット
-        this.credit = shotgun.FlatButton(width, height, "CREDIT")
+        this.credit = shotgun.Button(width, height, "CREDIT", {flat: true})
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.70)
             .addEventListener("pushed", function() {
@@ -150,7 +150,7 @@ tm.define("shotgun.TitleScene", {
             });
 
         //RANKING
-        this.ranking = shotgun.FlatButton(width, height, "RANKING")
+        this.ranking = shotgun.Button(width, height, "RANKING", {flat: true})
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.80)
             .addEventListener("pushed", function() {
@@ -159,7 +159,7 @@ tm.define("shotgun.TitleScene", {
             });
 
         //ノーマルモード
-        this.normal = shotgun.FlatButton(width, height, "NORMAL")
+        this.normal = shotgun.Button(width, height, "NORMAL", {flat: true})
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.40)
             .setAlpha(0)
@@ -170,7 +170,7 @@ tm.define("shotgun.TitleScene", {
             });
 
         //ハードモード
-        this.hard = shotgun.FlatButton(width, height, "HARD")
+        this.hard = shotgun.Button(width, height, "HARD", {flat: true})
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.50)
             .setAlpha(0)
@@ -181,7 +181,7 @@ tm.define("shotgun.TitleScene", {
             });
 
         //プラクティスモード
-        this.practice = shotgun.FlatButton(width, height, "PRACTICE")
+        this.practice = shotgun.Button(width, height, "PRACTICE", {flat: true})
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.60)
             .setAlpha(0)
@@ -196,9 +196,9 @@ tm.define("shotgun.TitleScene", {
         this.retJoker_label = tm.display.OutlineLabel("RETURN JOKER", 50)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.5, SC_H*0.675)
+            .setPosition(SC_W*0.5, SC_H*0.68)
             .setAlpha(0);
-        this.retJoker = shotgun.ToggleButton(150, 70, "ON", "OFF")
+        this.retJoker = shotgun.ToggleButton(150, 70, "ON", "OFF", {flat: true})
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.75)
             .setAlpha(0)
@@ -210,7 +210,7 @@ tm.define("shotgun.TitleScene", {
         this.retJoker.toggleON = appMain.returnJoker;
 
         //戻る
-        this.ret = shotgun.FlatButton(width, height, "RETURN")
+        this.ret = shotgun.Button(width, height, "RETURN", {flat: true})
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.85)
             .setAlpha(0)
