@@ -204,6 +204,7 @@ tm.define("shotgun.TitleScene", {
             .setLock(true)
             .addEventListener("pushed", function() {
                 appMain.returnJoker = that.retJoker.toggleON;
+                appMain.saveConfig();
             });
         this.retJoker.toggleON = appMain.returnJoker;
 
