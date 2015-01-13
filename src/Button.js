@@ -6,6 +6,7 @@
  *
  */
 
+//通常のボタン
 tm.define("shotgun.Button", {
     superClass: tm.display.CanvasElement,
 
@@ -139,86 +140,12 @@ tm.define("shotgun.Button", {
     },
 });
 
+//角丸ボタン
 tm.define("shotgun.RoundButton", {
-    superClass: tm.display.CanvasElement,
-
-    //描画スタイル設定
-    DEFAULT_STYLE: {
-        buttonColor: 'rgba(50, 150, 255, 0.8)',
-        lineColor: 'rgba(200, 200, 200, 0.5)',
-        lineWidth: 4,
-        shadowColor: 'rgba(0, 0, 0, 0.5)',
-        fontFamily: "azuki",
-        fontSize: 50,
-        radius: 16,
-    },
-
-    labelParam: {fontFamily: "azuki", align: "center", baseline:"middle", outlineWidth:3 },
-
-    text: "",
-    push: false,
-    lock: false,
-
-    //ボタン押下時の移動量
-    downX: 0,
-    downY: 10,
+    superClass: shotgun.Button,
 
     init: function(width, height, text, style) {
-        this.superInit();
-
-        this.width = width || 200;
-        this.height = height || 80;
-        this.text = text || "";
-
-        //セットアップ
-        this.setup(style);
-
-        //判定処理設定
-        this.interactive = true;
-        this.boundingType = "rect";
-//        this.checkHierarchy = true;
-
-        //イベントリスナ登録
-        this.addEventListener("touchstart", function() {
-            if (this.lock) return;
-
-            this.push = true;
-            this.button.x += this.downX;
-            this.button.y += this.downY;
-            var e = tm.event.Event("push");
-            this.dispatchEvent(e);
-        });
-        this.addEventListener("touchmove", function(e) {
-            if (this.lock) return;
-
-            var pt = e.pointing;
-            if (this.isHitPoint(pt.x, pt.y)) {
-                if (!this.push) {
-                    this.push = true;
-                    this.button.x += this.downX;
-                    this.button.y += this.downY;
-                }
-            } else {
-                if (this.push) {
-                    this.push = false;
-                    this.button.x -= this.downX;
-                    this.button.y -= this.downY;
-                }
-            }
-        });
-        this.addEventListener("touchend", function(e) {
-            if (this.lock) return;
-
-            var pt = e.pointing;
-            if (this.isHitPoint(pt.x, pt.y)) {
-                this.push = false;
-                this.button.x -= this.downX;
-                this.button.y -= this.downY;
-
-                var e = tm.event.Event("pushed");
-                this.dispatchEvent(e);
-            }
-        });
+        this.superInit(width, height, text, style);
     },
 
     setup: function(style) {
@@ -262,12 +189,9 @@ tm.define("shotgun.RoundButton", {
             .addChildTo(this.button)
             .setParam(this.labelParam);
     },
-    setLock: function(b) {
-        this.lock = b;
-        return this;
-    },
 });
 
+//トグルボタン
 tm.define("shotgun.ToggleButton", {
     superClass: tm.display.CanvasElement,
 
@@ -443,8 +367,120 @@ shotgun.ToggleButton.prototype.accessor("toggleON", {
     },
 });
 
+//フラットボタン
+tm.define("shotgun.FlatButton", {
+    superClass: tm.display.CanvasElement,
 
+    //描画スタイル設定
+    DEFAULT_STYLE: {
+        buttonColor: 'rgba(50, 150, 50, 1.0)',
+        lineColor: 'rgba(0, 0, 0, 1.0)',
+        lineWidth: 4,
+        fontFamily: "azuki",
+        fontSize: 50,
+    },
 
+    labelParam: {fontFamily: "azuki", align: "center", baseline:"middle", outlineWidth:3 },
+
+    text: "",
+    push: false,
+    lock: false,
+
+    init: function(width, height, text, style) {
+        this.superInit();
+
+        this.width = width || 200;
+        this.height = height || 80;
+        this.text = text || "";
+
+        //セットアップ
+        this.setup(style);
+
+        //判定処理設定
+        this.interactive = true;
+        this.boundingType = "rect";
+//        this.checkHierarchy = true;
+
+        //イベントリスナ登録
+        this.addEventListener("touchstart", function() {
+            if (this.lock) return;
+
+            this.push = true;
+            this.button.setAlpha(1);
+            var e = tm.event.Event("push");
+            this.dispatchEvent(e);
+        });
+        this.addEventListener("touchmove", function(e) {
+            if (this.lock) return;
+
+            var pt = e.pointing;
+            if (this.isHitPoint(pt.x, pt.y)) {
+                if (!this.push) {
+                    this.push = true;
+                    this.button.setAlpha(1);
+                }
+            } else {
+                if (this.push) {
+                    this.push = false;
+                    this.button.setAlpha(0.5);
+                }
+            }
+        });
+        this.addEventListener("touchend", function(e) {
+            if (this.lock) return;
+
+            var pt = e.pointing;
+            if (this.isHitPoint(pt.x, pt.y)) {
+                this.push = false;
+                this.button.setAlpha(0.5);
+
+                var e = tm.event.Event("pushed");
+                this.dispatchEvent(e);
+            }
+        });
+    },
+
+    setup: function(style) {
+        style = style || {};
+        style.$safe(this.DEFAULT_STYLE)
+
+        //登録済みの場合破棄する
+        if (this.button) {
+            this.label.remove();
+            this.button.remove();
+        }
+
+        var width = this.width, height = this.height;
+
+        //ボタン本体
+        var buttonStyle = {
+            fillStyle: style.buttonColor,
+            strokeStyle: style.lineColor,
+            lineWidth: style.lineWidth,
+        };
+        this.button = tm.display.RectangleShape(width, height, buttonStyle)
+            .addChildTo(this)
+            .setAlpha(0.5);
+
+        //ボタンラベル
+        this.labelParam.fontFamily = style.fontFamily;
+        this.label = tm.display.OutlineLabel(this.text, style.fontSize)
+            .addChildTo(this)
+            .setParam(this.labelParam);
+    },
+    setVisible: function(b) {
+        this.button.visible = b;
+        this.label.visible = b;
+        this.lock = !b;
+        return this;
+    },
+    setLock: function(b) {
+        this.lock = b;
+        return this;
+    },
+});
+
+//スライドボタン
 tm.define("shotgun.SlideButton", {
     superClass: tm.display.CanvasElement,
 
