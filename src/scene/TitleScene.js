@@ -84,7 +84,7 @@ tm.define("shotgun.TitleScene", {
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
         //プレイスタート
-        this.start = shotgun.FlatButton(width, height, "START")
+        this.start = shotgun.Button(width, height, "START",{flat: true})
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.40)
             .addEventListener("pushed", function() {
@@ -107,7 +107,7 @@ tm.define("shotgun.TitleScene", {
             });
 
         //チュートリアル
-        this.tutorial = shotgun.FlatButton(width, height, "TUTORIAL")
+        this.tutorial = shotgun.Button(width, height, "TUTORIAL")
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.50)
             .addEventListener("pushed", function() {
