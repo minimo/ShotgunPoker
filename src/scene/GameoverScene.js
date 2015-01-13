@@ -43,7 +43,7 @@ tm.define("shotgun.GameoverScene", {
 
         //スコア表示
         var mode = parentScene.mode;
-        if (parentScene.returnJoker) mode+=10;
+        if (appMain.returnJoker) mode += 10;
         this.score = tm.display.OutlineLabel("SCORE: "+appMain.lastScore[mode], 50)
             .addChildTo(this)
             .setParam(this.labelParam)

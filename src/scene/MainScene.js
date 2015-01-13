@@ -462,7 +462,7 @@ tm.define("shotgun.MainScene", {
 
         //スコア情報更新
         var mode = this.mode;
-        if (this.returnJoker) mode+=10;
+        if (appMain.returnJoker) mode+=10;
         appMain.lastScore[mode] = this.score;
         if (this.score > appMain.highScore[mode]) appMain.highScore[mode] = this.score;
 
