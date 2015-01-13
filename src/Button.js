@@ -18,7 +18,18 @@ tm.define("shotgun.Button", {
         shadowColor: 'rgba(0, 0, 0, 0.5)',
         fontFamily: "azuki",
         fontSize: 50,
+        flat: false,
     },
+
+    DEFAULT_STYLE: {
+        buttonColor: 'rgba(50, 150, 50, 1.0)',
+        lineColor: 'rgba(0, 0, 0, 1.0)',
+        lineWidth: 4,
+        fontFamily: "azuki",
+        fontSize: 50,
+    },
+
+    style: {},
 
     labelParam: {fontFamily: "azuki", align: "center", baseline:"middle", outlineWidth:3 },
 
@@ -43,75 +54,34 @@ tm.define("shotgun.Button", {
         //判定処理設定
         this.interactive = true;
         this.boundingType = "rect";
-//        this.checkHierarchy = true;
-
-        //イベントリスナ登録
-        this.addEventListener("touchstart", function() {
-            if (this.lock) return;
-
-            this.push = true;
-            this.button.x += this.downX;
-            this.button.y += this.downY;
-            var e = tm.event.Event("push");
-            this.dispatchEvent(e);
-        });
-        this.addEventListener("touchmove", function(e) {
-            if (this.lock) return;
-
-            var pt = e.pointing;
-            if (this.isHitPoint(pt.x, pt.y)) {
-                if (!this.push) {
-                    this.push = true;
-                    this.button.x += this.downX;
-                    this.button.y += this.downY;
-                }
-            } else {
-                if (this.push) {
-                    this.push = false;
-                    this.button.x -= this.downX;
-                    this.button.y -= this.downY;
-                }
-            }
-        });
-        this.addEventListener("touchend", function(e) {
-            if (this.lock) return;
-
-            var pt = e.pointing;
-            if (this.isHitPoint(pt.x, pt.y)) {
-                this.push = false;
-                this.button.x -= this.downX;
-                this.button.y -= this.downY;
-
-                var e = tm.event.Event("pushed");
-                this.dispatchEvent(e);
-            }
-        });
     },
 
     setup: function(style) {
         style = style || {};
         style.$safe(this.DEFAULT_STYLE)
+        this.style = style;
 
         //登録済みの場合破棄する
         if (this.shadow) {
-            this.shadow.remove();
+            if (!style.flat) this.shadow.remove();
             this.label.remove();
             this.button.remove();
         }
 
         var width = this.width, height = this.height;
 
-        //ボタン影
-        var shadowStyle = {
-            fillStyle: style.shadowColor,
-            strokeStyle: style.shadowColor,
-            lineWidth: style.lineWidth
-        };
-        this.shadow = tm.display.RectangleShape(width, height, shadowStyle)
-            .addChildTo(this)
-            .setPosition(this.downX, this.downY);
-        this.shadow.blendMode = "source-over";
-
+        if (!style.flat) {
+            //ボタン影
+            var shadowStyle = {
+                fillStyle: style.shadowColor,
+                strokeStyle: style.shadowColor,
+                lineWidth: style.lineWidth
+            };
+            this.shadow = tm.display.RectangleShape(width, height, shadowStyle)
+                .addChildTo(this)
+                .setPosition(this.downX, this.downY);
+            this.shadow.blendMode = "source-over";
+        }
         //ボタン本体
         var buttonStyle = {
             fillStyle: style.buttonColor,
@@ -120,13 +90,57 @@ tm.define("shotgun.Button", {
         };
         this.button = tm.display.RectangleShape(width, height, buttonStyle)
             .addChildTo(this);
+        if (style.flat) this.button.setAlpha(0.6);
 
         //ボタンラベル
+        var parent = this.button;
+        if (style.flat) parent = this;
         this.labelParam.fontFamily = style.fontFamily;
         this.label = tm.display.OutlineLabel(this.text, style.fontSize)
-            .addChildTo(this.button)
+            .addChildTo(parent)
             .setParam(this.labelParam);
     },
+    buttonPushStart: function(e) {
+        if (this.style.flat) {
+            this.button.setAlpha(1);
+        } else {
+            this.button.x += this.downX;
+            this.button.y += this.downY;
+        }
+    },
+    buttonPushMove: function(e) {
+        var pt = e.pointing;
+        if (this.isHitPoint(pt.x, pt.y)) {
+            if (!this.push) {
+                this.push = true;
+                if (this.style.flat) {
+                    this.button.setAlpha(1);
+                } else {
+                    this.button.x += this.downX;
+                    this.button.y += this.downY;
+                }
+            }
+        } else {
+            if (this.push) {
+                this.push = false;
+                if (this.style.flat) {
+                    this.button.setAlpha(0.6);
+                } else {
+                    this.button.x -= this.downX;
+                    this.button.y -= this.downY;
+                }
+            }
+        }
+    },
+    buttonPushEnd: function(e) {
+        if (this.style.flat) {
+            this.button.setAlpha(0.6);
+        } else {
+            this.button.x -= this.downX;
+            this.button.y -= this.downY;
+        }
+    },
+
     setVisible: function(b) {
         this.shadow.visible = b;
         this.button.visible = b;
@@ -137,6 +151,31 @@ tm.define("shotgun.Button", {
     setLock: function(b) {
         this.lock = b;
         return this;
+    },
+
+    ontouchstart: function(e) {
+        if (this.lock) return;
+
+        this.push = true;
+        this.buttonPushStart(e);
+        var e = tm.event.Event("push");
+        this.dispatchEvent(e);
+    },
+    ontouchmove: function(e) {
+        if (this.lock) return;
+        this.buttonPushMove(e);
+    },
+    ontouchend: function(e) {
+        if (this.lock) return;
+
+        var pt = e.pointing;
+        if (this.isHitPoint(pt.x, pt.y)) {
+            this.push = false;
+            this.buttonPushEnd(e);
+
+            var e = tm.event.Event("pushed");
+            this.dispatchEvent(e);
+        }
     },
 });
 
@@ -345,7 +384,6 @@ tm.define("shotgun.ToggleButton", {
         return this;
     },
 });
-
 shotgun.ToggleButton.prototype.accessor("toggleON", {
     "set": function(b) {
         this._toggleON = b;
@@ -477,6 +515,135 @@ tm.define("shotgun.FlatButton", {
     setLock: function(b) {
         this.lock = b;
         return this;
+    },
+});
+
+//フラットトグルボタン
+tm.define("shotgun.FlatToggleButton", {
+    superClass: tm.display.CanvasElement,
+
+    //描画スタイル設定
+    DEFAULT_STYLE: {
+        buttonColor: 'rgba(50, 150, 50, 1.0)',
+        lineColor: 'rgba(0, 0, 0, 1.0)',
+        lineWidth: 4,
+        fontFamily: "azuki",
+        fontSize: 50,
+    },
+
+    labelParam: {fontFamily: "azuki", align: "center", baseline:"middle", outlineWidth:3 },
+
+    text: "",
+    push: false,
+    lock: false,
+
+    init: function(width, height, text, style) {
+        this.superInit();
+
+        this.width = width || 200;
+        this.height = height || 80;
+        this.text = text || "";
+
+        //セットアップ
+        this.setup(style);
+
+        //判定処理設定
+        this.interactive = true;
+        this.boundingType = "rect";
+//        this.checkHierarchy = true;
+
+        //イベントリスナ登録
+        this.addEventListener("touchstart", function() {
+            if (this.lock) return;
+
+            this.push = true;
+            this.button.setAlpha(1);
+            var e = tm.event.Event("push");
+            this.dispatchEvent(e);
+        });
+        this.addEventListener("touchmove", function(e) {
+            if (this.lock) return;
+
+            var pt = e.pointing;
+            if (this.isHitPoint(pt.x, pt.y)) {
+                if (!this.push) {
+                    this.push = true;
+                    this.button.setAlpha(1);
+                }
+            } else {
+                if (this.push) {
+                    this.push = false;
+                    this.button.setAlpha(0.5);
+                }
+            }
+        });
+        this.addEventListener("touchend", function(e) {
+            if (this.lock) return;
+
+            var pt = e.pointing;
+            if (this.isHitPoint(pt.x, pt.y)) {
+                this.push = false;
+                this.button.setAlpha(0.5);
+
+                var e = tm.event.Event("pushed");
+                this.dispatchEvent(e);
+            }
+        });
+    },
+
+    setup: function(style) {
+        style = style || {};
+        style.$safe(this.DEFAULT_STYLE)
+
+        //登録済みの場合破棄する
+        if (this.button) {
+            this.label.remove();
+            this.button.remove();
+        }
+
+        var width = this.width, height = this.height;
+
+        //ボタン本体
+        var buttonStyle = {
+            fillStyle: style.buttonColor,
+            strokeStyle: style.lineColor,
+            lineWidth: style.lineWidth,
+        };
+        this.button = tm.display.RectangleShape(width, height, buttonStyle)
+            .addChildTo(this)
+            .setAlpha(0.5);
+
+        //ボタンラベル
+        this.labelParam.fontFamily = style.fontFamily;
+        this.label = tm.display.OutlineLabel(this.text, style.fontSize)
+            .addChildTo(this)
+            .setParam(this.labelParam);
+    },
+    setVisible: function(b) {
+        this.button.visible = b;
+        this.label.visible = b;
+        this.lock = !b;
+        return this;
+    },
+    setLock: function(b) {
+        this.lock = b;
+        return this;
+    },
+});
+shotgun.FlatToggleButton.prototype.accessor("toggleON", {
+    "set": function(b) {
+        this._toggleON = b;
+
+        if (this._toggleON) {
+            this.text = this.onText;
+        } else {
+            this.text = this.offText;
+        }
+        this.label.text = this.text;
+    },
+
+    "get": function() {
+        return this._toggleON;
     },
 });
 
