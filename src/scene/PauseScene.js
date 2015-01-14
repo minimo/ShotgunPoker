@@ -117,18 +117,18 @@ tm.define("shotgun.ConfirmDialog", {
             .setPosition(SC_W*0.5, SC_H*0.5);
 
         var that = this;
-        var width = 250, height = 70;
+        var width = SC_W-28, height = 70;
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
         //キャプション
         var lb = tm.display.OutlineLabel(caption, 50).addChildTo(this);
         lb.setParam(this.labelParam);
-        lb.setPosition(SC_W*0.5, SC_H*0.45);
+        lb.setPosition(SC_W*0.5, SC_H*0.42);
 
         //ＹＥＳ
         shotgun.Button(width, height, button[0], {flat: appMain.buttonFlat})
             .addChildTo(this)
-            .setPosition(SC_W*0.25, SC_H*0.55)
+            .setPosition(SC_W*0.5, SC_H*0.5)
             .addEventListener("pushed", function() {
                 that.answer = true;
                 appMain.popScene();
@@ -137,7 +137,7 @@ tm.define("shotgun.ConfirmDialog", {
         //ＮＯ
         shotgun.Button(width, height, button[1], {flat: appMain.buttonFlat})
             .addChildTo(this)
-            .setPosition(SC_W*0.75, SC_H*0.55)
+            .setPosition(SC_W*0.5, SC_H*0.58)
             .addEventListener("pushed", function() {
                 that.answer = false;
                 appMain.popScene();
@@ -146,7 +146,7 @@ tm.define("shotgun.ConfirmDialog", {
 });
 
 var DEFALT_ALERTPARAM = {
-    height: SC_H*0.3,
+    height: SC_H*0.35,
     text1: "text",
     text2: null,
     text3: null,
@@ -170,7 +170,7 @@ tm.define("shotgun.AlertDialog", {
             .setPosition(SC_W*0.5, SC_H*0.5);
 
         var that = this;
-        var width = 250, height = 70;
+        var width = SC_W-28, height = 80;
 
         //キャプション
         var pos = SC_H*0.47;

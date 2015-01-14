@@ -80,7 +80,7 @@ tm.define("shotgun.SettingScene", {
         var width = 250, height = 80;
         this.retJoker = shotgun.ToggleButton(width, height, "ON", "OFF", {flat: appMain.buttonFlat})
             .addChildTo(this)
-            .setPosition(SC_W*0.8, SC_H*0.6)
+            .setPosition(SC_W*0.78, SC_H*0.6)
             .addEventListener("pushed", function() {
                 appMain.returnJoker = that.retJoker.toggleON;
             });

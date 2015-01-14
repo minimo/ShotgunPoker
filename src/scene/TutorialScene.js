@@ -67,7 +67,7 @@ tm.define("shotgun.TutorialScene", {
 
         //戻るボタン
         var width = 210, height = 60;
-        shotgun.Button(width, height, "←BACK", {flat: appMain.buttonFlat})
+        shotgun.Button(width, height, "←BACK", {flat: appMain.buttonFlat, fontSize:40})
             .addChildTo(this)
             .setPosition(SC_W*0.80, 72)
             .addEventListener("pushed", function() {
