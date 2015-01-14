@@ -25,7 +25,7 @@ tm.define("shotgun.Button", {
         buttonColor: 'rgba(150, 150, 250, 0.8)',
         lineColor: 'rgba(0, 0, 0, 0.5)',
         lineWidth: 3,
-        fontFamily: "azuki",
+        fontFamily: "UbuntuMono",
         fontSize: 50,
         flat: true,
     },
@@ -41,6 +41,10 @@ tm.define("shotgun.Button", {
     //ボタン押下時の移動量
     downX: 0,
     downY: 10,
+
+    //フラット時透明度
+    alphaON: 1.0,
+    alphaOFF: 0.8,
 
     init: function(width, height, text, style) {
         this.superInit();
@@ -107,7 +111,7 @@ tm.define("shotgun.Button", {
     },
     buttonPushStart: function(e) {
         if (this.style.flat) {
-            this.button.setAlpha(1);
+            this.button.setAlpha(this.alphaON);
         } else {
             this.button.x += this.downX;
             this.button.y += this.downY;
@@ -119,7 +123,7 @@ tm.define("shotgun.Button", {
             if (!this.push) {
                 this.push = true;
                 if (this.style.flat) {
-                    this.button.setAlpha(1);
+                    this.button.setAlpha(this.alphaON);
                 } else {
                     this.button.x += this.downX;
                     this.button.y += this.downY;
@@ -129,7 +133,7 @@ tm.define("shotgun.Button", {
             if (this.push) {
                 this.push = false;
                 if (this.style.flat) {
-                    this.button.setAlpha(0.5);
+                    this.button.setAlpha(this.alphaOFF);
                 } else {
                     this.button.x -= this.downX;
                     this.button.y -= this.downY;
@@ -139,7 +143,7 @@ tm.define("shotgun.Button", {
     },
     buttonPushEnd: function(e) {
         if (this.style.flat) {
-            this.button.setAlpha(0.5);
+            this.button.setAlpha(this.alphaOFF);
         } else {
             this.button.x -= this.downX;
             this.button.y -= this.downY;
@@ -254,7 +258,7 @@ tm.define("shotgun.ToggleButton", {
         buttonColor: 'rgba(150, 150, 250, 0.8)',
         lineColor: 'rgba(0, 0, 0, 0.5)',
         lineWidth: 3,
-        fontFamily: "azuki",
+        fontFamily: "UbuntuMono",
         fontSize: 50,
         flat: true,
     },
@@ -272,6 +276,10 @@ tm.define("shotgun.ToggleButton", {
     //ボタン押下時の移動量
     downX: 0,
     downY: 10,
+
+    //フラット時透明度
+    alphaON: 1.0,
+    alphaOFF: 0.5,
 
     init: function(width, height, onText, offText, style) {
         this.superInit();
@@ -349,14 +357,14 @@ tm.define("shotgun.ToggleButton", {
         this.push = true;
         if (this._toggleON) {
             if (this.style.flat) {
-                this.button.setAlpha(1);
+                this.button.setAlpha(this.alphaON);
             } else {
                 this.button.x += this.downX*0.5;
                 this.button.y += this.downY*0.5;
             }
         } else {
             if (this.style.flat) {
-                this.button.setAlpha(0.5);
+                this.button.setAlpha(this.alphaOFF);
             } else {
                 this.button.x += this.downX*1.5;
                 this.button.y += this.downY*1.5;
@@ -370,14 +378,14 @@ tm.define("shotgun.ToggleButton", {
                 this.push = true;
                 if (this._toggleON) {
                     if (this.style.flat) {
-                        this.button.setAlpha(1);
+                        this.button.setAlpha(this.alphaON);
                     } else {
                         this.button.x += this.downX*0.5;
                         this.button.y += this.downY*0.5;
                     }
                 } else {
                     if (this.style.flat) {
-                        this.button.setAlpha(0.5);
+                        this.button.setAlpha(this.alphaOFF);
                     } else {
                         this.button.x += this.downX*1.5;
                         this.button.y += this.downY*1.5;
@@ -389,14 +397,14 @@ tm.define("shotgun.ToggleButton", {
                 this.push = false;
                 if (this._toggleON) {
                     if (this.style.flat) {
-                        this.button.setAlpha(1);
+                        this.button.setAlpha(this.alphaON);
                     } else {
                         this.button.x -= this.downX*0.5;
                         this.button.y -= this.downY*0.5;
                     }
                 } else {
                     if (this.style.flat) {
-                        this.button.setAlpha(0.5);
+                        this.button.setAlpha(this.alphaOFF);
                     } else {
                         this.button.x -= this.downX*1.5;
                         this.button.y -= this.downY*1.5;
@@ -413,7 +421,7 @@ tm.define("shotgun.ToggleButton", {
             if (this._toggleON) {
                 this.text = this.onText;
                 if (this.style.flat) {
-                    this.button.setAlpha(1);
+                    this.button.setAlpha(this.alphaON);
                 } else {
                     this.button.x -= this.downX*0.5;
                     this.button.y -= this.downY*0.5;
@@ -421,7 +429,7 @@ tm.define("shotgun.ToggleButton", {
             } else {
                 this.text = this.offText;
                 if (this.style.flat) {
-                    this.button.setAlpha(0.5);
+                    this.button.setAlpha(this.alphaOFF);
                 } else {
                     this.button.x -= this.downX*1.5;
                     this.button.y -= this.downY*1.5;
@@ -465,7 +473,7 @@ shotgun.ToggleButton.prototype.accessor("toggleON", {
         if (this._toggleON) {
             this.text = this.onText;
             if (this.style.flat) {
-                this.button.setAlpha(1);
+                this.button.setAlpha(this.alphaON);
             } else {
                 this.button.x = this.downX;
                 this.button.y = this.downY;
@@ -473,7 +481,7 @@ shotgun.ToggleButton.prototype.accessor("toggleON", {
         } else {
             this.text = this.offText;
             if (this.style.flat) {
-                this.button.setAlpha(0.5);
+                this.button.setAlpha(this.alphaOFF);
             } else {
                 this.button.x = 0;
                 this.button.y = 0;

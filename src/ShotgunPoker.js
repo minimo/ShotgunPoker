@@ -35,6 +35,9 @@ tm.define("shotgun.CanvasApp", {
     //バックグラウンドカラー
     bgColor: 'rgba(50, 120, 50, 1)',
 
+    //フラットボタン使用フラグ
+    buttonFlat: true,
+
     //言語設定
     language: JAPANESE,
 

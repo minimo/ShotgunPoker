@@ -57,7 +57,7 @@ tm.define("shotgun.PauseScene", {
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
         //戻るボタン
-        shotgun.Button(width, height, "RESUME")
+        shotgun.Button(width, height, "RESUME", {flat: appMain.buttonFlat})
             .addChildTo(this)
             .setPosition(SC_W*0.25, SC_H*0.85)
             .addEventListener("pushed", function() {
@@ -65,7 +65,7 @@ tm.define("shotgun.PauseScene", {
             });
 
         //終了ボタン
-        shotgun.Button(width, height, "EXIT")
+        shotgun.Button(width, height, "EXIT", {flat: appMain.buttonFlat})
             .addChildTo(this)
             .setPosition(SC_W*0.75, SC_H*0.85)
             .addEventListener("pushed", function() {
@@ -126,7 +126,7 @@ tm.define("shotgun.ConfirmDialog", {
         lb.setPosition(SC_W*0.5, SC_H*0.45);
 
         //ＹＥＳ
-        shotgun.Button(width, height, button[0])
+        shotgun.Button(width, height, button[0], {flat: appMain.buttonFlat})
             .addChildTo(this)
             .setPosition(SC_W*0.25, SC_H*0.55)
             .addEventListener("pushed", function() {
@@ -135,7 +135,7 @@ tm.define("shotgun.ConfirmDialog", {
             });
 
         //ＮＯ
-        shotgun.Button(width, height, button[1])
+        shotgun.Button(width, height, button[1], {flat: appMain.buttonFlat})
             .addChildTo(this)
             .setPosition(SC_W*0.75, SC_H*0.55)
             .addEventListener("pushed", function() {
@@ -195,7 +195,7 @@ tm.define("shotgun.AlertDialog", {
         }
 
         //ボタン
-        shotgun.Button(width, height, param.button)
+        shotgun.Button(width, height, param.button, {flat: appMain.buttonFlat})
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.55)
             .addEventListener("pushed", function() {
