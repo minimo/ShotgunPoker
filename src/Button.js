@@ -26,7 +26,7 @@ tm.define("shotgun.Button", {
         lineColor: 'rgba(0, 0, 0, 0.5)',
         lineWidth: 3,
         fontFamily: "UbuntuMono",
-        fontSize: 60,
+        fontSize: 50,
         flat: true,
     },
 

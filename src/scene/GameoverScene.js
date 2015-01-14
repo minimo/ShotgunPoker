@@ -29,8 +29,7 @@ tm.define("shotgun.GameoverScene", {
             .setPosition(SC_W*0.5, SC_H*0.5);
 
         var that = this;
-        var width = 230, height = 70;
-        var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
+        var width = 250, height = 70;
 
         //メインとリザルトを分けてレイヤーを作成
         this.mainLayer = tm.app.Object2D().addChildTo(this);
