@@ -199,7 +199,7 @@ tm.define("shotgun.MainScene", {
         }
 
         //ポーズボタン
-        this.pause = shotgun.Button(200, 60, "PAUSE", {flat: appMain.buttonFlat})
+        this.pause = shotgun.Button(200, 60, "PAUSE", {flat: appMain.buttonFlat, fontSize:40})
             .addChildTo(this)
             .setPosition(SC_W*0.84, 90)
             .addEventListener("pushed", function() {

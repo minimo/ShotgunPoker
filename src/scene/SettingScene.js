@@ -77,7 +77,7 @@ tm.define("shotgun.SettingScene", {
             .addChildTo(this)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.3, SC_H*0.6);
-        var width = 150, height = 70;
+        var width = 250, height = 80;
         this.retJoker = shotgun.ToggleButton(width, height, "ON", "OFF", {flat: appMain.buttonFlat})
             .addChildTo(this)
             .setPosition(SC_W*0.8, SC_H*0.6)
@@ -87,7 +87,7 @@ tm.define("shotgun.SettingScene", {
         this.retJoker.toggleON = appMain.returnJoker;
 
         //戻るボタン
-        var width = 300, height = 70;
+        var width = SC_W, height = 100;
         shotgun.Button(width, height, "RETURN", {flat: appMain.buttonFlat})
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.85)

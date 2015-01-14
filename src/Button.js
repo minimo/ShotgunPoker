@@ -22,11 +22,11 @@ tm.define("shotgun.Button", {
     },
 
     DEFAULT_STYLE_FLAT: {
-        buttonColor: 'rgba(150, 150, 250, 0.8)',
+        buttonColor: 'rgba(150, 150, 250, 1.0)',
         lineColor: 'rgba(0, 0, 0, 0.5)',
         lineWidth: 3,
         fontFamily: "UbuntuMono",
-        fontSize: 50,
+        fontSize: 60,
         flat: true,
     },
 
@@ -43,8 +43,8 @@ tm.define("shotgun.Button", {
     downY: 10,
 
     //フラット時透明度
-    alphaON: 1.0,
-    alphaOFF: 0.8,
+    alphaON: 0.9,
+    alphaOFF: 0.4,
 
     init: function(width, height, text, style) {
         this.superInit();
@@ -99,7 +99,7 @@ tm.define("shotgun.Button", {
         };
         this.button = tm.display.RectangleShape(width, height, buttonStyle)
             .addChildTo(this);
-        if (style.flat) this.button.setAlpha(0.5);
+        if (style.flat) this.button.setAlpha(this.alphaOFF);
 
         //ボタンラベル
         var parent = this.button;
@@ -255,7 +255,7 @@ tm.define("shotgun.ToggleButton", {
     },
 
     DEFAULT_STYLE_FLAT: {
-        buttonColor: 'rgba(150, 150, 250, 0.8)',
+        buttonColor: 'rgba(150, 150, 250, 1.0)',
         lineColor: 'rgba(0, 0, 0, 0.5)',
         lineWidth: 3,
         fontFamily: "UbuntuMono",
@@ -278,8 +278,8 @@ tm.define("shotgun.ToggleButton", {
     downY: 10,
 
     //フラット時透明度
-    alphaON: 1.0,
-    alphaOFF: 0.5,
+    alphaON: 0.9,
+    alphaOFF: 0.4,
 
     init: function(width, height, onText, offText, style) {
         this.superInit();
@@ -338,7 +338,7 @@ tm.define("shotgun.ToggleButton", {
         };
         this.button = tm.display.RectangleShape(width, height, buttonStyle)
             .addChildTo(this);
-        if (style.flat) this.button.setAlpha(0.5);
+        if (style.flat) this.button.setAlpha(this.alphaOFF);
 
         //ボタンラベル
         var parent = this.button;

@@ -29,7 +29,7 @@ tm.define("shotgun.GameoverScene", {
             .setPosition(SC_W*0.5, SC_H*0.5);
 
         var that = this;
-        var width = 230, height = 60;
+        var width = 230, height = 70;
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
         //メインとリザルトを分けてレイヤーを作成
@@ -63,7 +63,7 @@ tm.define("shotgun.GameoverScene", {
         }
 
         //リトライボタン
-        this.retry = shotgun.Button(width, height, "RETRY", {flat: appMain.buttonFlat})
+        this.retry = shotgun.Button(width, height, "RETRY", {flat: appMain.buttonFlat, fontSize:50})
             .addChildTo(this)
             .setPosition(SC_W*0.25, SC_H*0.85)
             .addEventListener("pushed", function() {
@@ -73,7 +73,7 @@ tm.define("shotgun.GameoverScene", {
             });
 
         //戻るボタン
-        this.back = shotgun.Button(width, height, "EXIT", {flat: appMain.buttonFlat})
+        this.back = shotgun.Button(width, height, "EXIT", {flat: appMain.buttonFlat, fontSize:50})
             .addChildTo(this)
             .setPosition(SC_W*0.75, SC_H*0.85)
             .addEventListener("pushed", function() {
@@ -82,7 +82,7 @@ tm.define("shotgun.GameoverScene", {
             });
 
         //全画面広告ボタン
-        this.Ad = shotgun.Button(width*0.5, height, "Ad", {flat: appMain.buttonFlat})
+        this.Ad = shotgun.Button(width*0.5, height, "Ad", {flat: appMain.buttonFlat, fontSize:50})
             .addChildTo(this)
             .setPosition(SC_W*0.25-width*0.25, SC_H*0.78)
             .addEventListener("pushed", function() {
@@ -96,7 +96,7 @@ tm.define("shotgun.GameoverScene", {
             });
 
         //GAMECENTER
-        shotgun.Button(width, height, "RANKING", {flat: appMain.buttonFlat})
+        shotgun.Button(width, height, "RANKING", {flat: appMain.buttonFlat, fontSize:50})
             .addChildTo(this)
             .setPosition(SC_W*0.75, SC_H*0.78)
             .addEventListener("pushed", function() {

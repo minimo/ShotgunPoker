@@ -42,7 +42,7 @@ tm.define("shotgun.PauseScene", {
             tm.display.OutlineLabel(appMain.handList[i].name+":"+parentScene.handCount[appMain.handList[i].point], 40)
                 .addChildTo(this)
                 .setParam(this.scoreParam)
-                .setPosition(SC_W*0.2, SC_H*0.28+(i*45));
+                .setPosition(SC_W*0.2, SC_H*0.25+(i*45));
         }
 
         if (parentScene.complete) {
@@ -53,21 +53,21 @@ tm.define("shotgun.PauseScene", {
         }
 
         var that = this;
-        var width = 250, height = 60;
+        var width = SC_W, height = 80;
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
         //戻るボタン
         shotgun.Button(width, height, "RESUME", {flat: appMain.buttonFlat})
             .addChildTo(this)
-            .setPosition(SC_W*0.25, SC_H*0.85)
+            .setPosition(SC_W*0.5, SC_H*0.76)
             .addEventListener("pushed", function() {
                 appMain.popScene();
             });
 
         //終了ボタン
-        shotgun.Button(width, height, "EXIT", {flat: appMain.buttonFlat})
+        shotgun.Button(width, height, "EXIT GAME", {flat: appMain.buttonFlat})
             .addChildTo(this)
-            .setPosition(SC_W*0.75, SC_H*0.85)
+            .setPosition(SC_W*0.5, SC_H*0.85)
             .addEventListener("pushed", function() {
                 appMain.pushScene(that.dialog);
             });
