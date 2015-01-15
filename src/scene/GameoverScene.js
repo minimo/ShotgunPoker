@@ -46,19 +46,19 @@ tm.define("shotgun.GameoverScene", {
         this.score = tm.display.OutlineLabel("SCORE: "+appMain.lastScore[mode], 50)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.5, SC_H*0.125);
+            .setPosition(SC_W*0.5, SC_H*0.12);
 
         this.score = tm.display.OutlineLabel("YOUR BEST SCORE: "+appMain.highScore[mode], 40)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.5, SC_H*0.175);
+            .setPosition(SC_W*0.5, SC_H*0.17);
 
         //役一覧
         for (var i = 0; i < 12; i++) {
-            tm.display.OutlineLabel(appMain.handList[i].name+":"+this.parentScene.handCount[appMain.handList[i].point], 40)
+            tm.display.OutlineLabel(appMain.handList[i].name+":"+this.parentScene.handCount[appMain.handList[i].point], 35)
                 .addChildTo(this.resultLayer)
                 .setParam(this.scoreParam)
-                .setPosition(SC_W*0.2, SC_H*0.25+(i*45));
+                .setPosition(SC_W*0.2, SC_H*0.22+(i*42));
         }
 
         //全画面広告ボタン

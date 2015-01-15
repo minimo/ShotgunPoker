@@ -506,28 +506,27 @@ tm.define("shotgun.MainScene", {
     dispHand: function(hand, wait) {
         wait = wait || 1200;
         var name1 = "", name2 = "", name3 = "";
-        var size = 80; offset = 10;
+        var size = 80; offset = 0;
         switch (hand) {
-            case MISS:          name1 = "MISS!"; offset = 50; break;
-            case NOPAIR:        name1 = "NO PAIR"; size = 70; break;
-            case ONEPAIR:       name1 = "ONE"; name2 = "PAIR"; offset = 60; break;
-            case FLASH:         name1 = "FLASH"; offset = 60; break;
-            case TWOPAIR:       name1 = "TWO"; name2 = "PAIR"; offset = 60; break;
-            case THREECARD:     name1 = "THREE"; name2 = "CARD"; offset = 50; break;
-            case FULLHOUSE:     name1 = "FULL"; name2 = "HOUSE"; offset = 50; break;
-            case STRAIGHT:      name1 = "STRAIGHT"; size = 70; break;
-            case FOURCARD:      name1 = "FOUR"; name2 = "CARD"; offset = 60; break;
-            case FIVECARD:      name1 = "FIVE"; name2 = "CARD"; offset = 60; break;
-            case STRAIGHTFLASH: name1 = "STRAIGHT"; name2 = "FLASH"; size = 70; break;
-            case ROYALSTRAIGHTFLASH: name1 = "ROYAL"; name2 = "STRAIGHT"; name3 = "FLASH!"; size = 70; break;
+            case MISS:          name1 = "MISS!"; offset = 10; break;
+            case NOPAIR:        name1 = "NO PAIR"; size = 65; break;
+            case ONEPAIR:       name1 = "ONE"; name2 = "PAIR"; offset = 30; break;
+            case FLASH:         name1 = "FLASH"; break;
+            case TWOPAIR:       name1 = "TWO"; name2 = "PAIR"; offset = 30; break;
+            case THREECARD:     name1 = "THREE"; name2 = "CARD"; size = 70; break;
+            case FULLHOUSE:     name1 = "FULL"; name2 = "HOUSE"; size = 75; break;
+            case STRAIGHT:      name1 = "STRAIGHT"; size = 50; break;
+            case FOURCARD:      name1 = "FOUR"; name2 = "CARD"; offset = 10; break;
+            case FIVECARD:      name1 = "FIVE"; name2 = "CARD"; offset = 10; break;
+            case STRAIGHTFLASH: name1 = "STRAIGHT"; name2 = "FLASH"; size = 50; break;
+            case ROYALSTRAIGHTFLASH: name1 = "ROYAL"; name2 = "STRAIGHT"; name3 = "FLASH !!"; size = 50; break;
         }
         if (appMain.language == ENGLISH) {
             switch (hand) {
-                case NOPAIR:        name1 = "NO PAIR"; size = 70; break;
-                case THREECARD:     name1 = "THREE OF"; name2 = "A KIND"; offset = 50; break;
-                case FOURCARD:      name1 = "FOUR OF"; name2 = "A KIND"; size = 70; offset = 60; break;
-                case FIVECARD:      name1 = "FIVE OF"; name2 = "A KIND"; size = 70; offset = 60; break;
-                case ROYALSTRAIGHTFLASH: name1 = "ROYAL"; name2 = "FLASH!"; size = 70; break;
+                case THREECARD:     name1 = "THREE OF"; name2 = "A KIND"; offset = 20; break;
+                case FOURCARD:      name1 = "FOUR OF"; name2 = "A KIND"; size = 70; offset = 30; break;
+                case FIVECARD:      name1 = "FIVE OF"; name2 = "A KIND"; size = 70; offset = 30; break;
+                case ROYALSTRAIGHTFLASH: name1 = "ROYAL"; name2 = "FLASH !!"; size = 70; break;
                 default:
                     break;
             }
@@ -535,9 +534,13 @@ tm.define("shotgun.MainScene", {
 
         //役名表示
         var that = this;
-        var x = SC_W*0.55+offset, y = SC_H*0.8;
+        var x = SC_W*0.6+offset, y = SC_H*0.8;
+        var step = SC_H*0.08;
         if (name2 != "") y-=SC_H*0.04;
-        if (name3 != "") y-=SC_H*0.04;
+        if (name3 != "") {
+            y-=SC_H*0.02;
+            step = SC_H*0.06;
+        }
 
         //１行目
         var lb1 = tm.display.OutlineLabel(name1, size).addChildTo(this);
@@ -556,14 +559,14 @@ tm.define("shotgun.MainScene", {
             });
 
         //２行目
-        y += SC_H*0.08;
+        y += step;
         var lb2 = tm.display.OutlineLabel(name2, size).addChildTo(this);
         lb2.setParam(this.labelParamHand);
         lb2.setPosition(x, y);
         lb2.tweener.clear().wait(wait).call(function(){lb2.remove();});
 
         //３行目
-        y += SC_H*0.08;
+        y += step;
         var lb3 = tm.display.OutlineLabel(name3, size).addChildTo(this);
         lb3.setParam(this.labelParamHand);
         lb3.setPosition(x, y);
