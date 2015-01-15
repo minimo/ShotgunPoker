@@ -4,15 +4,6 @@
 <meta charset=UTF-8>
 </head>
 <body>
-<div>
-<ul>
-    <li>
-        キャンバスのサイズ<br>
-        width<input type="number" id="canvasWidth" class="canvasSize" value="512"><br>
-        height<input type="number" id="canvasHeight" class="canvasSize" value="512"><br>
-    </li>
-</ul>
-</div>
 
 <canvas id="app"></canvas>
 
@@ -39,14 +30,14 @@ tm.main(function() {
 
     app.scene = tm.app.Scene();
     app.scene.setup = function() {
-        labelParamPoker = {fontFamily: "KS-Kohichi",align: "center", baseline: "middle", outlineWidth: 3};
+        labelParamPoker = {fontFamily: "CasinoRegular",align: "center", baseline: "middle", outlineWidth: 3};
 
         //カウントダウン表示
         for (var i = 0; i < 6; i++) {
             tm.display.OutlineLabel(""+i, 300)
                 .addChildTo(this)
                 .setParam(labelParamPoker)
-                .setPosition(i*256+128, SC_H/2);
+                .setPosition(i*256+128-40, SC_H/2+50);
         }
     }
 
