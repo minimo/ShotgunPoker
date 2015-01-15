@@ -79,12 +79,11 @@ tm.define("shotgun.TitleScene", {
             .setPosition(SC_W*0.5, SC_H*0.2);
 
         var that = this;
-        var width = 300, height = 70;
         var width = SC_W, height = 100;
         var param = {flat: appMain.buttonFlat, fontSize: 60};
 
         //プレイスタート
-        this.start = shotgun.Button(width, height, "START", param)
+        this.start = shotgun.Button(width, height, "PLAY", param)
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.40)
             .addEventListener("pushed", function() {
@@ -123,17 +122,13 @@ tm.define("shotgun.TitleScene", {
                     });
             });
 
-        //設定
-        this.option = shotgun.Button(width, height, "OPTION", param)
+        //RANKING
+        this.ranking = shotgun.Button(width, height, "RANKING", param)
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.60)
             .addEventListener("pushed", function() {
                 that.buttonLock(true);
-                that.mask.tweener.clear()
-                    .fadeIn(200)
-                    .call(function(){
-                        appMain.pushScene(shotgun.SettingScene());
-                    });
+                showLeadersBoard();
             });
 
         //クレジット
@@ -148,14 +143,17 @@ tm.define("shotgun.TitleScene", {
                         appMain.pushScene(shotgun.CreditScene());
                     });
             });
-
-        //RANKING
-        this.ranking = shotgun.Button(width, height, "RANKING", param)
+        //設定
+        this.option = shotgun.Button(width, height, "OPTION", param)
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.80)
             .addEventListener("pushed", function() {
                 that.buttonLock(true);
-                showLeadersBoard();
+                that.mask.tweener.clear()
+                    .fadeIn(200)
+                    .call(function(){
+                        appMain.pushScene(shotgun.SettingScene());
+                    });
             });
 
         //ノーマルモード
