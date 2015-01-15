@@ -54,8 +54,8 @@ tm.define("shotgun.MainScene", {
     //ラベル用パラメータ
     labelParamBasic: {fontFamily: "azuki", align: "left", baseline: "middle",outlineWidth: 3},
     labelParamBasicCenter: {fontFamily: "azuki'", align: "center", baseline: "middle",outlineWidth: 3},
-    labelParamPoker: {fontFamily: "KS-Kohichi",align: "center", baseline: "middle", outlineWidth: 3},
-    labelParamHand:  {fontFamily: "KS-Kohichi",align: "left", baseline: "middle", outlineWidth: 3},
+    labelParamPoker: {fontFamily: "CasinoRegular",align: "center", baseline: "middle", outlineWidth: 3},
+    labelParamHand:  {fontFamily: "CasinoRegular",align: "left", baseline: "middle", outlineWidth: 3},
     labelParamBefore:{fontFamily: "azuki",align: "left", baseline: "top", outlineWidth: 3},
     labelParamModeName: {fontFamily: "azuki'", align: "right", baseline: "middle",outlineWidth: 3},
 
