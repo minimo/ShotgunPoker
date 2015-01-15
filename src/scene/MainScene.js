@@ -52,12 +52,12 @@ tm.define("shotgun.MainScene", {
     exitGame: false,
 
     //ラベル用パラメータ
-    labelParamBasic: {fontFamily: "azuki", align: "left", baseline: "middle",outlineWidth: 3},
-    labelParamBasicCenter: {fontFamily: "azuki'", align: "center", baseline: "middle",outlineWidth: 3},
+    labelParamBasic: {fontFamily: "azuki", align: "left", baseline: "middle",outlineWidth: 3, fontWeight:700},
+    labelParamBasicCenter: {fontFamily: "azuki'", align: "center", baseline: "middle",outlineWidth: 3, fontWeight:700},
     labelParamPoker: {fontFamily: "CasinoRegular",align: "center", baseline: "middle", outlineWidth: 3},
     labelParamHand:  {fontFamily: "CasinoRegular",align: "left", baseline: "middle", outlineWidth: 3},
-    labelParamBefore:{fontFamily: "azuki",align: "left", baseline: "top", outlineWidth: 3},
-    labelParamModeName: {fontFamily: "azuki'", align: "right", baseline: "middle",outlineWidth: 3},
+    labelParamBefore:{fontFamily: "azuki",align: "left", baseline: "top", outlineWidth: 3, fontWeight:700},
+    labelParamModeName: {fontFamily: "azuki", align: "right", baseline: "middle",outlineWidth: 3, fontWeight:700},
 
     init: function(mode) {
         this.superInit();

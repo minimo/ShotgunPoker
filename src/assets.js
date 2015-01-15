@@ -24,9 +24,11 @@ var assets = {
     "finger":       "assets/finger.png",
 
     //Font
-    "azuki":        "font/azuki.ttf",
+//    "azuki":        "font/azuki.ttf",
+    "azuki":        "font/dejima-mincho-r227.ttf",
     "CasinoRegular":"font/CasinoRegular.ttf",
     "UbuntuMono":   "font/UbuntuMono-Bold.ttf",
+
 
     //SE
     "countdown":    "assets/se_countdown.mp3",
