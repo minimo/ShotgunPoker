@@ -16,7 +16,7 @@ tm.define("shotgun.Button", {
         lineColor: 'rgba(200, 200, 200, 0.5)',
         lineWidth: 4,
         shadowColor: 'rgba(0, 0, 0, 0.5)',
-        fontFamily: "azuki",
+        fontFamily: "UbuntuMono",
         fontSize: 50,
         flat: false,
     },
@@ -32,7 +32,7 @@ tm.define("shotgun.Button", {
 
     style: {},
 
-    labelParam: {fontFamily: "azuki", align: "center", baseline:"middle", outlineWidth:3 },
+    labelParam: {align: "center", baseline:"middle", outlineWidth:3 },
 
     text: "",
     push: false,
@@ -249,7 +249,7 @@ tm.define("shotgun.ToggleButton", {
         lineColor: 'rgba(200, 200, 200, 0.5)',
         lineWidth: 4,
         shadowColor: 'rgba(0, 0, 0, 0.5)',
-        fontFamily: "azuki",
+        fontFamily: "UbuntuMono",
         fontSize: 50,
         falt: false,
     },
@@ -265,7 +265,7 @@ tm.define("shotgun.ToggleButton", {
 
     style: {},
 
-    labelParam: {fontFamily: "azuki", align: "center", baseline:"middle", outlineWidth:3 },
+    labelParam: {align: "center", baseline:"middle", outlineWidth:3 },
 
     onText: "",
     offText: "",
