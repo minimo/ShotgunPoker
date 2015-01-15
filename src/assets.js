@@ -25,7 +25,7 @@ var assets = {
 
     //Font
 //    "azuki":        "font/azuki.ttf",
-    "azuki":        "font/dejima-mincho-r227.ttf",
+    "azuki":        "font/07YasashisaAntique.ttf",
     "CasinoRegular":"font/CasinoRegular.ttf",
     "UbuntuMono":   "font/UbuntuMono-Bold.ttf",
 
