@@ -29,7 +29,7 @@ tm.define("shotgun.GameoverScene", {
             .setPosition(SC_W*0.5, SC_H*0.5);
 
         var that = this;
-        var width = 250, height = 70;
+        var width = SC_W, height = 80;
 
         //メインとリザルトを分けてレイヤーを作成
         this.mainLayer = tm.app.Object2D().addChildTo(this);
@@ -61,29 +61,10 @@ tm.define("shotgun.GameoverScene", {
                 .setPosition(SC_W*0.2, SC_H*0.25+(i*45));
         }
 
-        //リトライボタン
-        this.retry = shotgun.Button(width, height, "RETRY", {flat: appMain.buttonFlat, fontSize:50})
-            .addChildTo(this)
-            .setPosition(SC_W*0.25, SC_H*0.85)
-            .addEventListener("pushed", function() {
-                var mode = that.parentScene.mode;
-                that.parentScene = null;
-                that.mask.tweener.clear().fadeIn(300).call(function(){appMain.replaceScene(shotgun.MainScene(mode));});
-            });
-
-        //戻るボタン
-        this.back = shotgun.Button(width, height, "EXIT", {flat: appMain.buttonFlat, fontSize:50})
-            .addChildTo(this)
-            .setPosition(SC_W*0.75, SC_H*0.85)
-            .addEventListener("pushed", function() {
-                that.parentScene = null;
-                that.mask.tweener.clear().fadeIn(300).call(function(){appMain.replaceScene(shotgun.TitleScene());});
-            });
-
         //全画面広告ボタン
-        this.Ad = shotgun.Button(width*0.5, height, "Ad", {flat: appMain.buttonFlat, fontSize:50})
+        this.Ad = shotgun.Button(width*0.49, height, "Ad", {flat: appMain.buttonFlat, fontSize:60})
             .addChildTo(this)
-            .setPosition(SC_W*0.25-width*0.25, SC_H*0.78)
+            .setPosition(SC_W*0.25, SC_H*0.71)
             .addEventListener("pushed", function() {
                 if(ENABLE_PHONEGAP && AdMob) {
                     AdMob.prepareInterstitial({
@@ -95,14 +76,33 @@ tm.define("shotgun.GameoverScene", {
             });
 
         //GAMECENTER
-        shotgun.Button(width, height, "RANKING", {flat: appMain.buttonFlat, fontSize:50})
+        shotgun.Button(width*0.49, height, "RANKING", {flat: appMain.buttonFlat, fontSize:60})
             .addChildTo(this)
-            .setPosition(SC_W*0.75, SC_H*0.78)
+            .setPosition(SC_W*0.75, SC_H*0.71)
             .addEventListener("pushed", function() {
                 var lb = "Normal";
                 if (parentScene.mode == GAMEMODE_HARD) lb = "Hard";
                 if (appMain.returnJoker) lb += "_ReturnJoker";
                 showLeadersBoard(lb);
+            });
+
+        //リトライボタン
+        this.retry = shotgun.Button(width, height, "RETRY", {flat: appMain.buttonFlat, fontSize:60})
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.78)
+            .addEventListener("pushed", function() {
+                var mode = that.parentScene.mode;
+                that.parentScene = null;
+                that.mask.tweener.clear().fadeIn(300).call(function(){appMain.replaceScene(shotgun.MainScene(mode));});
+            });
+
+        //戻るボタン
+        this.back = shotgun.Button(width, height, "EXIT", {flat: appMain.buttonFlat, fontSize:60})
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.85)
+            .addEventListener("pushed", function() {
+                that.parentScene = null;
+                that.mask.tweener.clear().fadeIn(300).call(function(){appMain.replaceScene(shotgun.TitleScene());});
             });
 
         //目隠し
