@@ -32,7 +32,7 @@ tm.define("shotgun.Button", {
 
     style: {},
 
-    labelParam: {align: "center", baseline:"middle", outlineWidth:3 },
+    labelParam: {align: "center", baseline:"middle", outlineWidth:3},
 
     text: "",
     push: false,

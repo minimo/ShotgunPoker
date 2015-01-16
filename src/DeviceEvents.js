@@ -81,7 +81,7 @@ var onGamecenterSuccess = function() {
 
 var onGamecenterFailure = function(result) {
     if (DEBUG_GAMECENTER) {
-        AdvanceAlert('GameCenterに接続できませんでした。\n'+result);
+        AdvanceAlert('GameCenterに接続できませんでした\n'+result);
     } else {
 /*
         appMain.pushScene(shotgun.AlertDialog({
@@ -156,7 +156,7 @@ var showLeadersBoard = function(id) {
     if (!ENABLE_PHONEGAP) {
         appMain.pushScene(shotgun.AlertDialog({
             height: SC_H*0.2,
-            text1: "GameCenterに接続できませんでした。",
+            text1: "GameCenterに接続できませんでした",
             fontSize: 32,
             button: "OK"
         }));
@@ -171,7 +171,7 @@ var showLeadersBoard = function(id) {
         if (!ENABLE_GAMECENTER) {
             appMain.pushScene(shotgun.AlertDialog({
                 height: SC_H*0.2,
-                text1: "GameCenterに接続できませんでした。",
+                text1: "GameCenterに接続できませんでした",
                 fontSize: 32,
                 button: "OK"
             }));

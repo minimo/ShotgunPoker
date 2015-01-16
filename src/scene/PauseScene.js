@@ -65,7 +65,7 @@ tm.define("shotgun.PauseScene", {
             });
 
         //終了ボタン
-        shotgun.Button(width, height, "EXIT GAME", {flat: appMain.buttonFlat})
+        shotgun.Button(width, height, "RETURN TO TITLE", {flat: appMain.buttonFlat})
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.85)
             .addEventListener("pushed", function() {

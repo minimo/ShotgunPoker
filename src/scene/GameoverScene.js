@@ -43,12 +43,12 @@ tm.define("shotgun.GameoverScene", {
         //スコア表示
         var mode = parentScene.mode;
         if (appMain.returnJoker) mode += 10;
-        this.score = tm.display.OutlineLabel("SCORE: "+appMain.lastScore[mode], 50)
+        this.score = tm.display.OutlineLabel("SCORE "+appMain.lastScore[mode], 50)
             .addChildTo(this)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.5, SC_H*0.12);
 
-        this.score = tm.display.OutlineLabel("YOUR BEST SCORE: "+appMain.highScore[mode], 40)
+        this.score = tm.display.OutlineLabel("YOUR BEST SCORE IS "+appMain.highScore[mode], 40)
             .addChildTo(this)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.5, SC_H*0.17);
@@ -61,8 +61,11 @@ tm.define("shotgun.GameoverScene", {
                 .setPosition(SC_W*0.2, SC_H*0.22+(i*42));
         }
 
+        //ボタン用パラメータ
+        var param = {flat: appMain.buttonFlat, fontSize:50};
+
         //全画面広告ボタン
-        this.Ad = shotgun.Button(width*0.49, height, "Ad", {flat: appMain.buttonFlat, fontSize:60})
+        this.Ad = shotgun.Button(width*0.5, height, "Ad", param)
             .addChildTo(this)
             .setPosition(SC_W*0.25, SC_H*0.71)
             .addEventListener("pushed", function() {
@@ -76,7 +79,7 @@ tm.define("shotgun.GameoverScene", {
             });
 
         //GAMECENTER
-        shotgun.Button(width*0.49, height, "RANKING", {flat: appMain.buttonFlat, fontSize:60})
+        shotgun.Button(width*0.5, height, "RANKING", param)
             .addChildTo(this)
             .setPosition(SC_W*0.75, SC_H*0.71)
             .addEventListener("pushed", function() {
@@ -87,7 +90,7 @@ tm.define("shotgun.GameoverScene", {
             });
 
         //リトライボタン
-        this.retry = shotgun.Button(width, height, "RETRY", {flat: appMain.buttonFlat, fontSize:60})
+        this.retry = shotgun.Button(width, height, "TRY AGAIN", param)
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.78)
             .addEventListener("pushed", function() {
@@ -97,7 +100,7 @@ tm.define("shotgun.GameoverScene", {
             });
 
         //戻るボタン
-        this.back = shotgun.Button(width, height, "EXIT", {flat: appMain.buttonFlat, fontSize:60})
+        this.back = shotgun.Button(width, height, "RETURN TO TITLE", param)
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.85)
             .addEventListener("pushed", function() {

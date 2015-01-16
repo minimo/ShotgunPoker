@@ -80,7 +80,7 @@ tm.define("shotgun.TitleScene", {
 
         var that = this;
         var width = SC_W, height = 100;
-        var param = {flat: appMain.buttonFlat, fontSize: 60};
+        var param = {flat: appMain.buttonFlat, fontSize: 50};
 
         //プレイスタート
         this.start = shotgun.Button(width, height, "PLAY", param)

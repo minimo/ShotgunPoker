@@ -38,7 +38,7 @@ tm.define("shotgun.SettingScene", {
 
         //ＢＧＭ音量
         var volBGM = appMain.sounds.volumeBGM;
-        tm.display.OutlineLabel("BGM", 60)
+        tm.display.OutlineLabel("BGM", 50)
             .addChildTo(this)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.1, SC_H*0.3);
@@ -53,7 +53,7 @@ tm.define("shotgun.SettingScene", {
 
         //ＳＥ音量
         var volSE = appMain.sounds.volumeSE;
-        tm.display.OutlineLabel("SE", 60)
+        tm.display.OutlineLabel("SE", 50)
             .addChildTo(this)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.1, SC_H*0.4);
@@ -66,14 +66,14 @@ tm.define("shotgun.SettingScene", {
         }
         this.setVolumeSE(appMain.sounds.volumeSE);
 
-        tm.display.OutlineLabel("GAME SETTING", 50)
+        tm.display.OutlineLabel("GAME SETTING", 40)
             .addChildTo(this)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.5, SC_H*0.5);
 
         //ジョーカー戻り設定ボタン
         var that = this;
-        tm.display.OutlineLabel("RETURN JOKER", 50)
+        tm.display.OutlineLabel("RETURN JOKER", 40)
             .addChildTo(this)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.3, SC_H*0.6);
@@ -88,7 +88,7 @@ tm.define("shotgun.SettingScene", {
 
         //戻るボタン
         var width = SC_W, height = 100;
-        shotgun.Button(width, height, "RETURN", {flat: appMain.buttonFlat, fontSize:60})
+        shotgun.Button(width, height, "RETURN TO TITLE", {flat: appMain.buttonFlat, fontSize:50})
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.85)
             .addEventListener("pushed", function() {
