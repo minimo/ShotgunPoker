@@ -76,13 +76,13 @@ tm.define("shotgun.TutorialScene", {
 
         //スコア表示
         var that = this;
-        this.scoreLabel = tm.display.OutlineLabel("SCORE:", 50)
+        this.scoreLabel = tm.display.OutlineLabel("SCORE ", 40)
             .addChildTo(this)
             .setParam(this.labelParamBasic)
             .setPosition(8, 32);
         this.scoreLabel.score = 0;
         this.scoreLabel.update = function() {
-            this.text = "SCORE:"+this.score;
+            this.text = "SCORE "+this.score;
             if (this.score < that.score) {
                 var s = ~~((that.score-this.score)/11);
                 if (s < 3) s=3;
@@ -92,7 +92,7 @@ tm.define("shotgun.TutorialScene", {
         }
 
         //ライフ表示
-        this.lifeLabel = tm.display.OutlineLabel("LIFE:", 50)
+        this.lifeLabel = tm.display.OutlineLabel("LIFE:", 40)
             .addChildTo(this)
             .setParam(this.labelParamBasic)
             .setPosition(8, 96);
@@ -102,7 +102,7 @@ tm.define("shotgun.TutorialScene", {
             var c = this.lifeLabel.lg[i] = tm.display.Sprite("card", CARD_W, CARD_H)
                 .addChildTo(this.lifeLabel)
                 .setScale(0.3)
-                .setPosition(150+i*45, 0)
+                .setPosition(130+i*45, 0)
                 .setFrameIndex(13*3+i);
             c.alpha = 0;
             if (i < this.life) c.alpha = 1;
@@ -127,7 +127,7 @@ tm.define("shotgun.TutorialScene", {
         this.beforeHand = tm.display.OutlineLabel("nothing", 30)
             .addChildTo(this)
             .setParam(this.labelParamBefore)
-            .setPosition(120, by);
+            .setPosition(140, by);
         this.beforeHand.name = "";
         this.beforeHand.alert = false;
         this.beforeHand.update = function() {
