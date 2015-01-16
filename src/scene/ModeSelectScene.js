@@ -12,7 +12,7 @@ tm.define("shotgun.ModeSelectScene", {
     answer: null,
 
     //ラベル用フォントパラメータ
-    labelParam: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:4 },
+    labelParam: {fontFamily:"Yasashisa", align: "center", baseline:"middle", outlineWidth:4 },
 
     init: function() {
         this.superInit();
@@ -31,7 +31,7 @@ tm.define("shotgun.ModeSelectScene", {
             lineColor: 'rgba(200, 200, 200, 0.5)',
             lineWidth: 3,
             shadowColor: 'rgba(0, 0, 0, 0.5)',
-            fontFamily: "azuki",
+            fontFamily: "Yasashisa",
             fontSize: 60,
             radius: 32,
         }

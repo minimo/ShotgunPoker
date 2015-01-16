@@ -11,7 +11,7 @@ tm.define("shotgun.CreditScene", {
 
     //クレジットラベル用パラメータ
     headerParam: {fontFamily:"CasinoRegular", align: "center", baseline:"middle", outlineWidth:2 },
-    labelParam: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:2 },
+    labelParam: {fontFamily:"Yasashisa", align: "center", baseline:"middle", outlineWidth:2 },
 
     init: function() {
         this.superInit();

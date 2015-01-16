@@ -37,16 +37,16 @@ tm.define("shotgun.TutorialScene", {
     onePair: 0,
 
     //ボタン用フォントパラメータ
-    buttonParam: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:4 },
-    labelParam: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:4 },
-    scoreParam: {fontFamily:"azuki", align: "left", baseline:"middle", outlineWidth:2 },
+    buttonParam: {fontFamily:"Yasashisa", align: "center", baseline:"middle", outlineWidth:4 },
+    labelParam: {fontFamily:"Yasashisa", align: "center", baseline:"middle", outlineWidth:4 },
+    scoreParam: {fontFamily:"Yasashisa", align: "left", baseline:"middle", outlineWidth:2 },
 
-    labelParamBasic: {fontFamily: "azuki", align: "left", baseline: "middle",outlineWidth: 3},
-    labelParamBasicCenter: {fontFamily: "azuki", align: "center", baseline: "middle",outlineWidth: 3},
+    labelParamBasic: {fontFamily: "Yasashisa", align: "left", baseline: "middle",outlineWidth: 3},
+    labelParamBasicCenter: {fontFamily: "Yasashisa", align: "center", baseline: "middle",outlineWidth: 3},
     labelParamPoker: {fontFamily: "CasinoRegular",align: "center", baseline: "middle", outlineWidth: 3},
     labelParamHand:  {fontFamily: "CasinoRegular",align: "left", baseline: "middle", outlineWidth: 3},
-    labelParamBefore:{fontFamily: "azuki",align: "left", baseline: "top", outlineWidth: 3},
-    labelParamMsg: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:1 },
+    labelParamBefore:{fontFamily: "Yasashisa",align: "left", baseline: "top", outlineWidth: 3},
+    labelParamMsg: {fontFamily:"Yasashisa", align: "center", baseline:"middle", outlineWidth:1 },
 
     bgColor: 'rgba(50, 150, 50, 1)',
 

@@ -10,8 +10,8 @@ tm.define("shotgun.TitleScene", {
     superClass: tm.app.Scene,
 
     //フォントパラメータ
-    labelParam: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:2, fontWeight:700 },
-    scoreParam: {fontFamily:"azuki", align: "left", baseline:"middle", outlineWidth:2 },
+    labelParam: {fontFamily:"Yasashisa", align: "center", baseline:"middle", outlineWidth:2, fontWeight:700 },
+    scoreParam: {fontFamily:"Yasashisa", align: "left", baseline:"middle", outlineWidth:2 },
 
     bgColor: 'rgba(50, 150, 50, 1)',
 

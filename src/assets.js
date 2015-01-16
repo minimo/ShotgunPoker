@@ -24,8 +24,8 @@ var assets = {
     "finger":       "assets/finger.png",
 
     //Font
-//    "azuki":        "font/azuki.ttf",
-    "azuki":        "font/07YasashisaAntique.ttf",
+//    "Yasashisa":        "font/Yasashisa.ttf",
+    "Yasashisa":        "font/07YasashisaAntique.ttf",
     "CasinoRegular":"font/CasinoRegular.ttf",
     "UbuntuMono":   "font/UbuntuMono-Bold.ttf",
 

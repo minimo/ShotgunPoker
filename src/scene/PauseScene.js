@@ -13,8 +13,8 @@ tm.define("shotgun.PauseScene", {
 
     //ラベル用フォントパラメータ
     headerParam: {fontFamily:"CasinoRegular", align: "center", baseline:"middle", outlineWidth:2 },
-    labelParam: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:2 },
-    scoreParam: {fontFamily:"azuki", align: "left", baseline:"middle", outlineWidth:2 },
+    labelParam: {fontFamily:"Yasashisa", align: "center", baseline:"middle", outlineWidth:2 },
+    scoreParam: {fontFamily:"Yasashisa", align: "left", baseline:"middle", outlineWidth:2 },
 
     init: function(parentScene) {
         this.superInit();
@@ -104,7 +104,7 @@ tm.define("shotgun.ConfirmDialog", {
     answer: null,
 
     //ラベル用フォントパラメータ
-    labelParam: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:4 },
+    labelParam: {fontFamily:"Yasashisa", align: "center", baseline:"middle", outlineWidth:4 },
 
     init: function(caption, button) {
         this.superInit();
@@ -158,7 +158,7 @@ tm.define("shotgun.AlertDialog", {
     superClass: tm.app.Scene,
 
     //ラベル用フォントパラメータ
-    labelParam: {fontFamily:"azuki", align: "center", baseline:"middle", outlineWidth:2 },
+    labelParam: {fontFamily:"Yasashisa", align: "center", baseline:"middle", outlineWidth:2 },
 
     init: function(param) {
         this.superInit();
