@@ -31,10 +31,10 @@ tm.define("shotgun.SettingScene", {
             .setParam(this.headerParam)
             .setPosition(SC_W*0.5, SC_H*0.1);
 
-        tm.display.OutlineLabel("SOUND SETTING", 50)
+        tm.display.OutlineLabel("SOUND SETTING", 40)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.5, SC_H*0.2);
+            .setPosition(SC_W*0.5, SC_H*0.225);
 
         //ＢＧＭ音量
         var volBGM = appMain.sounds.volumeBGM;
@@ -69,18 +69,18 @@ tm.define("shotgun.SettingScene", {
         tm.display.OutlineLabel("GAME SETTING", 40)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.5, SC_H*0.5);
+            .setPosition(SC_W*0.5, SC_H*0.55);
 
         //ジョーカー戻り設定ボタン
         var that = this;
-        tm.display.OutlineLabel("RETURN JOKER", 50)
+        tm.display.OutlineLabel("RETURN JOKER", 40)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.3, SC_H*0.6);
+            .setPosition(SC_W*0.3, SC_H*0.625);
         var width = 250, height = 80;
         this.retJoker = shotgun.ToggleButton(width, height, "ON", "OFF", {flat: appMain.buttonFlat})
             .addChildTo(this)
-            .setPosition(SC_W*0.78, SC_H*0.6)
+            .setPosition(SC_W*0.78, SC_H*0.625)
             .addEventListener("pushed", function() {
                 appMain.returnJoker = that.retJoker.toggleON;
             });
