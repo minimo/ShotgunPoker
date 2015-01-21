@@ -98,7 +98,7 @@ tm.define("shotgun.TitleScene", {
 
                 that.normal.tweener.clear().wait(300).fadeIn(300).call(function(){that.normal.setLock(false);});
                 that.hard.tweener.clear().wait(300).fadeIn(300).call(function(){that.hard.setLock(false);});
-                that.practice.tweener.clear().wait(300).fadeIn(300).call(function(){that.practice.setLock(false);});
+//                that.practice.tweener.clear().wait(300).fadeIn(300).call(function(){that.practice.setLock(false);});
                 that.retJoker_label.tweener.clear().wait(300).fadeIn(300);
                 that.retJoker.tweener.clear().wait(300).fadeIn(300).call(function(){that.retJoker.setLock(false);});
                 that.ret.tweener.clear().wait(300).fadeIn(300).call(function(){that.ret.setLock(false);});
@@ -179,6 +179,7 @@ tm.define("shotgun.TitleScene", {
             });
 
         //プラクティスモード
+/*
         this.practice = shotgun.Button(width, height, "PRACTICE", param)
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.60)
@@ -188,17 +189,17 @@ tm.define("shotgun.TitleScene", {
                 appMain.bonusLife = 0;
                 that.mask.tweener.clear().fadeIn(200).call(function(){appMain.replaceScene(shotgun.MainScene(GAMEMODE_PRACTICE));});
             });
-
+*/
         //ジョーカー戻り設定ボタン
         var that = this;
-        this.retJoker_label = tm.display.OutlineLabel("RETURN JOKER", 50)
+        this.retJoker_label = tm.display.OutlineLabel("RETURN JOKER", 40)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.5, SC_H*0.68)
+            .setPosition(SC_W*0.5, SC_H*0.58)
             .setAlpha(0);
         this.retJoker = shotgun.ToggleButton(300, 80, "ON", "OFF", param)
             .addChildTo(this)
-            .setPosition(SC_W*0.5, SC_H*0.75)
+            .setPosition(SC_W*0.5, SC_H*0.65)
             .setAlpha(0)
             .setLock(true)
             .addEventListener("pushed", function() {
@@ -210,7 +211,7 @@ tm.define("shotgun.TitleScene", {
         //戻る
         this.ret = shotgun.Button(width, height, "RETURN", param)
             .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.5, SC_H*0.85)
+            .setPosition(SC_W*0.5, SC_H*0.75)
             .setAlpha(0)
             .setLock(true)
             .addEventListener("pushed", function() {
@@ -223,7 +224,7 @@ tm.define("shotgun.TitleScene", {
 
                 that.normal.tweener.clear().call(function(){that.normal.setLock(true);}).fadeOut(300);
                 that.hard.tweener.clear().call(function(){that.hard.setLock(true);}).fadeOut(300);
-                that.practice.tweener.clear().call(function(){that.practice.setLock(true);}).fadeOut(300);
+//                that.practice.tweener.clear().call(function(){that.practice.setLock(true);}).fadeOut(300);
                 that.retJoker_label.tweener.clear().fadeOut(300);
                 that.retJoker.tweener.clear().call(function(){that.retJoker.setLock(true);}).fadeOut(300);
                 that.ret.tweener.clear().call(function(){that.ret.setLock(true);}).fadeOut(300);

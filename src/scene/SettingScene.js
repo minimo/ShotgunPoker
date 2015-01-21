@@ -73,7 +73,7 @@ tm.define("shotgun.SettingScene", {
 
         //ジョーカー戻り設定ボタン
         var that = this;
-        tm.display.OutlineLabel("RETURN JOKER", 40)
+        tm.display.OutlineLabel("RETURN JOKER", 50)
             .addChildTo(this)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.3, SC_H*0.6);

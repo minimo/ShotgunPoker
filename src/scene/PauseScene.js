@@ -36,7 +36,7 @@ tm.define("shotgun.PauseScene", {
         var lb = tm.display.OutlineLabel("YOUR HAND LIST", 40)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.5, SC_H*0.2);
+            .setPosition(SC_W*0.5, SC_H*0.175);
 
         for (var i = 0; i < 12; i++) {
             tm.display.OutlineLabel(appMain.handList[i].name+":"+parentScene.handCount[appMain.handList[i].point], 40)
