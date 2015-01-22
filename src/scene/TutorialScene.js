@@ -127,7 +127,7 @@ tm.define("shotgun.TutorialScene", {
         this.beforeHand = tm.display.OutlineLabel("nothing", 30)
             .addChildTo(this)
             .setParam(this.labelParamBefore)
-            .setPosition(140, by);
+            .setPosition(145, by);
         this.beforeHand.name = "";
         this.beforeHand.alert = false;
         this.beforeHand.update = function() {
