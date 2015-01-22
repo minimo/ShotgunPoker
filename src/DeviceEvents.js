@@ -35,7 +35,7 @@ var onDeviceReady = function () {
             interstitialId: admobid.interstitial,
             position: AdMob.AD_POSITION.BOTTOM_CENTER,
             bgColor: 'black',
-            isTesting: TEST_ADMOB,
+            isTesting: false,//TEST_ADMOB,
             autoShow: true
         };
         AdMob.setOptions(defaultOptions);
@@ -138,11 +138,13 @@ function cordovaPath() {
 
 var ad_units = {
     ios : {
-        banner: '/6253334/dfp_example_ad', // or DFP format "/6253334/dfp_example_ad"
-        interstitial: 'ca-app-pub-3940256099942544/4411468910'
+        banner:       'ca-app-pub-4753786498901311/3019381180', // or DFP format "/6253334/dfp_example_ad"
+        interstitial: 'ca-app-pub-4753786498901311/7270571985'
+//        banner: '/6253334/dfp_example_ad', // or DFP format "/6253334/dfp_example_ad"
+//        interstitial: 'ca-app-pub-3940256099942544/4411468910'
     },
     android : {
-        banner: 'ca-app-pub-4753786498901311/7270571985', // or DFP format "/6253334/dfp_example_ad"
+        banner:       'ca-app-pub-4753786498901311/3019381180', // or DFP format "/6253334/dfp_example_ad"
         interstitial: 'ca-app-pub-4753786498901311/7270571985'
     }
 };
