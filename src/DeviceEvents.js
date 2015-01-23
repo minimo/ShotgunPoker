@@ -17,7 +17,7 @@ DEBUG_GAMECENTER = false;
 //AdMob使用可能フラグ
 ENABLE_ADMOB = false;
 DEBUG_ADMOB = false;
-TEST_ADMOB = true;
+TEST_ADMOB = false;
 
 //PhoneGap Device Events
 var onDeviceReady = function () {
@@ -35,7 +35,7 @@ var onDeviceReady = function () {
             interstitialId: admobid.interstitial,
             position: AdMob.AD_POSITION.BOTTOM_CENTER,
             bgColor: 'black',
-            isTesting: false,//TEST_ADMOB,
+            isTesting: TEST_ADMOB,
             autoShow: true
         };
         AdMob.setOptions(defaultOptions);

@@ -47,6 +47,7 @@ tm.define("shotgun.TutorialScene", {
     labelParamHand:  {fontFamily: "CasinoRegular",align: "left", baseline: "middle", outlineWidth: 3},
     labelParamBefore:{fontFamily: "Yasashisa",align: "left", baseline: "top", outlineWidth: 3},
     labelParamMsg: {fontFamily:"Yasashisa", align: "center", baseline:"middle", outlineWidth:1 },
+    labelParamModeName: {fontFamily: "Yasashisa", align: "right", baseline: "middle",outlineWidth: 3, fontWeight:700},
 
     bgColor: 'rgba(50, 150, 50, 1)',
 
@@ -69,10 +70,16 @@ tm.define("shotgun.TutorialScene", {
         var width = 210, height = 60;
         shotgun.Button(width, height, "←BACK", {flat: appMain.buttonFlat, fontSize:40})
             .addChildTo(this)
-            .setPosition(SC_W*0.80, 72)
+            .setPosition(SC_W*0.80, 90)
             .addEventListener("pushed", function() {
                 appMain.popScene();
             });
+
+        //モード名
+        this.modeLabel = tm.display.OutlineLabel("TUTORIAL", 35)
+            .addChildTo(this)
+            .setParam(this.labelParamModeName)
+            .setPosition(SC_W-5, 25);
 
         //スコア表示
         var that = this;

@@ -219,10 +219,10 @@ tm.define("shotgun.MainScene", {
                 modeName = "PRACTICE";
                 break;
         }
-        this.beforeLabel = tm.display.OutlineLabel(modeName, 40)
+        this.modeLabel = tm.display.OutlineLabel(modeName, 40)
             .addChildTo(this)
             .setParam(this.labelParamModeName)
-            .setPosition(SC_W, 32);
+            .setPosition(SC_W-5, 32);
 
         //カードデッキ
         this.deck = shotgun.CardDeck().addChildTo(this.mainLayer);
