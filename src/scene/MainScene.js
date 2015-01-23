@@ -389,21 +389,26 @@ tm.define("shotgun.MainScene", {
             //役コンプリート判定
             if (!this.complete) {
                 var cp = true;
-                for (var i = 0; i < 12; i++) {
-                    if (i == 9)continue;    //ファイブカードは対象外
-                    if (this.handCount[appMain.handList[i].point] == 0) cp = false;
-                }
+                if (this.handCount[ONEPAIR] == 0) cp = false;
+                if (this.handCount[FLASH] == 0) cp = false;
+                if (this.handCount[TWOPAIR] == 0) cp = false;
+                if (this.handCount[THREECARD] == 0) cp = false;
+                if (this.handCount[FULLHOUSE] == 0) cp = false;
+                if (this.handCount[STRAIGHT] == 0) cp = false;
+                if (this.handCount[FOURCARD] == 0) cp = false;
+                if (this.handCount[STRAIGHTFLASH] == 0) cp = false;
+                if (this.handCount[ROYALSTRAIGHTFLASH] == 0) cp = false;
                 if (cp) {
                     oneUp = true;
                     this.complete = true;
-                    this.messageStack.addMessage("HAND COMPLETE!", 100);
+                    this.messageStack.addMessage("HAND COMPLETE!", 70);
                 }
             }
 
             //初回R.S.Fの場合はライフ＋１
             if (sc == ROYALSTRAIGHTFLASH && this.handCount[sc] == 1) oneUp = true;
 
-            if (oneUp && this.mode != GAMEMODE_PRACTICE) {
+            if (oneUp && this.mode == GAMEMODE_NORMAL) {
                 this.life++;
                 if (this.life > this.lifeMax) {
                     this.life = this.lifeMax;
