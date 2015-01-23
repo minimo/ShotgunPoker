@@ -75,7 +75,7 @@ var onOffline = function() {
 
 // GAMECENTER CallBack
 var onGamecenterSuccess = function() {
-    if (DEBUG_GAMECENTER) AdvanceAlertt('GameCenter connect success');
+    if (DEBUG_GAMECENTER) AdvanceAlert('GameCenter connect success');
     ENABLE_GAMECENTER = true;
 }
 
