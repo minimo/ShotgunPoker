@@ -140,7 +140,13 @@ tm.define("shotgun.MainScene", {
                     if (that.life < this.beforeLife) {
                         this.lg[this.beforeLife-1].tweener.clear().scale(0.0, 500);
                     } else if (that.life > this.beforeLife) {
-                        this.lg[that.life-1].tweener.clear().scale(1,1).fadeIn(1).scale(0.3, 1000, "easeOutBounce");
+                        if (that.life-this.beforeLife < 2) {
+                            this.lg[that.life-1].tweener.clear().scale(1,1).fadeIn(1).scale(0.3, 1000, "easeOutBounce");
+                        } else {
+                            //２ＵＰ用
+                            this.lg[that.life-2].tweener.clear().scale(1,1).fadeIn(1).scale(0.3, 1000, "easeOutBounce");
+                            this.lg[that.life-1].tweener.clear().wait(500).scale(1,1).fadeIn(1).scale(0.3, 1000, "easeOutBounce");
+                        }
                     }
                     this.beforeLife = that.life;
                 }
@@ -383,8 +389,8 @@ tm.define("shotgun.MainScene", {
                 this.score += ps;
             }
 
-            //Life1up判定
-            var oneUp = false;
+            //エクステンド判定
+            var extend = 0;
 
             //役コンプリート判定
             if (!this.complete) {
@@ -399,18 +405,18 @@ tm.define("shotgun.MainScene", {
                 if (this.handCount[STRAIGHTFLASH] == 0) cp = false;
                 if (this.handCount[ROYALSTRAIGHTFLASH] == 0) cp = false;
                 if (cp) {
-                    oneUp = true;
+                    extend++;
                     this.complete = true;
                     this.messageStack.addMessage("HAND COMPLETE!", 70);
                 }
             }
 
             //初回R.S.Fの場合はライフ＋１
-            if (sc == ROYALSTRAIGHTFLASH && this.handCount[sc] == 1) oneUp = true;
+            if (sc == ROYALSTRAIGHTFLASH && this.handCount[sc] == 1) extend++;
 
-            if (oneUp && this.mode == GAMEMODE_NORMAL) {
-                this.life++;
-                if (this.life > this.lifeMax) {
+            if (extend != 0 && this.mode == GAMEMODE_NORMAL) {
+                this.life+=extend;
+                if (this.life == this.lifeMax) {
                     this.life = this.lifeMax;
                 } else {
                     var tmp = tm.app.Object2D()
