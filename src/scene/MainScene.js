@@ -38,6 +38,7 @@ tm.define("shotgun.MainScene", {
     onePair: 0,     //ワンペアの連続回数
     gameend: false, //ゲーム終了フラグ
     complete: false,//役コンプリートフラグ
+    newRecord: false,   //ハイスコア更新フラグ
 
     //カウンタ
     count: 10,      //カード選択カウントダウン用

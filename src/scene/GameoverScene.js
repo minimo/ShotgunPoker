@@ -48,10 +48,17 @@ tm.define("shotgun.GameoverScene", {
             .setParam(this.labelParam)
             .setPosition(SC_W*0.5, SC_H*0.12);
 
-        this.score = tm.display.OutlineLabel("YOUR BEST SCORE IS "+appMain.highScore[mode], 40)
+        this.score = tm.display.OutlineLabel("YOUR BEST SCORE IS "+appMain.highScore[mode], 35)
             .addChildTo(this)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.5, SC_H*0.17);
+        if (this.parentScene.newRecord) {
+            var nr = tm.display.OutlineLabel("NewRecord!!", 20)
+                .addChildTo(this)
+                .setParam(this.labelParam)
+                .setPosition(SC_W*0.82, SC_H*0.20);
+            nr.setFillStyle("Red");
+        }
 
         //役一覧
         for (var i = 0; i < 12; i++) {
