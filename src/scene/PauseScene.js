@@ -45,7 +45,7 @@ tm.define("shotgun.PauseScene", {
                 .setPosition(SC_W*0.2, SC_H*0.25+(i*45));
         }
 
-        if (!parentScene.complete) {
+        if (parentScene.complete) {
             tm.display.OutlineLabel("COMPLETE!!", 35)
                 .addChildTo(this)
                 .setParam(this.labelParam)

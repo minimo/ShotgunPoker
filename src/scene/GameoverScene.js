@@ -52,7 +52,7 @@ tm.define("shotgun.GameoverScene", {
             .addChildTo(this)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.5, SC_H*0.17);
-        if (!this.parentScene.newRecord) {
+        if (this.parentScene.newRecord) {
             var nr = tm.display.OutlineLabel("NewRecord!!", 20)
                 .addChildTo(this)
                 .setParam(this.labelParam)
