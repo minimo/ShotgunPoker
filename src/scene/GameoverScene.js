@@ -52,12 +52,13 @@ tm.define("shotgun.GameoverScene", {
             .addChildTo(this)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.5, SC_H*0.17);
-        if (this.parentScene.newRecord) {
+        if (!this.parentScene.newRecord) {
             var nr = tm.display.OutlineLabel("NewRecord!!", 20)
                 .addChildTo(this)
                 .setParam(this.labelParam)
+                .setFillStyle("Red")
+                .setFillStyleOutline("rgb(255,200,200)")
                 .setPosition(SC_W*0.82, SC_H*0.20);
-            nr.setFillStyle("Red");
         }
 
         //役一覧
