@@ -451,13 +451,54 @@ tm.define("shotgun.MainScene", {
         //スクリーンショット保存
         var kb = appMain.keyboard;
         if (kb.getKeyDown("s")) appMain.canvas.saveAsImage();
-        if (kb.getKeyDown("c")) {
+/*
+        //チート
+        if (kb.getKeyDown("1")) { //RSF
             this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 10));
             this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 11));
             this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 12));
             this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 13));
             this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 1));
         }
+        if (kb.getKeyDown("2")) { //SF
+            this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 10));
+            this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 11));
+            this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 12));
+            this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 13));
+            this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 9));
+        }
+        if (kb.getKeyDown("3")) { //FLASH
+            this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 6));
+            this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 11));
+            this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 12));
+            this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 13));
+            this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 9));
+        }
+        if (kb.getKeyDown("4")) { //Straght
+            this.deck.addHand(this.deck.pickCard(SUIT_HEART, 10));
+            this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 11));
+            this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 12));
+            this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 13));
+            this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 9));
+        }
+        if (kb.getKeyDown("5")) { //4c
+            this.deck.addHand(this.deck.pickCard(SUIT_HEART, 10));
+            this.deck.addHand(this.deck.pickCard(SUIT_CLOVER, 10));
+            this.deck.addHand(this.deck.pickCard(SUIT_DIAMOND, 10));
+            this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 10));
+        }
+        if (kb.getKeyDown("6")) { //3c
+            this.deck.addHand(this.deck.pickCard(SUIT_HEART, 10));
+            this.deck.addHand(this.deck.pickCard(SUIT_CLOVER, 10));
+            this.deck.addHand(this.deck.pickCard(SUIT_DIAMOND, 10));
+        }
+        if (kb.getKeyDown("7")) { //2p
+            this.deck.addHand(this.deck.pickCard(SUIT_HEART, 8));
+            this.deck.addHand(this.deck.pickCard(SUIT_CLOVER, 8));
+            this.deck.addHand(this.deck.pickCard(SUIT_DIAMOND, 10));
+            this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 10));
+        }
+*/
     },
 
     //ゲームオーバー
