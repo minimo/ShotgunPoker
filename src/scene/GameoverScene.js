@@ -121,7 +121,7 @@ tm.define("shotgun.GameoverScene", {
             var c = tm.display.Sprite("card", CARD_W, CARD_H)
                 .addChildTo(this.retry)
 //                .setPosition(SC_W*0.40, SC_H*0.85)
-                .setPosition(130, 0)
+                .setPosition(190, 0)
                 .setFrameIndex(13*3)
                 .tweener.clear()
                 .fadeOut(1)
@@ -136,7 +136,7 @@ tm.define("shotgun.GameoverScene", {
                     tm.display.OutlineLabel("+", 70)
                         .addChildTo(that.retry)
                         .setParam(that.extendParam)
-                        .setPosition(90, 0);
+                        .setPosition(150, 0);
                 });
             this.dispExtend = true;
         }
