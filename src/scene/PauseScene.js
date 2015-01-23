@@ -45,11 +45,13 @@ tm.define("shotgun.PauseScene", {
                 .setPosition(SC_W*0.2, SC_H*0.25+(i*45));
         }
 
-        if (parentScene.complete) {
-            tm.display.OutlineLabel("COMPLETE!!", 40)
+        if (!parentScene.complete) {
+            tm.display.OutlineLabel("COMPLETE!!", 35)
                 .addChildTo(this)
                 .setParam(this.labelParam)
-                .setPosition(SC_W*0.5, SC_H*0.8);
+                .setFillStyle("Red")
+                .setFillStyleOutline("rgb(255,200,200)")
+                .setPosition(SC_W*0.5, SC_H*0.21);
         }
 
         var that = this;
