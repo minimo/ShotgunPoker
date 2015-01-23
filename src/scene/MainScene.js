@@ -451,6 +451,13 @@ tm.define("shotgun.MainScene", {
         //スクリーンショット保存
         var kb = appMain.keyboard;
         if (kb.getKeyDown("s")) appMain.canvas.saveAsImage();
+        if (kb.getKeyDown("c")) {
+            this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 10));
+            this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 11));
+            this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 12));
+            this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 13));
+            this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 1));
+        }
     },
 
     //ゲームオーバー
@@ -465,7 +472,10 @@ tm.define("shotgun.MainScene", {
         var mode = this.mode;
         if (appMain.returnJoker) mode+=10;
         appMain.lastScore[mode] = this.score;
-        if (this.score > appMain.highScore[mode]) appMain.highScore[mode] = this.score;
+        if (this.score > appMain.highScore[mode]) {
+            appMain.highScore[mode] = this.score;
+            this.newRecord = true;
+        }
 
         //GAMECENTERにスコアを登録
         if (ENABLE_GAMECENTER) {
