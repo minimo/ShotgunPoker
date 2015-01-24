@@ -529,24 +529,6 @@ tm.define("shotgun.MainScene", {
             this.newRecord = true;
         }
 
-        //GAMECENTERにスコアを登録
-        if (ENABLE_GAMECENTER) {
-            var lb = "Normal";
-            if (this.mode == GAMEMODE_HARD) lb = "Hard";
-            if (appMain.returnJoker) lb += "_ReturnJoker";
-            var data = {
-                score: this.score,
-                leaderboardId: lb,
-            };
-            gamecenter.submitScore(
-                function() {
-                    if (DEBUG_GAMECENTER) AdvanceAlert('スコア登録に成功しました');
-                },
-                function() {
-                    AdvanceAlert('GAMECENTERへのスコア登録に失敗しました');
-                }, data);
-        }
-
         //メッセージ
         var that = this;
         var lb = tm.display.Sprite("gameover")
@@ -557,6 +539,7 @@ tm.define("shotgun.MainScene", {
             .move(SC_W*0.5, SC_H*0.5, 4000, "easeOutBounce")
             .wait(2000)
             .call(function() {
+                that.registScore();
                 this.remove();
                 appMain.replaceScene(shotgun.GameoverScene(that));
             }.bind(lb));
@@ -634,6 +617,32 @@ tm.define("shotgun.MainScene", {
         lb3.setParam(this.labelParamHand);
         lb3.setPosition(x, y);
         lb3.tweener.clear().wait(wait).call(function(){lb3.remove();});
+    },
+
+    //GameCenterにスコアを登録
+    registScore: function() {
+        //GAMECENTERにスコアを登録
+        if (ENABLE_GAMECENTER) {
+            var lb = "Normal";
+            if (that.mode == GAMEMODE_HARD) lb = "Hard";
+            if (appMain.returnJoker) lb += "_ReturnJoker";
+            var data = {
+                score: this.score,
+                leaderboardId: lb,
+            };
+            gamecenter.submitScore(
+                function() {
+                    if (DEBUG_GAMECENTER) AdvanceAlert('スコア登録に成功しました');
+                },
+                function() {
+                    appMain.pushScene(shotgun.AlertDialog({
+                        height: SC_H*0.2,
+                        text1: "スコア登録に失敗しました",
+                        fontSize: 32,
+                        button: "OK"
+                    }));
+                }, data);
+        }
     },
 
     //タッチorクリック開始処理
