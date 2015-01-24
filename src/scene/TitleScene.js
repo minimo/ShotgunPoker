@@ -87,9 +87,8 @@ tm.define("shotgun.TitleScene", {
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.40)
             .addEventListener("pushed", function() {
-//                appMain.bonusLife = 0;
-//                that.mask.tweener.clear().fadeIn(200).call(function(){appMain.replaceScene(shotgun.MainScene());});
                 that.buttonLock(true);
+
                 that.start.tweener.clear().moveBy(0, SC_H, 500, "easeInQuint");
                 that.tutorial.tweener.clear().moveBy(0, SC_H, 500, "easeInQuint");
                 that.option.tweener.clear().moveBy(0, SC_H, 500, "easeInQuint");

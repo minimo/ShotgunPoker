@@ -414,19 +414,17 @@ tm.define("shotgun.MainScene", {
             //初回R.S.Fの場合はライフ＋１
             if (sc == ROYALSTRAIGHTFLASH && this.handCount[sc] == 1) extend++;
 
+            //エクステンド処理
             if (extend != 0 && this.mode == GAMEMODE_NORMAL) {
-                this.life+=extend;
-                if (this.life == this.lifeMax) {
-                    this.life = this.lifeMax;
-                } else {
-                    var tmp = tm.app.Object2D()
-                        .addChildTo(this)
-                        .tweener.clear()
-                        .wait(1000)
-                        .call(function(){
-                            appMain.playSE("extend");
-                        });
-                }
+                var that = this;
+                var tmp = tm.app.Object2D()
+                    .addChildTo(this)
+                    .tweener.clear()
+                    .wait(1000)
+                    .call(function(){
+                        that.life+=extend;
+                        appMain.playSE("extend");
+                    });
             }
 
             //ゲームオーバー判定
