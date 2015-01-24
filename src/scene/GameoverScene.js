@@ -9,6 +9,8 @@
 tm.define("shotgun.GameoverScene", {
     superClass: tm.app.Scene,
 
+    parentScene: null,
+    mode: 0,
     dispExtend: false,
 
     //ラベル用フォントパラメータ
@@ -41,14 +43,14 @@ tm.define("shotgun.GameoverScene", {
             .setPosition(SC_W*0.5, SC_H*0.05);
 
         //スコア表示
-        var mode = parentScene.mode;
-        if (appMain.returnJoker) mode += 10;
-        this.score = tm.display.OutlineLabel("SCORE "+appMain.lastScore[mode], 50)
+        this.mode = parentScene.mode;
+        if (appMain.returnJoker) this.mode += 10;
+        this.score = tm.display.OutlineLabel("SCORE "+appMain.lastScore[this.mode], 50)
             .addChildTo(this)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.5, SC_H*0.12);
 
-        this.score = tm.display.OutlineLabel("YOUR BEST SCORE IS "+appMain.highScore[mode], 35)
+        this.score = tm.display.OutlineLabel("YOUR BEST SCORE IS "+appMain.highScore[this.mode], 35)
             .addChildTo(this)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.5, SC_H*0.17);
@@ -83,7 +85,7 @@ tm.define("shotgun.GameoverScene", {
                         autoShow:true
                     });
                 }
-                if (parentScene.mode != GAMEMODE_HARD) appMain.bonusLife = 1;
+                if (this.mode != GAMEMODE_HARD) appMain.bonusLife = 1;
             });
 
         //GAMECENTER
@@ -91,8 +93,9 @@ tm.define("shotgun.GameoverScene", {
             .addChildTo(this)
             .setPosition(SC_W*0.75, SC_H*0.71)
             .addEventListener("pushed", function() {
+                var mode = that.parentScene.mode;
                 var lb = "Normal";
-                if (parentScene.mode == GAMEMODE_HARD) lb = "Hard";
+                if (mode == GAMEMODE_HARD) lb = "Hard";
                 if (appMain.returnJoker) lb += "_ReturnJoker";
                 showLeadersBoard(lb);
             });
@@ -121,6 +124,9 @@ tm.define("shotgun.GameoverScene", {
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.5);
         this.mask.tweener.clear().fadeOut(200);
+
+        //GameCenter登録
+        this.registScore();
     },
 
     update: function() {
@@ -147,6 +153,27 @@ tm.define("shotgun.GameoverScene", {
                         .setPosition(150, 0);
                 });
             this.dispExtend = true;
+        }
+    },
+
+    //GameCenterにスコアを登録
+    registScore: function() {
+        //GAMECENTERにスコアを登録
+        if (ENABLE_GAMECENTER) {
+            var lb = "Normal";
+            if (this.mode == GAMEMODE_HARD) lb = "Hard";
+            if (appMain.returnJoker) lb += "_ReturnJoker";
+            var data = {
+                score: this.score,
+                leaderboardId: lb,
+            };
+            gamecenter.submitScore(
+                function() {
+                    if (DEBUG_GAMECENTER) AdvanceAlert('スコア登録に成功しました');
+                },
+                function() {
+                    if (DEBUG_GAMECENTER) AdvanceAlert('スコア登録に失敗しました');
+                }, data);
         }
     },
 
