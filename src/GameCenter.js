@@ -17,18 +17,7 @@ var onGamecenterSuccess = function() {
 }
 
 var onGamecenterFailure = function(result) {
-    if (DEBUG_GAMECENTER) {
-        AdvanceAlert('GameCenterに接続できませんでした\n'+result);
-    } else {
-/*
-        appMain.pushScene(shotgun.AlertDialog({
-            height: SC_H*0.2,
-            text1: "GameCenterに接続できませんでした。",
-            fontSize: 32,
-            button: "OK"
-        }));
-*/
-    }
+    if (DEBUG_GAMECENTER) AdvanceAlert('GameCenterに接続できませんでした\n'+result);
     ENABLE_GAMECENTER = false;
 }
 
