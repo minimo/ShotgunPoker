@@ -624,7 +624,7 @@ tm.define("shotgun.MainScene", {
         //GAMECENTERにスコアを登録
         if (ENABLE_GAMECENTER) {
             var lb = "Normal";
-            if (that.mode == GAMEMODE_HARD) lb = "Hard";
+            if (this.mode == GAMEMODE_HARD) lb = "Hard";
             if (appMain.returnJoker) lb += "_ReturnJoker";
             var data = {
                 score: this.score,
