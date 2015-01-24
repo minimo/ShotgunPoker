@@ -64,3 +64,11 @@ var onOffline = function() {
     if (DEBUG_PHONEGAP) AdvanceAlert('offlineイベントが発火しました');
 }
 
+//Phonegap Event listener
+document.addEventListener("deviceready", onDeviceReady, false);
+document.addEventListener('pause', onPause, false);
+document.addEventListener('resume', onResume, false);
+document.addEventListener('online', onOnline, false);
+document.addEventListener('offline', onOffline, false);
+
+

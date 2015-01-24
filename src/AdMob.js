@@ -11,6 +11,21 @@ ENABLE_ADMOB = false;
 DEBUG_ADMOB = false;
 TEST_ADMOB = false;
 
+var ad_units = {
+    ios : {
+        banner:       'ca-app-pub-4753786498901311/3019381180', // or DFP format "/6253334/dfp_example_ad"
+        interstitial: 'ca-app-pub-4753786498901311/7270571985'
+//        banner: '/6253334/dfp_example_ad', // or DFP format "/6253334/dfp_example_ad"
+//        interstitial: 'ca-app-pub-3940256099942544/4411468910'
+    },
+    android : {
+        banner:       'ca-app-pub-4753786498901311/3019381180', // or DFP format "/6253334/dfp_example_ad"
+        interstitial: 'ca-app-pub-4753786498901311/7270571985'
+    }
+};
+// select the right Ad Id according to platform
+var admobid = ( /(android)/i.test(navigator.userAgent) ) ? ad_units.android : ad_units.ios;
+
 // AdMob CallBack
 var onBannerLeaveApp = function(result) {
     if (DEBUG_ADMOB) AdvanceAlert('OnBannerLeaveApp\n'+result);
@@ -38,19 +53,3 @@ document.addEventListener('onBannerDismiss', onBannerDismiss, false);
 document.addEventListener('onInterstitialPresent', onInterstitialPresent, false);
 document.addEventListener('onInterstitialLeaveApp', onInterstitialLeaveApp, false);
 document.addEventListener('onInterstitialDissmiss', onInterstitialDissmiss, false);
-
-var ad_units = {
-    ios : {
-        banner:       'ca-app-pub-4753786498901311/3019381180', // or DFP format "/6253334/dfp_example_ad"
-        interstitial: 'ca-app-pub-4753786498901311/7270571985'
-//        banner: '/6253334/dfp_example_ad', // or DFP format "/6253334/dfp_example_ad"
-//        interstitial: 'ca-app-pub-3940256099942544/4411468910'
-    },
-    android : {
-        banner:       'ca-app-pub-4753786498901311/3019381180', // or DFP format "/6253334/dfp_example_ad"
-        interstitial: 'ca-app-pub-4753786498901311/7270571985'
-    }
-};
-
-// select the right Ad Id according to platform
-var admobid = ( /(android)/i.test(navigator.userAgent) ) ? ad_units.android : ad_units.ios;

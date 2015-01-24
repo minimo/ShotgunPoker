@@ -6,10 +6,6 @@
  */
 
 //定数
-//PhoneGap使用可能フラグ
-ENABLE_PHONEGAP = false;
-DEBUG_PHONEGAP = false;
-
 //GAMECENTER使用可能フラグ
 ENABLE_GAMECENTER = false;
 DEBUG_GAMECENTER = false;
