@@ -129,6 +129,7 @@ tm.define("shotgun.TitleScene", {
             .addEventListener("pushed", function() {
                 that.buttonLock(true);
                 showLeadersBoard();
+                that.buttonLock(false);
             });
 
         //クレジット

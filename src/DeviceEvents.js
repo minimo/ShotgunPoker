@@ -185,6 +185,6 @@ var showLeadersBoard = function(id) {
 //        period: "today",
         leaderboardId: id,
     };
-    gamecenter.showLeaderboard(onGamecenterSuccess, onGamecenterFailure, data);
+    gamecenter.showLeaderboard(function(){}, function(){}, data);
     return true;
 }
