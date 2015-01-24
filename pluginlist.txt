@@ -1,11 +1,24 @@
 //UsingPluginList
+
 //Gamecenter
 //https://github.com/leecrossley/cordova-plugin-game-center.git
+
 //Admob
 //https://github.com/floatinghotpot/cordova-admob-pro.git
+
 //StatusBar
 //https://github.com/apache/cordova-plugin-statusbar.git
+
 //Device
 //https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
+
 //WKWebView
 //https://github.com/Telerik-Verified-Plugins/WKWebView.git
+
+com.google.admobsdk 6.12.2 "AdMob SDK for Android, iOS and WP8"
+com.google.cordova.admob 2.5.0 "AdMob PluginPro with Mediations"
+com.rjfun.cordova.extension 1.0.5 "Cordova Plugin Extension"
+com.telerik.plugins.wkwebview 0.2.7 "WKWebView Polyfill"
+org.apache.cordova.device 0.2.13-dev "Device"
+org.apache.cordova.statusbar 0.1.9-dev "StatusBar"
+uk.co.ilee.gamecenter 0.3.0 "Game Center"
