@@ -15,6 +15,9 @@ tm.define("shotgun.CanvasApp", {
 
     version: "1.0.0",
 
+    //初回起動フラグ
+    firstGame: false,
+
     //ＢＧＭ＆効果音
     bgm: null,
     bgmIsPlay: false,
@@ -101,6 +104,7 @@ tm.define("shotgun.CanvasApp", {
     //設定データの保存
     saveConfig: function() {
         var saveObj = {
+            "firstGame": false,
             "language": this.language,
             "volumeBGM": this.sounds.volumeBGM,
             "volumeSE": this.sounds.volumeSE,
@@ -143,6 +147,7 @@ tm.define("shotgun.CanvasApp", {
             var c = JSON.parse(cfg);
             c.$safe(cfgDef);
 
+            this.firstGame = false;
             this.language = c.language;
             this.sounds.volumeBGM = c.volumeBGM;
             this.sounds.volumeSE = c.volumeSE;
@@ -156,6 +161,10 @@ tm.define("shotgun.CanvasApp", {
             this.lastScore[GAMEMODE_HARD] = c.lastScore_hard;
             this.highScore[GAMEMODE_HARD+10] = c.highScore_hard_ret;
             this.lastScore[GAMEMODE_HARD+10] = c.lastScore_hard_ret;
+        } else {
+            //初期情報書き込み
+            this.saveConfig();
+            this.firstGame = true;
         }
         return this;
     },
