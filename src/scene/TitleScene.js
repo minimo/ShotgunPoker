@@ -299,7 +299,6 @@ tm.define("shotgun.TitleScene", {
     update: function() {
         if (appMain.firstGame) {
             appMain.pushScene(shotgun.TutorialScene());
-            appMain.firstGame = false;
         }
         if (this.time % 7 == 0) {
             var c = tm.display.Sprite("card", CARD_W, CARD_H)
