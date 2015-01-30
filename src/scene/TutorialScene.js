@@ -287,19 +287,21 @@ tm.define("shotgun.TutorialScene", {
     startPhase1: function() {
         var pos = SC_H*0.3;
         var that = this;
-        this.ctrl.tweener.clear().wait(2000);
+        this.ctrl.tweener.clear()
+            .wait(2000)
+            .call(function(){
+                that.enterMessage(pos, 3000, "ショットガンポーカーの遊び方", 40);
+            }).wait(4000);
 
         if (appMain.firstGame) {
             appMain.firstGame = false;
             this.ctrl.tweener
                 .call(function(){
-                    that.enterMessage(pos, 3000, "ショットガンポーカーの遊び方", 40);
-                }).wait(3000)
-                .call(function(){
                     that.enterMessage(pos, 3000, "スキップしたい場合は右上の", 40);
                     that.enterMessage(pos+60, 3000, "SKIPボタンを押してください", 40);
                 }).wait(4000)
         }
+
         this.ctrl.tweener
             .call(function(){
                 that.enterMessage(pos, 6000, "制限時間内にカードを５枚選んで", 40);
