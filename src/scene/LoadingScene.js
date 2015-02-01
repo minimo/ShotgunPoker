@@ -162,6 +162,7 @@ tm.define("shotgun.LoadingScene", {
     _onLoadAssets: function() {
         appMain.sounds.add("titleBGM",    "assets/game_maoudamashii_5_casino02.mp3");
         appMain.sounds.add("mainBGM",     "assets/game_maoudamashii_5_casino01.mp3");
+        appMain.sounds.add("hardBGM",     "assets/game_maoudamashii_5_casino03.mp3");
         appMain.sounds.add("tutorialBGM", "assets/game_maoudamashii_5_casino04.mp3");
         appMain.sounds.add("countdown",   "assets/se_countdown.mp3");
         appMain.sounds.add("deal",        "assets/se_deal.mp3");

@@ -213,17 +213,20 @@ tm.define("shotgun.MainScene", {
                 appMain.pushScene(shotgun.PauseScene(this));
             }.bind(this));
 
-        //モード名称表示
+        //モード名称表示とBGM
         var modeName;
         switch(mode) {
             case GAMEMODE_NORMAL:
                 modeName = "NORMAL";
+                appMain.playBGM("mainBGM");
                 break;
             case GAMEMODE_HARD:
                 modeName = "HARD";
+                appMain.playBGM("hardBGM");
                 break;
             case GAMEMODE_PRACTICE:
                 modeName = "PRACTICE";
+                appMain.playBGM("mainBGM");
                 break;
         }
         this.modeLabel = tm.display.OutlineLabel(modeName, 40)
@@ -233,9 +236,6 @@ tm.define("shotgun.MainScene", {
 
         //カードデッキ
         this.deck = shotgun.CardDeck().addChildTo(this.mainLayer);
-
-        //BGM再生
-        appMain.playBGM("mainBGM");
 
         //スタートアップ
         var lb = this.readyLabel = tm.display.Sprite("ready")
