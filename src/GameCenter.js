@@ -21,6 +21,7 @@ var onGamecenterFailure = function(result) {
     ENABLE_GAMECENTER = false;
 }
 
+//リーダーズボード参照
 var showLeadersBoard = function(id) {
     id = id || "";
 
@@ -56,4 +57,25 @@ var showLeadersBoard = function(id) {
     };
     gamecenter.showLeaderboard(function(){}, function(){}, data);
     return true;
+}
+
+//GameCenterにスコアを登録
+registScore: function(mode, score) {
+    //GAMECENTERにスコアを登録
+    if (ENABLE_GAMECENTER) {
+        var lb = "Normal";
+        if (mode == GAMEMODE_HARD) lb = "Hard";
+        if (appMain.returnJoker) lb += "_ReturnJoker";
+        var data = {
+            score: score,
+            leaderboardId: lb,
+        };
+        gamecenter.submitScore(
+            function() {
+                if (DEBUG_GAMECENTER) AdvanceAlert('スコア登録に成功しました');
+            },
+            function() {
+                if (DEBUG_GAMECENTER) AdvanceAlert('スコア登録に失敗しました');
+            }, data);
+    }
 }
