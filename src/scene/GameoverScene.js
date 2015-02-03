@@ -126,7 +126,7 @@ tm.define("shotgun.GameoverScene", {
         this.mask.tweener.clear().fadeOut(200);
 
         //GameCenter登録
-        this.registScore();
+//        this.registScore();
     },
 
     update: function() {
@@ -158,9 +158,6 @@ tm.define("shotgun.GameoverScene", {
 
     //GameCenterにスコアを登録
     registScore: function() {
-        if (!USE_GAMECENTER) return;
-
-        //GAMECENTERにスコアを登録
         if (ENABLE_GAMECENTER) {
             var lb = "Normal";
             if (this.mode == GAMEMODE_HARD) lb = "Hard";
