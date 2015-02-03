@@ -127,7 +127,7 @@ var showLeadersBoard = function(id) {
 }
 
 //GameCenterにスコアを登録
-var registScore: function(mode, score) {
+var registScore = function(mode, score) {
     if (ENABLE_GAMECENTER) {
         var lb = "Normal";
         if (mode == GAMEMODE_HARD) lb = "Hard";
