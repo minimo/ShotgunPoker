@@ -10,6 +10,9 @@
 ENABLE_GAMECENTER = false;
 DEBUG_GAMECENTER = false;
 
+//GameCenter使用フラグ
+USE_GAMECENTER = false;
+
 // GAMECENTER CallBack
 var onGamecenterSuccess = function() {
     if (DEBUG_GAMECENTER) AdvanceAlert('GameCenter connect success');
@@ -23,6 +26,8 @@ var onGamecenterFailure = function(result) {
 
 //リーダーズボード参照
 var showLeadersBoard = function(id) {
+    if (!USE_GAMECENTER) return false;
+
     id = id || "";
 
     if (!ENABLE_PHONEGAP) {
@@ -60,7 +65,9 @@ var showLeadersBoard = function(id) {
 }
 
 //GameCenterにスコアを登録
-registScore: function(mode, score) {
+var registScore: function(mode, score) {
+    if (!USE_GAMECENTER) return;
+
     //GAMECENTERにスコアを登録
     if (ENABLE_GAMECENTER) {
         var lb = "Normal";

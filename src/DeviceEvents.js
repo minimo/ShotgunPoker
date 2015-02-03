@@ -34,7 +34,9 @@ var onDeviceReady = function () {
     }
 
     //Game Center Plugin
-    gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
+    if (USE_GAMECENTER) {
+        gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
+    }
 }
 
 var onPause = function() {

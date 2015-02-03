@@ -90,7 +90,7 @@ tm.define("shotgun.GameoverScene", {
 
         //GAMECENTER
         shotgun.Button(width*0.5, height, "RANKING", param)
-            .addChildTo(this)
+//            .addChildTo(this)
             .setPosition(SC_W*0.75, SC_H*0.71)
             .addEventListener("pushed", function() {
                 var mode = that.parentScene.mode;
@@ -158,6 +158,8 @@ tm.define("shotgun.GameoverScene", {
 
     //GameCenterにスコアを登録
     registScore: function() {
+        if (!USE_GAMECENTER) return;
+
         //GAMECENTERにスコアを登録
         if (ENABLE_GAMECENTER) {
             var lb = "Normal";

@@ -123,7 +123,7 @@ tm.define("shotgun.TitleScene", {
 
         //RANKING
         this.ranking = shotgun.Button(width, height, "RANKING", param)
-            .addChildTo(this.titleLayer)
+//            .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.5, SC_H*0.60)
             .addEventListener("pushed", function() {
                 that.buttonLock(true);
@@ -134,7 +134,7 @@ tm.define("shotgun.TitleScene", {
         //クレジット
         this.credit = shotgun.Button(width, height, "CREDIT", param)
             .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.5, SC_H*0.70)
+            .setPosition(SC_W*0.5, SC_H*0.60)
             .addEventListener("pushed", function() {
                 that.buttonLock(true);
                 that.mask.tweener.clear()
@@ -146,7 +146,7 @@ tm.define("shotgun.TitleScene", {
         //設定
         this.option = shotgun.Button(width, height, "OPTION", param)
             .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.5, SC_H*0.80)
+            .setPosition(SC_W*0.5, SC_H*0.70)
             .addEventListener("pushed", function() {
                 that.buttonLock(true);
                 that.mask.tweener.clear()
