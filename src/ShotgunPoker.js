@@ -13,7 +13,7 @@ shotgun = {
 tm.define("shotgun.CanvasApp", {
     superClass: tm.app.CanvasApp,
 
-    version: "1.0.0",
+    version: "1.0.1",
 
     //初回起動フラグ
     firstGame: false,
