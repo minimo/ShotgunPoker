@@ -85,7 +85,7 @@ tm.define("shotgun.GameoverScene", {
                         autoShow:true
                     });
                 }
-                if (this.mode != GAMEMODE_HARD) appMain.bonusLife = 1;
+                if (that.mode != GAMEMODE_HARD && that.mode != GAMEMODE_HARD+10) appMain.bonusLife = 1;
             });
 
         //GAMECENTER
