@@ -24,6 +24,13 @@ tm.define("shotgun.GameoverScene", {
         this.background = "rgba(0, 0, 0, 0.0)";
 
         this.parentScene = parentScene;
+        this.mode = parentScene.mode;
+
+        //スコア情報取得
+        var m = appMain.returnJoker? this.mode+10: this.mode;
+        var lastScore = appMain.lastScore[m];
+        var highScore = appMain.highScore[m];
+        var newRecord = parentScene.newRecord;
 
         //バックグラウンド
         this.bg = tm.display.RectangleShape(SC_W, SC_H, {fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor})
@@ -43,18 +50,16 @@ tm.define("shotgun.GameoverScene", {
             .setPosition(SC_W*0.5, SC_H*0.05);
 
         //スコア表示
-        this.mode = parentScene.mode;
-        if (appMain.returnJoker) this.mode += 10;
-        this.score = tm.display.OutlineLabel("SCORE "+appMain.lastScore[this.mode], 50)
+        this.score = tm.display.OutlineLabel("SCORE "+lastScore, 50)
             .addChildTo(this)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.5, SC_H*0.12);
 
-        this.score = tm.display.OutlineLabel("YOUR BEST SCORE IS "+appMain.highScore[this.mode], 35)
+        this.score = tm.display.OutlineLabel("YOUR BEST SCORE IS "+highScore, 35)
             .addChildTo(this)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.5, SC_H*0.17);
-        if (this.parentScene.newRecord) {
+        if (newRecord) {
             var nr = tm.display.OutlineLabel("NewRecord!!", 20)
                 .addChildTo(this)
                 .setParam(this.labelParam)
@@ -85,7 +90,7 @@ tm.define("shotgun.GameoverScene", {
                         autoShow:true
                     });
                 }
-                if (that.mode != GAMEMODE_HARD && that.mode != GAMEMODE_HARD+10) appMain.bonusLife = 1;
+                if (that.mode != GAMEMODE_HARD) appMain.bonusLife = 1;
             });
 
         //GAMECENTER
@@ -126,7 +131,7 @@ tm.define("shotgun.GameoverScene", {
         this.mask.tweener.clear().fadeOut(200);
 
         //GameCenter登録
-//        registScore(parentScene.mode, appMain.lastScore[this.mode]);
+        registScore(this.mode, appMain.returnJoker, lastScore);
     },
 
     update: function() {
@@ -134,7 +139,6 @@ tm.define("shotgun.GameoverScene", {
             var that = this;
             var c = tm.display.Sprite("card", CARD_W, CARD_H)
                 .addChildTo(this.retry)
-//                .setPosition(SC_W*0.40, SC_H*0.85)
                 .setPosition(190, 0)
                 .setFrameIndex(13*3)
                 .tweener.clear()

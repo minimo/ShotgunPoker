@@ -130,11 +130,11 @@ var showLeadersBoard = function(id) {
 }
 
 //GameCenterにスコアを登録
-var registScore = function(mode, score) {
+var registScore = function(mode, returnJoker, score) {
     if (ENABLE_GAMECENTER) {
         var lb = "Normal";
         if (mode == GAMEMODE_HARD) lb = "Hard";
-        if (appMain.returnJoker) lb += "_ReturnJoker";
+        if (returnJoker) lb += "_ReturnJoker";
         gamecenter.submitScore(
             function() {
                 if (DEBUG_GAMECENTER) AdvanceAlert('スコア登録に成功しました');
