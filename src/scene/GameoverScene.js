@@ -90,7 +90,7 @@ tm.define("shotgun.GameoverScene", {
 
         //GAMECENTER
         shotgun.Button(width*0.5, height, "RANKING", param)
-//            .addChildTo(this)
+            .addChildTo(this)
             .setPosition(SC_W*0.75, SC_H*0.71)
             .addEventListener("pushed", function() {
                 var mode = that.parentScene.mode;
@@ -126,7 +126,7 @@ tm.define("shotgun.GameoverScene", {
         this.mask.tweener.clear().fadeOut(200);
 
         //GameCenter登録
-//        this.registScore();
+//        registScore(parentScene.mode, appMain.lastScore[this.mode]);
     },
 
     update: function() {
@@ -153,26 +153,6 @@ tm.define("shotgun.GameoverScene", {
                         .setPosition(150, 0);
                 });
             this.dispExtend = true;
-        }
-    },
-
-    //GameCenterにスコアを登録
-    registScore: function() {
-        if (ENABLE_GAMECENTER) {
-            var lb = "Normal";
-            if (this.mode == GAMEMODE_HARD) lb = "Hard";
-            if (appMain.returnJoker) lb += "_ReturnJoker";
-            var data = {
-                score: this.score,
-                leaderboardId: lb,
-            };
-            gamecenter.submitScore(
-                function() {
-                    if (DEBUG_GAMECENTER) AdvanceAlert('スコア登録に成功しました');
-                },
-                function() {
-                    if (DEBUG_GAMECENTER) AdvanceAlert('スコア登録に失敗しました');
-                }, data);
         }
     },
 

@@ -43,7 +43,7 @@ var onDeviceReady = function () {
     }
 
     //Game Center Plugin
-//    gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
+    gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
 }
 
 var onPause = function() {
@@ -135,17 +135,16 @@ var registScore = function(mode, score) {
         var lb = "Normal";
         if (mode == GAMEMODE_HARD) lb = "Hard";
         if (appMain.returnJoker) lb += "_ReturnJoker";
-        var data = {
-            score: score,
-            leaderboardId: lb,
-        };
         gamecenter.submitScore(
             function() {
                 if (DEBUG_GAMECENTER) AdvanceAlert('スコア登録に成功しました');
             },
             function() {
                 if (DEBUG_GAMECENTER) AdvanceAlert('スコア登録に失敗しました');
-            }, data);
+            }, {
+                score: score,
+                leaderboardId: lb,
+            });
     }
 }
 
