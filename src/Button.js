@@ -82,22 +82,26 @@ tm.define("shotgun.Button", {
         if (!style.flat) {
             //ボタン影
             var shadowStyle = {
+                width: width,
+                height: height,
                 fillStyle: style.shadowColor,
                 strokeStyle: style.shadowColor,
                 lineWidth: style.lineWidth
             };
-            this.shadow = tm.display.RectangleShape(width, height, shadowStyle)
+            this.shadow = tm.display.RectangleShape(shadowStyle)
                 .addChildTo(this)
                 .setPosition(this.downX, this.downY);
             this.shadow.blendMode = "source-over";
         }
         //ボタン本体
         var buttonStyle = {
+            width: width,
+            height: height,
             fillStyle: style.buttonColor,
             strokeStyle: style.lineColor,
             lineWidth: style.lineWidth
         };
-        this.button = tm.display.RectangleShape(width, height, buttonStyle)
+        this.button = tm.display.RectangleShape(buttonStyle)
             .addChildTo(this);
         if (style.flat) this.button.setAlpha(this.alphaOFF);
 
@@ -211,24 +215,28 @@ tm.define("shotgun.RoundButton", {
 
         //ボタン影
         var shadowStyle = {
+            width: width,
+            height: height,
             fillStyle: style.shadowColor,
             strokeStyle: style.shadowColor,
             lineWidth: style.lineWidth,
             radius: style.radius,
         };
-        this.shadow = tm.display.RoundRectangleShape(width, height, shadowStyle)
+        this.shadow = tm.display.RoundRectangleShape(shadowStyle)
             .addChildTo(this)
             .setPosition(this.downX, this.downY);
         this.shadow.blendMode = "source-over";
 
         //ボタン本体
         var buttonStyle = {
+            width: width,
+            height: height,
             fillStyle: style.buttonColor,
             strokeStyle: style.lineColor,
             lineWidth: style.lineWidth,
             radius: style.radius,
         };
-        this.button = tm.display.RoundRectangleShape(width, height, buttonStyle)
+        this.button = tm.display.RoundRectangleShape(buttonStyle)
             .addChildTo(this);
 
         //ボタンラベル
@@ -320,11 +328,13 @@ tm.define("shotgun.ToggleButton", {
         if (!style.flat) {
             //ボタン影
             var shadowStyle = {
+                width: width,
+                height: height,
                 fillStyle: style.shadowColor,
                 strokeStyle: style.shadowColor,
                 lineWidth: style.lineWidth
             };
-            this.shadow = tm.display.RectangleShape(width, height, shadowStyle)
+            this.shadow = tm.display.RectangleShape(shadowStyle)
                 .addChildTo(this)
                 .setPosition(this.downX, this.downY);
             this.shadow.blendMode = "source-over";
@@ -332,11 +342,13 @@ tm.define("shotgun.ToggleButton", {
 
         //ボタン本体
         var buttonStyle = {
+            width: width,
+            height: height,
             fillStyle: style.buttonColor,
             strokeStyle: style.lineColor,
             lineWidth: style.lineWidth
         };
-        this.button = tm.display.RectangleShape(width, height, buttonStyle)
+        this.button = tm.display.RectangleShape(buttonStyle)
             .addChildTo(this);
         if (style.flat) this.button.setAlpha(this.alphaOFF);
 
@@ -563,13 +575,25 @@ tm.define("shotgun.SlideButton", {
         var buttonWidth = this.button, heightButton = this.heightButton;
 
         //ボタンベース
-        var baseStyle = {fillStyle: style.offColor, strokeStyle: style.offColor, lineWidth:  style.lineWidth};
-        this.button = tm.display.RectangleShape(width, height, buttonStyle)
+        var baseStyle = {
+            width: width,
+            height: height,
+            fillStyle: style.offColor,
+            strokeStyle: style.offColor,
+            lineWidth:  style.lineWidth
+        };
+        this.button = tm.display.RectangleShape(buttonStyle)
             .addChildTo(this);
 
         //ボタン本体
-        var buttonStyle = {fillStyle: style.buttonColor, strokeStyle: style.lineColor, lineWidth:  style.lineWidth};
-        this.button = tm.display.RectangleShape(buttonWidth, buttonHeight, buttonStyle)
+        var buttonStyle = {
+            width: buttonWidth,
+            height: buttonHeight,
+            fillStyle: style.buttonColor,
+            strokeStyle: style.lineColor,
+            lineWidth: style.lineWidth
+        };
+        this.button = tm.display.RectangleShape(buttonStyle)
             .addChildTo(this);
     },
 });
