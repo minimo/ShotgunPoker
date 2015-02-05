@@ -463,8 +463,15 @@ tm.define("shotgun.MainScene", {
         //スクリーンショット保存
         var kb = appMain.keyboard;
         if (kb.getKeyDown("s")) appMain.canvas.saveAsImage();
-/*
+
         //チート
+        this.cheat();
+    },
+
+    //チートコマンド
+    cheat: function() {
+        if (!CHEAT) return;
+        var kb = appMain.keyboard;
         if (kb.getKeyDown("1")) { //RSF
             this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 10));
             this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 11));
@@ -510,7 +517,6 @@ tm.define("shotgun.MainScene", {
             this.deck.addHand(this.deck.pickCard(SUIT_DIAMOND, 10));
             this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 10));
         }
-*/
     },
 
     //ゲームオーバー

@@ -12,6 +12,8 @@ var rand = function(min, max) { return mt.nextInt(min, max); };    //乱数発�
 //定数
 //デバッグフラグ
 DEBUG = false;
+//チートコマンド有効フラグ
+CHEAT = false;
 
 //スクリーンサイズ
 SC_W = 640;
