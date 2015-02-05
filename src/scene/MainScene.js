@@ -39,6 +39,7 @@ tm.define("shotgun.MainScene", {
     gameend: false, //ゲーム終了フラグ
     complete: false,//役コンプリートフラグ
     newRecord: false,   //ハイスコア更新フラグ
+    handLog: [],    //役ログ
 
     //カウンタ
     count: 10,      //カード選択カウントダウン用
@@ -349,6 +350,8 @@ tm.define("shotgun.MainScene", {
             var sc = this.deck.checkHand();
             this.dispHand(sc);
             this.handCount[sc]++;
+            this.handLog.push(sc);
+            if (this.handLog.length > 20) this.handLog.splice(0, 1);
 
             //役無し、手札未成立、ワンペア２連続はペナルティ
             var penalty = 0;
@@ -614,6 +617,14 @@ tm.define("shotgun.MainScene", {
         lb3.setParam(this.labelParamHand);
         lb3.setPosition(x, y);
         lb3.tweener.clear().wait(wait).call(function(){lb3.remove();});
+    },
+
+    //実績達成チェック
+    checkAchievement: function() {
+        var len = this.handLog.length-1;
+        var lastHand = this.handLog[len];
+
+        //単体役成立チェック
     },
 
     //タッチorクリック開始処理
