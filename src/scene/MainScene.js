@@ -350,8 +350,21 @@ tm.define("shotgun.MainScene", {
             var sc = this.deck.checkHand();
             this.dispHand(sc);
             this.handCount[sc]++;
+
+            //役履歴保存
             this.handLog.push(sc);
             if (this.handLog.length > 20) this.handLog.splice(0, 1);
+
+            //実績判定
+            var ac = appMain.achievement.check(sc, this.handLog);
+            if (ac) {
+                for (var i = 0; i < ac.length; i++) {
+                    var text = "実績:"+ac[i].name+"を獲得しました";
+                    shotgun.Telop(text)
+                        .addChildTo(this)
+                        .setPosition(SC_W*0.5, SC_H*0.9);
+                }
+            }
 
             //役無し、手札未成立、ワンペア２連続はペナルティ
             var penalty = 0;

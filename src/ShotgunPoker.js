@@ -30,6 +30,9 @@ tm.define("shotgun.CanvasApp", {
     lastScore: [],
     highScore: [],
 
+    //実績保存
+    achievement: null,
+
     //各種設定
     useJoker: USE_JOKER,
     returnJoker: RETURN_JOKER,
@@ -88,6 +91,9 @@ tm.define("shotgun.CanvasApp", {
         this.lastScore[GAMEMODE_NORMAL+10] = 0;
         this.highScore[GAMEMODE_HARD+10] = 0;
         this.lastScore[GAMEMODE_HARD+10] = 0;
+
+        //実績情報
+        this.achievement = shotgun.Achievement();
 
         //設定情報の読み込み
         this.loadConfig();
