@@ -170,6 +170,7 @@ tm.define("shotgun.LoadingScene", {
         appMain.sounds.add("hand");
         appMain.sounds.add("nopair");
         appMain.sounds.add("extend");
+        appMain.sounds.add("achievement");
 
         //Admob setting
         if (ENABLE_PHONEGAP && AdMob) {
