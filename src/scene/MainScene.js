@@ -356,7 +356,7 @@ tm.define("shotgun.MainScene", {
             if (this.handLog.length > 20) this.handLog.splice(0, 1);
 
             //実績判定
-            var ac = appMain.achievement.check(sc, this.handLog);
+            var ac = appMain.achievement.check({lastHand:sc, handLog:this.handLog, score:this.score, handCount:this.handCount});
             if (ac) {
                 for (var i = 0; i < ac.length; i++) {
                     var text = "実績:"+ac[i].name+"を獲得しました";
