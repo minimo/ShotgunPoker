@@ -344,122 +344,7 @@ tm.define("shotgun.MainScene", {
 
         //手札が五枚揃ったor時間切れ
         if (this.deck.numHand == 5 || this.count < 0) {
-            this.pick = false;
-            this.deck.sortHand();
-            this.deck.numHand = 0;
-            var hand = this.deck.checkHand();
-            this.dispHand(hand);
-            this.handCount[hand]++;
-
-            //役履歴保存
-            this.handLog.push(hand);
-            if (this.handLog.length > 20) this.handLog.splice(0, 1);
-
-            //実績判定
-            var ac = appMain.achievement.check({lastHand:hand, handLog:this.handLog, score:this.score, handCount:this.handCount});
-            if (ac) {
-                for (var i = 0; i < ac.length; i++) {
-                    var text = "実績「"+ac[i].name+"」が解除されました";
-                    shotgun.Telop(text)
-                        .addChildTo(this)
-                        .setPosition(SC_W*0.5, SC_H*0.85);
-                }
-            }
-
-            //役無し、手札未成立、ワンペア２連続はペナルティ
-            var penalty = 0;
-            if (hand == NOPAIR) penalty = 1;
-            if (hand == MISS) penalty = 1;
-            if (hand == ONEPAIR) {
-                this.onePair++;
-                if (this.onePair % 2 == 0) penalty = 1;
-            } else {
-                this.onePair = 0;
-            }
-            if (penalty > 0) {
-                if (this.mode != GAMEMODE_PRACTICE) this.life -= penalty;
-                appMain.playSE("nopair");
-            } else {
-                appMain.playSE("hand");
-            }
-
-            //得点がプラスの時のみスコアに加算
-            if (hand > 0) {
-                var ps = hand;    //加算スコア
-
-                //早上がりボーナス判定
-                var msg = "";
-                if (this.count > 8) {
-                    ps = ~~(ps*2);
-                    msg = "FANTASTIC!";
-                } else if (this.count > 7) {
-                    ps = ~~(ps*1.5);
-                    msg = "EXCELLENT!";
-                } else if (this.count > 5) {
-                    ps = ~~(ps*1.3);
-                    msg = "GOOD!"
-                }
-                if (msg != "") {
-                    this.messageStack.addMessage(msg, 100);
-                }
-                this.score+=ps;
-            }
-
-            //エクステンド判定
-            var extend = 0;
-
-            //役コンプリート判定
-            if (!this.complete) {
-                var cp = true;
-                if (this.handCount[ONEPAIR] == 0) cp = false;
-                if (this.handCount[FLASH] == 0) cp = false;
-                if (this.handCount[TWOPAIR] == 0) cp = false;
-                if (this.handCount[THREECARD] == 0) cp = false;
-                if (this.handCount[FULLHOUSE] == 0) cp = false;
-                if (this.handCount[STRAIGHT] == 0) cp = false;
-                if (this.handCount[FOURCARD] == 0) cp = false;
-                if (this.handCount[STRAIGHTFLASH] == 0) cp = false;
-                if (this.handCount[ROYALSTRAIGHTFLASH] == 0) cp = false;
-                if (cp) {
-                    extend++;
-                    this.complete = true;
-                    this.messageStack.addMessage("HAND COMPLETE!", 70);
-                }
-            }
-
-            //初回R.S.Fの場合はライフ＋１
-            if (hand == ROYALSTRAIGHTFLASH && this.handCount[hand] == 1) extend++;
-
-            //エクステンド処理
-            if (extend != 0 && this.mode == GAMEMODE_NORMAL) {
-                var that = this;
-                var tmp = tm.app.Object2D()
-                    .addChildTo(this)
-                    .tweener.clear()
-                    .wait(1000)
-                    .call(function(){
-                        that.life+=extend;
-                        that.score+=2000;
-                        appMain.playSE("extend");
-                    });
-            }
-
-            //ゲームオーバー判定
-            if (this.life < 0) {
-                appMain.stopBGM();
-                this.gameover();
-            }
-
-            this.count = 10;
-            this.time = 0;
-
-            //レベル処理
-            this.level = Math.sqrt(this.absTime*(0.0002*(this.levelReset+1)))+1;
-            if (this.level > 2 && this.levelReset < 1) {
-                this.absTime = 0;
-                this.level = 1;
-                this.levelReset++;
-            }
+            this.checkHand();
         }
 
         //カードピック可能時のみ時間を進める
@@ -568,6 +453,138 @@ tm.define("shotgun.MainScene", {
         appMain.saveConfig();
     },
 
+    checkHand: function() {
+        this.pick = false;
+        this.deck.sortHand();
+        this.deck.numHand = 0;
+        var hand = this.deck.checkHand();
+        this.dispHand(hand);
+        this.handCount[hand]++;
+
+        //役履歴保存
+        this.handLog.push(hand);
+        if (this.handLog.length > 20) this.handLog.splice(0, 1);
+
+        //実績判定
+        var param = {
+            lastHand:hand,
+            handLog:this.handLog,
+            score:this.score,
+            handCount:this.handCount
+        };
+        var ac = appMain.achievement.check(param);
+        if (ac) {
+            var wk = tm.app.Object2D().addChildTo(this);
+            wk.tweener.clear().wait(1000);
+            for (var i = 0; i < ac.length; i++) {
+                var name = ac[i].name;
+                wk.tweener.call(function() {
+                    appMain.playSE("achievement");
+                    var text = "実績「"+name+"」が解除されました";
+                    shotgun.Telop(text)
+                        .addChildTo(this)
+                        .setPosition(SC_W*0.5, SC_H*0.85);
+                }.bind(this))
+                .wait(3000);
+            }
+        }
+
+        //役無し、手札未成立、ワンペア２連続はペナルティ
+        var penalty = 0;
+        if (hand == NOPAIR) penalty = 1;
+        if (hand == MISS) penalty = 1;
+        if (hand == ONEPAIR) {
+            this.onePair++;
+            if (this.onePair % 2 == 0) penalty = 1;
+        } else {
+            this.onePair = 0;
+        }
+        if (penalty > 0) {
+            if (this.mode != GAMEMODE_PRACTICE) this.life -= penalty;
+                appMain.playSE("nopair");
+        } else {
+            appMain.playSE("hand");
+        }
+
+        //得点がプラスの時のみスコアに加算
+        if (hand > 0) {
+            var ps = hand;    //加算スコア
+
+            //早上がりボーナス判定
+            var msg = "";
+            if (this.count > 8) {
+                ps = ~~(ps*2);
+                msg = "FANTASTIC!";
+            } else if (this.count > 7) {
+                ps = ~~(ps*1.5);
+                msg = "EXCELLENT!";
+            } else if (this.count > 5) {
+                ps = ~~(ps*1.3);
+                msg = "GOOD!"
+            }
+            if (msg != "") {
+                this.messageStack.addMessage(msg, 100);
+            }
+            this.score+=ps;
+        }
+
+        //エクステンド判定
+        var extend = 0;
+
+        //役コンプリート判定
+        if (!this.complete) {
+            var cp = true;
+            if (this.handCount[ONEPAIR] == 0) cp = false;
+            if (this.handCount[FLASH] == 0) cp = false;
+            if (this.handCount[TWOPAIR] == 0) cp = false;
+            if (this.handCount[THREECARD] == 0) cp = false;
+            if (this.handCount[FULLHOUSE] == 0) cp = false;
+            if (this.handCount[STRAIGHT] == 0) cp = false;
+            if (this.handCount[FOURCARD] == 0) cp = false;
+            if (this.handCount[STRAIGHTFLASH] == 0) cp = false;
+            if (this.handCount[ROYALSTRAIGHTFLASH] == 0) cp = false;
+            if (cp) {
+                extend++;
+                this.complete = true;
+                this.messageStack.addMessage("HAND COMPLETE!", 70);
+            }
+        }
+
+        //初回R.S.Fの場合はライフ＋１
+        if (hand == ROYALSTRAIGHTFLASH && this.handCount[hand] == 1) extend++;
+
+        //エクステンド処理
+        if (extend != 0 && this.mode == GAMEMODE_NORMAL) {
+            var that = this;
+            var tmp = tm.app.Object2D()
+                .addChildTo(this)
+                .tweener.clear()
+                .wait(1000)
+                .call(function(){
+                    that.life+=extend;
+                    that.score+=2000;
+                    appMain.playSE("extend");
+                });
+        }
+
+        //ゲームオーバー判定
+        if (this.life < 0) {
+            appMain.stopBGM();
+            this.gameover();
+        }
+
+        this.count = 10;
+        this.time = 0;
+
+        //レベル処理
+        this.level = Math.sqrt(this.absTime*(0.0002*(this.levelReset+1)))+1;
+        if (this.level > 2 && this.levelReset < 1) {
+            this.absTime = 0;
+            this.level = 1;
+            this.levelReset++;
+        }
+    },
+
     //役名表示
     dispHand: function(hand, wait) {
         wait = wait || 1200;
@@ -637,14 +654,6 @@ tm.define("shotgun.MainScene", {
         lb3.setParam(this.labelParamHand);
         lb3.setPosition(x, y);
         lb3.tweener.clear().wait(wait).call(function(){lb3.remove();});
-    },
-
-    //実績達成チェック
-    checkAchievement: function() {
-        var len = this.handLog.length-1;
-        var lastHand = this.handLog[len];
-
-        //単体役成立チェック
     },
 
     //タッチorクリック開始処理
