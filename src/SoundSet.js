@@ -38,8 +38,10 @@ tm.define("shotgun.SoundSet", {
                 e = shotgun.SoundElement_LLA(name, url);
                 break;
         }
+        if (!e) return false;
+
         this.elements.push(e);
-        return this;
+        return true;
     },
 
     find: function(name) {
@@ -60,6 +62,8 @@ tm.define("shotgun.SoundSet", {
             media.setVolume(this.volumeBGM);
             this.bgm = media;
             this.bgmIsPlay = true;
+        } else {
+            if (this.add(name)) this.playBGM(name);
         }
         return this;
     },
@@ -111,6 +115,8 @@ tm.define("shotgun.SoundSet", {
         if (media) {
             media.setVolume(this.volumeSE);
             media.playClone();
+        } else {
+            if (this.add(name)) this.playSE(name);
         }
         return this;
     },
