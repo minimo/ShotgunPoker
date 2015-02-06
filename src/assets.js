@@ -29,7 +29,6 @@ var assets = {
     "CasinoRegular":"font/CasinoRegular.ttf",
     "UbuntuMono":   "font/UbuntuMono-Bold.ttf",
 
-
     //SE
     "countdown":    "assets/se_countdown.mp3",
     "deal":         "assets/se_deal.mp3",
@@ -37,4 +36,6 @@ var assets = {
     "hand":         "assets/se_hand.mp3",
     "nopair":       "assets/se_nopair.mp3",
     "extend":       "assets/ata_a17.mp3",
+    "achievement":  "assets/ata_a49.mp3",
+    "button":       "assets/botan_b25.mp3",
 }
