@@ -179,9 +179,41 @@ tm.define("shotgun.CanvasApp", {
         return this;
     },
 
+    pauseBGM: function() {
+        this.sounds.pauseBGM();
+        return this;
+    },
+
+    resumeBGM: function() {
+        this.sounds.resumeBGM();
+        return this;
+    },
+
     playSE: function(asset) {
         this.sounds.playSE(asset);
         return this;
     },
+
+    setVolumeBGM: function(vol) {
+        this.sounds.setVolumeBGM(vol);
+        return this;
+    },
+
+    setVolumeSE: function(vol) {
+        this.sounds.setVolumeSE(vol);
+        return this;
+    },
 });
 
+shotgun.CanvasApp.prototype.accessor("volumeBGM", {
+    "get": function() { return this.sounds.volumeBGM; },
+    "set": function(vol) {
+        this.setVolumeBGM(vol)
+    }
+});
+shotgun.CanvasApp.prototype.accessor("volumeSE", {
+    "get": function() { return this.sounds.volumeSE; },
+    "set": function(vol) {
+        this.setVolumeSE(vol)
+    }
+});
