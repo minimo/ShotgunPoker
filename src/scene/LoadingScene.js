@@ -160,16 +160,16 @@ tm.define("shotgun.LoadingScene", {
         }.bind(this));
     },
     _onLoadAssets: function() {
-        appMain.sounds.add("titleBGM",    "assets/game_maoudamashii_5_casino02.mp3");
-        appMain.sounds.add("mainBGM",     "assets/game_maoudamashii_5_casino01.mp3");
-        appMain.sounds.add("hardBGM",     "assets/game_maoudamashii_5_casino03.mp3");
-        appMain.sounds.add("tutorialBGM", "assets/game_maoudamashii_5_casino04.mp3");
-        appMain.sounds.add("countdown",   "assets/se_countdown.mp3");
-        appMain.sounds.add("deal",        "assets/se_deal.mp3");
-        appMain.sounds.add("dist",        "assets/se_maoudamashii_se_paper01.mp3");
-        appMain.sounds.add("hand",        "assets/se_hand.mp3");
-        appMain.sounds.add("nopair",      "assets/se_nopair.mp3");
-        appMain.sounds.add("extend",      "assets/ta_ta_sharara02.mp3");
+        appMain.sounds.add("titleBGM");
+        appMain.sounds.add("mainBGM");
+        appMain.sounds.add("hardBGM");
+        appMain.sounds.add("tutorialBGM");
+        appMain.sounds.add("countdown");
+        appMain.sounds.add("deal");
+        appMain.sounds.add("dist");
+        appMain.sounds.add("hand");
+        appMain.sounds.add("nopair");
+        appMain.sounds.add("extend");
 
         //Admob setting
         if (ENABLE_PHONEGAP && AdMob) {
