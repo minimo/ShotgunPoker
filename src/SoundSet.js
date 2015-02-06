@@ -38,10 +38,8 @@ tm.define("shotgun.SoundSet", {
                 e = shotgun.SoundElement_LLA(name, url);
                 break;
         }
-        if (!e) return false;
-
         this.elements.push(e);
-        return true;
+        return this;
     },
 
     find: function(name) {
@@ -185,6 +183,7 @@ tm.define("shotgun.SoundElement_WebAudio", {
     init: function(name) {
         this.superInit(MEDIA_ASSET, name);
         this.media = tm.asset.AssetManager.get(name);
+        if (!this.media) console.warn("asset not found. "+name);
     },
 
     play: function(loop) {
