@@ -347,30 +347,30 @@ tm.define("shotgun.MainScene", {
             this.pick = false;
             this.deck.sortHand();
             this.deck.numHand = 0;
-            var sc = this.deck.checkHand();
-            this.dispHand(sc);
-            this.handCount[sc]++;
+            var hand = this.deck.checkHand();
+            this.dispHand(hand);
+            this.handCount[hand]++;
 
             //役履歴保存
-            this.handLog.push(sc);
+            this.handLog.push(hand);
             if (this.handLog.length > 20) this.handLog.splice(0, 1);
 
             //実績判定
-            var ac = appMain.achievement.check({lastHand:sc, handLog:this.handLog, score:this.score, handCount:this.handCount});
+            var ac = appMain.achievement.check({lastHand:hand, handLog:this.handLog, score:this.score, handCount:this.handCount});
             if (ac) {
                 for (var i = 0; i < ac.length; i++) {
-                    var text = "実績:"+ac[i].name+"を獲得しました";
+                    var text = "実績「"+ac[i].name+"」が解除されました";
                     shotgun.Telop(text)
                         .addChildTo(this)
-                        .setPosition(SC_W*0.5, SC_H*0.9);
+                        .setPosition(SC_W*0.5, SC_H*0.85);
                 }
             }
 
             //役無し、手札未成立、ワンペア２連続はペナルティ
             var penalty = 0;
-            if (sc == NOPAIR) penalty = 1;
-            if (sc == MISS) penalty = 1;
-            if (sc == ONEPAIR) {
+            if (hand == NOPAIR) penalty = 1;
+            if (hand == MISS) penalty = 1;
+            if (hand == ONEPAIR) {
                 this.onePair++;
                 if (this.onePair % 2 == 0) penalty = 1;
             } else {
@@ -384,25 +384,25 @@ tm.define("shotgun.MainScene", {
             }
 
             //得点がプラスの時のみスコアに加算
-            if (sc > 0) {
-                var ps = sc;    //加算スコア
+            if (hand > 0) {
+                var ps = hand;    //加算スコア
 
                 //早上がりボーナス判定
                 var msg = "";
                 if (this.count > 8) {
-                    ps = ~~(sc*2);
+                    ps = ~~(ps*2);
                     msg = "FANTASTIC!";
                 } else if (this.count > 7) {
-                    ps = ~~(sc*1.5);
+                    ps = ~~(ps*1.5);
                     msg = "EXCELLENT!";
                 } else if (this.count > 5) {
-                    ps = ~~(sc*1.3);
+                    ps = ~~(ps*1.3);
                     msg = "GOOD!"
                 }
                 if (msg != "") {
                     this.messageStack.addMessage(msg, 100);
                 }
-                this.score += ps;
+                this.score+=ps;
             }
 
             //エクステンド判定
@@ -428,7 +428,7 @@ tm.define("shotgun.MainScene", {
             }
 
             //初回R.S.Fの場合はライフ＋１
-            if (sc == ROYALSTRAIGHTFLASH && this.handCount[sc] == 1) extend++;
+            if (hand == ROYALSTRAIGHTFLASH && this.handCount[hand] == 1) extend++;
 
             //エクステンド処理
             if (extend != 0 && this.mode == GAMEMODE_NORMAL) {
@@ -439,6 +439,7 @@ tm.define("shotgun.MainScene", {
                     .wait(1000)
                     .call(function(){
                         that.life+=extend;
+                        that.score+=2000;
                         appMain.playSE("extend");
                     });
             }
