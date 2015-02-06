@@ -24,7 +24,7 @@ tm.define("shotgun.PauseScene", {
         this.dialog = shotgun.ConfirmDialog("EXIT GAME?", ["YES", "NO"]);
 
         //バックグラウンド
-        this.bg = tm.display.RectangleShape(SC_W, SC_H, {fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor})
+        this.bg = tm.display.RectangleShape({width: SC_W, height: SC_H, fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor})
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.5);
 
@@ -114,7 +114,7 @@ tm.define("shotgun.ConfirmDialog", {
         button = button || ["OK", "CANCEL"];
 
         //バックグラウンド
-        tm.display.RoundRectangleShape(SC_W-20, SC_H*0.3, {fillStyle: appMain.bgColor, lineWidth: 4})
+        tm.display.RoundRectangleShape({width: SC_W-20, height: SC_H*0.3, fillStyle: appMain.bgColor, lineWidth: 4})
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.5);
 
@@ -167,7 +167,7 @@ tm.define("shotgun.AlertDialog", {
         param = {}.$extend(DEFALT_ALERTPARAM, param);
 
         //バックグラウンド
-        tm.display.RoundRectangleShape(SC_W-20, param.height, {fillStyle: appMain.bgColor, lineWidth: 4})
+        tm.display.RoundRectangleShape({width: SC_W-20, height: param.height, fillStyle: appMain.bgColor, lineWidth: 4})
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.5);
 

@@ -1,5 +1,5 @@
 /*
- * tmlib.js 0.4.1
+ * tmlib.js 0.5.0
  * http://github.com/phi-jp/tmlib.js
  * MIT Licensed
  * 
@@ -28,7 +28,7 @@ if (typeof module !== 'undefined' && module.exports) {
     /**
      * バージョン
      */
-    tm.VERSION = '0.4.1';
+    tm.VERSION = '0.5.0';
 
     /**
      * tmlib.js のルートパス
@@ -6873,7 +6873,7 @@ tm.dom = tm.dom || {};
             // type が省略されている場合は拡張子から判定する
             type = type || path.split('?')[0].split('#')[0].split('.').last;
             
-            var asset = tm.asset.Loader._funcs[type](path);
+            var asset = tm.asset.Loader._funcs[type](path, key);
             this.set(key, asset);
             
             return asset;
@@ -7549,6 +7549,62 @@ tm.dom = tm.dom || {};
     });
 
 })();
+tm.asset = tm.asset || {};
+
+(function() {
+
+    tm.define("tm.asset.Font", {
+        superClass: "tm.event.EventDispatcher",
+
+        init: function(path, key, format) {
+            this.superInit();
+
+            var fontFaceStyleElement = tm.dom.Element("head").create("style");
+            fontFaceStyleElement.text = "@font-face { font-family: '{0}'; src: url({1}) format('{2}'); }".format(key, path, format);
+
+            tm.asset.Font.checkLoaded(key, function() {
+                this.flare("load");
+            }.bind(this));
+        },
+    });
+
+    tm.asset.Font.checkLoaded = function(font, callback) {
+        var element = tm.dom.Element("body").create("span");
+        element.style
+            .set("color", "rgba(0, 0, 0, 0)")
+            .set("fontSize", "40px");
+        element.text = "QW@HhsXJ=/()あいうえお＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝";
+
+        var before = element.element.offsetWidth;
+        element.style
+            .set("fontFamily", "'{0}', 'monospace'".format(font));
+
+        var checkLoadFont = function() {
+            if (element.element.offsetWidth !== before) {
+                element.remove();
+                callback && callback();
+            } else {
+                setTimeout(checkLoadFont, 100);
+            }
+        };
+        setTimeout(checkLoadFont, 100);
+    };
+
+    tm.asset.Loader.register("ttf", function(path, key) {
+        return tm.asset.Font(path, key, "truetype");
+    });
+    tm.asset.Loader.register("otf", function(path, key) {
+        return tm.asset.Font(path, key, "opentype");
+    });
+    tm.asset.Loader.register("woff", function(path, key) {
+        return tm.asset.Font(path, key, "woff");
+    });
+    tm.asset.Loader.register("woff2", function(path, key) {
+        return tm.asset.Font(path, key, "woff2");
+    });
+
+})();
+
 /*
  * keyboard.js
  */
@@ -12288,13 +12344,13 @@ tm.app = tm.app || {};
             this._matrix.identity();
             
             this.boundingType = "circle";
+            this.checkHierarchy = true;
             this.interactive = false;
             this.hitFlags = [];
             this.downFlags= [];
             this._clickFlag = false;
 
-            this._worldMatrix = tm.geom.Matrix33();
-            this._worldMatrix.identity();
+            this._worldMatrix = tm.geom.Matrix33().identity();
             this._worldAlpha = 1.0;
         },
         
@@ -12457,11 +12513,10 @@ tm.app = tm.app || {};
          * @param {Object} elm
          */
         globalToLocal: function(p) {
-            // var matrix = this.getFinalMatrix();
             var matrix = this._worldMatrix.clone();
             matrix.invert();
             matrix.transpose();
-            
+
             return matrix.multiplyVector2(p);
         },
         
@@ -12578,8 +12633,13 @@ tm.app = tm.app || {};
          * タッチ判定の有効/無効をセット
          * @param {Boolean} flag
          */
-        setInteractive: function(flag) {
+        setInteractive: function(flag, type) {
             this.interactive = flag;
+
+            if (type) {
+                this.boundingType = type;
+            }
+
             return this;
         },
         
@@ -12703,11 +12763,11 @@ tm.app = tm.app || {};
             localTransform[3] = this._sr * this.scale.x;
             localTransform[4] = this._cr * this.scale.y;
 
-            ///AAARR GETTER SETTTER!
+            // 
             localTransform[2] = this.position.x;
             localTransform[5] = this.position.y;
 
-            // Cache the matrix values (makes for huge speed increases!)
+            // cache
             var a00 = localTransform[0], a01 = localTransform[1], a02 = localTransform[2],
                 a10 = localTransform[3], a11 = localTransform[4], a12 = localTransform[5],
 
@@ -15454,7 +15514,10 @@ tm.display = tm.display || {};
         _buildLayer: function(layer) {
             var self     = this;
             var mapSheet = this.mapSheet;
-            var shape    = tm.display.Shape(this.width, this.height).addChildTo(this);
+            var shape    = tm.display.Shape({
+                width: this.width,
+                height: this.height
+            }).addChildTo(this);
             var visible  = (layer.visible === 1) || (layer.visible === undefined);
             var opacity  = layer.opacity === undefined ? 1 : layer.opacity;
             var tileset  = [];
@@ -16116,37 +16179,37 @@ tm.ui = tm.ui || {};
      * @extends tm.display.Shape
      */
     tm.define("tm.ui.FlatButton", {
-        superClass: tm.display.Shape,
+        superClass: "tm.display.RoundRectangleShape",
 
         /**
          * @constructor
          */
         init: function(param) {
-            param.$safe({
-                width: 300,
-                height: 100,
-                bgColor: "rgb(180, 180, 180)",
-                text: "ABC",
-                fontSize: 50,
-                fontFamily: "'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', 'Meiryo', 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif",
-            });
+            param = (param || {}).$safe(tm.ui.FlatButton.defaults);
 
-            this.superInit({
-                width: param.width,
-                height: param.height,
-            });
-
-            this.canvas.clearColor(param.bgColor);
+            this.superInit(param);
 
             this.setInteractive(true);
             this.setBoundingType("rect");
+            this.on("pointingend", function() {
+                this.flare('push');
+            });
 
             this.label = tm.display.Label(param.text).addChildTo(this);
             this.label.setFontSize(param.fontSize).setFontFamily(param.fontFamily).setAlign("center").setBaseline("middle");
         },
     });
 
-
+    tm.ui.FlatButton.defaults = {
+        width: 300,
+        height: 100,
+        fillStyle: "hsl(180, 60%, 50%)",
+        strokeStyle: "transparent",
+        text: "START",
+        fontSize: 50,
+        cornerRadius: 8,
+        fontFamily: "'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', 'Meiryo', 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif",
+    };
 
 })();
 
@@ -17242,7 +17305,7 @@ tm.ui = tm.ui || {};
                         init: {
                             text: "Share",
                             width: 200,
-                            bgColor: "hsl(240, 100%, 64%)",
+                            fillStyle: "hsl(240, 100%, 64%)",
                         },
                         x: this._toGridX(4),
                         y: this._toGridY(9),
@@ -17252,7 +17315,7 @@ tm.ui = tm.ui || {};
                         init: {
                             text: "Back",
                             width: 200,
-                            bgColor: "hsl(240, 80%, 0%)",
+                            fillStyle: "hsl(240, 80%, 0%)",
                         },
                         x: this._toGridX(8),
                         y: this._toGridY(9),

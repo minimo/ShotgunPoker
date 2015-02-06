@@ -82,7 +82,7 @@ tm.define("shotgun.MainScene", {
         }
 
         //バックグラウンド
-        this.bg = tm.display.RectangleShape(SC_W, SC_H, {fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor})
+        this.bg = tm.display.RectangleShape({width: SC_W, height: SC_H, fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor})
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.5)
 
@@ -161,7 +161,7 @@ tm.define("shotgun.MainScene", {
 
         //タイムリミットゲージ
         var color = "hsla({0}, 100%, 50%, 1.0)".format(300);
-        this.meter = tm.display.Shape(30, 500)
+        this.meter = tm.display.Shape({width: 30, height: 500})
             .addChildTo(this)
             .setPosition(20, SC_H*0.65)
             .setOrigin(0.5, 1.0);
@@ -180,7 +180,7 @@ tm.define("shotgun.MainScene", {
             c.fillRect(0, 500-limit, this.width, this.height-(500-limit));
             c.restore();
         }
-        tm.display.RectangleShape(30, 500, {fillStyle: "rgba(0,0,0,0)", strokeStyle: "Black", lineWidth: 3})
+        tm.display.RectangleShape({width: 30, height: 500, fillStyle: "rgba(0,0,0,0)", strokeStyle: "Black", lineWidth: 3})
             .addChildTo(this)
             .setPosition(20, SC_H*0.65)
             .setOrigin(0.5, 1.0);
@@ -315,7 +315,7 @@ tm.define("shotgun.MainScene", {
         }
 
         //目隠し
-        this.mask = tm.display.RectangleShape(SC_W, SC_H, {fillStyle: "rgba(0, 0, 0, 1.0)", strokeStyle: "rgba(0, 0, 0, 1.0)"})
+        this.mask = tm.display.RectangleShape({width: SC_W, height: SC_H, fillStyle: "rgba(0, 0, 0, 1.0)", strokeStyle: "rgba(0, 0, 0, 1.0)"})
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.5);
         this.mask.tweener.clear().fadeOut(200);

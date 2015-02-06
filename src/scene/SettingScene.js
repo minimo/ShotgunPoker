@@ -22,7 +22,7 @@ tm.define("shotgun.SettingScene", {
         var that = this;
 
         //バックグラウンド
-        this.bg = tm.display.RectangleShape(SC_W, SC_H, {fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor})
+        this.bg = tm.display.RectangleShape({width: SC_W, height: SC_H, fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor})
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.5);
 
@@ -37,7 +37,7 @@ tm.define("shotgun.SettingScene", {
             .setPosition(SC_W*0.5, SC_H*0.225);
 
         //ＢＧＭ音量
-        var volBGM = appMain.sounds.volumeBGM;
+        var volBGM = appMain.volumeBGM;
         tm.display.OutlineLabel("BGM", 50)
             .addChildTo(this)
             .setParam(this.labelParam)
@@ -49,10 +49,10 @@ tm.define("shotgun.SettingScene", {
                 .setScale(0.3)
                 .setPosition(SC_W*0.25+i*44, SC_H*0.3)
         }
-        this.setVolumeBGM(appMain.sounds.volumeBGM);
+        this.setVolumeBGM(appMain.volumeBGM);
 
         //ＳＥ音量
-        var volSE = appMain.sounds.volumeSE;
+        var volSE = appMain.volumeSE;
         tm.display.OutlineLabel("SE", 50)
             .addChildTo(this)
             .setParam(this.labelParam)
@@ -64,7 +64,7 @@ tm.define("shotgun.SettingScene", {
                 .setScale(0.3)
                 .setPosition(SC_W*0.25+i*44, SC_H*0.4)
         }
-        this.setVolumeSE(appMain.sounds.volumeSE);
+        this.setVolumeSE(appMain.volumeSE);
 
         tm.display.OutlineLabel("GAME SETTING", 40)
             .addChildTo(this)
@@ -98,7 +98,7 @@ tm.define("shotgun.SettingScene", {
             });
 
         //目隠し
-        this.mask = tm.display.RectangleShape(SC_W, SC_H, {fillStyle: "rgba(0, 0, 0, 1.0)", strokeStyle: "rgba(0, 0, 0, 1.0)"})
+        this.mask = tm.display.RectangleShape({width: SC_W, height: SC_H, fillStyle: "rgba(0, 0, 0, 1.0)", strokeStyle: "rgba(0, 0, 0, 1.0)"})
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.5)
         this.mask.tweener.clear().fadeOut(200);
@@ -107,10 +107,10 @@ tm.define("shotgun.SettingScene", {
     },
 
     setVolumeBGM: function(vol) {
-        if (vol != appMain.sounds.volumeBGM) {
-            appMain.sounds.pauseBGM();
-            appMain.sounds.setVolumeBGM(vol);
-            appMain.sounds.resumeBGM();
+        if (vol != appMain.volumeBGM) {
+            appMain.pauseBGM();
+            appMain.setVolumeBGM(vol);
+            appMain.resumeBGM();
         }
         for (var i = 0; i < 10; i++) {
             this.bgm[i].setFrameIndex(52).setScale(0.3);
@@ -124,8 +124,8 @@ tm.define("shotgun.SettingScene", {
     },
 
     setVolumeSE: function(vol) {
-        if (vol != appMain.sounds.volumeSE) {
-            appMain.sounds.setVolumeSE(vol);
+        if (vol != appMain.volumeSE) {
+            appMain.setVolumeSE(vol);
             appMain.playSE("hand");
         }
         for (var i = 0; i < 10; i++) {

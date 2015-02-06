@@ -56,7 +56,7 @@ tm.define("shotgun.TutorialScene", {
         this.background = "rgba(0, 0, 0, 0.0)";
 
         //バックグラウンド
-        this.bg = tm.display.RectangleShape(SC_W, SC_H, {fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor})
+        this.bg = tm.display.RectangleShape({width: SC_W, height: SC_H, fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor})
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.5)
 
@@ -162,7 +162,7 @@ tm.define("shotgun.TutorialScene", {
         //タイムリミットゲージ
         var that = this;
         var color = "hsla({0}, 100%, 50%, 1.0)".format(300);
-        this.meter = tm.display.Shape(30, 500)
+        this.meter = tm.display.Shape({width: 30, height: 500})
             .addChildTo(this)
             .setPosition(20, SC_H*0.65)
             .setOrigin(0.5, 1.0);
@@ -181,7 +181,7 @@ tm.define("shotgun.TutorialScene", {
             c.fillRect(0, 500-limit, this.width, this.height-(500-limit));
             c.restore();
         }
-        tm.display.RectangleShape(30, 500, {fillStyle: "rgba(0,0,0,0)", strokeStyle: "Black", lineWidth: 3})
+        tm.display.RectangleShape({width: 30, height: 500, fillStyle: "rgba(0,0,0,0)", strokeStyle: "Black", lineWidth: 3})
             .addChildTo(this)
             .setPosition(20, SC_H*0.65)
             .setOrigin(0.5, 1.0);
@@ -273,7 +273,7 @@ tm.define("shotgun.TutorialScene", {
         var pt = tm.app.Object2D().addChildTo(this);
         pt.tweener.wait(time).call(function(){this.remove();}.bind(pt));
 
-        pt.bg = tm.display.RectangleShape(SC_W, 80, {fillStyle: this.bgColor, strokeStyle: this.bgColor})
+        pt.bg = tm.display.RectangleShape({width: SC_W, height: 80, fillStyle: this.bgColor, strokeStyle: this.bgColor})
             .addChildTo(pt)
             .setPosition(SC_W*0.5, y);
 

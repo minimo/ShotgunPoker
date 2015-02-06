@@ -60,6 +60,8 @@ tm.define("shotgun.SoundSet", {
             media.setVolume(this.volumeBGM);
             this.bgm = media;
             this.bgmIsPlay = true;
+        } else {
+            if (this.add(name)) this.playBGM(name);
         }
         return this;
     },
@@ -111,6 +113,8 @@ tm.define("shotgun.SoundSet", {
         if (media) {
             media.setVolume(this.volumeSE);
             media.playClone();
+        } else {
+            if (this.add(name)) this.playSE(name);
         }
         return this;
     },
@@ -179,6 +183,7 @@ tm.define("shotgun.SoundElement_WebAudio", {
     init: function(name) {
         this.superInit(MEDIA_ASSET, name);
         this.media = tm.asset.AssetManager.get(name);
+        if (!this.media) console.warn("asset not found. "+name);
     },
 
     play: function(loop) {
