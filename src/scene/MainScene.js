@@ -666,11 +666,6 @@ tm.define("shotgun.MainScene", {
         this.moveX = 0;
         this.moveY = 0;
 
-        if (this.pick && !this.shuffled && !this.deck.busy && !this.gameend) {
-            var c = this.deck.pick(sx, sy);
-            if (c) this.deck.addHand(c);
-        }
-
         this.beforeX = sx;
         this.beforeY = sy;
     },
@@ -704,12 +699,11 @@ tm.define("shotgun.MainScene", {
 
         var sx = e.pointing.x;
         var sy = e.pointing.y;
-/*
+
         if (this.pick && !this.shuffled && !this.deck.busy && !this.gameend) {
             var c = this.deck.pick(sx, sy);
             if (c) this.deck.addHand(c);
         }
-*/
         this.shuffled = false;
     },
 });
