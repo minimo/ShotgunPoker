@@ -16,6 +16,7 @@ tm.define("shotgun.MainScene", {
     //タッチ情報
     startX: 0,
     startY: 0,
+    touchTime: 0,
     moveX: 0,
     moveY: 0,
     beforeX: 0,
@@ -49,6 +50,7 @@ tm.define("shotgun.MainScene", {
     //経過時間
     time: 1,
     absTime: 1,
+    touchTime: 0,
 
     //遷移情報
     exitGame: false,
@@ -365,6 +367,8 @@ tm.define("shotgun.MainScene", {
 
         //チート
         this.cheat();
+
+        this.touchTime++;
     },
 
     //チートコマンド
@@ -668,6 +672,7 @@ tm.define("shotgun.MainScene", {
 
         this.beforeX = sx;
         this.beforeY = sy;
+        this.touchTime = 0;
     },
 
     //タッチorクリック移動処理
@@ -680,7 +685,7 @@ tm.define("shotgun.MainScene", {
         var moveY = Math.abs(sx - this.beforeY);
 
         if (!this.shuffled) {
-            if (moveX > 300) {
+            if (moveX > 200) {
                 this.deck.shuffle();
                 this.shuffled = true;
             }
