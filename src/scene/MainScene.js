@@ -469,30 +469,6 @@ tm.define("shotgun.MainScene", {
         this.handLog.push(hand);
         if (this.handLog.length > 20) this.handLog.splice(0, 1);
 
-        //実績判定
-        var param = {
-            lastHand:hand,
-            handLog:this.handLog,
-            score:this.score,
-            handCount:this.handCount
-        };
-        var ac = appMain.achievement.check(param);
-        if (ac) {
-            var wk = tm.app.Object2D().addChildTo(this);
-            wk.tweener.clear().wait(1000);
-            for (var i = 0; i < ac.length; i++) {
-                var name = ac[i].name;
-                wk.tweener.call(function() {
-                    appMain.playSE("achievement");
-                    var text = "実績「"+name+"」が解除されました";
-                    shotgun.Telop(text)
-                        .addChildTo(this)
-                        .setPosition(SC_W*0.5, SC_H*0.85);
-                }.bind(this))
-                .wait(3000);
-            }
-        }
-
         //役無し、手札未成立、ワンペア２連続はペナルティ
         var penalty = 0;
         if (hand == NOPAIR) penalty = 1;
@@ -575,6 +551,32 @@ tm.define("shotgun.MainScene", {
         if (this.life < 0) {
             appMain.stopBGM();
             this.gameover();
+        }
+
+        //実績判定
+        var param = {
+            lastHand:hand,
+            handLog:this.handLog,
+            score:this.score,
+            handCount:this.handCount,
+        };
+        var ac = appMain.achievement.check(param);
+        if (ac) {
+            //達成実績があったらテロップを投入
+            var that = this;
+            var wk = tm.app.Object2D().addChildTo(this);
+            wk.telops = [];
+            wk.tweener.clear().wait(1000);
+            for (var i = 0; i < ac.length; i++) {
+                var text = "実績「"+ac[i].name+"」が解除されました";
+                wk.telops.push(shotgun.Telop(text));
+                wk.tweener.call(function() {
+                    appMain.playSE("achievement");
+                    this.telops[0].addChildTo(that).setPosition(SC_W*0.5, SC_H*0.85);
+                    this.telops.splice(0, 1);
+                }.bind(wk)).wait(1250);
+            }
+            wk.tweener.call(function() {this.remove();}.bind(wk));
         }
 
         this.count = 10;

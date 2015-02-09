@@ -5,10 +5,6 @@
  *  This Program is MIT license.
  */
 
-tm.define("shotgun.TelopStack", {
-    superClass: tm.app.Object2D,
-});
-
 //メッセージテロップ表示
 tm.define("shotgun.Telop", {
     superClass: tm.app.Object2D,
@@ -16,6 +12,7 @@ tm.define("shotgun.Telop", {
     init: function(text, size, dispWait) {
         this.superInit();
 
+        text = text || "test message";
         size = size || 30;
         dispWait = dispWait || 1000;
         this.finish = false;
@@ -29,14 +26,14 @@ tm.define("shotgun.Telop", {
             .setPosition(SC_W, 0);
 
         this.textLabel.tweener.clear()
-            .move(0, 0, 500, "easeInOutSine")
+            .move(0, 0, 250, "easeInOutSine")
             .wait(dispWait)
-            .move(-SC_W, 0, 500, "easeInOutSine");
+            .move(-SC_W, 0, 250, "easeInOutSine");
 
         this.bg.tweener.clear()
-            .fadeIn(200)
+            .fadeIn(100)
             .wait(dispWait+1000)
-            .fadeOut(200)
+            .fadeOut(100)
             .call(function(){
                 this.finish = true;
                 this.remove();
