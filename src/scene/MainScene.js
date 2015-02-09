@@ -278,22 +278,22 @@ tm.define("shotgun.MainScene", {
         }
 
         //メッセージ表示キュー
-        var ms = this.messageQue = tm.display.OutlineLabel("", 100)
+        var ms = this.messageQueue = tm.display.OutlineLabel("", 100)
             .addChildTo(this.upperLayer)
             .setParam(this.labelParamPoker)
             .setPosition(SC_W*0.5, SC_H*0.5);
         ms.duration = -1;
-        ms.que = [];
+        ms.queue = [];
         ms.update = function() {
             this.duration--;
             if (this.duration == 0) this.text = "";
             if (this.duration < 0) {
-                if (this.que.length > 0) {
-                    var p = this.que[0];
+                if (this.queue.length > 0) {
+                    var p = this.queue[0];
                     this.text = p.text;
                     this.setFontSize(p.size);
                     this.duration = p.duration;
-                    this.que.splice(0, 1);
+                    this.queue.splice(0, 1);
 
                     this.tweener.clear().fadeIn(1);
                 }
@@ -302,7 +302,7 @@ tm.define("shotgun.MainScene", {
         ms.addMessage = function(text, size, duration) {
             duration = duration || 50;
             var param = {text: text, size: size, duration: duration};
-            this.que.push(param);
+            this.queue.push(param);
         }
 
         //デバッグ用レベル表示
@@ -527,7 +527,7 @@ tm.define("shotgun.MainScene", {
                 msg = "GOOD!"
             }
             if (msg != "") {
-                this.messageQue.addMessage(msg, 100);
+                this.messageQueue.addMessage(msg, 100);
             }
             this.score+=ps;
         }
@@ -550,7 +550,7 @@ tm.define("shotgun.MainScene", {
             if (cp) {
                 extend++;
                 this.complete = true;
-                this.messageQue.addMessage("HAND COMPLETE!", 70);
+                this.messageQueue.addMessage("HAND COMPLETE!", 70);
             }
         }
 
