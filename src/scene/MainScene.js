@@ -480,8 +480,8 @@ tm.define("shotgun.MainScene", {
             this.onePair = 0;
         }
         if (penalty > 0) {
+            appMain.playSE("nopair");
             if (this.mode != GAMEMODE_PRACTICE) this.life -= penalty;
-                appMain.playSE("nopair");
         } else {
             appMain.playSE("hand");
         }
