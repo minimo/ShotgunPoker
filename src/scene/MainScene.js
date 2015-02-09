@@ -512,8 +512,8 @@ tm.define("shotgun.MainScene", {
         var extend = 0;
 
         //役コンプリート判定
+        var cp = true;
         if (!this.complete) {
-            var cp = true;
             if (this.handCount[ONEPAIR] == 0) cp = false;
             if (this.handCount[FLASH] == 0) cp = false;
             if (this.handCount[TWOPAIR] == 0) cp = false;
@@ -554,20 +554,23 @@ tm.define("shotgun.MainScene", {
         }
 
         //実績判定
-        var param = {
-            lastHand:hand,
-            handLog:this.handLog,
-            score:this.score,
-            handCount:this.handCount,
-        };
-        var ac = appMain.achievement.check(param);
-        if (ac) {
-            //達成実績があったらテロップを投入
-            var that = this;
-            var telop = shotgun.Telop().addChildTo(this).setPosition(SC_W*0.5, SC_H*0.85);
-            for (var i = 0; i < ac.length; i++) {
-                var text = "実績「"+ac[i].name+"」が解除されました";
-                telop.add(text);
+        if (ENABLE_ACHEVEMENT) {
+            var param = {
+                lastHand:hand,
+                handLog:this.handLog,
+                score:this.score,
+                handCount:this.handCount,
+                complete:cp,
+            };
+            var ac = appMain.achievement.check(param);
+            if (ac) {
+                //達成実績があったらテロップを投入
+                var that = this;
+                var telop = shotgun.Telop().addChildTo(this).setPosition(SC_W*0.5, SC_H*0.85);
+                for (var i = 0; i < ac.length; i++) {
+                    var text = "実績「"+ac[i].name+"」が解除されました";
+                    telop.add(text);
+                }
             }
         }
 
