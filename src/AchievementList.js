@@ -141,6 +141,13 @@ shotgun.achievementList = [
         check: function(param) {
             if (param.lastHand < 1) return false;
             var c2 = false, c4 = false, c11 = false;
+            for (var i = 0; i < param.cards.length; i++) {
+                var c = param.cards[i];
+                if (c.number == 2)  c2 = true;
+                if (c.number == 4)  c4 = true;
+                if (c.number == 11) c11 = true;
+            }
+            if (c2 && c4 && c11) return true;
             return false;
         },
     },
