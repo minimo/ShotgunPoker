@@ -564,19 +564,11 @@ tm.define("shotgun.MainScene", {
         if (ac) {
             //達成実績があったらテロップを投入
             var that = this;
-            var wk = tm.app.Object2D().addChildTo(this);
-            wk.telops = [];
-            wk.tweener.clear().wait(1000);
+            var telop = shotgun.Telop().addChildTo(this).setPosition(SC_W*0.5, SC_H*0.85);
             for (var i = 0; i < ac.length; i++) {
                 var text = "実績「"+ac[i].name+"」が解除されました";
-                wk.telops.push(shotgun.Telop(text));
-                wk.tweener.call(function() {
-                    appMain.playSE("achievement");
-                    this.telops[0].addChildTo(that).setPosition(SC_W*0.5, SC_H*0.85);
-                    this.telops.splice(0, 1);
-                }.bind(wk)).wait(1250);
+                telop.add(text);
             }
-            wk.tweener.call(function() {this.remove();}.bind(wk));
         }
 
         this.count = 10;
