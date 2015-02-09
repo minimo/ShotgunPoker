@@ -11,6 +11,7 @@ shotgun.achievementList = [
         id:     "onepair",
         name:   "ワンペア",
         percent: "0",
+        text: "ワンペアを成立させた",
         secret: false,
         check: function(param) {
             if (param.lastHand == ONEPAIR) return true;
@@ -20,6 +21,7 @@ shotgun.achievementList = [
         id:     "twopair",
         name:   "ツーペア",
         percent: "0",
+        text: "ツーペアを成立させた",
         secret: false,
         check: function(param) {
             if (param.lastHand == TWOPAIR) return true;
@@ -29,6 +31,7 @@ shotgun.achievementList = [
         id:     "threecard",
         name:   "スリーカード",
         percent: "0",
+        text: "スリーカードを成立させた",
         secret: false,
         check: function(param) {
             if (param.lastHand == THREECARD) return true;
@@ -38,6 +41,7 @@ shotgun.achievementList = [
         id:     "fourcard",
         name:   "フォーカード",
         percent: "0",
+        text: "フォーカードを成立させた",
         secret: false,
         check: function(param) {
             if (param.lastHand == FOURCARD) return true;
@@ -47,6 +51,7 @@ shotgun.achievementList = [
         id:     "threecard",
         name:   "ファイブカード",
         percent: "0",
+        text: "ファイブカードを成立させた",
         secret: false,
         check: function(param) {
             if (param.lastHand == FIVECARD) return true;
@@ -56,6 +61,7 @@ shotgun.achievementList = [
         id:     "flash",
         name:   "フラッシュ",
         percent: "0",
+        text: "フラッシュを成立させた",
         secret: false,
         check: function(param) {
             if (param.lastHand == FLASH) return true;
@@ -65,6 +71,7 @@ shotgun.achievementList = [
         id:     "fullhouse",
         name:   "フルハウス",
         percent: "0",
+        text: "フルハウスを成立させた",
         secret: false,
         check: function(param) {
             if (param.lastHand == FULLHOUSE) return true;
@@ -74,6 +81,7 @@ shotgun.achievementList = [
         id:     "straight",
         name:   "ストレート",
         percent: "0",
+        text: "ストレートを成立させた",
         secret: false,
         check: function(param) {
             if (param.lastHand == STRAIGHT) return true;
@@ -83,6 +91,7 @@ shotgun.achievementList = [
         id:     "straightflash",
         name:   "ストレートフラッシュ",
         percent: "0",
+        text: "ストレートフラッシュを成立させた",
         secret: false,
         check: function(param) {
             if (param.lastHand == STRAIGHTFLASH) return true;
@@ -92,6 +101,7 @@ shotgun.achievementList = [
         id:     "royalstraightflash",
         name:   "Ｒ．ストレートフラッシュ",
         percent: "0",
+        text: "ロイヤルストレートフラッシュを成立させた",
         secret: false,
         check: function(param) {
             if (param.lastHand == ROYALSTRAIGHTFLASH) return true;
@@ -101,26 +111,17 @@ shotgun.achievementList = [
         id:     "complete",
         name:   "コンプリート",
         percent: "0",
+        text: "１ゲーム内でファイブカード以外の全役を成立させた",
         secret: false,
         check: function(param) {
-            var handCount = param.handCount;
-            var cp = false;
-            if (handCount[ONEPAIR] == 0) cp = false;
-            if (handCount[FLASH] == 0) cp = false;
-            if (handCount[TWOPAIR] == 0) cp = false;
-            if (handCount[THREECARD] == 0) cp = false;
-            if (handCount[FULLHOUSE] == 0) cp = false;
-            if (handCount[STRAIGHT] == 0) cp = false;
-            if (handCount[FOURCARD] == 0) cp = false;
-            if (handCount[STRAIGHTFLASH] == 0) cp = false;
-            if (handCount[ROYALSTRAIGHTFLASH] == 0) cp = false;
-            return cp;
+            return param.complete;
         },
     },{
         id:     "123",
         name:   "１－２－３",
         percent: "0",
         secret: false,
+        text: "ワンペア、ツーペア、スリーカードの順で役を成立させた",
         check: function(param) {
             if (param.handLog.length < 3) return false;
             var len = param.handLog.length;
@@ -135,15 +136,11 @@ shotgun.achievementList = [
         id:     "4211",
         name:   "恋の２－４－１１",
         percent: "0",
-        secret: false,
+        secret: true,
+        text: "役が成立した手札の中に２、４、Ｊがあった",
         check: function(param) {
-            if (param.handLog.length < 3) return false;
-            var len = param.handLog.length;
-            if (param.handLog[len-3] == ONEPAIR &&
-                param.handLog[len-2] == TWOPAIR &&
-                param.handLog[len-1] == THREECARD) {
-                return true;
-            }
+            if (param.lastHand < 1) return false;
+            var c2 = false, c4 = false, c11 = false;
             return false;
         },
     },
