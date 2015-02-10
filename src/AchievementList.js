@@ -6,9 +6,8 @@
  */
 
 //実績判定
-shotgun.achievementList = [
-    {
-        id:     "onepair",
+shotgun.achievementList = {
+    "onepair": {
         name:   "ワンペア",
         percent: "0",
         text: "ワンペアを成立させた",
@@ -17,8 +16,8 @@ shotgun.achievementList = [
             if (param.lastHand == ONEPAIR) return true;
             return false;
         },
-    },{
-        id:     "twopair",
+    },
+    "twopair": {
         name:   "ツーペア",
         percent: "0",
         text: "ツーペアを成立させた",
@@ -27,8 +26,8 @@ shotgun.achievementList = [
             if (param.lastHand == TWOPAIR) return true;
             return false;
         },
-    },{
-        id:     "threecard",
+    },
+    "threecard": {
         name:   "スリーカード",
         percent: "0",
         text: "スリーカードを成立させた",
@@ -37,8 +36,8 @@ shotgun.achievementList = [
             if (param.lastHand == THREECARD) return true;
             return false;
         },
-    },{
-        id:     "fourcard",
+    },
+    "fourcard": {
         name:   "フォーカード",
         percent: "0",
         text: "フォーカードを成立させた",
@@ -47,8 +46,8 @@ shotgun.achievementList = [
             if (param.lastHand == FOURCARD) return true;
             return false;
         },
-    },{
-        id:     "threecard",
+    },
+    "threecard": {
         name:   "ファイブカード",
         percent: "0",
         text: "ファイブカードを成立させた",
@@ -57,8 +56,8 @@ shotgun.achievementList = [
             if (param.lastHand == FIVECARD) return true;
             return false;
         },
-    },{
-        id:     "flash",
+    },
+    "flash": {
         name:   "フラッシュ",
         percent: "0",
         text: "フラッシュを成立させた",
@@ -67,8 +66,8 @@ shotgun.achievementList = [
             if (param.lastHand == FLASH) return true;
             return false;
         },
-    },{
-        id:     "fullhouse",
+    },
+    "fullhouse": {
         name:   "フルハウス",
         percent: "0",
         text: "フルハウスを成立させた",
@@ -77,8 +76,8 @@ shotgun.achievementList = [
             if (param.lastHand == FULLHOUSE) return true;
             return false;
         },
-    },{
-        id:     "straight",
+    },
+    "straight": {
         name:   "ストレート",
         percent: "0",
         text: "ストレートを成立させた",
@@ -87,8 +86,8 @@ shotgun.achievementList = [
             if (param.lastHand == STRAIGHT) return true;
             return false;
         },
-    },{
-        id:     "straightflash",
+    },
+    "straightflash": {
         name:   "ストレートフラッシュ",
         percent: "0",
         text: "ストレートフラッシュを成立させた",
@@ -97,8 +96,8 @@ shotgun.achievementList = [
             if (param.lastHand == STRAIGHTFLASH) return true;
             return false;
         },
-    },{
-        id:     "royalstraightflash",
+    },
+    "royalstraightflash": {
         name:   "Ｒ．ストレートフラッシュ",
         percent: "0",
         text: "ロイヤルストレートフラッシュを成立させた",
@@ -107,8 +106,8 @@ shotgun.achievementList = [
             if (param.lastHand == ROYALSTRAIGHTFLASH) return true;
             return false;
         },
-    },{
-        id:     "complete",
+    },
+    "complete": {
         name:   "コンプリート",
         percent: "0",
         text: "１ゲーム内でファイブカード以外の全役を成立させた",
@@ -116,8 +115,8 @@ shotgun.achievementList = [
         check: function(param) {
             return param.complete;
         },
-    },{
-        id:     "123",
+    },
+    "123": {
         name:   "１－２－３",
         percent: "0",
         secret: false,
@@ -132,8 +131,8 @@ shotgun.achievementList = [
             }
             return false;
         },
-    },{
-        id:     "4211",
+    },
+    "4211": {
         name:   "恋の２－４－１１",
         percent: "0",
         secret: true,
@@ -151,4 +150,4 @@ shotgun.achievementList = [
             return false;
         },
     },
-];
+};

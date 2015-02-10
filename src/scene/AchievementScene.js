@@ -21,9 +21,12 @@ tm.define("shotgun.AchievementScene", {
         this.bg = tm.display.RectangleShape({width: SC_W, height: SC_H, fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor})
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.5);
-        
-        tm.display.OutlineLabel("ACHIEVEMENT", 60)
+        this.bg2 = tm.display.RectangleShape({width: SC_W, height: SC_H*0.2, fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor})
             .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.5);
+
+        tm.display.OutlineLabel("ACHIEVEMENT", 60)
+            .addChildTo(this.bg2)
             .setParam(this.headerParam)
             .setPosition(SC_W*0.5, SC_H*0.1);
 
@@ -34,6 +37,9 @@ tm.define("shotgun.AchievementScene", {
         this.mask.tweener.clear().fadeOut(200);
         
         this.time = 0;
+    },
+
+    setup: function() {
     },
 
     update: function() {

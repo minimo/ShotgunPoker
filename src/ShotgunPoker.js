@@ -127,6 +127,10 @@ tm.define("shotgun.CanvasApp", {
             "lastScore_hard_ret":   this.lastScore[GAMEMODE_HARD+10],
         };
         localStorage.setItem("config", JSON.stringify(saveObj));
+
+        //実績情報
+        this.achievement.save();
+
         return this;
     },
 
@@ -172,6 +176,10 @@ tm.define("shotgun.CanvasApp", {
             this.saveConfig();
             this.firstGame = true;
         }
+
+        //実績情報
+        this.achievement.load();
+
         return this;
     },
 

@@ -13,26 +13,29 @@ tm.define("shotgun.Achievement", {
     check: function(param) {
         var acList = [];
         var ac = shotgun.achievementList;
-        var len = shotgun.achievementList.length;
+        var list = Object.getOwnPropertyNames(ac);
+        var len = list.length;
         for (var i = 0; i < len; i++) {
-            var a = ac[i];
+            var a = ac[list[i]];
             if (a.percent != "100" && a.check(param)) {
                 a.percent = "100";
                 acList.push(a);
             }
         }
         if (acList.length == 0) return null;
+        this.save();
         return acList;
     },
 
     //ローカルストレージへ保存
     save: function() {
         var saveObj = {};
-        var list = shotgun.achievementList;
-        for (var i = 0; i < list.length; i++) {
-            var obj = list[i];
-            saveObj[obj.id] = {
-                "id": obj.id,
+        var ac = shotgun.achievementList;
+        var list = Object.getOwnPropertyNames(ac);
+        var len = list.length;
+        for (var i = 0; i < len; i++) {
+            var obj = ac[list[i]];
+            saveObj[list[i]] = {
                 "percent": obj.percent,
             }
         }
@@ -42,6 +45,16 @@ tm.define("shotgun.Achievement", {
     //ローカルストレージから読み込み
     load: function() {
         var ac = localStorage.getItem("achievement");
+        var data = JSON.parse(ac);
+
+        //達成実績を反映
+        var list = Object.getOwnPropertyNames(data);
+        var len = list.length;
+        for (var i = 0; i < len; i++) {
+            var id = list[i];
+            var obj = shotgun.achievementList[id];
+            obj.percent = data[id].percent;
+        }
     },
 
     //ゲームセンターから実績情報を読み込み
@@ -61,5 +74,9 @@ tm.define("shotgun.Achievement", {
             var obj = ac[i];
             ac.percent = "0";
         }
+
+        //ローカルストレージのデータを消してセーブしなおす
+        localStorage.removeItem("achievement");
+        this.save();
     },
 });
