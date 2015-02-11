@@ -45,6 +45,7 @@ tm.define("shotgun.Achievement", {
     //ローカルストレージから読み込み
     load: function() {
         var ac = localStorage.getItem("achievement");
+        if (!ac) return;
         var data = JSON.parse(ac);
 
         //達成実績を反映
