@@ -55,6 +55,8 @@ var onDeviceReady = function () {
     if (DEVICE_IOS) {
         gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
     }
+    if (DEVICE_ANDROID) {
+    }
 }
 
 var onPause = function() {
@@ -93,6 +95,13 @@ document.addEventListener('pause', onPause, false);
 document.addEventListener('resume', onResume, false);
 document.addEventListener('online', onOnline, false);
 document.addEventListener('offline', onOffline, false);
+
+/*
+ *
+ * iOS GameCenter
+ * Android Google Play
+ *
+ */
 
 // GAMECENTER CallBack
 var onGamecenterSuccess = function() {
@@ -161,6 +170,8 @@ var registScore = function(mode, returnJoker, score) {
                 leaderboardId: lb,
             });
     }
+    if (DEVICE_ANDROID) {
+    }
 }
 
 //GameCenterに実績登録
@@ -178,6 +189,8 @@ var reportAchievements = function(id, percent) {
                 percent: "100"
             });
     }
+    if (DEVICE_ANDROID) {
+    }
     return true;
 }
 
@@ -193,7 +206,15 @@ var resetAchievements = function() {
             if (DEBUG_GAMECENTER) AdvanceAlert('実績リセットに失敗しました');
             });
     }
+    if (DEVICE_ANDROID) {
+    }
 }
+
+/*
+ *
+ * AdMob
+ *
+ */
 
 var ad_units = {
     ios : {
