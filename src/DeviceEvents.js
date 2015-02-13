@@ -5,12 +5,16 @@
  *  This Program is MIT license.
  */
 
+//実行ＯＳ種別
+DEVICE_IOS = false;
+DEVICE_ANDROID = false;
+
 //定数
 //PhoneGap使用可能フラグ
 ENABLE_PHONEGAP = false;
 DEBUG_PHONEGAP = false;
 
-//GAMECENTER使用可能フラグ
+//GAMECENTER(GooglePlay)使用可能フラグ
 ENABLE_GAMECENTER = false;
 DEBUG_GAMECENTER = false;
 
@@ -21,6 +25,11 @@ TEST_ADMOB = false;
 
 //PhoneGap Device Events
 var onDeviceReady = function () {
+
+    //使用ＯＳの判別
+    DEVICE_IOS = ( /(android)/i.test(navigator.userAgent) )? false: true;
+    if (!DEVICE_IOS) DEVICE_ANDROID = true;
+
     if (DEBUG_PHONEGAP) {
         AdvanceAlert('devicereadyイベントが発火しました');
         AdvanceAlert('Device:'+device.name+" "+device.platform);
@@ -43,7 +52,9 @@ var onDeviceReady = function () {
     }
 
     //Game Center Plugin
-    gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
+    if (DEVICE_IOS) {
+        gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
+    }
 }
 
 var onPause = function() {
@@ -60,8 +71,11 @@ var onResume = function() {
     if (DEBUG_PHONEGAP) AdvanceAlert('resumeイベントが発火しました');
 
     //GAME CENTERに再度接続を行う
-    if (!ENABLE_GAMECENTER) {
-        gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
+    if (DEVICE_IOS) {
+        if (!ENABLE_GAMECENTER) {
+            gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
+        }
+        return;
     }
 }
 
@@ -131,7 +145,8 @@ var showLeadersBoard = function(id) {
 
 //GameCenterにスコアを登録
 var registScore = function(mode, returnJoker, score) {
-    if (ENABLE_GAMECENTER) {
+    if (!ENABLE_GAMECENTER) return false;
+    if (DEVICE_IOS) {
         var lb = "Normal";
         if (mode == GAMEMODE_HARD) lb = "Hard";
         if (returnJoker) lb += "_ReturnJoker";
@@ -151,29 +166,33 @@ var registScore = function(mode, returnJoker, score) {
 //GameCenterに実績登録
 var reportAchievements = function(id, percent) {
     if (!ENABLE_GAMECENTER) return false;
-
-    gamecenter.reportAchievement(
-        function(){
-            if (DEBUG_GAMECENTER) AdvanceAlert('実績登録に成功しました');
-        },
-        function(){
-            if (DEBUG_GAMECENTER) AdvanceAlert('実績登録に失敗しました');
-        }, {
-            achievementId: a.id,
-            percent: "100"
-        });
+    if (DEVICE_IOS) {
+        gamecenter.reportAchievement(
+            function(){
+                if (DEBUG_GAMECENTER) AdvanceAlert('実績登録に成功しました');
+            },
+            function(){
+                if (DEBUG_GAMECENTER) AdvanceAlert('実績登録に失敗しました');
+            }, {
+                achievementId: a.id,
+                percent: "100"
+            });
+    }
     return true;
 }
 
 //GameCenterの実績をリセット
 var resetAchievements = function() {
-    gamecenter.resetAchievements(
-        function(){
-            if (DEBUG_GAMECENTER) AdvanceAlert('実績リセットに成功しました');
-        },
-        function(){
+    if (!ENABLE_GAMECENTER) return false;
+    if (DEVICE_IOS) {
+        gamecenter.resetAchievements(
+            function(){
+                if (DEBUG_GAMECENTER) AdvanceAlert('実績リセットに成功しました');
+            },
+            function(){
             if (DEBUG_GAMECENTER) AdvanceAlert('実績リセットに失敗しました');
-        });
+            });
+    }
 }
 
 var ad_units = {
