@@ -7,6 +7,10 @@
 
 //実績判定
 shotgun.achievementList = {
+
+    /*
+     * 単体役成立系
+     */
     "onepair": {
         name:   "ワンペア",
         percent: "0",
@@ -107,6 +111,28 @@ shotgun.achievementList = {
             return false;
         },
     },
+
+    /*
+     * 単体条件系
+     */
+    "normal": {
+        name:   "ノーマルモード",
+        percent: "0",
+        text: "ノーマルモードでゲームをスタートした",
+        secret: false,
+        check: function(param) {
+            return param.mode == GAMEMODE_NOMAL? true: false;
+        },
+    },
+    "hard": {
+        name:   "ハードモード",
+        percent: "0",
+        text: "ハードモードでゲームをスタートした",
+        secret: false,
+        check: function(param) {
+            return param.mode == GAMEMODE_HARD? true: false;
+        },
+    },
     "complete": {
         name:   "コンプリート",
         percent: "0",
@@ -116,6 +142,50 @@ shotgun.achievementList = {
             return param.complete;
         },
     },
+
+    /*
+     * スコア条件系
+     */
+    "score1000": {
+        name:   "１０００ＰＴＳ",
+        percent: "0",
+        text: "スコアが１０００ＰＴＳを超えた",
+        secret: false,
+        check: function(param) {
+            return param.score<1000? false: true;
+        },
+    },
+    "score5000": {
+        name:   "５０００ＰＴＳ",
+        percent: "0",
+        text: "スコアが１０００ＰＴＳを超えた",
+        secret: false,
+        check: function(param) {
+            return param.score<5000? false: true;
+        },
+    },
+    "score10000": {
+        name:   "５０００ＰＴＳ",
+        percent: "0",
+        text: "スコアが１０００ＰＴＳを超えた",
+        secret: false,
+        check: function(param) {
+            return param.score<10000? false: true;
+        },
+    },
+    "score10000": {
+        name:   "５０００ＰＴＳ",
+        percent: "0",
+        text: "スコアが１０００ＰＴＳを超えた",
+        secret: false,
+        check: function(param) {
+            return param.score<10000? false: true;
+        },
+    },
+
+    /*
+     * 複合条件系
+     */
     "123": {
         name:   "１－２－３",
         percent: "0",
@@ -147,6 +217,21 @@ shotgun.achievementList = {
                 if (c.number == 11) c11 = true;
             }
             if (c2 && c4 && c11) return true;
+            return false;
+        },
+    },
+    "doubleroyal": {
+        name:   "Double Royal",
+        percent: "0",
+        secret: true,
+        text: "ロイヤルストレートフラッシュを２回連続で成立した",
+        check: function(param) {
+            if (param.handLog.length < 3) return false;
+            var len = param.handLog.length;
+            if (param.handLog[len-2] == ROYALSTRAIGHTFLASH &&
+                param.handLog[len-1] == ROYALSTRAIGHTFLASH) {
+                return true;
+            }
             return false;
         },
     },
