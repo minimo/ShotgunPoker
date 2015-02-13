@@ -10,7 +10,18 @@ tm.define("shotgun.Achievement", {
     init: function() {
     },
 
+    defaultParam: {
+        mode:-1,
+        cards:null,
+        lastHand:-100,
+        handLog:[0,0,0,0,0,0,0,0,0,0],
+        score:0,
+        handCount:0,
+        complete:false,
+    },
+   
     check: function(param) {
+        param.$safe(this.defaultParam);
         var acList = [];
         var ac = shotgun.achievementList;
         var list = Object.getOwnPropertyNames(ac);
