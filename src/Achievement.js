@@ -31,6 +31,9 @@ tm.define("shotgun.Achievement", {
             if (a.percent != "100" && a.check(param)) {
                 a.percent = "100";
                 acList.push(a);
+
+                //ゲームセンターに実績登録
+                if (ENABLE_GAMECENTER) reportAchievements(a.id, a.percent);
             }
         }
         if (acList.length == 0) return null;
@@ -69,12 +72,23 @@ tm.define("shotgun.Achievement", {
         }
     },
 
-    //ゲームセンターから実績情報を読み込み
-    loadFromGamecenter: function() {
-    },
-
     //ゲームセンターと実績情報同期
     syncGamecenter: function() {
+        if (!ENABLE_GAMECENTER) return false;
+        var successCallback = function (results) {
+            if (results) {
+                var len = results.length;
+                for (var i = 0; i < len; i++) {
+                    //results[i].identifier
+                    //results[i].percentComplete
+                    //results[i].completed
+                    //results[i].lastReportedDate
+                    //results[i].showsCompletionBanner
+                    //results[i].playerID
+                }
+            }
+        }
+        gamecenter.getAchievements(function(){}, function(){});
     },
 
     //全実績をリセット
@@ -90,5 +104,8 @@ tm.define("shotgun.Achievement", {
         //ローカルストレージのデータを消してセーブしなおす
         localStorage.removeItem("achievement");
         this.save();
+
+        //ゲームセンターの実績を消去
+        if (ENABLE_GAMECENTER) resetAchievements();
     },
 });

@@ -148,6 +148,34 @@ var registScore = function(mode, returnJoker, score) {
     }
 }
 
+//GameCenterに実績登録
+var reportAchievements = function(id, percent) {
+    if (!ENABLE_GAMECENTER) return false;
+
+    gamecenter.reportAchievement(
+        function(){
+            if (DEBUG_GAMECENTER) AdvanceAlert('実績登録に成功しました');
+        },
+        function(){
+            if (DEBUG_GAMECENTER) AdvanceAlert('実績登録に失敗しました');
+        }, {
+            achievementId: a.id,
+            percent: "100"
+        });
+    return true;
+}
+
+//GameCenterの実績をリセット
+var resetAchievements = function() {
+    gamecenter.resetAchievements(
+        function(){
+            if (DEBUG_GAMECENTER) AdvanceAlert('実績リセットに成功しました');
+        },
+        function(){
+            if (DEBUG_GAMECENTER) AdvanceAlert('実績リセットに失敗しました');
+        });
+}
+
 var ad_units = {
     ios : {
         banner:       'ca-app-pub-4753786498901311/3019381180', // or DFP format "/6253334/dfp_example_ad"
