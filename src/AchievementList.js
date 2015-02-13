@@ -121,7 +121,7 @@ shotgun.achievementList = {
         text: "ノーマルモードでゲームをスタートした",
         secret: false,
         check: function(param) {
-            return param.mode == GAMEMODE_NOMAL? true: false;
+            return param.mode == GAMEMODE_NORMAL? true: false;
         },
     },
     "hard": {
