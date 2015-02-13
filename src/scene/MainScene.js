@@ -321,6 +321,9 @@ tm.define("shotgun.MainScene", {
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.5);
         this.mask.tweener.clear().fadeOut(200);
+
+        //起動時実績チェック
+        this.checkAchievement({mode:this.mode});
     },
     
     update: function() {
@@ -457,6 +460,19 @@ tm.define("shotgun.MainScene", {
         appMain.saveConfig();
     },
 
+    checkAchievement: function(param) {
+        var ac = appMain.achievement.check(param);
+        if (ac) {
+            //達成実績があったらテロップを投入
+            var that = this;
+            var telop = shotgun.Telop().addChildTo(this).setPosition(SC_W*0.5, SC_H*0.85);
+            for (var i = 0; i < ac.length; i++) {
+                var text = "実績「"+ac[i].name+"」が解除されました";
+                telop.add(text);
+            }
+        }
+    },
+
     checkHand: function() {
         this.pick = false;
         this.deck.sortHand();
@@ -564,16 +580,7 @@ tm.define("shotgun.MainScene", {
                 handCount:this.handCount,
                 complete:cp,
             };
-            var ac = appMain.achievement.check(param);
-            if (ac) {
-                //達成実績があったらテロップを投入
-                var that = this;
-                var telop = shotgun.Telop().addChildTo(this).setPosition(SC_W*0.5, SC_H*0.85);
-                for (var i = 0; i < ac.length; i++) {
-                    var text = "実績「"+ac[i].name+"」が解除されました";
-                    telop.add(text);
-                }
-            }
+            this.checkAchievement(param);
         }
 
         this.count = 10;
