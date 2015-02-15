@@ -66,10 +66,10 @@ tm.define("shotgun.GameoverScene", {
                 .setFillStyle("Red")
                 .setFillStyleOutline("rgb(255,200,200)")
                 .setPosition(SC_W*0.82, SC_H*0.20);
-
-            //最高得点更新時のみGameCenter登録
-            registScore(this.mode, appMain.returnJoker, lastScore);
         }
+
+        //GameCenterへスコア登録
+        registScore(this.mode, appMain.returnJoker, lastScore);
 
         //役一覧
         for (var i = 0; i < 12; i++) {
@@ -102,9 +102,9 @@ tm.define("shotgun.GameoverScene", {
             .setPosition(SC_W*0.75, SC_H*0.71)
             .addEventListener("pushed", function() {
                 var mode = that.parentScene.mode;
-                var lb = "Normal";
-                if (mode == GAMEMODE_HARD) lb = "Hard";
-                if (appMain.returnJoker) lb += "_ReturnJoker";
+                var lb = "Normal_";
+                if (mode == GAMEMODE_HARD) lb = "Hard_";
+                if (appMain.returnJoker) lb += "RJ";
                 showLeadersBoard(lb);
             });
 

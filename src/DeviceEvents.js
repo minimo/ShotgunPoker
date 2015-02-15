@@ -162,9 +162,9 @@ var showLeadersBoard = function(id) {
 var registScore = function(mode, returnJoker, score) {
     if (!ENABLE_GAMECENTER) return false;
     if (DEVICE_IOS) {
-        var lb = "Normal";
-        if (mode == GAMEMODE_HARD) lb = "Hard";
-        if (returnJoker) lb += "_ReturnJoker";
+        var lb = "Normal_";
+        if (mode == GAMEMODE_HARD) lb = "Hard_";
+        if (returnJoker) lb += "RJ";
         gamecenter.submitScore(
             function() {
                 if (DEBUG_GAMECENTER) AdvanceAlert('スコア登録に成功しました');

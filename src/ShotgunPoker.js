@@ -131,12 +131,13 @@ tm.define("shotgun.CanvasApp", {
         //実績情報
         this.achievement.save();
 
+/*
         //GameCenterに現在スコアを強制更新
         registScore(GAMEMODE_NORMAL, false, this.highScore[GAMEMODE_NORMAL]);
         registScore(GAMEMODE_NORMAL, true , this.highScore[GAMEMODE_NORMAL+10]);
         registScore(GAMEMODE_HARD  , false, this.highScore[GAMEMODE_HARD]);
         registScore(GAMEMODE_HARD  , true , this.highScore[GAMEMODE_HARD+10]);
-
+*/
         return this;
     },
 
@@ -177,12 +178,13 @@ tm.define("shotgun.CanvasApp", {
             this.lastScore[GAMEMODE_HARD] = c.lastScore_hard;
             this.highScore[GAMEMODE_HARD+10] = c.highScore_hard_ret;
             this.lastScore[GAMEMODE_HARD+10] = c.lastScore_hard_ret;
-
+/*
             //GameCenterに現在スコアを強制更新
             registScore(GAMEMODE_NORMAL, false, this.highScore[GAMEMODE_NORMAL]);
             registScore(GAMEMODE_NORMAL, true , this.highScore[GAMEMODE_NORMAL+10]);
             registScore(GAMEMODE_HARD  , false, this.highScore[GAMEMODE_HARD]);
             registScore(GAMEMODE_HARD  , true , this.highScore[GAMEMODE_HARD+10]);
+*/
         } else {
             //初期情報書き込み
             this.saveConfig();
