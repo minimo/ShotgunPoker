@@ -72,18 +72,18 @@ tm.define("shotgun.SettingScene", {
         tm.display.OutlineLabel("GAME SETTING", 40)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.5, SC_H*0.55);
+            .setPosition(SC_W*0.5, SC_H*0.525);
 
         //ジョーカー戻り設定ボタン
         var that = this;
         tm.display.OutlineLabel("RETURN JOKER", 40)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.3, SC_H*0.625);
+            .setPosition(SC_W*0.3, SC_H*0.6);
         var width = 250, height = 80;
         this.retJoker = shotgun.ToggleButton(width, height, "ON", "OFF", {flat: appMain.buttonFlat})
             .addChildTo(this)
-            .setPosition(SC_W*0.78, SC_H*0.625)
+            .setPosition(SC_W*0.78, SC_H*0.6)
             .addEventListener("pushed", function() {
                 appMain.returnJoker = that.retJoker.toggleON;
             });
@@ -93,10 +93,10 @@ tm.define("shotgun.SettingScene", {
         tm.display.OutlineLabel("SCORE DATA", 40)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.3, SC_H*0.725);
+            .setPosition(SC_W*0.3, SC_H*0.7);
         shotgun.Button(width, height, "CLEAR", {flat: appMain.buttonFlat, fontSize:50})
             .addChildTo(this)
-            .setPosition(SC_W*0.78, SC_H*0.725)
+            .setPosition(SC_W*0.78, SC_H*0.7)
             .addEventListener("pushed", function() {
                 appMain.pushScene(that.dialog);
             });
