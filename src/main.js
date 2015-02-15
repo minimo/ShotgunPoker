@@ -17,7 +17,7 @@ DEBUG = false;
 CHEAT = false;
 
 //実績対応有効フラグ
-ENABLE_ACHEVEMENT = true;
+ENABLE_ACHEVEMENT = false;
 
 //スクリーンサイズ
 SC_W = 640;

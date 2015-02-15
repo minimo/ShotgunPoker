@@ -21,6 +21,7 @@ tm.define("shotgun.Achievement", {
     },
    
     check: function(param) {
+        if (!ENABLE_ACHIEVEMENT) return null;
         param.$safe(this.defaultParam);
         var acList = [];
         var ac = shotgun.achievementList;
