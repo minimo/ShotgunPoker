@@ -74,6 +74,7 @@ tm.define("shotgun.TutorialScene", {
             .addChildTo(this)
             .setPosition(SC_W*0.80, 90)
             .addEventListener("pushed", function() {
+                appMain.playBGM("titleBGM");
                 appMain.popScene();
             });
 

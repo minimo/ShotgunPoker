@@ -115,10 +115,7 @@ tm.define("shotgun.TitleScene", {
                     .call(function(){
                         appMain.pushScene(shotgun.TutorialScene());
                     })
-                    .moveBy(SC_W, 0, 500, "easeOutQuint")
-                    .call(function(){
-                        appMain.playBGM("titleBGM");
-                    });
+                    .moveBy(SC_W, 0, 500, "easeOutQuint");
             });
 
         //RANKING
