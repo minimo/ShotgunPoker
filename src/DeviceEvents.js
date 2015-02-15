@@ -23,6 +23,9 @@ ENABLE_ADMOB = false;
 DEBUG_ADMOB = false;
 TEST_ADMOB = false;
 
+//Social Message
+ENABLE_SOCIAL = false;
+
 //PhoneGap Device Events
 var onDeviceReady = function () {
 
@@ -57,6 +60,9 @@ var onDeviceReady = function () {
     }
     if (DEVICE_ANDROID) {
     }
+
+    //Social Message
+    ENABLE_SOCIAL = true;
 }
 
 var onPause = function() {
@@ -258,3 +264,20 @@ document.addEventListener('onBannerDismiss', onBannerDismiss, false);
 document.addEventListener('onInterstitialPresent', onInterstitialPresent, false);
 document.addEventListener('onInterstitialLeaveApp', onInterstitialLeaveApp, false);
 document.addEventListener('onInterstitialDissmiss', onInterstitialDissmiss, false);
+
+/*
+ *
+ * Social Message
+ *
+ */
+
+//ソーシャルにメッセージを送る
+var sendSocialMessage = function() {
+    if (!ENABLE_SOCIAL) return false;
+
+    var message = {
+        text: "This is a test message",
+//        activityTypes: ["PostToTwitter"],
+    };
+    window.socialmessage.send(message);
+}
