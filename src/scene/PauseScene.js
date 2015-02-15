@@ -108,10 +108,11 @@ tm.define("shotgun.ConfirmDialog", {
     //ラベル用フォントパラメータ
     labelParam: {fontFamily:"Yasashisa", align: "center", baseline:"middle", outlineWidth:4 },
 
-    init: function(caption, button) {
+    init: function(caption, button, fontSize) {
         this.superInit();
         
         button = button || ["OK", "CANCEL"];
+        fontSize = fontSize || 50;
 
         //バックグラウンド
         tm.display.RoundRectangleShape({width: SC_W-20, height: SC_H*0.3, fillStyle: appMain.bgColor, lineWidth: 4})
@@ -123,7 +124,7 @@ tm.define("shotgun.ConfirmDialog", {
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
         //キャプション
-        var lb = tm.display.OutlineLabel(caption, 50).addChildTo(this);
+        var lb = tm.display.OutlineLabel(caption, fontSize).addChildTo(this);
         lb.setParam(this.labelParam);
         lb.setPosition(SC_W*0.5, SC_H*0.42);
 
