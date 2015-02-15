@@ -21,6 +21,9 @@ tm.define("shotgun.SettingScene", {
         this.background = "rgba(0, 0, 0, 0.0)";
         var that = this;
 
+        //スコア消去確認ダイアログ
+        this.dialog = shotgun.ConfirmDialog("CLEAR SCORE DATA?", ["YES", "NO"]);
+
         //バックグラウンド
         this.bg = tm.display.RectangleShape({width: SC_W, height: SC_H, fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor})
             .addChildTo(this)
@@ -86,6 +89,18 @@ tm.define("shotgun.SettingScene", {
             });
         this.retJoker.toggleON = appMain.returnJoker;
 
+        //SCORE CLEAR
+        tm.display.OutlineLabel("SCORE DATA", 40)
+            .addChildTo(this)
+            .setParam(this.labelParam)
+            .setPosition(SC_W*0.3, SC_H*0.725);
+        shotgun.Button(width, height, "CLEAR", {flat: appMain.buttonFlat, fontSize:50})
+            .addChildTo(this)
+            .setPosition(SC_W*0.78, SC_H*0.725)
+            .addEventListener("pushed", function() {
+                appMain.pushScene(that.dialog);
+            });
+
         //戻るボタン
         var width = SC_W, height = 100;
         shotgun.Button(width, height, "RETURN TO TITLE", {flat: appMain.buttonFlat, fontSize:50})
@@ -143,6 +158,15 @@ tm.define("shotgun.SettingScene", {
         this.time++;
     },
 
+    onresume: function() {
+        if (this.dialog.answer == true) {
+            appMain.highScore[GAMEMODE_NORMAL] = 0;
+            appMain.highScore[GAMEMODE_NORMAL+10] = 0;
+            appMain.highScore[GAMEMODE_HARD] = 0;
+            appMain.highScore[GAMEMODE_HARD+10] = 0;
+            this.dialog.answer = false;
+        }
+    },
     //タッチorクリック開始処理
     ontouchstart: function(e) {
     },
