@@ -66,6 +66,9 @@ tm.define("shotgun.GameoverScene", {
                 .setFillStyle("Red")
                 .setFillStyleOutline("rgb(255,200,200)")
                 .setPosition(SC_W*0.82, SC_H*0.20);
+
+            //最高得点更新時のみGameCenter登録
+            registScore(this.mode, appMain.returnJoker, lastScore);
         }
 
         //役一覧
@@ -129,9 +132,6 @@ tm.define("shotgun.GameoverScene", {
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.5);
         this.mask.tweener.clear().fadeOut(200);
-
-        //GameCenter登録
-        registScore(this.mode, appMain.returnJoker, lastScore);
     },
 
     update: function() {
