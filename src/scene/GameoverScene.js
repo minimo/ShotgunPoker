@@ -38,7 +38,7 @@ tm.define("shotgun.GameoverScene", {
             .setPosition(SC_W*0.5, SC_H*0.5);
 
         var that = this;
-        var width = SC_W, height = 80;
+        var width = SC_W, height = 90;
 
         //メインとリザルトを分けてレイヤーを作成
         this.mainLayer = tm.app.Object2D().addChildTo(this);
@@ -85,7 +85,7 @@ tm.define("shotgun.GameoverScene", {
         //全画面広告ボタン
         this.Ad = shotgun.Button(width*0.3, height, "Ad", param)
             .addChildTo(this)
-            .setPosition(SC_W*0.15, SC_H*0.71)
+            .setPosition(SC_W*0.15, SC_H*0.7)
             .addEventListener("pushed", function() {
                 if(ENABLE_PHONEGAP && AdMob) {
                     AdMob.prepareInterstitial({
@@ -99,7 +99,7 @@ tm.define("shotgun.GameoverScene", {
         //GAMECENTER
         shotgun.Button(width*0.4, height, "RANKING", param)
             .addChildTo(this)
-            .setPosition(SC_W*0.5, SC_H*0.71)
+            .setPosition(SC_W*0.5, SC_H*0.70)
             .addEventListener("pushed", function() {
                 var mode = that.parentScene.mode;
                 var lb = "Normal_";
@@ -111,7 +111,7 @@ tm.define("shotgun.GameoverScene", {
         //SNS
         shotgun.Button(width*0.3, height, "SNS", param)
             .addChildTo(this)
-            .setPosition(SC_W*0.85, SC_H*0.71)
+            .setPosition(SC_W*0.85, SC_H*0.70)
             .addEventListener("pushed", function() {
                 sendSocialMessage(that.mode, appMain.returnJoker, lastScore);
             });
@@ -129,7 +129,7 @@ tm.define("shotgun.GameoverScene", {
         //戻るボタン
         this.back = shotgun.Button(width, height, "RETURN TO TITLE", param)
             .addChildTo(this)
-            .setPosition(SC_W*0.5, SC_H*0.85)
+            .setPosition(SC_W*0.5, SC_H*0.86)
             .addEventListener("pushed", function() {
                 that.parentScene = null;
                 that.mask.tweener.clear().fadeIn(300).call(function(){appMain.replaceScene(shotgun.TitleScene());});
