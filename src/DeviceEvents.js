@@ -305,10 +305,10 @@ var sendSocialMessageGlobal = function() {
     var sc = [sc1, sc2, sc3, sc4];
     sc.sort(function(a, b){return a<b;});
     score = sc[0];
-    if (sc1 == sc[0]) {mode = GAMEMODE_NORMAL; returnJoker = false;}
     if (sc2 == sc[0]) {mode = GAMEMODE_NORMAL; returnJoker = true;}
-    if (sc3 == sc[0]) {mode = GAMEMODE_HARD;   returnJoker = false;}
+    if (sc1 == sc[0]) {mode = GAMEMODE_NORMAL; returnJoker = false;}
     if (sc4 == sc[0]) {mode = GAMEMODE_HARD;   returnJoker = true;}
+    if (sc3 == sc[0]) {mode = GAMEMODE_HARD;   returnJoker = false;}
 
     //メッセージテキストの作成
     var lb = "Normal";
