@@ -303,12 +303,14 @@ var sendSocialMessageGlobal = function() {
     var sc3 = appMain.highScore[GAMEMODE_HARD];
     var sc4 = appMain.highScore[GAMEMODE_HARD+10];
     var sc = [sc1, sc2, sc3, sc4];
-    sc.sort(function(a, b){return a<b;});
     score = sc[0];
-    if (sc2 == sc[0]) {mode = GAMEMODE_NORMAL; returnJoker = true;}
-    if (sc1 == sc[0]) {mode = GAMEMODE_NORMAL; returnJoker = false;}
-    if (sc4 == sc[0]) {mode = GAMEMODE_HARD;   returnJoker = true;}
-    if (sc3 == sc[0]) {mode = GAMEMODE_HARD;   returnJoker = false;}
+    for (var i = 1; i < sc.length; i++) {
+        if (score < sc[i]) score = sc[i];
+    }
+    if (score == sc[0]) {mode = GAMEMODE_NORMAL; returnJoker = true;}
+    if (score == sc[1]) {mode = GAMEMODE_NORMAL; returnJoker = false;}
+    if (score == sc[2]) {mode = GAMEMODE_HARD;   returnJoker = true;}
+    if (score == sc[3]) {mode = GAMEMODE_HARD;   returnJoker = false;}
 
     //メッセージテキストの作成
     var lb = "Normal";
