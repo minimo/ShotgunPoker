@@ -17,6 +17,8 @@ tm.define("shotgun.CanvasApp", {
 
     //初回起動フラグ
     firstGame: false,
+    firstNormalGameOver: true,
+    telopCount: 1,
 
     //ＢＧＭ＆効果音
     bgm: null,
@@ -115,6 +117,7 @@ tm.define("shotgun.CanvasApp", {
             "volumeBGM": this.sounds.volumeBGM,
             "volumeSE": this.sounds.volumeSE,
             "returnJoker": this.returnJoker,
+            "firstNormalGameOver": this.firstNormalGameOver,
 
             "highScore_normal":     this.highScore[GAMEMODE_NORMAL],
             "lastScore_normal":     this.lastScore[GAMEMODE_NORMAL],
@@ -143,6 +146,7 @@ tm.define("shotgun.CanvasApp", {
                 "volumeBGM": 5,
                 "volumeSE": 5,
                 "returnJoker": false,
+                "firstNormalGameOver": true,
 
                 "highScore_normal": 0,
                 "lastScore_normal": 0,
@@ -162,6 +166,8 @@ tm.define("shotgun.CanvasApp", {
             this.sounds.volumeBGM = c.volumeBGM;
             this.sounds.volumeSE = c.volumeSE;
             this.returnJoker = c.returnJoker;
+            this.firstNormalGameOver = c.firstNormalGameOver;
+
 
             this.highScore[GAMEMODE_NORMAL] = c.highScore_normal;
             this.lastScore[GAMEMODE_NORMAL] = c.lastScore_normal;

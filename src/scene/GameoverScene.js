@@ -11,6 +11,7 @@ tm.define("shotgun.GameoverScene", {
 
     parentScene: null,
     mode: 0,
+    bonus: false,
     dispExtend: false,
 
     //ラベル用フォントパラメータ
@@ -25,6 +26,7 @@ tm.define("shotgun.GameoverScene", {
 
         this.parentScene = parentScene;
         this.mode = parentScene.mode;
+        this.bonus = parentScene.bonus;
 
         //スコア情報取得
         var m = appMain.returnJoker? this.mode+10: this.mode;
@@ -134,6 +136,20 @@ tm.define("shotgun.GameoverScene", {
                 that.parentScene = null;
                 that.mask.tweener.clear().fadeIn(300).call(function(){appMain.replaceScene(shotgun.TitleScene());});
             });
+
+        //ライフサービステロップ
+        if (this.mode == GAMEMODE_NORMAL && !this.bonus) {
+            if (appMain.telopCount < 0 || appMain.firstNormalGameOver) {
+                this.telop = shotgun.Telop()
+                    .addChildTo(this)
+                    .setPosition(SC_W*0.5, SC_H*0.5)
+                    .add("Adボタンで広告を見るとリトライ時ライフ１つサービス！", 23, 5000);
+                appMain.telopCount = 4;
+            }
+            appMain.telopCount--;
+            appMain.firstNormalGameOver = false;
+            appMain.saveConfig();
+        }
 
         //目隠し
         this.mask = tm.display.RectangleShape({width: SC_W, height: SC_H, fillStyle: "rgba(0, 0, 0, 1.0)", strokeStyle: "rgba(0, 0, 0, 1.0)"})

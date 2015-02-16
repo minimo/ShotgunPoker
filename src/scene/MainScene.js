@@ -41,6 +41,7 @@ tm.define("shotgun.MainScene", {
     complete: false,//役コンプリートフラグ
     newRecord: false,   //ハイスコア更新フラグ
     handLog: [],    //役ログ
+    bonus: false,   //ボーナスライフ貰ってるかフラグ
 
     //カウンタ
     count: 10,      //カード選択カウントダウン用
@@ -70,6 +71,9 @@ tm.define("shotgun.MainScene", {
         //ゲームモード
         if (mode === undefined) mode = GAMEMODE_NORMAL;
         this.mode = mode;
+
+        //ボーナス貰ってるか判定
+        if (appMain.bonusLife != 0) this.bonus = true;
 
         //ハードモードはライフ無し
         if (this.mode == GAMEMODE_HARD) {
