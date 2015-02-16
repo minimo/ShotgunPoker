@@ -120,7 +120,7 @@ tm.define("shotgun.ConfirmDialog", {
             .setPosition(SC_W*0.5, SC_H*0.5);
 
         var that = this;
-        var width = SC_W-28, height = 70;
+        var width = SC_W-28, height = 90;
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
         //キャプション
@@ -173,7 +173,7 @@ tm.define("shotgun.AlertDialog", {
             .setPosition(SC_W*0.5, SC_H*0.5);
 
         var that = this;
-        var width = SC_W-28, height = 80;
+        var width = SC_W-28, height = 90;
 
         //キャプション
         var pos = SC_H*0.47;
