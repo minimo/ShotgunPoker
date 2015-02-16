@@ -83,9 +83,9 @@ tm.define("shotgun.GameoverScene", {
         var param = {flat: appMain.buttonFlat, fontSize:50};
 
         //全画面広告ボタン
-        this.Ad = shotgun.Button(width*0.5, height, "Ad", param)
+        this.Ad = shotgun.Button(width*0.3, height, "Ad", param)
             .addChildTo(this)
-            .setPosition(SC_W*0.25, SC_H*0.71)
+            .setPosition(SC_W*0.15, SC_H*0.71)
             .addEventListener("pushed", function() {
                 if(ENABLE_PHONEGAP && AdMob) {
                     AdMob.prepareInterstitial({
@@ -97,15 +97,23 @@ tm.define("shotgun.GameoverScene", {
             });
 
         //GAMECENTER
-        shotgun.Button(width*0.5, height, "RANKING", param)
+        shotgun.Button(width*0.4, height, "RANKING", param)
             .addChildTo(this)
-            .setPosition(SC_W*0.75, SC_H*0.71)
+            .setPosition(SC_W*0.5, SC_H*0.71)
             .addEventListener("pushed", function() {
                 var mode = that.parentScene.mode;
                 var lb = "Normal_";
                 if (mode == GAMEMODE_HARD) lb = "Hard_";
                 if (appMain.returnJoker) lb += "RJ";
                 showLeadersBoard(lb);
+            });
+
+        //SNS
+        shotgun.Button(width*0.3, height, "SNS", param)
+            .addChildTo(this)
+            .setPosition(SC_W*0.85, SC_H*0.71)
+            .addEventListener("pushed", function() {
+                sendSocialMessage(that.mode, appMain.returnJoker, lastScore);
             });
 
         //リトライボタン

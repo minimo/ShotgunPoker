@@ -303,7 +303,7 @@ var sendSocialMessageGlobal = function() {
     var sc3 = appMain.highScore[GAMEMODE_HARD];
     var sc4 = appMain.highScore[GAMEMODE_HARD+10];
     var sc = [sc1, sc2, sc3, sc4];
-    sc.sort(function(a, b){return b-a;});
+    sc.sort(function(a, b){return a<b;});
     score = sc[0];
     if (sc1 == sc[0]) {mode = GAMEMODE_NORMAL; returnJoker = false;}
     if (sc2 == sc[0]) {mode = GAMEMODE_NORMAL; returnJoker = true;}
