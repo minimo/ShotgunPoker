@@ -80,12 +80,13 @@ tm.define("shotgun.TitleScene", {
 
         var that = this;
         var width = SC_W, height = 100;
+        var y = SC_H*0.4, space = 115;
         var param = {flat: appMain.buttonFlat, fontSize: 50};
 
         //プレイスタート
         this.start = shotgun.Button(width, height, "PLAY", param)
             .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.5, SC_H*0.40)
+            .setPosition(SC_W*0.5, y)
             .addEventListener("pushed", function() {
                 that.buttonLock(true);
 
@@ -105,9 +106,10 @@ tm.define("shotgun.TitleScene", {
             });
 
         //チュートリアル
+        y+=space;
         this.tutorial = shotgun.Button(width, height, "TUTORIAL", param)
             .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.5, SC_H*0.50)
+            .setPosition(SC_W*0.5, y)
             .addEventListener("pushed", function() {
                 that.buttonLock(true);
                 that.titleLayer.tweener.clear()
@@ -119,9 +121,10 @@ tm.define("shotgun.TitleScene", {
             });
 
         //RANKING
+        y+=space;
         this.ranking = shotgun.Button(width, height, "RANKING", param)
             .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.5, SC_H*0.60)
+            .setPosition(SC_W*0.5, y)
             .addEventListener("pushed", function() {
                 that.buttonLock(true);
                 showLeadersBoard();
@@ -129,9 +132,10 @@ tm.define("shotgun.TitleScene", {
             });
 
         //クレジット
+        y+=space;
         this.credit = shotgun.Button(width, height, "CREDIT", param)
             .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.5, SC_H*0.70)
+            .setPosition(SC_W*0.5, y)
             .addEventListener("pushed", function() {
                 that.buttonLock(true);
                 that.mask.tweener.clear()
@@ -141,9 +145,10 @@ tm.define("shotgun.TitleScene", {
                     });
             });
         //設定
+        y+=space;
         this.option = shotgun.Button(width, height, "OPTION", param)
             .addChildTo(this.titleLayer)
-            .setPosition(SC_W*0.5, SC_H*0.80)
+            .setPosition(SC_W*0.5, y)
             .addEventListener("pushed", function() {
                 that.buttonLock(true);
                 that.mask.tweener.clear()
