@@ -44,6 +44,7 @@ tm.define("shotgun.Achievement", {
 
     //ローカルストレージへ保存
     save: function() {
+        if (!ENABLE_ACHIEVEMENT) return;
         var saveObj = {};
         var ac = shotgun.achievementList;
         var list = Object.getOwnPropertyNames(ac);
@@ -59,6 +60,7 @@ tm.define("shotgun.Achievement", {
 
     //ローカルストレージから読み込み
     load: function() {
+        if (!ENABLE_ACHIEVEMENT) return;
         var ac = localStorage.getItem("achievement");
         if (!ac) return;
         var data = JSON.parse(ac);
