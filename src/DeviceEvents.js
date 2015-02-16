@@ -278,10 +278,10 @@ var sendSocialMessage = function(mode, returnJoker, score) {
     //メッセージテキストの作成
     var lb = "Normal";
     if (mode == GAMEMODE_HARD) lb = "Hard";
-    if (returnJoker) lb += "-RJ";
+    if (returnJoker) lb += "_RJ";
 
     var url = "https://itunes.apple.com/jp/app/shottoganpoka/id951249463";
-    var text = "Score:"+score+"pts.("+lb+")【"+url+"】 #ShotgunPoker";
+    var text = "ShotgunPoker Score:"+score+"pts("+lb+")【"+url+"】 #ShotgunPoker #SGP_"+lb;
     var message = {
         text: text,
 //        activityTypes: ["PostToTwitter"],
@@ -318,7 +318,7 @@ var sendSocialMessageGlobal = function() {
     if (returnJoker) lb += "-RJ";
 
     var url = "https://itunes.apple.com/jp/app/shottoganpoka/id951249463";
-    var text = "MyBestScore:"+score+"pts.("+lb+")【"+url+"】 #ShotgunPoker";
+    var text = "ShotgunPoker MyBestScore:"+score+"pts("+lb+")【"+url+"】 #ShotgunPoker #SGP_Best";
     var message = {
         text: text,
 //        activityTypes: ["PostToTwitter"],
