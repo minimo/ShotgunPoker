@@ -41,10 +41,11 @@ tm.define("shotgun.Telop", {
         }
     },
 
-    add: function(text, size, dispWait) {
+    add: function(text, size, dispWait, silent) {
         text = text || "test message";
         size = size || 30;
         dispWait = dispWait || 1000;
+        silent = silent || false;
         this.queue.push({text:text, size:size, dispWait:dispWait});
 
         var that = this;
@@ -53,7 +54,7 @@ tm.define("shotgun.Telop", {
                 this.setPosition(SC_W, 0);
                 this.text = that.queue[0].text;
                 this.fontSize = that.queue[0].size;
-                appMain.playSE("achievement");
+                if(!silent) appMain.playSE("achievement");
             }.bind(this.textLabel))
             .move(0, 0, 250, "easeInOutSine")
             .wait(dispWait)
