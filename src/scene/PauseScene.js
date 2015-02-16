@@ -55,7 +55,7 @@ tm.define("shotgun.PauseScene", {
         }
 
         var that = this;
-        var width = SC_W, height = 80;
+        var width = SC_W, height = 100;
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
         //戻るボタン
