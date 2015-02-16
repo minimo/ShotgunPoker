@@ -28,7 +28,7 @@ tm.define("shotgun.CreditScene", {
         this.titleLayer = tm.app.Object2D().addChildTo(this);
         this.tutorialLayer = tm.app.Object2D().addChildTo(this);
 
-        this.credit0 = tm.display.OutlineLabel("CREDIT", 40)
+        this.credit0 = tm.display.OutlineLabel("CREDIT", 50)
             .addChildTo(this.titleLayer)
             .setParam(this.headerParam)
             .setPosition(SC_W*0.5, SC_H*0.1);
@@ -63,17 +63,25 @@ tm.define("shotgun.CreditScene", {
         this.credit4 = tm.display.OutlineLabel("Powered by tmlib.js", sizeCredit)
             .addChildTo(this.titleLayer)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.5, SC_H*0.5);
+            .setPosition(SC_W*0.5, SC_H*0.45);
         this.credit3url = tm.display.OutlineLabel("http://phi-jp.github.io/tmlib.js/", sizeURL)
             .addChildTo(this.titleLayer)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.5, SC_H*0.5+45);
+            .setPosition(SC_W*0.5, SC_H*0.45+45);
 
         //tmlibロゴ
         tm.display.Sprite("tmliblogo")
             .addChildTo(this)
-            .setPosition(SC_W*0.5, SC_H*0.7)
+            .setPosition(SC_W*0.5, SC_H*0.65)
             .setScale(0.5, 0.5);
+
+        //SNS
+        this.btn = shotgun.Button(SC_W*0.55, 80, "Tweet best score", {flat: appMain.buttonFlat, fontSize:40})
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.83)
+            .addEventListener("pushed", function() {
+                sendSocialMessageGlobal();
+            });
 
         //目隠し
         this.mask = tm.display.RectangleShape({width: SC_W, height: SC_H, fillStyle: "rgba(0, 0, 0, 1.0)", strokeStyle: "rgba(0, 0, 0, 1.0)"})
@@ -98,8 +106,10 @@ tm.define("shotgun.CreditScene", {
 
     //タッチorクリック終了処理
     ontouchend: function(e) {
-        this.mask.tweener.clear().fadeOut(200);
-        appMain.popScene();
+        if (!this.btn.push) {
+            this.mask.tweener.clear().fadeOut(200);
+            appMain.popScene();
+        }
     },
 
 });
