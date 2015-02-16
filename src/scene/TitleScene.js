@@ -127,6 +127,10 @@ tm.define("shotgun.TitleScene", {
             .setPosition(SC_W*0.5, y)
             .addEventListener("pushed", function() {
                 that.buttonLock(true);
+                registScore(GAMEMODE_NORMAL, false, appMain.highScore[GAMEMODE_NORMAL]);
+                registScore(GAMEMODE_NORMAL, true , appMain.highScore[GAMEMODE_NORMAL+10]);
+                registScore(GAMEMODE_HARD  , false, appMain.highScore[GAMEMODE_HARD]);
+                registScore(GAMEMODE_HARD  , true , appMain.highScore[GAMEMODE_HARD+10]);
                 showLeadersBoard();
                 that.buttonLock(false);
             });
