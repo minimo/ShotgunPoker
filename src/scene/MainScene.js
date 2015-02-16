@@ -71,10 +71,6 @@ tm.define("shotgun.MainScene", {
         if (mode === undefined) mode = GAMEMODE_NORMAL;
         this.mode = mode;
 
-        //ボーナスライフ加算
-        this.life += appMain.bonusLife;
-        appMain.bonusLife = 0;
-
         //ハードモードはライフ無し
         if (this.mode == GAMEMODE_HARD) {
             this.life = 0;
@@ -330,6 +326,23 @@ tm.define("shotgun.MainScene", {
         if (!this.start) return;
         if (this.deck.busy) return;
 
+        //ボーナスライフ加算演出
+        if (this.mode != GAMEMODE_HARD && appMain.bonusLife != 0) {
+            this.messageQueue.addMessage("THANKYOU!!", 90);
+            appMain.bonusLife = 0;
+
+            var that = this;
+            var tmp = tm.app.Object2D()
+                .addChildTo(this);
+            tmp.tweener.clear()
+                .wait(1000)
+                .call(function(){
+                    that.life++;
+                    appMain.playSE("extend");
+                    this.remove();
+                }.bind(tmp));
+        }
+
         if (this.pick && !this.gameend) {
             //カウントダウン間隔
             var interval = 45-~~(this.level*10);
@@ -554,14 +567,14 @@ tm.define("shotgun.MainScene", {
         if (extend != 0 && this.mode == GAMEMODE_NORMAL) {
             var that = this;
             var tmp = tm.app.Object2D()
-                .addChildTo(this)
-                .tweener.clear()
+                .addChildTo(this);
+            tmp.tweener.clear()
                 .wait(1000)
                 .call(function(){
                     that.life+=extend;
-                    that.score+=2000;
                     appMain.playSE("extend");
-                });
+                    this.remove();
+                }.bind(tmp));
         }
 
         //ゲームオーバー判定
