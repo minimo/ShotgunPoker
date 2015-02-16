@@ -542,6 +542,7 @@ tm.define("shotgun.MainScene", {
             if (cp) {
                 extend++;
                 this.complete = true;
+                this.score+=2000;
                 this.messageQueue.addMessage("HAND COMPLETE!", 70);
             }
         }
