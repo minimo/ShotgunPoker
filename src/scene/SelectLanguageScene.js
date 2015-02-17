@@ -23,13 +23,25 @@ tm.define("shotgun.SelectLanguageScene", {
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.5);
 
-        tm.display.OutlineLabel("Select your language.", 60)
+        //ショットガンシルエット
+        var sg = tm.display.Sprite("shotgun", 640, 250)
             .addChildTo(this)
-            .setParam(this.headerParam)
-            .setPosition(SC_W*0.5, SC_H*0.3);
+            .setPosition(SC_W*0.5, SC_H*0.2);
+        sg.scaleX = -1;
+        sg.rotation = -10;
+
+        //タイトルロゴ
+        tm.display.Sprite("titlelogo", 600, 300)
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.2);
+
+        tm.display.OutlineLabel("Select language.", 60)
+            .addChildTo(this)
+            .setParam(this.labelParam)
+            .setPosition(SC_W*0.5, SC_H*0.4);
 
         //言語選択
-        var width = 250, height = 70;
+        var width = 300, height = 100;
         shotgun.Button(width, height, "日本語", {flat: appMain.buttonFlat, fontSize:50})
             .addChildTo(this)
             .setPosition(SC_W*0.25, SC_H*0.5)
