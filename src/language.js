@@ -10,7 +10,7 @@ var $trans = function(text) {
     var ret = languagePack[text];
     if (ret) {
         var retText = ret[appMain.language];
-        return retText;
+        return retText?retText:text;
     }
     return text;
 }
@@ -20,6 +20,18 @@ var languagePack = {
     //Tutorial
     "ショットガンポーカーの遊び方": {
         "ENGLISH": "How to play Shotgun Poker"
+    },
+    "スキップしたい場合は右上の": {
+        "ENGLISH": "If you skip this tutorial."
+    },
+     "SKIPボタンを押してください": {
+        "ENGLISH": "Please press SKIP button."
+    },
+    "制限時間内にカードを５枚選んで": {
+        "ENGLISH": "Please make the hand of poker to"
+    },
+    "ポーカーの役を作ってください": {
+        "ENGLISH": "choose 5 cards within the time limit."
     },
 
     //GameCenter warning
