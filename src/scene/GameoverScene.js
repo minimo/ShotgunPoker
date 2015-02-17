@@ -143,7 +143,7 @@ tm.define("shotgun.GameoverScene", {
                 this.telop = shotgun.Telop()
                     .addChildTo(this)
                     .setPosition(SC_W*0.5, SC_H*0.5)
-                    .add({text:"Adボタンで広告を見るとリトライ時ライフ１つサービス！", size:23, dispWait:5000, silent:true});
+                    .add({text:$trans("Adボタンで広告を見るとライフ１個ボーナス！"), size:28, dispWait:5000, silent:true});
                 appMain.telopCount = 4;
             }
             appMain.telopCount--;

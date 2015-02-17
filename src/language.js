@@ -79,8 +79,8 @@ var languagePack = {
     },
 
     //GameOver Ad telop
-    "Adボタンで広告を見るとリトライ時ライフ１つサービス！": {
-        "ENGLISH": "View ad 'Ad' button and to retry when life one service!"
+    "Adボタンで広告を見るとライフ１個ボーナス！": {
+        "ENGLISH": "View ad 'Ad' button and life one bonus !"
     },
 
     //Achievement
