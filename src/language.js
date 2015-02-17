@@ -7,22 +7,40 @@
 
 //言語変換
 var $trans = function(text) {
-    //英語変換
-    if (appMain.language == ENGLISH) {
-        //tutorial
-        if (text == "得点表") return "SCORE LIST";
-        if (text == "プレイ画面の説明") return "Description";
-
-        //GAMECENTER
-        if (text == "GAMECENTERのアクセスに失敗しました") return "I failed to access the GAMECENTER";
-        if (text == "GAMECENTERの準備が出来ていません") return "I failed to access the GAMECENTER";
-
-        //POKER HANDS
-        if (text == "NO HAND") return "NO PAIR";
-        if (text == "THREE CARD") return "THREE OF A KIND";
-        if (text == "FOUR CARD") return "FOUR OF A KIND";
-        if (text == "FIVE CARD") return "FIVE OF A KIND";
-        if (text == "R.STRAIGHT FLASH") return "ROYAL FLASH";
+    var ret = languagePack[text];
+    if (ret) {
+        var retText = ret[appMain.language];
+        return retText;
     }
     return text;
 }
+
+var languagePack = {
+
+    //Tutorial
+    "ショットガンポーカーの遊び方": {
+        "ENGLISH": "How to play Shotgun Poker"
+    },
+
+    //GameCenter warning
+    "GAMECENTERのアクセスに失敗しました": {
+        "ENGLISH": "I failed to access the GAMECENTER"
+    },
+    "GAMECENTERの準備が出来ていません": {
+        "ENGLISH": "I failed to access the GAMECENTER"
+    },
+
+    //Poker Hand
+    "THREE CARD": {
+        "ENGLISH": "THREE OF A KIND"
+    },
+    "FOUR CARD": {
+        "ENGLISH": "FOUR OF A KIND"
+    },
+    "FIVE CARD": {
+        "ENGLISH": "FIVE OF A KIND"
+    },
+    "R.STRAIGHT FLASH": {
+        "ENGLISH": "ROYAL FLASH"
+    },
+};

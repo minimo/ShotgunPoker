@@ -632,7 +632,7 @@ tm.define("shotgun.MainScene", {
             case STRAIGHTFLASH: name1 = "STRAIGHT"; name2 = "FLASH"; size = 50; break;
             case ROYALSTRAIGHTFLASH: name1 = "ROYAL"; name2 = "STRAIGHT"; name3 = "FLASH !!"; size = 50; break;
         }
-        if (appMain.language == ENGLISH) {
+        if (appMain.language == "ENGLISH") {
             switch (hand) {
                 case THREECARD:     name1 = "THREE OF"; name2 = "A KIND"; offset = 20; break;
                 case FOURCARD:      name1 = "FOUR OF"; name2 = "A KIND"; size = 70; offset = 30; break;

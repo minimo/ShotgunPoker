@@ -47,7 +47,7 @@ tm.define("shotgun.CanvasApp", {
     buttonFlat: true,
 
     //言語設定
-    language: JAPANESE,
+    language: "JAPANESE",
 
     init: function(id) {
         this.superInit(id);
@@ -72,13 +72,6 @@ tm.define("shotgun.CanvasApp", {
         this.handList[9]  = {name: "FIVE CARD", point: FIVECARD};
         this.handList[10] = {name: "STRAIGHT FLASH", point: STRAIGHTFLASH};
         this.handList[11] = {name: "R.STRAIGHT FLASH", point: ROYALSTRAIGHTFLASH};
-        if (this.language == ENGLISH) {
-            this.handList[1]  = {name: "NO PAIR", point: NOPAIR};
-            this.handList[5]  = {name: "THREE OF A KIND", point: THREECARD};
-            this.handList[8]  = {name: "FOUR OF A KIND", point: FOURCARD};
-            this.handList[9]  = {name: "FIVE OF A KIND", point: FIVECARD};
-            this.handList[11] = {name: "ROYAL FLASH", point: ROYALSTRAIGHTFLASH};
-        }
 
         //サウンドセット
         this.sounds = shotgun.SoundSet(MEDIA_DEFAULT);
@@ -142,7 +135,7 @@ tm.define("shotgun.CanvasApp", {
         var cfg = localStorage.getItem("config");
         if (cfg) {
             var cfgDef = {
-                "language": JAPANESE,
+                "language": "JAPANESE",
                 "volumeBGM": 5,
                 "volumeSE": 5,
                 "returnJoker": false,
@@ -163,6 +156,8 @@ tm.define("shotgun.CanvasApp", {
 
             this.firstGame = false;
             this.language = c.language;
+            if (this.language == 0) this.language = "JAPANESE";
+            if (this.language == 1) this.language = "ENGLISH";
             this.sounds.volumeBGM = c.volumeBGM;
             this.sounds.volumeSE = c.volumeSE;
             this.returnJoker = c.returnJoker;
