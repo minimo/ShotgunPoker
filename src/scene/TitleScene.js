@@ -45,7 +45,7 @@ tm.define("shotgun.TitleScene", {
         
         this.time = 0;
 
-        appMain.playBGM("titleBGM");
+        if (!appMain.firstGame) appMain.playBGM("titleBGM");
     },
 
     onresume: function() {
@@ -304,7 +304,8 @@ tm.define("shotgun.TitleScene", {
 
     update: function() {
         if (appMain.firstGame) {
-            appMain.pushScene(shotgun.TutorialScene());
+            appMain.pushScene(shotgun.SelectLanguageScene());
+//            appMain.pushScene(shotgun.TutorialScene());
         }
         if (this.time % 7 == 0) {
             var c = tm.display.Sprite("card", CARD_W, CARD_H)
