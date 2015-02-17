@@ -78,6 +78,19 @@ var languagePack = {
         "ENGLISH": "I failed to access the GAMECENTER"
     },
 
+    //GameOver Ad telop
+    "Adボタンで広告を見るとリトライ時ライフ１つサービス！": {
+        "ENGLISH": "View ad 'Ad' button and to retry when life one service!"
+    },
+
+    //Achievement
+    "実績「": {
+        "ENGLISH": "Achievement「"
+    },
+    "」が解除されました": {
+        "ENGLISH": "」unlocked."
+    },
+
     //Poker Hand
     "THREE CARD": {
         "ENGLISH": "THREE OF A KIND"

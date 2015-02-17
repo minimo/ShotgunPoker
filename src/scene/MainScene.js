@@ -484,7 +484,9 @@ tm.define("shotgun.MainScene", {
             var that = this;
             var telop = shotgun.Telop().addChildTo(this).setPosition(SC_W*0.5, SC_H*0.85);
             for (var i = 0; i < ac.length; i++) {
-                var text = "実績「"+ac[i].name+"」が解除されました";
+                var text1 = $trans("実績「");
+                var text2 = $trans("」が解除されました");
+                var text = text1+ac[i].name+text2;
                 telop.add({text:text});
             }
         }
