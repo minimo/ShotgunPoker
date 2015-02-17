@@ -74,7 +74,7 @@ tm.define("shotgun.SettingScene", {
             .addChildTo(this)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.5, SC_H*0.50);
-        var width = 250, height = 70;
+        var width = 250, height = 90;
         this.japanese = shotgun.ToggleButton(width, height, "日本語", "日本語", {flat: appMain.buttonFlat, fontSize:40})
             .addChildTo(this)
             .setPosition(SC_W*0.25, SC_H*0.57)
