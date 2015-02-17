@@ -32,25 +32,25 @@ tm.define("shotgun.SettingScene", {
         tm.display.OutlineLabel("OPTION", 60)
             .addChildTo(this)
             .setParam(this.headerParam)
-            .setPosition(SC_W*0.5, SC_H*0.1);
+            .setPosition(SC_W*0.5, SC_H*0.07);
 
         tm.display.OutlineLabel("SOUND SETTING", 40)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.5, SC_H*0.225);
+            .setPosition(SC_W*0.5, SC_H*0.15);
 
         //ＢＧＭ音量
         var volBGM = appMain.volumeBGM;
         tm.display.OutlineLabel("BGM", 50)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.1, SC_H*0.3);
+            .setPosition(SC_W*0.1, SC_H*0.25);
         this.bgm = [];
         for (var i = 0; i < 10; i++) {
             this.bgm[i] = tm.display.Sprite("card", CARD_W, CARD_H)
                 .addChildTo(this)
                 .setScale(0.3)
-                .setPosition(SC_W*0.25+i*44, SC_H*0.3)
+                .setPosition(SC_W*0.25+i*44, SC_H*0.25)
         }
         this.setVolumeBGM(appMain.volumeBGM);
 
@@ -59,31 +59,65 @@ tm.define("shotgun.SettingScene", {
         tm.display.OutlineLabel("SE", 50)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.1, SC_H*0.4);
+            .setPosition(SC_W*0.1, SC_H*0.35);
         this.se = [];
         for (var i = 0; i < 10; i++) {
             this.se[i] = tm.display.Sprite("card", CARD_W, CARD_H)
                 .addChildTo(this)
                 .setScale(0.3)
-                .setPosition(SC_W*0.25+i*44, SC_H*0.4)
+                .setPosition(SC_W*0.25+i*44, SC_H*0.35)
         }
         this.setVolumeSE(appMain.volumeSE);
+
+        //言語選択
+        tm.display.OutlineLabel("LANGUAGE", 40)
+            .addChildTo(this)
+            .setParam(this.labelParam)
+            .setPosition(SC_W*0.5, SC_H*0.44);
+        var width = 250, height = 70;
+        this.japanese = shotgun.ToggleButton(width, height, "日本語", "日本語", {flat: appMain.buttonFlat, fontSize:40})
+            .addChildTo(this)
+            .setPosition(SC_W*0.25, SC_H*0.5)
+            .addEventListener("pushed", function() {
+                if (this.toggleON) {
+                    appMain.language = "JAPANESE";
+                    that.english.toggleON = false;
+                }
+                this.toggleON = true;
+            });
+        this.english = shotgun.ToggleButton(width, height, "English", "English", {flat: appMain.buttonFlat, fontSize:40})
+            .addChildTo(this)
+            .setPosition(SC_W*0.75, SC_H*0.5)
+            .addEventListener("pushed", function() {
+                if (this.toggleON) {
+                    appMain.language = "ENGLISH";
+                    that.japanese.toggleON = false;
+                }
+                this.toggleON = true;
+            });
+        if (appMain.language == "JAPANESE") {
+            this.japanese.toggleON = true;
+            this.english.toggleON = false;
+        } else {
+            this.japanese.toggleON = false;
+            this.english.toggleON = true;
+        }
 
         tm.display.OutlineLabel("GAME SETTING", 40)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.5, SC_H*0.525);
+            .setPosition(SC_W*0.5, SC_H*0.58);
 
         //ジョーカー戻り設定ボタン
         var that = this;
         tm.display.OutlineLabel("RETURN JOKER", 40)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.3, SC_H*0.6);
+            .setPosition(SC_W*0.3, SC_H*0.65);
         var width = 250, height = 80;
         this.retJoker = shotgun.ToggleButton(width, height, "ON", "OFF", {flat: appMain.buttonFlat})
             .addChildTo(this)
-            .setPosition(SC_W*0.78, SC_H*0.6)
+            .setPosition(SC_W*0.78, SC_H*0.65)
             .addEventListener("pushed", function() {
                 appMain.returnJoker = that.retJoker.toggleON;
             });
@@ -93,10 +127,10 @@ tm.define("shotgun.SettingScene", {
         tm.display.OutlineLabel("SCORE DATA", 40)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.3, SC_H*0.7);
+            .setPosition(SC_W*0.3, SC_H*0.75);
         shotgun.Button(width, height, "CLEAR", {flat: appMain.buttonFlat, fontSize:50})
             .addChildTo(this)
-            .setPosition(SC_W*0.78, SC_H*0.7)
+            .setPosition(SC_W*0.78, SC_H*0.75)
             .addEventListener("pushed", function() {
                 appMain.pushScene(that.dialog);
             });
@@ -181,7 +215,7 @@ tm.define("shotgun.SettingScene", {
             sx -= SC_W*0.25;
             var x = ~~(sx/44)+1;
             //ＢＧＭボリューム
-            if ( SC_H*0.25 < sy && sy < SC_H*0.35) {
+            if ( SC_H*0.2 < sy && sy < SC_H*0.3) {
                 if (sx < 0) {
                     this.setVolumeBGM(0);
                 } else {
@@ -190,7 +224,7 @@ tm.define("shotgun.SettingScene", {
             }
 
             //ＳＥボリューム
-            if ( SC_H*0.35 < sy && sy < SC_H*0.45) {
+            if ( SC_H*0.3 < sy && sy < SC_H*0.4) {
                 if (sx < 0) {
                     this.setVolumeSE(0);
                 } else {
