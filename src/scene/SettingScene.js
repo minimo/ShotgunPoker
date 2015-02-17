@@ -192,6 +192,7 @@ tm.define("shotgun.SettingScene", {
         this.time++;
     },
 
+/*
     onresume: function() {
         if (this.dialog.answer == true) {
             appMain.highScore[GAMEMODE_NORMAL] = 0;
@@ -201,6 +202,7 @@ tm.define("shotgun.SettingScene", {
             this.dialog.answer = false;
         }
     },
+*/
     //タッチorクリック開始処理
     ontouchstart: function(e) {
     },
