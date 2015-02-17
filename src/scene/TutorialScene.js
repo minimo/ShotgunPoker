@@ -642,7 +642,16 @@ tm.define("shotgun.TutorialScene", {
             }).wait(5000)
             .call(function(){
                 that.enterMessage(pos, 6000, "以上でチュートリアルは終了です", 40);
-            }).wait(5000)
+            }).wait(5000);
+
+        if (appMain.language != "JAPANESE") {
+            this.ctrl.tweener
+                .call(function(){
+                    that.enterMessage(pos, 6000, "Please enjoy the ShotgunPoker", 40);
+                }).wait(5000);
+        }
+
+        this.ctrl.tweener
             .call(function(){
                 appMain.popScene();
             });

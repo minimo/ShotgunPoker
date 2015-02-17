@@ -33,12 +33,48 @@ var languagePack = {
     "ポーカーの役を作ってください": {
         "ENGLISH": "choose 5 cards within the time limit."
     },
+    "完成した役に応じた": {
+        "ENGLISH": "Score is obtained in accor-"
+    },
+    "得点が入ります": {
+        "ENGLISH": "dance with the finished hand"
+    },
+    "場のカードが少なくなると": {
+        "ENGLISH": "The field of the card is reduced"
+    },
+    "カード補充してシャッフルされます": {
+        "ENGLISH": "by the card replenished are shuffled."
+    },
+    "また、横に大きくスワイプすると": {
+        "ENGLISH": "Can be made by the lateral to"
+    },
+    "カードのシャッフルが出来ます": {
+        "ENGLISH": "increase swipe card shuffle."
+    },
+    "役無し、時間切れはミスとなり": {
+        "ENGLISH": "No pair, expired becomes a mistake."
+    },
+    "左上のライフが一つ減ります": {
+        "ENGLISH": "You upper left of life is reduced one."
+    },
+    "ワンペアが２回続いた場合も": {
+        "ENGLISH": "It becomes a miss even if one"
+    },
+    "ミスとなります": {
+        "ENGLISH": "pair was followed by twice."
+    },
+    "ライフが０の状態でミスすると": {
+        "ENGLISH": "The game is over when you miss"
+    },
+    "ゲームオーバーです": {
+        "ENGLISH": "in the state of life is not."
+    },
+    "以上でチュートリアルは終了です": {
+        "ENGLISH": "This completes the tutorial above."
+    },
 
     //GameCenter warning
-    "GAMECENTERのアクセスに失敗しました": {
-        "ENGLISH": "I failed to access the GAMECENTER"
-    },
-    "GAMECENTERの準備が出来ていません": {
+    "GameCenterに接続できませんでした": {
         "ENGLISH": "I failed to access the GAMECENTER"
     },
 
