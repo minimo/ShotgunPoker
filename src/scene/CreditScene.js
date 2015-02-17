@@ -28,10 +28,10 @@ tm.define("shotgun.CreditScene", {
         this.titleLayer = tm.app.Object2D().addChildTo(this);
         this.tutorialLayer = tm.app.Object2D().addChildTo(this);
 
-        this.credit0 = tm.display.OutlineLabel("CREDIT", 50)
+        this.credit0 = tm.display.OutlineLabel("CREDIT", 60)
             .addChildTo(this.titleLayer)
             .setParam(this.headerParam)
-            .setPosition(SC_W*0.5, SC_H*0.1);
+            .setPosition(SC_W*0.5, SC_H*0.07);
 
         this.credit1 = tm.display.OutlineLabel("ＢＧＭ：魔王魂様", sizeCredit)
             .addChildTo(this.titleLayer)
