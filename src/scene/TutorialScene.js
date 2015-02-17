@@ -286,8 +286,8 @@ tm.define("shotgun.TutorialScene", {
 
     //基本操作説明
     startPhase1: function() {
-        var size1 = appMain.language=="JAPANESE"?40:35;
-        var size2 = appMain.language=="JAPANESE"?40:30;
+        var size1 = appMain.language=="JAPANESE"?40:32;
+        var size2 = appMain.language=="JAPANESE"?40:32;
 
         var pos = SC_H*0.3;
         var that = this;
@@ -656,6 +656,7 @@ tm.define("shotgun.TutorialScene", {
 
         this.ctrl.tweener
             .call(function(){
+                appMain.playBGM("titleBGM");
                 appMain.popScene();
             });
     },
