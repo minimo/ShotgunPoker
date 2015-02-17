@@ -286,6 +286,9 @@ tm.define("shotgun.TutorialScene", {
 
     //基本操作説明
     startPhase1: function() {
+        var size1 = appMain.language=="JAPANESE"?40:35;
+        var size2 = appMain.language=="JAPANESE"?40:30;
+
         var pos = SC_H*0.3;
         var that = this;
         this.ctrl.tweener.clear()
@@ -298,15 +301,15 @@ tm.define("shotgun.TutorialScene", {
             appMain.firstGame = false;
             this.ctrl.tweener
                 .call(function(){
-                    that.enterMessage(pos, 3000, "スキップしたい場合は右上の", 40);
-                    that.enterMessage(pos+60, 3000, "SKIPボタンを押してください", 40);
+                    that.enterMessage(pos, 3000, "スキップしたい場合は右上の", size1);
+                    that.enterMessage(pos+60, 3000, "SKIPボタンを押してください", size1);
                 }).wait(4000)
         }
 
         this.ctrl.tweener
             .call(function(){
-                that.enterMessage(pos, 6000, "制限時間内にカードを５枚選んで", 40);
-                that.enterMessage(pos+60, 6000, "ポーカーの役を作ってください", 40);
+                that.enterMessage(pos, 6000, "制限時間内にカードを５枚選んで", size2);
+                that.enterMessage(pos+60, 6000, "ポーカーの役を作ってください", size2);
             }).wait(2000)
 
             //最初にロイヤルストレートフラッシュを作る
@@ -393,8 +396,8 @@ tm.define("shotgun.TutorialScene", {
 
             //カード補充の説明
             .call(function(){
-                that.enterMessage(pos, 10000, "場のカードが少なくなると", 40);
-                that.enterMessage(pos+60, 10000, "カード補充してシャッフルされます", 40);
+                that.enterMessage(pos, 10000, "場のカードが少なくなると", size2);
+                that.enterMessage(pos+60, 10000, "カード補充してシャッフルされます", size2);
             }).wait(500)
             //フラッシュ
             .call(function(){
@@ -476,8 +479,8 @@ tm.define("shotgun.TutorialScene", {
 
             //手動シャッフルの説明
             .call(function(){
-                that.enterMessage(pos, 9000, "また、横に大きくスワイプすると", 40);
-                that.enterMessage(pos+60, 9000, "カードのシャッフルが出来ます", 40);
+                that.enterMessage(pos, 9000, "また、横に大きくスワイプすると", size1);
+                that.enterMessage(pos+60, 9000, "カードのシャッフルが出来ます", size1);
                 that.finger.tweener.clear().to({alpha:1.0},100)
                     .wait(2500)
                     .moveBy(SC_W*0.6, 0, 500, "easeOutCubic")
@@ -503,8 +506,8 @@ tm.define("shotgun.TutorialScene", {
 
             //ミス条件の説明
             .call(function(){
-                that.enterMessage(pos, 6000, "役無し、時間切れはミスとなり", 40);
-                that.enterMessage(pos+60, 6000, "左上のライフが一つ減ります", 40);
+                that.enterMessage(pos, 6000, "役無し、時間切れはミスとなり", size2);
+                that.enterMessage(pos+60, 6000, "左上のライフが一つ減ります", size2);
             }).wait(1000)
             .call(function(){
                 that.countDown = true;
@@ -548,8 +551,8 @@ tm.define("shotgun.TutorialScene", {
 
             //ワンペア二回ミス説明
             .call(function(){
-                that.enterMessage(pos, 6000, "ワンペアが２回続いた場合も", 40);
-                that.enterMessage(pos+60, 6000, "ミスとなります", 40);
+                that.enterMessage(pos, 6000, "ワンペアが２回続いた場合も", size1);
+                that.enterMessage(pos+60, 6000, "ミスとなります", size1);
             }).wait(1000)
             .call(function(){
                 that.countDown = true;
@@ -606,8 +609,8 @@ tm.define("shotgun.TutorialScene", {
 
             //ゲームオーバー説明
             .call(function() {
-                that.enterMessage(pos, 8000, "ライフが０の状態でミスすると", 40);
-                that.enterMessage(pos+80, 8000, "ゲームオーバーです", 40);
+                that.enterMessage(pos, 8000, "ライフが０の状態でミスすると", size1);
+                that.enterMessage(pos+80, 8000, "ゲームオーバーです", size1);
                 that.deck.addHand(that.deck.pickCard(SUIT_DIAMOND, 5));
             }).wait(500)
             .call(function(){
@@ -641,13 +644,13 @@ tm.define("shotgun.TutorialScene", {
                     .call(function(){this.remove()}.bind(lb));
             }).wait(5000)
             .call(function(){
-                that.enterMessage(pos, 6000, "以上でチュートリアルは終了です", 40);
+                that.enterMessage(pos, 6000, "以上でチュートリアルは終了です", size1);
             }).wait(5000);
 
         if (appMain.language != "JAPANESE") {
             this.ctrl.tweener
                 .call(function(){
-                    that.enterMessage(pos, 6000, "Please enjoy the ShotgunPoker", 40);
+                    that.enterMessage(pos, 6000, "Please enjoy the ShotgunPoker", 35);
                 }).wait(5000);
         }
 
