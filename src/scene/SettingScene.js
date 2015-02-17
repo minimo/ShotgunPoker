@@ -73,11 +73,11 @@ tm.define("shotgun.SettingScene", {
         tm.display.OutlineLabel("LANGUAGE", 40)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.5, SC_H*0.44);
+            .setPosition(SC_W*0.5, SC_H*0.50);
         var width = 250, height = 70;
         this.japanese = shotgun.ToggleButton(width, height, "日本語", "日本語", {flat: appMain.buttonFlat, fontSize:40})
             .addChildTo(this)
-            .setPosition(SC_W*0.25, SC_H*0.5)
+            .setPosition(SC_W*0.25, SC_H*0.57)
             .addEventListener("pushed", function() {
                 if (this.toggleON) {
                     appMain.language = "JAPANESE";
@@ -87,7 +87,7 @@ tm.define("shotgun.SettingScene", {
             });
         this.english = shotgun.ToggleButton(width, height, "English", "English", {flat: appMain.buttonFlat, fontSize:40})
             .addChildTo(this)
-            .setPosition(SC_W*0.75, SC_H*0.5)
+            .setPosition(SC_W*0.75, SC_H*0.57)
             .addEventListener("pushed", function() {
                 if (this.toggleON) {
                     appMain.language = "ENGLISH";
@@ -102,7 +102,7 @@ tm.define("shotgun.SettingScene", {
             this.japanese.toggleON = false;
             this.english.toggleON = true;
         }
-
+/*
         tm.display.OutlineLabel("GAME SETTING", 40)
             .addChildTo(this)
             .setParam(this.labelParam)
@@ -134,7 +134,7 @@ tm.define("shotgun.SettingScene", {
             .addEventListener("pushed", function() {
                 appMain.pushScene(that.dialog);
             });
-
+*/
         //戻るボタン
         var width = SC_W, height = 100;
         shotgun.Button(width, height, "RETURN TO TITLE", {flat: appMain.buttonFlat, fontSize:50})
