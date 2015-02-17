@@ -11,15 +11,17 @@ tm.define("shotgun.Telop", {
 
     //テロップメッセージキュー
     queue: [],
+    sound: "achievement",
 
     //終了フラグ
     finish: false,
 
-    init: function(wait) {
+    init: function(wait, sound) {
         this.superInit();
         wait = wait || 1000;
+        this.sound = sound || "achievement";
 
-        this.bg = tm.display.RectangleShape({width:SC_W, height:60, fillStyle:"rgba(0,0,0,0.5)", strokeStyle:"rgba(0,0,0,0.5)"})
+        this.bg = tm.display.RectangleShape({width:SC_W, height:70, fillStyle:"rgba(0,0,0,0.5)", strokeStyle:"rgba(0,0,0,0.5)"})
             .addChildTo(this)
             .setAlpha(0);
         this.bg.tweener.clear().wait(wait).fadeIn(100);
@@ -41,12 +43,17 @@ tm.define("shotgun.Telop", {
         }
     },
 
-    add: function(text, size, dispWait, silent) {
-        text = text || "test message";
-        size = size || 30;
-        dispWait = dispWait || 1000;
-        silent = silent || false;
-        this.queue.push({text:text, size:size, dispWait:dispWait});
+    add: function(param) {
+        param = param || {};
+        var defParam = {
+            text: "Test message",
+            size: 30,
+            dispWait: 1000,
+            silent: false,
+        };
+        param.$safe(defParam);
+
+        this.queue.push({text:param.text, size:param.size, dispWait:param.dispWait, silent: param.silent});
 
         var that = this;
         this.textLabel.tweener
@@ -54,10 +61,10 @@ tm.define("shotgun.Telop", {
                 this.setPosition(SC_W, 0);
                 this.text = that.queue[0].text;
                 this.fontSize = that.queue[0].size;
-                if(!silent) appMain.playSE("achievement");
+                if(!that.queue[0].silent) appMain.playSE(that.sound);
             }.bind(this.textLabel))
             .move(0, 0, 250, "easeInOutSine")
-            .wait(dispWait)
+            .wait(param.dispWait)
             .move(-SC_W, 0, 250, "easeInOutSine")
             .call(function() {
                 that.queue.splice(0, 1);

@@ -485,7 +485,7 @@ tm.define("shotgun.MainScene", {
             var telop = shotgun.Telop().addChildTo(this).setPosition(SC_W*0.5, SC_H*0.85);
             for (var i = 0; i < ac.length; i++) {
                 var text = "実績「"+ac[i].name+"」が解除されました";
-                telop.add(text);
+                telop.add({text:text});
             }
         }
     },
