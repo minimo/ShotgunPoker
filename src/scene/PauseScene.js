@@ -39,7 +39,8 @@ tm.define("shotgun.PauseScene", {
             .setPosition(SC_W*0.5, SC_H*0.175);
 
         for (var i = 0; i < 12; i++) {
-            tm.display.OutlineLabel(appMain.handList[i].name+":"+parentScene.handCount[appMain.handList[i].point], 40)
+            var handName = $trans(appMain.handList[i].name);
+            tm.display.OutlineLabel(handName+":"+parentScene.handCount[appMain.handList[i].point], 35)
                 .addChildTo(this)
                 .setParam(this.scoreParam)
                 .setPosition(SC_W*0.2, SC_H*0.25+(i*45));

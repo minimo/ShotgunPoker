@@ -142,6 +142,7 @@ tm.define("shotgun.SettingScene", {
             .setPosition(SC_W*0.5, SC_H*0.85)
             .addEventListener("pushed", function() {
                 that.mask.tweener.clear().fadeOut(200);
+                appMain.createHandList();
                 appMain.saveConfig();
                 appMain.popScene();
             });

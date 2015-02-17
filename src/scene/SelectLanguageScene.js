@@ -47,6 +47,7 @@ tm.define("shotgun.SelectLanguageScene", {
             .setPosition(SC_W*0.25, SC_H*0.5)
             .addEventListener("pushed", function() {
                 appMain.language = "JAPANESE";
+                appMain.createHandList();
                 that.mask.tweener.clear().fadeOut(200);
                 appMain.replaceScene(shotgun.TutorialScene());
             });
@@ -55,6 +56,7 @@ tm.define("shotgun.SelectLanguageScene", {
             .setPosition(SC_W*0.75, SC_H*0.5)
             .addEventListener("pushed", function() {
                 appMain.language = "ENGLISH";
+                appMain.createHandList();
                 that.mask.tweener.clear().fadeOut(200);
                 appMain.replaceScene(shotgun.TutorialScene());
             });

@@ -75,7 +75,8 @@ tm.define("shotgun.GameoverScene", {
 
         //役一覧
         for (var i = 0; i < 12; i++) {
-            tm.display.OutlineLabel(appMain.handList[i].name+":"+this.parentScene.handCount[appMain.handList[i].point], 35)
+            var handName = $trans(appMain.handList[i].name);
+            tm.display.OutlineLabel(handName+":"+this.parentScene.handCount[appMain.handList[i].point], 35)
                 .addChildTo(this.resultLayer)
                 .setParam(this.scoreParam)
                 .setPosition(SC_W*0.2, SC_H*0.22+(i*42));
