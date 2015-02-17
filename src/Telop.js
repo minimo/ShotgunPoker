@@ -16,12 +16,12 @@ tm.define("shotgun.Telop", {
     //終了フラグ
     finish: false,
 
-    init: function(wait, sound) {
+    init: function(wait, alpha) {
         this.superInit();
         wait = wait || 1000;
-        this.sound = sound || "achievement";
+        alpha = alpha || 0.5;
 
-        this.bg = tm.display.RectangleShape({width:SC_W, height:70, fillStyle:"rgba(0,0,0,0.5)", strokeStyle:"rgba(0,0,0,0.5)"})
+        this.bg = tm.display.RectangleShape({width:SC_W, height:70, fillStyle:"rgba(0,0,0,{0})".format(alpha), strokeStyle:"rgba(0,0,0,{0})".format(alpha)})
             .addChildTo(this)
             .setAlpha(0);
         this.bg.tweener.clear().wait(wait).fadeIn(100);
