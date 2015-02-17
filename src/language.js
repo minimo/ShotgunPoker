@@ -19,7 +19,7 @@ var languagePack = {
 
     //Tutorial
     "ショットガンポーカーの遊び方": {
-        "ENGLISH": "How to play Shotgun Poker"
+        "ENGLISH": "How to play Shotgun Poker."
     },
     "スキップしたい場合は右上の": {
         "ENGLISH": "If you skip this tutorial."
@@ -37,7 +37,7 @@ var languagePack = {
         "ENGLISH": "Score is obtained in accor-"
     },
     "得点が入ります": {
-        "ENGLISH": "dance with the finished hand"
+        "ENGLISH": "dance with the finished hand."
     },
     "場のカードが少なくなると": {
         "ENGLISH": "The field of the card is reduced"
@@ -75,7 +75,7 @@ var languagePack = {
 
     //GameCenter warning
     "GameCenterに接続できませんでした": {
-        "ENGLISH": "I failed to access the GAMECENTER"
+        "ENGLISH": "I failed to access the GAMECENTER."
     },
 
     //GameOver Ad telop
