@@ -35,7 +35,7 @@ tm.define("shotgun.SelectLanguageScene", {
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.2);
 
-        tm.display.OutlineLabel("Select language.", 60)
+        tm.display.OutlineLabel("Select language", 60)
             .addChildTo(this)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.5, SC_H*0.4);
