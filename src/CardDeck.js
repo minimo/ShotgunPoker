@@ -252,14 +252,14 @@ tm.define("shotgun.CardDeck", {
             //ストレートフラッシュ判定
             if (flash) {
                 //ロイヤルストレートフラッシュ判定（ジョーカー有りは成立しない）
-                if (this.hands[0].number == 1 && this.hands[1].number == 10 && !this.jokerInHand) return ROYALSTRAIGHTFLASH;
-                return STRAIGHTFLASH;
+                if (this.hands[0].number == 1 && this.hands[1].number == 10 && !this.jokerInHand) return ROYALSTRAIGHTFLUSH;
+                return STRAIGHTFLUSH;
             }
             return STRAIGHT;
         }
 
         //フラッシュの場合は役確定
-        if (flash) return FLASH;
+        if (flash) return FLUSH;
 
         //スリーカード、フォーカード判別
         if (this.hands[0].number == this.hands[3].number

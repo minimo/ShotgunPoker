@@ -67,7 +67,7 @@ shotgun.achievementList = {
         text: "フラッシュを成立させた",
         secret: false,
         check: function(param) {
-            if (param.lastHand == FLASH) return true;
+            if (param.lastHand == FLUSH) return true;
             return false;
         },
     },
@@ -97,7 +97,7 @@ shotgun.achievementList = {
         text: "ストレートフラッシュを成立させた",
         secret: false,
         check: function(param) {
-            if (param.lastHand == STRAIGHTFLASH) return true;
+            if (param.lastHand == STRAIGHTFLUSH) return true;
             return false;
         },
     },
@@ -107,7 +107,7 @@ shotgun.achievementList = {
         text: "ロイヤルストレートフラッシュを成立させた",
         secret: false,
         check: function(param) {
-            if (param.lastHand == ROYALSTRAIGHTFLASH) return true;
+            if (param.lastHand == ROYALSTRAIGHTFLUSH) return true;
             return false;
         },
     },
@@ -228,8 +228,8 @@ shotgun.achievementList = {
         check: function(param) {
             if (param.handLog.length < 3) return false;
             var len = param.handLog.length;
-            if (param.handLog[len-2] == ROYALSTRAIGHTFLASH &&
-                param.handLog[len-1] == ROYALSTRAIGHTFLASH) {
+            if (param.handLog[len-2] == ROYALSTRAIGHTFLUSH &&
+                param.handLog[len-1] == ROYALSTRAIGHTFLUSH) {
                 return true;
             }
             return false;

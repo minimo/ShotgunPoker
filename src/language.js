@@ -101,7 +101,7 @@ var languagePack = {
     "FIVE CARD": {
         "ENGLISH": "FIVE OF A KIND"
     },
-    "R.STRAIGHT FLASH": {
-        "ENGLISH": "ROYAL FLASH"
+    "R.STRAIGHT FLUSH": {
+        "ENGLISH": "ROYAL FLUSH"
     },
 };

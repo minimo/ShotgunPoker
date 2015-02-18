@@ -409,7 +409,7 @@ tm.define("shotgun.MainScene", {
             this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 13));
             this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 9));
         }
-        if (kb.getKeyDown("3")) { //FLASH
+        if (kb.getKeyDown("3")) { //FLUSH
             this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 6));
             this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 11));
             this.deck.addHand(this.deck.pickCard(SUIT_SPADE, 12));
@@ -550,14 +550,14 @@ tm.define("shotgun.MainScene", {
         var cp = true;
         if (!this.complete) {
             if (this.handCount[ONEPAIR] == 0) cp = false;
-            if (this.handCount[FLASH] == 0) cp = false;
+            if (this.handCount[FLUSH] == 0) cp = false;
             if (this.handCount[TWOPAIR] == 0) cp = false;
             if (this.handCount[THREECARD] == 0) cp = false;
             if (this.handCount[FULLHOUSE] == 0) cp = false;
             if (this.handCount[STRAIGHT] == 0) cp = false;
             if (this.handCount[FOURCARD] == 0) cp = false;
-            if (this.handCount[STRAIGHTFLASH] == 0) cp = false;
-            if (this.handCount[ROYALSTRAIGHTFLASH] == 0) cp = false;
+            if (this.handCount[STRAIGHTFLUSH] == 0) cp = false;
+            if (this.handCount[ROYALSTRAIGHTFLUSH] == 0) cp = false;
             if (cp) {
                 extend++;
                 this.complete = true;
@@ -567,7 +567,7 @@ tm.define("shotgun.MainScene", {
         }
 
         //初回R.S.Fの場合はライフ＋１
-        if (hand == ROYALSTRAIGHTFLASH && this.handCount[hand] == 1) extend++;
+        if (hand == ROYALSTRAIGHTFLUSH && this.handCount[hand] == 1) extend++;
 
         //エクステンド処理
         if (extend != 0 && this.mode == GAMEMODE_NORMAL) {
@@ -624,22 +624,22 @@ tm.define("shotgun.MainScene", {
             case MISS:          name1 = "MISS!"; offset = 10; break;
             case NOPAIR:        name1 = "NO PAIR"; size = 65; break;
             case ONEPAIR:       name1 = "ONE"; name2 = "PAIR"; offset = 30; break;
-            case FLASH:         name1 = "FLASH"; break;
+            case FLUSH:         name1 = "FLUSH"; break;
             case TWOPAIR:       name1 = "TWO"; name2 = "PAIR"; offset = 30; break;
             case THREECARD:     name1 = "THREE"; name2 = "CARD"; size = 70; break;
             case FULLHOUSE:     name1 = "FULL"; name2 = "HOUSE"; size = 75; break;
             case STRAIGHT:      name1 = "STRAIGHT"; size = 50; break;
             case FOURCARD:      name1 = "FOUR"; name2 = "CARD"; offset = 10; break;
             case FIVECARD:      name1 = "FIVE"; name2 = "CARD"; offset = 10; break;
-            case STRAIGHTFLASH: name1 = "STRAIGHT"; name2 = "FLASH"; size = 50; break;
-            case ROYALSTRAIGHTFLASH: name1 = "ROYAL"; name2 = "STRAIGHT"; name3 = "FLASH !!"; size = 50; break;
+            case STRAIGHTFLUSH: name1 = "STRAIGHT"; name2 = "FLUSH"; size = 50; break;
+            case ROYALSTRAIGHTFLUSH: name1 = "ROYAL"; name2 = "STRAIGHT"; name3 = "FLUSH !!"; size = 50; break;
         }
         if (appMain.language == "ENGLISH") {
             switch (hand) {
                 case THREECARD:     name1 = "THREE"; name2 = "OF"; name3 = "A KIND"; size = 70; offset = 20; break;
                 case FOURCARD:      name1 = "FOUR";  name2 = "OF"; name3 = "A KIND"; size = 70; offset = 30; break;
                 case FIVECARD:      name1 = "FIVE";  name2 = "OF"; name3 = "A KIND"; size = 70; offset = 30; break;
-                case ROYALSTRAIGHTFLASH: name1 = "ROYAL"; name2 = "FLASH !!"; name3 = "", size = 60; break;
+                case ROYALSTRAIGHTFLUSH: name1 = "ROYAL"; name2 = "FLUSH !!"; name3 = "", size = 60; break;
                 default:
                     break;
             }

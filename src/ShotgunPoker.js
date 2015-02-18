@@ -97,14 +97,14 @@ tm.define("shotgun.CanvasApp", {
         this.handList[1]  = {name: $trans("NO PAIR"), point: NOPAIR};
         this.handList[2]  = {name: $trans("ONE PAIR"), point: ONEPAIR};
         this.handList[3]  = {name: $trans("TWO PAIR"), point: TWOPAIR};
-        this.handList[4]  = {name: $trans("FLASH"), point: FLASH};
+        this.handList[4]  = {name: $trans("FLUSH"), point: FLUSH};
         this.handList[5]  = {name: $trans("THREE CARD"), point: THREECARD};
         this.handList[6]  = {name: $trans("FULL HOUSE"), point: FULLHOUSE};
         this.handList[7]  = {name: $trans("STRAIGHT"), point: STRAIGHT};
         this.handList[8]  = {name: $trans("FOUR CARD"), point: FOURCARD};
         this.handList[9]  = {name: $trans("FIVE CARD"), point: FIVECARD};
-        this.handList[10] = {name: $trans("STRAIGHT FLASH"), point: STRAIGHTFLASH};
-        this.handList[11] = {name: $trans("R.STRAIGHT FLASH"), point: ROYALSTRAIGHTFLASH};
+        this.handList[10] = {name: $trans("STRAIGHT FLUSH"), point: STRAIGHTFLUSH};
+        this.handList[11] = {name: $trans("R.STRAIGHT FLUSH"), point: ROYALSTRAIGHTFLUSH};
     },
 
     //設定データの保存

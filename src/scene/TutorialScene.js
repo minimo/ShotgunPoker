@@ -336,9 +336,9 @@ tm.define("shotgun.TutorialScene", {
             .call(function(){
                 that.enterMessage(pos, 12000, "完成した役に応じた", 40);
                 that.enterMessage(pos+60, 12000, "得点が入ります", 40);
-                shotgun.MainScene.prototype.dispHand.call(that, ROYALSTRAIGHTFLASH, 2400);
+                shotgun.MainScene.prototype.dispHand.call(that, ROYALSTRAIGHTFLUSH, 2400);
                 appMain.playSE("hand");
-                that.score+=ROYALSTRAIGHTFLASH;
+                that.score+=ROYALSTRAIGHTFLUSH;
                 that.countReset();
             }).wait(5000)
 
@@ -419,9 +419,9 @@ tm.define("shotgun.TutorialScene", {
             .call(function(){
                 that.countDown = false;
                 that.deck.sortHand();
-                shotgun.MainScene.prototype.dispHand.call(that, FLASH);
+                shotgun.MainScene.prototype.dispHand.call(that, FLUSH);
                 appMain.playSE("hand");
-                that.score+=FLASH;
+                that.score+=FLUSH;
                 that.countReset();
             }).wait(2000)
 
