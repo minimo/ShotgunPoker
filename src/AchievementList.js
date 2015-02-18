@@ -61,7 +61,7 @@ shotgun.achievementList = {
             return false;
         },
     },
-    "flash": {
+    "flush": {
         name:   "フラッシュ",
         percent: "0",
         text: "フラッシュを成立させた",
@@ -91,7 +91,7 @@ shotgun.achievementList = {
             return false;
         },
     },
-    "straightflash": {
+    "straightflush": {
         name:   "ストレートフラッシュ",
         percent: "0",
         text: "ストレートフラッシュを成立させた",
@@ -101,7 +101,7 @@ shotgun.achievementList = {
             return false;
         },
     },
-    "royalstraightflash": {
+    "royalstraightflush": {
         name:   "Ｒ．ストレートフラッシュ",
         percent: "0",
         text: "ロイヤルストレートフラッシュを成立させた",

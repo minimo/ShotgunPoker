@@ -202,10 +202,10 @@ tm.define("shotgun.CardDeck", {
 
         //フラッシュ判別
         var max = this.jokerInHand ? 4: 5;
-        var flash = true;
+        var flush = true;
         var suit = this.hands[0].suit;
         for (var i = 1; i < max; i++) {
-            if (suit != this.hands[i].suit) flash = false;
+            if (suit != this.hands[i].suit) flush = false;
         }
 
         //ストレート判別
@@ -250,7 +250,7 @@ tm.define("shotgun.CardDeck", {
         //ストレートの場合は役確定	
         if (straight) {
             //ストレートフラッシュ判定
-            if (flash) {
+            if (flush) {
                 //ロイヤルストレートフラッシュ判定（ジョーカー有りは成立しない）
                 if (this.hands[0].number == 1 && this.hands[1].number == 10 && !this.jokerInHand) return ROYALSTRAIGHTFLUSH;
                 return STRAIGHTFLUSH;
@@ -259,7 +259,7 @@ tm.define("shotgun.CardDeck", {
         }
 
         //フラッシュの場合は役確定
-        if (flash) return FLUSH;
+        if (flush) return FLUSH;
 
         //スリーカード、フォーカード判別
         if (this.hands[0].number == this.hands[3].number
