@@ -59,6 +59,7 @@ var onDeviceReady = function () {
         gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
     }
     if (DEVICE_ANDROID) {
+        googleplaygame.auth(onGamecenterSuccess, onGamecenterFailure);
     }
 
     //Social Message
@@ -124,22 +125,8 @@ var onGamecenterFailure = function(result) {
 var showLeadersBoard = function(id) {
     id = id || "";
 
-    if (!ENABLE_PHONEGAP) {
-        appMain.pushScene(shotgun.AlertDialog({
-            height: SC_H*0.2,
-            text1: "GameCenterに接続できませんでした",
-            fontSize: 32,
-            button: "OK"
-        }));
-        return false;
-    }
-
-    //GAMECENTERに接続してない場合は再接続
-    if (!ENABLE_GAMECENTER) {
-        gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
-
-        //再接続失敗
-        if (!ENABLE_GAMECENTER) {
+    if (DEVICE_IOS) {
+        if (!ENABLE_PHONEGAP) {
             appMain.pushScene(shotgun.AlertDialog({
                 height: SC_H*0.2,
                 text1: "GameCenterに接続できませんでした",
@@ -148,23 +135,46 @@ var showLeadersBoard = function(id) {
             }));
             return false;
         }
-    }
+        //GAMECENTERに接続してない場合は再接続
+        if (!ENABLE_GAMECENTER) {
+            gamecenter.auth(onGamecenterSuccess, onGamecenterFailure);
 
-    var data = {
-//        period: "today",
-        leaderboardId: id,
-    };
-    gamecenter.showLeaderboard(function(){}, function(){}, data);
-    return true;
+            //再接続失敗
+            if (!ENABLE_GAMECENTER) {
+                appMain.pushScene(shotgun.AlertDialog({
+                    height: SC_H*0.2,
+                    text1: "GameCenterに接続できませんでした",
+                    fontSize: 32,
+                    button: "OK"
+                }));
+                return false;
+            }
+        }
+
+        gamecenter.showLeaderboard(function(){}, function(){}, {
+            leaderboardId: id,
+        });
+        return true;
+    }
+    if (DEVICE_ANDROID) {
+        if (id == "") {
+            googleplaygame.showAllLeaderboards();
+        } else {
+            googleplaygame.showLeaderboard({
+                leaderboardId: id,
+            });
+        }
+        return true;
+    }
 }
 
 //GameCenterにスコアを登録
 var registScore = function(mode, returnJoker, score) {
     if (!ENABLE_GAMECENTER) return false;
     if (DEVICE_IOS) {
-        var lb = "Normal_";
-        if (mode == GAMEMODE_HARD) lb = "Hard_";
-        if (returnJoker) lb += "RJ";
+        var id = "Normal_";
+        if (mode == GAMEMODE_HARD) id = "Hard_";
+        if (returnJoker) id += "RJ";
         gamecenter.submitScore(
             function() {
                 if (DEBUG_GAMECENTER) AdvanceAlert('スコア登録に成功しました');
@@ -173,10 +183,25 @@ var registScore = function(mode, returnJoker, score) {
                 if (DEBUG_GAMECENTER) AdvanceAlert('スコア登録に失敗しました');
             }, {
                 score: score,
-                leaderboardId: lb,
+                leaderboardId: id,
             });
     }
     if (DEVICE_ANDROID) {
+        var id = "";
+        if (mode == GAMEMODE_NORMAL && !returnJoker) id = "CgkI-I-vk7YTEAIQAA";
+        if (mode == GAMEMODE_NORMAL && returnJoker)  id = "CgkI-I-vk7YTEAIQAQ";
+        if (mode == GAMEMODE_HARD   && !returnJoker) id = "CgkI-I-vk7YTEAIQAg";
+        if (mode == GAMEMODE_HARD   && returnJoker)  id = "CgkI-I-vk7YTEAIQAw";
+        googleplaygame.submitScore({
+                score: score,
+                leaderboardId: id,
+            },
+            function() {
+                if (DEBUG_GAMECENTER) AdvanceAlert('スコア登録に成功しました');
+            },
+            function() {
+                if (DEBUG_GAMECENTER) AdvanceAlert('スコア登録に失敗しました');
+            });
     }
 }
 
@@ -191,11 +216,20 @@ var reportAchievements = function(id, percent) {
             function(){
                 if (DEBUG_GAMECENTER) AdvanceAlert('実績登録に失敗しました');
             }, {
-                achievementId: a.id,
-                percent: "100"
+                achievementId: id,
+                percent: "100",
             });
     }
     if (DEVICE_ANDROID) {
+        googleplaygame.unlockAchievement({
+                achievementId: id,
+            },
+            function(){
+                if (DEBUG_GAMECENTER) AdvanceAlert('実績登録に成功しました');
+            },
+            function(){
+                if (DEBUG_GAMECENTER) AdvanceAlert('実績登録に失敗しました');
+            });
     }
     return true;
 }
