@@ -71,7 +71,7 @@ tm.define("shotgun.GameoverScene", {
         }
 
         //GameCenterへスコア登録
-        registScore(this.mode, appMain.returnJoker, lastScore);
+        submitScore(this.mode, appMain.returnJoker, lastScore);
 
         //役一覧
         for (var i = 0; i < 12; i++) {

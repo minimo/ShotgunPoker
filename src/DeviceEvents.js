@@ -169,7 +169,7 @@ var showLeadersBoard = function(id) {
 }
 
 //GameCenterにスコアを登録
-var registScore = function(mode, returnJoker, score) {
+var submitScore = function(mode, returnJoker, score) {
     if (!ENABLE_GAMECENTER) return false;
     if (DEVICE_IOS) {
         var id = "Normal_";
