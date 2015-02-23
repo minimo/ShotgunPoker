@@ -86,6 +86,11 @@ var onResume = function() {
         }
         return;
     }
+    if (DEVICE_ANDROID) {
+        if (!ENABLE_GAMECENTER) {
+            googleplaygame.auth(onGamecenterSuccess, onGamecenterFailure);
+        }
+    }
 }
 
 var onOnline = function() {
