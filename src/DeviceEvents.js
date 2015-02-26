@@ -346,10 +346,10 @@ var sendSocialMessageGlobal = function() {
     for (var i = 1; i < sc.length; i++) {
         if (score < sc[i]) score = sc[i];
     }
-    if (score == sc[0]) {mode = GAMEMODE_NORMAL; returnJoker = true;}
-    if (score == sc[1]) {mode = GAMEMODE_NORMAL; returnJoker = false;}
-    if (score == sc[2]) {mode = GAMEMODE_HARD;   returnJoker = true;}
-    if (score == sc[3]) {mode = GAMEMODE_HARD;   returnJoker = false;}
+    if (score == sc[0]) {mode = GAMEMODE_NORMAL; returnJoker = false;}
+    if (score == sc[1]) {mode = GAMEMODE_NORMAL; returnJoker = true;}
+    if (score == sc[2]) {mode = GAMEMODE_HARD;   returnJoker = false;}
+    if (score == sc[3]) {mode = GAMEMODE_HARD;   returnJoker = true;}
 
     //メッセージテキストの作成
     var lb = "Normal";
