@@ -1,0 +1,12 @@
+2015/2/26
+Score registration bug fixes to the Game Center.
+The Leaders board I created new for failure of the corresponding.
+Open the " RANKING " of the title screen and the current highest score will be registered in GameCenter.
+
+Additional SNS posting function.
+When the game is over , it became like be able to post a score in the SNS button to Twitter and Facebook , etc.
+Best score you through the whole game mode you can post from "Tweet best score" button of the credit screen.
+
+Add language selection to the Options screen.
+
+minor bug fixes.
