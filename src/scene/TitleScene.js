@@ -127,10 +127,10 @@ tm.define("shotgun.TitleScene", {
             .setPosition(SC_W*0.5, y)
             .addEventListener("pushed", function() {
                 that.buttonLock(true);
-                submitScore(GAMEMODE_NORMAL, false, appMain.highScore[GAMEMODE_NORMAL]);
-                submitScore(GAMEMODE_NORMAL, true , appMain.highScore[GAMEMODE_NORMAL+10]);
-                submitScore(GAMEMODE_HARD  , false, appMain.highScore[GAMEMODE_HARD]);
-                submitScore(GAMEMODE_HARD  , true , appMain.highScore[GAMEMODE_HARD+10]);
+                if (appMain.highScore[GAMEMODE_NORMAL]    != 0) submitScore(GAMEMODE_NORMAL, false, appMain.highScore[GAMEMODE_NORMAL]);
+                if (appMain.highScore[GAMEMODE_NORMAL+10] != 0) submitScore(GAMEMODE_NORMAL, true , appMain.highScore[GAMEMODE_NORMAL+10]);
+                if (appMain.highScore[GAMEMODE_HARD]      != 0) submitScore(GAMEMODE_HARD  , false, appMain.highScore[GAMEMODE_HARD]);
+                if (appMain.highScore[GAMEMODE_HARD+10]   != 0) submitScore(GAMEMODE_HARD  , true , appMain.highScore[GAMEMODE_HARD+10]);
                 showLeadersBoard();
                 that.buttonLock(false);
             });
@@ -323,6 +323,14 @@ tm.define("shotgun.TitleScene", {
             c.vr = rand(-5, 5) || 1;
             c.vy = rand(5, 15);
             c.setScale(rand(7, 10)/10);
+        }
+
+        //ハイスコアを自動登録
+        if (this.time == 60) {
+            if (appMain.highScore[GAMEMODE_NORMAL]    != 0) submitScore(GAMEMODE_NORMAL, false, appMain.highScore[GAMEMODE_NORMAL]);
+            if (appMain.highScore[GAMEMODE_NORMAL+10] != 0) submitScore(GAMEMODE_NORMAL, true , appMain.highScore[GAMEMODE_NORMAL+10]);
+            if (appMain.highScore[GAMEMODE_HARD]      != 0) submitScore(GAMEMODE_HARD  , false, appMain.highScore[GAMEMODE_HARD]);
+            if (appMain.highScore[GAMEMODE_HARD+10]   != 0) submitScore(GAMEMODE_HARD  , true , appMain.highScore[GAMEMODE_HARD+10]);
         }
 
         //スクリーンショット保存
