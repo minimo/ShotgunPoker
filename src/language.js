@@ -85,10 +85,10 @@ var languagePack = {
 
     //Achievement
     "実績「": {
-        "ENGLISH": "Achievement「"
+        "ENGLISH": "Achievement '"
     },
     "」が解除されました": {
-        "ENGLISH": "」unlocked."
+        "ENGLISH": "' unlocked."
     },
 
     //Poker Hand

@@ -167,19 +167,28 @@ shotgun.achievementList = {
     "score10000": {
         name:   "５０００ＰＴＳ",
         percent: "0",
-        text: "スコアが１０００ＰＴＳを超えた",
+        text: "スコアが５０００ＰＴＳを超えた",
         secret: false,
         check: function(param) {
             return param.score<10000? false: true;
         },
     },
     "score10000": {
-        name:   "５０００ＰＴＳ",
+        name:   "１００００ＰＴＳ",
         percent: "0",
-        text: "スコアが１０００ＰＴＳを超えた",
+        text: "スコアが１００００ＰＴＳを超えた",
         secret: false,
         check: function(param) {
             return param.score<10000? false: true;
+        },
+    },
+    "score20000": {
+        name:   "２００００ＰＴＳ",
+        percent: "0",
+        text: "スコアが２００００ＰＴＳを超えた",
+        secret: false,
+        check: function(param) {
+            return param.score<20000? false: true;
         },
     },
 
@@ -197,6 +206,23 @@ shotgun.achievementList = {
             if (param.handLog[len-3] == ONEPAIR &&
                 param.handLog[len-2] == TWOPAIR &&
                 param.handLog[len-1] == THREECARD) {
+                return true;
+            }
+            return false;
+        },
+    },
+    "1234": {
+        name:   "１－２－３−４",
+        percent: "0",
+        secret: false,
+        text: "ワンペア、ツーペア、スリーカード、フォーカードの順で役を成立させた",
+        check: function(param) {
+            if (param.handLog.length < 4) return false;
+            var len = param.handLog.length;
+            if (param.handLog[len-4] == ONEPAIR &&
+                param.handLog[len-3] == TWOPAIR &&
+                param.handLog[len-2] == THREECARD &&
+                param.handLog[len-1] == FOURCARD) {
                 return true;
             }
             return false;
@@ -220,17 +246,57 @@ shotgun.achievementList = {
             return false;
         },
     },
-    "doubleroyal": {
-        name:   "Double Royal",
+    "777": {
+        name:   "スリーセブン",
         percent: "0",
         secret: true,
-        text: "ロイヤルストレートフラッシュを２回連続で成立した",
+        text: "７のスリーカードを成立させた",
+        check: function(param) {
+            if (param.lastHand != THREECARD) return false;
+            var seven = 0;
+            for (var i = 0; i < param.cards.length; i++) {
+                var c = param.cards[i];
+                if (c.number == 7)  seven++;
+            }
+            if (seven == 3) return true;
+            return false;
+        },
+    },
+    "doubleroyal": {
+        name:   "ダブルロイヤル",
+        percent: "0",
+        secret: true,
+        text: "ロイヤルストレートフラッシュを２回連続で成立させた",
         check: function(param) {
             if (param.handLog.length < 3) return false;
             var len = param.handLog.length;
             if (param.handLog[len-2] == ROYALSTRAIGHTFLUSH &&
                 param.handLog[len-1] == ROYALSTRAIGHTFLUSH) {
                 return true;
+            }
+            return false;
+        },
+    },
+    "pokermaster": {
+        name:   "ポーカーマスター",
+        percent: "0",
+        text: "ハードモードで５０００ＰＴＳを超えた",
+        secret: false,
+        check: function(param) {
+            if (param.mode == GAMEMODE_HARD) {
+                return param.score<5000? false: true;
+            }
+            return false;
+        },
+    },
+    "pokergod": {
+        name:   "ポーカー神",
+        percent: "0",
+        text: "ハードモードで１００００ＰＴＳを超えた",
+        secret: false,
+        check: function(param) {
+            if (param.mode == GAMEMODE_HARD) {
+                return param.score<10000? false: true;
             }
             return false;
         },
