@@ -16,10 +16,16 @@
 //https://github.com/Telerik-Verified-Plugins/WKWebView.git
 
 //Social Message
-//cordova plugin add https://github.com/leecrossley/cordova-plugin-social-message.git
+//https://github.com/leecrossley/cordova-plugin-social-message.git
 
+//GooglePlay
+//https://github.com/ptgamr/cordova-google-play-game.git --variable APP_ID= you_app_id_here
+
+android.support.v4 21.0.1 "Android Support v4"
+com.a42.cordova.googleplaygame 2.0.4 "GooglePlayGame"
 com.google.admobsdk 6.12.2 "AdMob SDK for Android, iOS and WP8"
 com.google.cordova.admob 2.5.0 "AdMob PluginPro with Mediations"
+com.google.playservices 19.0.0 "Google Play Services for Android"
 com.rjfun.cordova.extension 1.0.5 "Cordova Plugin Extension"
 com.telerik.plugins.wkwebview 0.2.7 "WKWebView Polyfill"
 org.apache.cordova.device 0.2.13-dev "Device"
