@@ -165,6 +165,11 @@ var showLeadersBoard = function(id) {
         if (id == "") {
             googleplaygame.showAllLeaderboards();
         } else {
+            //IDをGooglePlay向けに変換
+            if (id == "Normal_")    id = "CgkI-I-vk7YTEAIQAA";
+            if (id == "Normal_RJ")  id = "CgkI-I-vk7YTEAIQAQ";
+            if (id == "Hard_")      id = "CgkI-I-vk7YTEAIQAg";
+            if (id == "Hard_RJ")    id = "CgkI-I-vk7YTEAIQAw";
             googleplaygame.showLeaderboard({
                 leaderboardId: id,
             });
