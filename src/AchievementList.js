@@ -59,7 +59,7 @@ shotgun.achievementList = {
             return false;
         },
     },
-    "threecard": {
+    "fivecard": {
         name:   "ファイブカード",
         text: "ファイブカードを成立させた",
         point: 15,
