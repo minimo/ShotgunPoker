@@ -172,6 +172,18 @@ shotgun.achievementList = {
             return false;
         },
     },
+    "notusejoker": {
+        name:   "勿体ない？",
+        text: "ジョーカーを使わずにゲームオーバーになった",
+        point: 5,
+        percent: "0",
+        secret: false,
+        id: "",
+        check: function(param) {
+            if (param.gameover == true && !param.usejoker) return true;
+            return false;
+        },
+    },
     "complete": {
         name:   "コンプリート",
         text: "１ゲーム内でファイブカード以外の全役を成立させた",
@@ -202,12 +214,23 @@ shotgun.achievementList = {
     "score1000": {
         name:   "１０００ＰＴＳ",
         text: "スコアが１０００ＰＴＳを超えた",
-        point: 10,
+        point: 5,
         percent: "0",
         secret: false,
         id: "",
         check: function(param) {
             return param.score<1000? false: true;
+        },
+    },
+    "score3000": {
+        name:   "３０００ＰＴＳ",
+        text: "スコアが３０００ＰＴＳを超えた",
+        point: 10,
+        percent: "0",
+        secret: false,
+        id: "",
+        check: function(param) {
+            return param.score<3000? false: true;
         },
     },
     "score5000": {
@@ -266,7 +289,7 @@ shotgun.achievementList = {
         },
     },
     "1234": {
-        name:   "１－２－３−４",
+        name:   "１－２－３－４",
         text: "ワンペア、ツーペア、スリーカード、フォーカードの順で役を成立させた",
         point: 15,
         percent: "0",
@@ -281,6 +304,23 @@ shotgun.achievementList = {
                 param.handLog[len-1] == FOURCARD) {
                 return true;
             }
+            return false;
+        },
+    },
+    "prime": {
+        name:   "素数を数えるんだ",
+        text: "素数のカードだけで役を成立させた",
+        point: 10,
+        percent: "0",
+        secret: true,
+        id: "",
+        check: function(param) {
+            if (param.lastHand < 1) return false;
+            for (var i = 0; i < param.cards.length; i++) {
+                var c = param.cards[i];
+                if (c.number == 1 || c.number % 2 == 0 || c.number % 3 == 0)  return false;
+            }
+            if (c2 && c4 && c11) return true;
             return false;
         },
     },
@@ -304,7 +344,7 @@ shotgun.achievementList = {
             return false;
         },
     },
-    "777": {
+    "three7": {
         name:   "スリーセブン",
         text: "７のスリーカードを成立させた",
         point: 10,
@@ -319,6 +359,24 @@ shotgun.achievementList = {
                 if (c.number == 7)  seven++;
             }
             if (seven == 3) return true;
+            return false;
+        },
+    },
+    "eightman": {
+        name:   "８マン",
+        text: "８のフォーカードを成立させた",
+        point: 10,
+        percent: "0",
+        secret: true,
+        id: "",
+        check: function(param) {
+            if (param.lastHand != FOURCARD) return false;
+            var num = 0;
+            for (var i = 0; i < param.cards.length; i++) {
+                var c = param.cards[i];
+                if (c.number == 8)  num++;
+            }
+            if (num == 4) return true;
             return false;
         },
     },

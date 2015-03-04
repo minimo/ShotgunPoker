@@ -42,6 +42,7 @@ tm.define("shotgun.MainScene", {
     newRecord: false,   //ハイスコア更新フラグ
     handLog: [],    //役ログ
     bonus: false,   //ボーナスライフ貰ってるかフラグ
+    useJoker: false,//ジョーカー使ったよフラグ
 
     //カウンタ
     count: 10,      //カード選択カウントダウン用
@@ -459,6 +460,13 @@ tm.define("shotgun.MainScene", {
             this.newRecord = true;
         }
 
+        //ゲームオーバー時実績チェック
+        var param = {
+            gameover:true,
+            useJoker: this.useJoker
+        };
+        this.checkAchievement(param);
+
         //メッセージ
         var that = this;
         var lb = tm.display.Sprite("gameover")
@@ -477,6 +485,7 @@ tm.define("shotgun.MainScene", {
         appMain.saveConfig();
     },
 
+    //実績達成チェック
     checkAchievement: function(param) {
         var ac = appMain.achievement.check(param);
         if (ac) {
@@ -605,6 +614,9 @@ tm.define("shotgun.MainScene", {
 
         this.count = 10;
         this.time = 0;
+
+        //ジョーカー使用判定
+        if (!this.useJoker) this.useJoker = this.deck.jokerInHand
 
         //レベル処理
         this.level = Math.sqrt(this.absTime*(0.0002*(this.levelReset+1)))+1;
