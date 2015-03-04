@@ -387,7 +387,7 @@ shotgun.achievementList = {
         secret: true,
         id: "",
         check: function(param) {
-            if (param.handLog.length < 3) return false;
+            if (param.handLog.length < 2) return false;
             var len = param.handLog.length;
             if (param.handLog[len-2] == ROYALSTRAIGHTFLUSH &&
                 param.handLog[len-1] == ROYALSTRAIGHTFLUSH) {
