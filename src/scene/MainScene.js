@@ -495,7 +495,7 @@ tm.define("shotgun.MainScene", {
             for (var i = 0; i < ac.length; i++) {
                 var text1 = $trans("実績「");
                 var text2 = $trans("」が解除されました");
-                var text = text1+ac[i].name+text2;
+                var text = text1+$trans(ac[i].name)+text2;
                 telop.add({text:text});
             }
         }
