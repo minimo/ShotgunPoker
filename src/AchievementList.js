@@ -50,7 +50,7 @@ shotgun.achievementList = {
     "fourcard": {
         name:   "フォーカード",
         text: "フォーカードを成立させた",
-        point: 5,
+        point: 10,
         percent: "0",
         secret: false,
         id: "CgkI-I-vk7YTEAIQCA",
@@ -62,7 +62,7 @@ shotgun.achievementList = {
     "threecard": {
         name:   "ファイブカード",
         text: "ファイブカードを成立させた",
-        point: 5,
+        point: 15,
         percent: "0",
         secret: false,
         id: "CgkI-I-vk7YTEAIQCQ",
@@ -86,7 +86,7 @@ shotgun.achievementList = {
     "fullhouse": {
         name:   "フルハウス",
         text: "フルハウスを成立させた",
-        point: 5,
+        point: 10,
         percent: "0",
         secret: false,
         id: "",
@@ -98,7 +98,7 @@ shotgun.achievementList = {
     "straight": {
         name:   "ストレート",
         text: "ストレートを成立させた",
-        point: 5,
+        point: 10,
         percent: "0",
         secret: false,
         id: "",
@@ -110,7 +110,7 @@ shotgun.achievementList = {
     "straightflush": {
         name:   "ストレートフラッシュ",
         text: "ストレートフラッシュを成立させた",
-        point: 5,
+        point: 15,
         percent: "0",
         secret: false,
         id: "",
@@ -122,7 +122,7 @@ shotgun.achievementList = {
     "royalstraightflush": {
         name:   "ロイヤルストレートフラッシュ",
         text: "ロイヤルストレートフラッシュを成立させた",
-        point: 5,
+        point: 20,
         percent: "0",
         secret: false,
         id: "",
@@ -160,7 +160,7 @@ shotgun.achievementList = {
     "complete": {
         name:   "コンプリート",
         text: "１ゲーム内でファイブカード以外の全役を成立させた",
-        point: 5,
+        point: 20,
         percent: "0",
         secret: false,
         id: "",
@@ -172,7 +172,7 @@ shotgun.achievementList = {
     "grandslam": {
         name:   "グランドスラム",
         text: "１ゲーム内で全ての役を成立させた",
-        point: 5,
+        point: 25,
         percent: "0",
         secret: true,
         id: "",
@@ -187,7 +187,7 @@ shotgun.achievementList = {
     "score1000": {
         name:   "１０００ＰＴＳ",
         text: "スコアが１０００ＰＴＳを超えた",
-        point: 5,
+        point: 10,
         percent: "0",
         secret: false,
         id: "",
@@ -198,7 +198,7 @@ shotgun.achievementList = {
     "score5000": {
         name:   "５０００ＰＴＳ",
         text: "スコアが１０００ＰＴＳを超えた",
-        point: 5,
+        point: 15,
         percent: "0",
         secret: false,
         id: "",
@@ -207,20 +207,9 @@ shotgun.achievementList = {
         },
     },
     "score10000": {
-        name:   "５０００ＰＴＳ",
-        text: "スコアが５０００ＰＴＳを超えた",
-        point: 5,
-        percent: "0",
-        secret: false,
-        id: "",
-        check: function(param) {
-            return param.score<10000? false: true;
-        },
-    },
-    "score10000": {
         name:   "１００００ＰＴＳ",
         text: "スコアが１００００ＰＴＳを超えた",
-        point: 5,
+        point: 20,
         percent: "0",
         secret: false,
         id: "",
@@ -231,7 +220,7 @@ shotgun.achievementList = {
     "score20000": {
         name:   "２００００ＰＴＳ",
         text: "スコアが２００００ＰＴＳを超えた",
-        point: 5,
+        point: 30,
         percent: "0",
         secret: false,
         id: "",
@@ -264,7 +253,7 @@ shotgun.achievementList = {
     "1234": {
         name:   "１－２－３−４",
         text: "ワンペア、ツーペア、スリーカード、フォーカードの順で役を成立させた",
-        point: 5,
+        point: 15,
         percent: "0",
         secret: true,
         id: "",
@@ -283,7 +272,7 @@ shotgun.achievementList = {
     "4211": {
         name:   "恋の２－４－１１",
         text: "役が成立した手札の中に２、４、Ｊがあった",
-        point: 5,
+        point: 10,
         percent: "0",
         secret: true,
         id: "",
@@ -303,7 +292,7 @@ shotgun.achievementList = {
     "777": {
         name:   "スリーセブン",
         text: "７のスリーカードを成立させた",
-        point: 5,
+        point: 10,
         percent: "0",
         secret: true,
         id: "",
@@ -321,7 +310,7 @@ shotgun.achievementList = {
     "doubleroyal": {
         name:   "ダブルロイヤル",
         text: "ロイヤルストレートフラッシュを２回連続で成立させた",
-        point: 5,
+        point: 50,
         percent: "0",
         secret: true,
         id: "",
