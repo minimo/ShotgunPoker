@@ -48,7 +48,7 @@ tm.define("shotgun.Telop", {
         var defParam = {
             text: "Test message",
             size: 30,
-            dispWait: 1000,
+            dispWait: 1500,
             silent: false,
         };
         param.$safe(defParam);

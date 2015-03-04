@@ -320,7 +320,6 @@ shotgun.achievementList = {
                 var c = param.cards[i];
                 if (c.number == 1 || c.number % 2 == 0 || c.number % 3 == 0)  return false;
             }
-            if (c2 && c4 && c11) return true;
             return false;
         },
     },
