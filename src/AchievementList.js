@@ -111,7 +111,7 @@ shotgun.achievementList = {
         },
     },
     "royalstraightflush": {
-        name:   "Ｒ．ストレートフラッシュ",
+        name:   "ロイヤルストレートフラッシュ",
         text: "ロイヤルストレートフラッシュを成立させた",
         percent: "0",
         secret: false,
@@ -150,6 +150,17 @@ shotgun.achievementList = {
         text: "１ゲーム内でファイブカード以外の全役を成立させた",
         percent: "0",
         secret: false,
+        id: "",
+        check: function(param) {
+            return param.complete;
+        },
+    },
+
+    "grandslam": {
+        name:   "グランドスラム",
+        text: "１ゲーム内で全ての役を成立させた",
+        percent: "0",
+        secret: true,
         id: "",
         check: function(param) {
             return param.complete;
@@ -234,7 +245,7 @@ shotgun.achievementList = {
         name:   "１－２－３−４",
         text: "ワンペア、ツーペア、スリーカード、フォーカードの順で役を成立させた",
         percent: "0",
-        secret: false,
+        secret: true,
         id: "",
         check: function(param) {
             if (param.handLog.length < 4) return false;
@@ -317,7 +328,7 @@ shotgun.achievementList = {
         name:   "ポーカー神",
         text: "ハードモードで１００００ＰＴＳを超えた",
         percent: "0",
-        secret: false,
+        secret: true,
         id: "",
         check: function(param) {
             if (param.mode == GAMEMODE_HARD) {
