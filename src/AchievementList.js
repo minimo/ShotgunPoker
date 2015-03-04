@@ -335,18 +335,29 @@ shotgun.achievementList = {
             return false;
         },
     },
-    "pokermaster": {
-        name:   "ポーカーマスター",
-        text: "ハードモードで５０００ＰＴＳを超えた",
-        point: 20,
+
+    "senior": {
+        name:   "ポーカー上級者",
+        text: "ハードモードで２０００ＰＴＳを超えた",
+        point: 10,
         percent: "0",
         secret: false,
         id: "",
         check: function(param) {
-            if (param.mode == GAMEMODE_HARD) {
-                return param.score<5000? false: true;
-            }
-            return false;
+            if (param.mode != GAMEMODE_HARD) return false;
+            return param.score<2000? false: true;
+        },
+    },
+    "pokermaster": {
+        name:   "ポーカーマスター",
+        text: "ハードモードで５０００ＰＴＳを超えた",
+        point: 30,
+        percent: "0",
+        secret: false,
+        id: "",
+        check: function(param) {
+            if (param.mode != GAMEMODE_HARD) return false;
+            return param.score<5000? false: true;
         },
     },
     "pokergod": {
@@ -357,10 +368,8 @@ shotgun.achievementList = {
         secret: true,
         id: "",
         check: function(param) {
-            if (param.mode == GAMEMODE_HARD) {
-                return param.score<10000? false: true;
-            }
-            return false;
+            if (param.mode != GAMEMODE_HARD) return false;
+            return param.score<10000? false: true;
         },
     },
 };

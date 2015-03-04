@@ -244,16 +244,22 @@ var languagePack = {
     "ロイヤルストレートフラッシュを２回連続で成立させた": {
         "ENGLISH": "Royal Flush You was established in two consecutive."
     },
+    "ポーカー上級者": {
+        "ENGLISH": "Poker senior"
+    },
+    "ハードモードで２０００ＰＴＳを超えた": {
+        "ENGLISH": "Score exceeds the 2000pts in Hard mode."
+    },
     "ポーカーマスター": {
         "ENGLISH": "Master of Poker"
     },
     "ハードモードで５０００ＰＴＳを超えた": {
-        "ENGLISH": "Score exceeds the 5000PTS in Hard mode."
+        "ENGLISH": "Score exceeds the 5000pts in Hard mode."
     },
     "ポーカー神": {
         "ENGLISH": "The God of Poker"
     },
     "ハードモードで１００００ＰＴＳを超えた": {
-        "ENGLISH": "Score exceeds the 10000PTS in Hard mode."
+        "ENGLISH": "Score exceeds the 10000pts in Hard mode."
     },
 };
