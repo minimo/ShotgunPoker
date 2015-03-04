@@ -33,8 +33,8 @@ tm.define("shotgun.Telop", {
     },
 
     update: function() {
-        if (this.finish) {
-            this.finish = false;
+        if (this.queue.length == 0 && !this.finish) {
+            this.finish = true;
             this.bg.tweener.clear()
                 .fadeOut(100)
                 .call(function(){
@@ -68,7 +68,6 @@ tm.define("shotgun.Telop", {
             .move(-SC_W, 0, 250, "easeInOutSine")
             .call(function() {
                 that.queue.splice(0, 1);
-                if (that.queue.length == 0) that.finish = true;
             }.bind(this.textLabel));
     },
 });
