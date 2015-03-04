@@ -18,6 +18,8 @@ tm.define("shotgun.Achievement", {
         score:0,
         handCount:0,
         complete:false,
+        gameover: false,
+        usejoker: false,
     },
 
     //実績達成チェック

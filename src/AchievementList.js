@@ -157,6 +157,21 @@ shotgun.achievementList = {
             return param.mode == GAMEMODE_HARD? true: false;
         },
     },
+    "usejoker": {
+        name:   "ジョーカー",
+        text: "ジョーカーを使った",
+        point: 5,
+        percent: "0",
+        secret: false,
+        id: "",
+        check: function(param) {
+            if (param.lastHand < 1) return false;
+            for (var i = 0; i < param.cards.length; i++) {
+                if (param.cards[i].suit == SUIT_JOKER)  return true;
+            }
+            return false;
+        },
+    },
     "complete": {
         name:   "コンプリート",
         text: "１ゲーム内でファイブカード以外の全役を成立させた",
