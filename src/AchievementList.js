@@ -187,7 +187,7 @@ shotgun.achievementList = {
         },
     },
     "quickdraw": {
-        name: "早撃ち",
+        name: "ビリー・ザ・キッド",
         text: "３回連続で一定時間以内に役を成立させた",
         point: 15,
         percent: "0",
@@ -206,7 +206,7 @@ shotgun.achievementList = {
     },
     "runner": {
         name: "ランナーランナー",
-        text: "３回連続で残り１カウント以下でを成立させた",
+        text: "３回連続で残り０カウント以下でを成立させた",
         point: 10,
         percent: "0",
         secret: false,
@@ -214,9 +214,9 @@ shotgun.achievementList = {
         check: function(param) {
             if (param.handLog.length < 3) return false;
             var len = param.handLog.length;
-            if (param.handLog[len-3].leftTime < 2 &&
-                param.handLog[len-2].leftTime < 2 &&
-                param.handLog[len-1].leftTime < 2) {
+            if (param.handLog[len-3].leftTime < 1 &&
+                param.handLog[len-2].leftTime < 1 &&
+                param.handLog[len-1].leftTime < 1) {
                 return true;
             }
             return false;
@@ -230,19 +230,19 @@ shotgun.achievementList = {
         secret: false,
         id: "",
         check: function(param) {
-            if (param.lastHand != FLUSH && param.cards[0].suit == SUIT_DIAMOND) return true;
+            if (param.lastHand == FLUSH && param.cards[0].suit == SUIT_DIAMOND) return true;
             return false;
         },
     },
-    "heart": {
-        name: "",
+    "lovedelux": {
+        name: "ラブデラックス",
         text: "ハートのフラッシュを成立させた",
         point: 5,
         percent: "0",
         secret: false,
         id: "",
         check: function(param) {
-            if (param.lastHand != FLUSH && param.cards[0].suit == SUIT_DIAMOND) return true;
+            if (param.lastHand == FLUSH && param.cards[0].suit == SUIT_DIAMOND) return true;
             return false;
         },
     },
@@ -305,19 +305,19 @@ shotgun.achievementList = {
             return false;
         },
     },
-    "ninelives": {
-        name: "ナインライブス",
-        text: "９のスリーカードを成立させた",
-        point: 10,
+    "killerqueen": {
+        name: "キラークイーン",
+        text: "Ｑのフォーカードを成立させた",
+        point: 15,
         percent: "0",
         secret: true,
         id: "",
         check: function(param) {
-            if (param.lastHand != THREECARD) return false;
+            if (param.lastHand != FOURCARD) return false;
             var num = 0;
             for (var i = 0; i < param.cards.length; i++) {
                 var c = param.cards[i];
-                if (c.number == 9) num++;
+                if (c.number == 12) num++;
             }
             if (num == 4) return true;
             return false;
@@ -325,7 +325,7 @@ shotgun.achievementList = {
     },
     "wing": {
         name: "ウィング",
-        text: "２０回ミス無しだった",
+        text: "２０回連続でミス無しだった",
         point: 15,
         percent: "0",
         secret: false,
@@ -341,7 +341,7 @@ shotgun.achievementList = {
     },
     "bigwing": {
         name: "ビッグウィング",
-        text: "５０回ミス無しだった",
+        text: "５０回連続ミス無しだった",
         point: 30,
         percent: "0",
         secret: false,
@@ -405,7 +405,7 @@ shotgun.achievementList = {
         },
     },
     "score20000": {
-        name: "エクセレント！",
+        name: "あなたが神か",
         text: "スコアが２００００ＰＴＳを超えた",
         point: 30,
         percent: "0",
@@ -539,7 +539,6 @@ shotgun.achievementList = {
         check: function(param) {
             if (param.lastHand != TWOPAIR) return false;
             if (param.cards[0].number == 1 && param.cards[1].number == 1) return true;
-            }
             return false;
         },
     },
@@ -556,26 +555,6 @@ shotgun.achievementList = {
             if (param.handLog[len-2].hand == ROYALSTRAIGHTFLUSH &&
                 param.handLog[len-1].hand == ROYALSTRAIGHTFLUSH) {
                 return true;
-            }
-            return false;
-        },
-    },
-    "doki": {
-        name: "ドキプリ",
-        text: "４つのスートのフラッシュを連続で成立させた（順不同）",
-        point: 10,
-        percent: "0",
-        secret: true,
-        id: "",
-        check: function(param) {
-            if (param.handLog.length < 4) return false;
-            var len = param.handLog.length;
-            var spade = false;
-            var clover = false;
-            var heart = false;
-            var diomond = false;
-            for (var i = 0; i < 4; i++) {
-                if (param.handLog[3-i].hand != FLUSH) return false;
             }
             return false;
         },
