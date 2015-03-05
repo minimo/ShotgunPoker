@@ -10,6 +10,7 @@ shotgun.achievementList = {
 
     /*
      * 単体役成立系
+     * total: 100 points
      */
     "onepair": {
         name: "ワンペア",
@@ -134,6 +135,7 @@ shotgun.achievementList = {
 
     /*
      * 単体条件系
+     * total: 175 points
      */
     "normal": {
         name: "ゲームの始まり",
@@ -187,7 +189,7 @@ shotgun.achievementList = {
     "quickdraw": {
         name: "早撃ち",
         text: "３回連続で一定時間以内に役を成立させた",
-        point: 5,
+        point: 15,
         percent: "0",
         secret: false,
         id: "",
@@ -202,6 +204,48 @@ shotgun.achievementList = {
             return false;
         },
     },
+    "runner": {
+        name: "ランナーランナー",
+        text: "３回連続で残り１カウント以下でを成立させた",
+        point: 10,
+        percent: "0",
+        secret: false,
+        id: "",
+        check: function(param) {
+            if (param.handLog.length < 3) return false;
+            var len = param.handLog.length;
+            if (param.handLog[len-3].leftTime < 2 &&
+                param.handLog[len-2].leftTime < 2 &&
+                param.handLog[len-1].leftTime < 2) {
+                return true;
+            }
+            return false;
+        },
+    },
+    "millionaire": {
+        name: "大富豪",
+        text: "ダイヤのフラッシュを成立させた",
+        point: 5,
+        percent: "0",
+        secret: false,
+        id: "",
+        check: function(param) {
+            if (param.lastHand != FLUSH && param.cards[0].suit == SUIT_DIAMOND) return true;
+            return false;
+        },
+    },
+    "heart": {
+        name: "",
+        text: "ハートのフラッシュを成立させた",
+        point: 5,
+        percent: "0",
+        secret: false,
+        id: "",
+        check: function(param) {
+            if (param.lastHand != FLUSH && param.cards[0].suit == SUIT_DIAMOND) return true;
+            return false;
+        },
+    },
     "complete": {
         name: "コンプリート",
         text: "１ゲーム内でファイブカード以外の全役を成立させた",
@@ -213,7 +257,6 @@ shotgun.achievementList = {
             return param.complete;
         },
     },
-
     "grandslam": {
         name: "グランドスラム",
         text: "１ゲーム内で全ての役を成立させた",
@@ -225,9 +268,97 @@ shotgun.achievementList = {
             return param.complete;
         },
     },
+    "three7": {
+        name: "スリーセブン",
+        text: "７のスリーカードを成立させた",
+        point: 10,
+        percent: "0",
+        secret: true,
+        id: "",
+        check: function(param) {
+            if (param.lastHand != THREECARD) return false;
+            var seven = 0;
+            for (var i = 0; i < param.cards.length; i++) {
+                var c = param.cards[i];
+                if (c.number == 7)  seven++;
+            }
+            if (seven == 3) return true;
+            return false;
+        },
+    },
+    "big7": {
+        name: "ビッグセブン",
+        text: "７がハイカードであるフォーカードを成立させた",
+        point: 15,
+        percent: "0",
+        secret: true,
+        id: "",
+        check: function(param) {
+            if (param.lastHand != FOURCARD) return false;
+            var seven = 0;
+            for (var i = 0; i < param.cards.length; i++) {
+                var c = param.cards[i];
+                if (c.number == 7)  seven++;
+                if (c.number > 7) return false;
+            }
+            if (seven == 4) return true;
+            return false;
+        },
+    },
+    "ninelives": {
+        name: "ナインライブス",
+        text: "９のスリーカードを成立させた",
+        point: 10,
+        percent: "0",
+        secret: true,
+        id: "",
+        check: function(param) {
+            if (param.lastHand != THREECARD) return false;
+            var num = 0;
+            for (var i = 0; i < param.cards.length; i++) {
+                var c = param.cards[i];
+                if (c.number == 9) num++;
+            }
+            if (num == 4) return true;
+            return false;
+        },
+    },
+    "wing": {
+        name: "ウィング",
+        text: "２０回ミス無しだった",
+        point: 15,
+        percent: "0",
+        secret: false,
+        id: "",
+        check: function(param) {
+            if (param.handLog.length < 20) return false;
+            var len = param.handLog.length;
+            for (var i = 0; i < 20; i++) {
+                if (param.handLog[19-i].hand < 1) return false;
+            }
+            return true;
+        },
+    },
+    "bigwing": {
+        name: "ビッグウィング",
+        text: "５０回ミス無しだった",
+        point: 30,
+        percent: "0",
+        secret: false,
+        id: "",
+        check: function(param) {
+            if (param.handLog.length < 50) return false;
+            var len = param.handLog.length;
+            for (var i = 0; i < 50; i++) {
+                if (param.handLog[49-i].hand < 1) return false;
+            }
+            return true;
+        },
+    },
 
     /*
      * スコア条件系
+     * total: 160 points
      */
     "score1000": {
         name: "登竜門",
@@ -323,6 +454,7 @@ shotgun.achievementList = {
 
     /*
      * 複合条件系
+     * total: 95 points
      */
     "123": {
         name: "１－２－３",
@@ -361,7 +493,7 @@ shotgun.achievementList = {
             return false;
         },
     },
-    "prime": {
+    "primenumber": {
         name: "素数を数えるんだ",
         text: "素数のカードだけで役を成立させた",
         point: 10,
@@ -397,58 +529,17 @@ shotgun.achievementList = {
             return false;
         },
     },
-    "three7": {
-        name: "スリーセブン",
-        text: "７のスリーカードを成立させた",
-        point: 10,
+    "acesup": {
+        name: "エーシーズアップ",
+        text: "エースのペアと別のペアの組み合わせのツーペアを成立させた",
+        point: 5,
         percent: "0",
-        secret: true,
+        secret: false,
         id: "",
         check: function(param) {
-            if (param.lastHand != THREECARD) return false;
-            var seven = 0;
-            for (var i = 0; i < param.cards.length; i++) {
-                var c = param.cards[i];
-                if (c.number == 7)  seven++;
+            if (param.lastHand != TWOPAIR) return false;
+            if (param.cards[0].number == 1 && param.cards[1].number == 1) return true;
             }
-            if (seven == 3) return true;
-            return false;
-        },
-    },
-    "big7": {
-        name: "ビッグセブン",
-        text: "７がハイカードであるフォーカードを成立させた",
-        point: 15,
-        percent: "0",
-        secret: true,
-        id: "",
-        check: function(param) {
-            if (param.lastHand != FOURCARD) return false;
-            var seven = 0;
-            for (var i = 0; i < param.cards.length; i++) {
-                var c = param.cards[i];
-                if (c.number == 7)  seven++;
-                if (c.number > 7) return false;
-            }
-            if (seven == 4) return true;
-            return false;
-        },
-    },
-    "ninelives": {
-        name: "ナインライブス",
-        text: "９のスリーカードを成立させた",
-        point: 10,
-        percent: "0",
-        secret: true,
-        id: "",
-        check: function(param) {
-            if (param.lastHand != THREECARD) return false;
-            var num = 0;
-            for (var i = 0; i < param.cards.length; i++) {
-                var c = param.cards[i];
-                if (c.number == 9) num++;
-            }
-            if (num == 4) return true;
             return false;
         },
     },
@@ -465,6 +556,26 @@ shotgun.achievementList = {
             if (param.handLog[len-2].hand == ROYALSTRAIGHTFLUSH &&
                 param.handLog[len-1].hand == ROYALSTRAIGHTFLUSH) {
                 return true;
+            }
+            return false;
+        },
+    },
+    "doki": {
+        name: "ドキプリ",
+        text: "４つのスートのフラッシュを連続で成立させた（順不同）",
+        point: 10,
+        percent: "0",
+        secret: true,
+        id: "",
+        check: function(param) {
+            if (param.handLog.length < 4) return false;
+            var len = param.handLog.length;
+            var spade = false;
+            var clover = false;
+            var heart = false;
+            var diomond = false;
+            for (var i = 0; i < 4; i++) {
+                if (param.handLog[3-i].hand != FLUSH) return false;
             }
             return false;
         },
