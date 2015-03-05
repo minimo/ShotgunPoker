@@ -12,7 +12,7 @@ shotgun.achievementList = {
      * 単体役成立系
      */
     "onepair": {
-        name:   "ワンペア",
+        name: "ワンペア",
         text: "ワンペアを成立させた",
         point: 5,
         percent: "0",
@@ -24,7 +24,7 @@ shotgun.achievementList = {
         },
     },
     "twopair": {
-        name:   "ツーペア",
+        name: "ツーペア",
         text: "ツーペアを成立させた",
         point: 5,
         percent: "0",
@@ -36,7 +36,7 @@ shotgun.achievementList = {
         },
     },
     "threecard": {
-        name:   "スリーカード",
+        name: "スリーカード",
         text: "スリーカードを成立させた",
         point: 5,
         percent: "0",
@@ -48,7 +48,7 @@ shotgun.achievementList = {
         },
     },
     "fourcard": {
-        name:   "フォーカード",
+        name: "フォーカード",
         text: "フォーカードを成立させた",
         point: 10,
         percent: "0",
@@ -60,7 +60,7 @@ shotgun.achievementList = {
         },
     },
     "fivecard": {
-        name:   "ファイブカード",
+        name: "ファイブカード",
         text: "ファイブカードを成立させた",
         point: 15,
         percent: "0",
@@ -72,7 +72,7 @@ shotgun.achievementList = {
         },
     },
     "flush": {
-        name:   "フラッシュ",
+        name: "フラッシュ",
         text: "フラッシュを成立させた",
         point: 5,
         percent: "0",
@@ -84,7 +84,7 @@ shotgun.achievementList = {
         },
     },
     "fullhouse": {
-        name:   "フルハウス",
+        name: "フルハウス",
         text: "フルハウスを成立させた",
         point: 10,
         percent: "0",
@@ -96,7 +96,7 @@ shotgun.achievementList = {
         },
     },
     "straight": {
-        name:   "ストレート",
+        name: "ストレート",
         text: "ストレートを成立させた",
         point: 10,
         percent: "0",
@@ -108,7 +108,7 @@ shotgun.achievementList = {
         },
     },
     "straightflush": {
-        name:   "ストレートフラッシュ",
+        name: "ストレートフラッシュ",
         text: "ストレートフラッシュを成立させた",
         point: 15,
         percent: "0",
@@ -120,7 +120,7 @@ shotgun.achievementList = {
         },
     },
     "royalstraightflush": {
-        name:   "Ｒ．ストレートフラッシュ",
+        name: "Ｒ．ストレートフラッシュ",
         text: "ロイヤルストレートフラッシュを成立させた",
         point: 20,
         percent: "0",
@@ -136,7 +136,7 @@ shotgun.achievementList = {
      * 単体条件系
      */
     "normal": {
-        name:   "ノーマルモード",
+        name: "ゲームの始まり",
         text: "ノーマルモードでゲームをスタートした",
         point: 5,
         percent: "0",
@@ -147,7 +147,7 @@ shotgun.achievementList = {
         },
     },
     "hard": {
-        name:   "ハードモード",
+        name: "挑戦者",
         text: "ハードモードでゲームをスタートした",
         point: 5,
         percent: "0",
@@ -158,7 +158,7 @@ shotgun.achievementList = {
         },
     },
     "usejoker": {
-        name:   "ジョーカー",
+        name: "ジョーカー",
         text: "ジョーカーを使った",
         point: 5,
         percent: "0",
@@ -173,7 +173,7 @@ shotgun.achievementList = {
         },
     },
     "notusejoker": {
-        name:   "勿体ない？",
+        name: "勿体ない？",
         text: "ジョーカーを使わずにゲームオーバーになった",
         point: 5,
         percent: "0",
@@ -185,7 +185,7 @@ shotgun.achievementList = {
         },
     },
     "complete": {
-        name:   "コンプリート",
+        name: "コンプリート",
         text: "１ゲーム内でファイブカード以外の全役を成立させた",
         point: 20,
         percent: "0",
@@ -197,7 +197,7 @@ shotgun.achievementList = {
     },
 
     "grandslam": {
-        name:   "グランドスラム",
+        name: "グランドスラム",
         text: "１ゲーム内で全ての役を成立させた",
         point: 25,
         percent: "0",
@@ -212,7 +212,7 @@ shotgun.achievementList = {
      * スコア条件系
      */
     "score1000": {
-        name:   "１０００ＰＴＳ",
+        name: "登竜門",
         text: "スコアが１０００ＰＴＳを超えた",
         point: 5,
         percent: "0",
@@ -222,20 +222,20 @@ shotgun.achievementList = {
             return param.score<1000? false: true;
         },
     },
-    "score3000": {
-        name:   "３０００ＰＴＳ",
-        text: "スコアが３０００ＰＴＳを超えた",
+    "score2000": {
+        name: "熟練者",
+        text: "スコアが２０００ＰＴＳを超えた",
         point: 10,
         percent: "0",
         secret: false,
         id: "",
         check: function(param) {
-            return param.score<3000? false: true;
+            return param.score<2000? false: true;
         },
     },
     "score5000": {
-        name:   "５０００ＰＴＳ",
-        text: "スコアが１０００ＰＴＳを超えた",
+        name: "達人",
+        text: "スコアが５０００ＰＴＳを超えた",
         point: 15,
         percent: "0",
         secret: false,
@@ -245,7 +245,7 @@ shotgun.achievementList = {
         },
     },
     "score10000": {
-        name:   "１００００ＰＴＳ",
+        name: "ポーカーチャンプ",
         text: "スコアが１００００ＰＴＳを超えた",
         point: 20,
         percent: "0",
@@ -256,14 +256,50 @@ shotgun.achievementList = {
         },
     },
     "score20000": {
-        name:   "２００００ＰＴＳ",
+        name: "エクセレント！",
         text: "スコアが２００００ＰＴＳを超えた",
+        point: 30,
+        percent: "0",
+        secret: true,
+        id: "",
+        check: function(param) {
+            return param.score<20000? false: true;
+        },
+    },
+    "senior": {
+        name: "ポーカー上級者",
+        text: "ハードモードで２０００ＰＴＳを超えた",
+        point: 10,
+        percent: "0",
+        secret: false,
+        id: "",
+        check: function(param) {
+            if (param.mode != GAMEMODE_HARD) return false;
+            return param.score<2000? false: true;
+        },
+    },
+    "pokermaster": {
+        name: "ポーカーマスター",
+        text: "ハードモードで５０００ＰＴＳを超えた",
         point: 30,
         percent: "0",
         secret: false,
         id: "",
         check: function(param) {
-            return param.score<20000? false: true;
+            if (param.mode != GAMEMODE_HARD) return false;
+            return param.score<5000? false: true;
+        },
+    },
+    "pokergod": {
+        name: "ポーカー神",
+        text: "ハードモードで１００００ＰＴＳを超えた",
+        point: 50,
+        percent: "0",
+        secret: true,
+        id: "",
+        check: function(param) {
+            if (param.mode != GAMEMODE_HARD) return false;
+            return param.score<10000? false: true;
         },
     },
 
@@ -271,7 +307,7 @@ shotgun.achievementList = {
      * 複合条件系
      */
     "123": {
-        name:   "１－２－３",
+        name: "１－２－３",
         text: "ワンペア、ツーペア、スリーカードの順で役を成立させた",
         point: 5,
         percent: "0",
@@ -289,7 +325,7 @@ shotgun.achievementList = {
         },
     },
     "1234": {
-        name:   "１－２－３－４",
+        name: "１－２－３－４",
         text: "ワンペア、ツーペア、スリーカード、フォーカードの順で役を成立させた",
         point: 15,
         percent: "0",
@@ -308,7 +344,7 @@ shotgun.achievementList = {
         },
     },
     "prime": {
-        name:   "素数を数えるんだ",
+        name: "素数を数えるんだ",
         text: "素数のカードだけで役を成立させた",
         point: 10,
         percent: "0",
@@ -324,7 +360,7 @@ shotgun.achievementList = {
         },
     },
     "4211": {
-        name:   "恋の２－４－１１",
+        name: "恋の２－４－１１",
         text: "役が成立した手札の中に２、４、Ｊがあった",
         point: 10,
         percent: "0",
@@ -344,7 +380,7 @@ shotgun.achievementList = {
         },
     },
     "three7": {
-        name:   "スリーセブン",
+        name: "スリーセブン",
         text: "７のスリーカードを成立させた",
         point: 10,
         percent: "0",
@@ -361,26 +397,45 @@ shotgun.achievementList = {
             return false;
         },
     },
-    "eightman": {
-        name:   "８マン",
-        text: "８のフォーカードを成立させた",
-        point: 10,
+    "big7": {
+        name: "ビッグセブン",
+        text: "７がハイカードであるフォーカードを成立させた",
+        point: 15,
         percent: "0",
         secret: true,
         id: "",
         check: function(param) {
             if (param.lastHand != FOURCARD) return false;
+            var seven = 0;
+            for (var i = 0; i < param.cards.length; i++) {
+                var c = param.cards[i];
+                if (c.number == 7)  seven++;
+                if (c.number > 7) return false;
+            }
+            if (seven == 4) return true;
+            return false;
+        },
+    },
+    "ninelives": {
+        name: "ナインライブス",
+        text: "９のスリーカードを成立させた",
+        point: 10,
+        percent: "0",
+        secret: true,
+        id: "",
+        check: function(param) {
+            if (param.lastHand != THREECARD) return false;
             var num = 0;
             for (var i = 0; i < param.cards.length; i++) {
                 var c = param.cards[i];
-                if (c.number == 8)  num++;
+                if (c.number == 9) num++;
             }
             if (num == 4) return true;
             return false;
         },
     },
     "doubleroyal": {
-        name:   "ダブルロイヤル",
+        name: "ダブルロイヤル",
         text: "ロイヤルストレートフラッシュを２回連続で成立させた",
         point: 50,
         percent: "0",
@@ -394,43 +449,6 @@ shotgun.achievementList = {
                 return true;
             }
             return false;
-        },
-    },
-
-    "senior": {
-        name:   "ポーカー上級者",
-        text: "ハードモードで２０００ＰＴＳを超えた",
-        point: 10,
-        percent: "0",
-        secret: false,
-        id: "",
-        check: function(param) {
-            if (param.mode != GAMEMODE_HARD) return false;
-            return param.score<2000? false: true;
-        },
-    },
-    "pokermaster": {
-        name:   "ポーカーマスター",
-        text: "ハードモードで５０００ＰＴＳを超えた",
-        point: 30,
-        percent: "0",
-        secret: false,
-        id: "",
-        check: function(param) {
-            if (param.mode != GAMEMODE_HARD) return false;
-            return param.score<5000? false: true;
-        },
-    },
-    "pokergod": {
-        name:   "ポーカー神",
-        text: "ハードモードで１００００ＰＴＳを超えた",
-        point: 50,
-        percent: "0",
-        secret: true,
-        id: "",
-        check: function(param) {
-            if (param.mode != GAMEMODE_HARD) return false;
-            return param.score<10000? false: true;
         },
     },
 };

@@ -166,6 +166,7 @@ var languagePack = {
     "ロイヤルストレートフラッシュを成立させた": {
         "ENGLISH": "You've passed a Royal Flush."
     },
+
     "ノーマルモード": {
         "ENGLISH": "Normal"
     },
@@ -190,6 +191,7 @@ var languagePack = {
     "１ゲーム内で全ての役を成立させた": {
         "ENGLISH": "I was met all of the role in one game."
     },
+
     "１０００ＰＴＳ": {
         "ENGLISH": "1000pts"
     },
@@ -214,6 +216,25 @@ var languagePack = {
     "スコアが２００００ＰＴＳを超えた": {
         "ENGLISH": "Score exceeds the 20000PTS."
     },
+    "ポーカー上級者": {
+        "ENGLISH": "Poker senior"
+    },
+    "ハードモードで２０００ＰＴＳを超えた": {
+        "ENGLISH": "Score exceeds the 2000pts in Hard mode."
+    },
+    "ポーカーマスター": {
+        "ENGLISH": "Master of Poker"
+    },
+    "ハードモードで５０００ＰＴＳを超えた": {
+        "ENGLISH": "Score exceeds the 5000pts in Hard mode."
+    },
+    "ポーカー神": {
+        "ENGLISH": "The God of Poker"
+    },
+    "ハードモードで１００００ＰＴＳを超えた": {
+        "ENGLISH": "Score exceeds the 10000pts in Hard mode."
+    },
+
     "１－２－３": {
         "ENGLISH": "1-2-3"
     },
@@ -243,23 +264,5 @@ var languagePack = {
     },
     "ロイヤルストレートフラッシュを２回連続で成立させた": {
         "ENGLISH": "Royal Flush You was established in two consecutive."
-    },
-    "ポーカー上級者": {
-        "ENGLISH": "Poker senior"
-    },
-    "ハードモードで２０００ＰＴＳを超えた": {
-        "ENGLISH": "Score exceeds the 2000pts in Hard mode."
-    },
-    "ポーカーマスター": {
-        "ENGLISH": "Master of Poker"
-    },
-    "ハードモードで５０００ＰＴＳを超えた": {
-        "ENGLISH": "Score exceeds the 5000pts in Hard mode."
-    },
-    "ポーカー神": {
-        "ENGLISH": "The God of Poker"
-    },
-    "ハードモードで１００００ＰＴＳを超えた": {
-        "ENGLISH": "Score exceeds the 10000pts in Hard mode."
     },
 };
