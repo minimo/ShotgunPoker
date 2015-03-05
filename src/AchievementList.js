@@ -134,8 +134,104 @@ shotgun.achievementList = {
     },
 
     /*
+     * スコア条件系
+     * total: 160 points
+     */
+    "score1000": {
+        name: "登竜門",
+        text: "スコアが１０００ＰＴＳを超えた",
+        point: 5,
+        percent: "0",
+        secret: false,
+        id: "",
+        check: function(param) {
+            return param.score<1000? false: true;
+        },
+    },
+    "score2000": {
+        name: "熟練者",
+        text: "スコアが２０００ＰＴＳを超えた",
+        point: 10,
+        percent: "0",
+        secret: false,
+        id: "",
+        check: function(param) {
+            return param.score<2000? false: true;
+        },
+    },
+    "score5000": {
+        name: "ゲームの達人",
+        text: "スコアが５０００ＰＴＳを超えた",
+        point: 15,
+        percent: "0",
+        secret: false,
+        id: "",
+        check: function(param) {
+            return param.score<5000? false: true;
+        },
+    },
+    "score10000": {
+        name: "ポーカーチャンプ",
+        text: "スコアが１００００ＰＴＳを超えた",
+        point: 20,
+        percent: "0",
+        secret: false,
+        id: "",
+        check: function(param) {
+            return param.score<10000? false: true;
+        },
+    },
+    "score20000": {
+        name: "あなたが神か",
+        text: "スコアが２００００ＰＴＳを超えた",
+        point: 30,
+        percent: "0",
+        secret: true,
+        id: "",
+        check: function(param) {
+            return param.score<20000? false: true;
+        },
+    },
+    "senior": {
+        name: "ポーカー上級者",
+        text: "ハードモードで２０００ＰＴＳを超えた",
+        point: 10,
+        percent: "0",
+        secret: false,
+        id: "",
+        check: function(param) {
+            if (param.mode != GAMEMODE_HARD) return false;
+            return param.score<2000? false: true;
+        },
+    },
+    "pokermaster": {
+        name: "ポーカーマスター",
+        text: "ハードモードで５０００ＰＴＳを超えた",
+        point: 30,
+        percent: "0",
+        secret: false,
+        id: "",
+        check: function(param) {
+            if (param.mode != GAMEMODE_HARD) return false;
+            return param.score<5000? false: true;
+        },
+    },
+    "pokergod": {
+        name: "ポーカー神",
+        text: "ハードモードで１００００ＰＴＳを超えた",
+        point: 50,
+        percent: "0",
+        secret: true,
+        id: "",
+        check: function(param) {
+            if (param.mode != GAMEMODE_HARD) return false;
+            return param.score<10000? false: true;
+        },
+    },
+
+    /*
      * 単体条件系
-     * total: 175 points
+     * total: 165 points
      */
     "normal": {
         name: "ゲームの始まり",
@@ -329,16 +425,16 @@ shotgun.achievementList = {
     },
     "wing": {
         name: "ウィング",
-        text: "２０回連続でミス無しだった",
+        text: "３０回連続でミス無しだった",
         point: 15,
         percent: "0",
         secret: false,
         id: "",
         check: function(param) {
-            if (param.handLog.length < 20) return false;
+            if (param.handLog.length < 30) return false;
             var len = param.handLog.length;
-            for (var i = 0; i < 20; i++) {
-                if (param.handLog[19-i].hand < 1) return false;
+            for (var i = 0; i < 30; i++) {
+                if (param.handLog[29-i].hand < 1) return false;
             }
             return true;
         },
@@ -348,7 +444,7 @@ shotgun.achievementList = {
         text: "５０回連続ミス無しだった",
         point: 30,
         percent: "0",
-        secret: false,
+        secret: true,
         id: "",
         check: function(param) {
             if (param.handLog.length < 50) return false;
@@ -357,102 +453,6 @@ shotgun.achievementList = {
                 if (param.handLog[49-i].hand < 1) return false;
             }
             return true;
-        },
-    },
-
-    /*
-     * スコア条件系
-     * total: 160 points
-     */
-    "score1000": {
-        name: "登竜門",
-        text: "スコアが１０００ＰＴＳを超えた",
-        point: 5,
-        percent: "0",
-        secret: false,
-        id: "",
-        check: function(param) {
-            return param.score<1000? false: true;
-        },
-    },
-    "score2000": {
-        name: "熟練者",
-        text: "スコアが２０００ＰＴＳを超えた",
-        point: 10,
-        percent: "0",
-        secret: false,
-        id: "",
-        check: function(param) {
-            return param.score<2000? false: true;
-        },
-    },
-    "score5000": {
-        name: "達人",
-        text: "スコアが５０００ＰＴＳを超えた",
-        point: 15,
-        percent: "0",
-        secret: false,
-        id: "",
-        check: function(param) {
-            return param.score<5000? false: true;
-        },
-    },
-    "score10000": {
-        name: "ポーカーチャンプ",
-        text: "スコアが１００００ＰＴＳを超えた",
-        point: 20,
-        percent: "0",
-        secret: false,
-        id: "",
-        check: function(param) {
-            return param.score<10000? false: true;
-        },
-    },
-    "score20000": {
-        name: "あなたが神か",
-        text: "スコアが２００００ＰＴＳを超えた",
-        point: 30,
-        percent: "0",
-        secret: true,
-        id: "",
-        check: function(param) {
-            return param.score<20000? false: true;
-        },
-    },
-    "senior": {
-        name: "ポーカー上級者",
-        text: "ハードモードで２０００ＰＴＳを超えた",
-        point: 10,
-        percent: "0",
-        secret: false,
-        id: "",
-        check: function(param) {
-            if (param.mode != GAMEMODE_HARD) return false;
-            return param.score<2000? false: true;
-        },
-    },
-    "pokermaster": {
-        name: "ポーカーマスター",
-        text: "ハードモードで５０００ＰＴＳを超えた",
-        point: 30,
-        percent: "0",
-        secret: false,
-        id: "",
-        check: function(param) {
-            if (param.mode != GAMEMODE_HARD) return false;
-            return param.score<5000? false: true;
-        },
-    },
-    "pokergod": {
-        name: "ポーカー神",
-        text: "ハードモードで１００００ＰＴＳを超えた",
-        point: 50,
-        percent: "0",
-        secret: true,
-        id: "",
-        check: function(param) {
-            if (param.mode != GAMEMODE_HARD) return false;
-            return param.score<10000? false: true;
         },
     },
 
@@ -513,7 +513,7 @@ shotgun.achievementList = {
             return false;
         },
     },
-    "4211": {
+    "love4211": {
         name: "恋の２－４－１１",
         text: "役が成立した手札の中に２、４、Ｊがあった",
         point: 10,
@@ -551,7 +551,7 @@ shotgun.achievementList = {
         text: "ロイヤルストレートフラッシュを２回連続で成立させた",
         point: 50,
         percent: "0",
-        secret: true,
+        secret: false,
         id: "",
         check: function(param) {
             if (param.handLog.length < 2) return false;
