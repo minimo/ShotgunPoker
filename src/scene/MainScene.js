@@ -515,7 +515,11 @@ tm.define("shotgun.MainScene", {
         this.handCount[hand]++;
 
         //役履歴保存
-        this.handLog.push({hand:hand, leftTime:this.count});
+        this.handLog.push({
+            hand: hand,
+            leftTime: this.count,
+            cards: this.deck.hands.clone()
+        });
         if (this.handLog.length > 20) this.handLog.splice(0, 1);
 
         //役無し、手札未成立、ワンペア２連続はペナルティ
