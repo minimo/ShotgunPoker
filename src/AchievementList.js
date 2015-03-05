@@ -230,7 +230,9 @@ shotgun.achievementList = {
         secret: false,
         id: "",
         check: function(param) {
-            if (param.lastHand == FLUSH && param.cards[0].suit == SUIT_DIAMOND) return true;
+            if (param.lastHand != FLUSH) return false;
+            var c = param.cards[0];
+            if (c.suit == SUIT_DIAMOND) return true;
             return false;
         },
     },
@@ -242,7 +244,9 @@ shotgun.achievementList = {
         secret: false,
         id: "",
         check: function(param) {
-            if (param.lastHand == FLUSH && param.cards[0].suit == SUIT_DIAMOND) return true;
+            if (param.lastHand != FLUSH) return false;
+            var c = param.cards[0];
+            if (c.suit == SUIT_HEART) return true;
             return false;
         },
     },
