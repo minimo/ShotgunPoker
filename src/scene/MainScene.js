@@ -496,7 +496,11 @@ tm.define("shotgun.MainScene", {
                 var text1 = $trans("実績「");
                 var text2 = $trans("」が解除されました");
                 var text = text1+$trans(ac[i].name)+text2;
-                telop.add({text:text});
+                var size = 30;
+                if (appMain.language == "JAPANESE") {
+                    size = text.length<22? 30: 27;
+                }
+                telop.add({text:text, size:size});
             }
         }
     },

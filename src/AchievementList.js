@@ -120,7 +120,7 @@ shotgun.achievementList = {
         },
     },
     "royalstraightflush": {
-        name:   "ロイヤルストレートフラッシュ",
+        name:   "Ｒ．ストレートフラッシュ",
         text: "ロイヤルストレートフラッシュを成立させた",
         point: 20,
         percent: "0",
