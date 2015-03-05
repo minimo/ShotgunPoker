@@ -20,6 +20,7 @@ tm.define("shotgun.Achievement", {
         complete:false,
         gameover: false,
         useJoker: false,
+        leftTime: -99,
     },
 
     //実績達成チェック
@@ -87,7 +88,7 @@ tm.define("shotgun.Achievement", {
         for (var i = 0; i < len; i++) {
             var id = list[i];
             var obj = shotgun.achievementList[id];
-            obj.percent = data[id].percent;
+            if (obj) obj.percent = data[id].percent;
         }
     },
 

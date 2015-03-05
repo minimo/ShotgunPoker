@@ -184,6 +184,24 @@ shotgun.achievementList = {
             return false;
         },
     },
+    "quickdraw": {
+        name: "早撃ち",
+        text: "３回連続で一定時間以内に役を成立させた",
+        point: 5,
+        percent: "0",
+        secret: false,
+        id: "",
+        check: function(param) {
+            if (param.handLog.length < 3) return false;
+            var len = param.handLog.length;
+            if (param.handLog[len-3].leftTime > 7 &&
+                param.handLog[len-2].leftTime > 7 &&
+                param.handLog[len-1].leftTime > 7) {
+                return true;
+            }
+            return false;
+        },
+    },
     "complete": {
         name: "コンプリート",
         text: "１ゲーム内でファイブカード以外の全役を成立させた",
@@ -316,9 +334,9 @@ shotgun.achievementList = {
         check: function(param) {
             if (param.handLog.length < 3) return false;
             var len = param.handLog.length;
-            if (param.handLog[len-3] == ONEPAIR &&
-                param.handLog[len-2] == TWOPAIR &&
-                param.handLog[len-1] == THREECARD) {
+            if (param.handLog[len-3].hand == ONEPAIR &&
+                param.handLog[len-2].hand == TWOPAIR &&
+                param.handLog[len-1].hand == THREECARD) {
                 return true;
             }
             return false;
@@ -334,10 +352,10 @@ shotgun.achievementList = {
         check: function(param) {
             if (param.handLog.length < 4) return false;
             var len = param.handLog.length;
-            if (param.handLog[len-4] == ONEPAIR &&
-                param.handLog[len-3] == TWOPAIR &&
-                param.handLog[len-2] == THREECARD &&
-                param.handLog[len-1] == FOURCARD) {
+            if (param.handLog[len-4].hand == ONEPAIR &&
+                param.handLog[len-3].hand == TWOPAIR &&
+                param.handLog[len-2].hand == THREECARD &&
+                param.handLog[len-1].hand == FOURCARD) {
                 return true;
             }
             return false;
@@ -444,8 +462,8 @@ shotgun.achievementList = {
         check: function(param) {
             if (param.handLog.length < 2) return false;
             var len = param.handLog.length;
-            if (param.handLog[len-2] == ROYALSTRAIGHTFLUSH &&
-                param.handLog[len-1] == ROYALSTRAIGHTFLUSH) {
+            if (param.handLog[len-2].hand == ROYALSTRAIGHTFLUSH &&
+                param.handLog[len-1].hand == ROYALSTRAIGHTFLUSH) {
                 return true;
             }
             return false;

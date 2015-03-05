@@ -505,6 +505,7 @@ tm.define("shotgun.MainScene", {
         }
     },
 
+    //手札内容のチェック
     checkHand: function() {
         this.pick = false;
         this.deck.sortHand();
@@ -514,7 +515,7 @@ tm.define("shotgun.MainScene", {
         this.handCount[hand]++;
 
         //役履歴保存
-        this.handLog.push(hand);
+        this.handLog.push({hand:hand, leftTime:this.count});
         if (this.handLog.length > 20) this.handLog.splice(0, 1);
 
         //役無し、手札未成立、ワンペア２連続はペナルティ
@@ -612,6 +613,7 @@ tm.define("shotgun.MainScene", {
                 score:this.score,
                 handCount:this.handCount,
                 complete:cp,
+                leftTime:this.count,
             };
             this.checkAchievement(param);
         }
