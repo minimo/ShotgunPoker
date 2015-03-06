@@ -42,6 +42,7 @@ tm.define("shotgun.MainScene", {
     newRecord: false,   //ハイスコア更新フラグ
     handLog: [],    //役ログ
     bonus: false,   //ボーナスライフ貰ってるかフラグ
+    useJoker: false,//ジョーカー使ったよフラグ
 
     //カウンタ
     count: 10,      //カード選択カウントダウン用
@@ -459,6 +460,13 @@ tm.define("shotgun.MainScene", {
             this.newRecord = true;
         }
 
+        //ゲームオーバー時実績チェック
+        var param = {
+            gameover:true,
+            useJoker: this.useJoker
+        };
+        this.checkAchievement(param);
+
         //メッセージ
         var that = this;
         var lb = tm.display.Sprite("gameover")
@@ -477,6 +485,7 @@ tm.define("shotgun.MainScene", {
         appMain.saveConfig();
     },
 
+    //実績達成チェック
     checkAchievement: function(param) {
         var ac = appMain.achievement.check(param);
         if (ac) {
@@ -486,12 +495,17 @@ tm.define("shotgun.MainScene", {
             for (var i = 0; i < ac.length; i++) {
                 var text1 = $trans("実績「");
                 var text2 = $trans("」が解除されました");
-                var text = text1+ac[i].name+text2;
-                telop.add({text:text});
+                var text = text1+$trans(ac[i].name)+text2;
+                var size = 30;
+                if (appMain.language == "JAPANESE") {
+                    size = text.length<22? 30: 27;
+                }
+                telop.add({text:text, size:size});
             }
         }
     },
 
+    //手札内容のチェック
     checkHand: function() {
         this.pick = false;
         this.deck.sortHand();
@@ -501,7 +515,11 @@ tm.define("shotgun.MainScene", {
         this.handCount[hand]++;
 
         //役履歴保存
-        this.handLog.push(hand);
+        this.handLog.push({
+            hand: hand,
+            leftTime: this.count,
+            cards: this.deck.hands.clone()
+        });
         if (this.handLog.length > 20) this.handLog.splice(0, 1);
 
         //役無し、手札未成立、ワンペア２連続はペナルティ
@@ -599,12 +617,16 @@ tm.define("shotgun.MainScene", {
                 score:this.score,
                 handCount:this.handCount,
                 complete:cp,
+                leftTime:this.count,
             };
             this.checkAchievement(param);
         }
 
         this.count = 10;
         this.time = 0;
+
+        //ジョーカー使用判定
+        if (!this.useJoker) this.useJoker = this.deck.jokerInHand
 
         //レベル処理
         this.level = Math.sqrt(this.absTime*(0.0002*(this.levelReset+1)))+1;

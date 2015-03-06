@@ -30,7 +30,7 @@ tm.define("shotgun.Card", {
         this.number = num+1;
 
         this.pattern = this.suit*13+(this.number-1);
-        if (suit == 5) {
+        if (suit == SUIT_JOKER) {
             this.number = 99;
             this.pattern = 54;
         }

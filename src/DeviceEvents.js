@@ -165,6 +165,11 @@ var showLeadersBoard = function(id) {
         if (id == "") {
             googleplaygame.showAllLeaderboards();
         } else {
+            //IDをGooglePlay向けに変換
+            if (id == "Normal_")    id = "CgkI-I-vk7YTEAIQAA";
+            if (id == "Normal_RJ")  id = "CgkI-I-vk7YTEAIQAQ";
+            if (id == "Hard_")      id = "CgkI-I-vk7YTEAIQAg";
+            if (id == "Hard_RJ")    id = "CgkI-I-vk7YTEAIQAw";
             googleplaygame.showLeaderboard({
                 leaderboardId: id,
             });
@@ -211,7 +216,7 @@ var submitScore = function(mode, returnJoker, score) {
 }
 
 //GameCenterに実績登録
-var reportAchievements = function(id, percent) {
+var reportAchievements = function(name, percent) {
     if (!ENABLE_GAMECENTER) return false;
     if (DEVICE_IOS) {
         gamecenter.reportAchievement(
@@ -221,13 +226,15 @@ var reportAchievements = function(id, percent) {
             function(){
                 if (DEBUG_GAMECENTER) AdvanceAlert('実績登録に失敗しました');
             }, {
-                achievementId: id,
-                percent: "100",
+                achievementId: name,    //GameCenterは実績名とidが同一
+                percent: "100"
             });
     }
     if (DEVICE_ANDROID) {
+        if (shotgun.achievementList[name].id === undefined) return false;
+        if (shotgun.achievementList[name].id == "") return false;
         googleplaygame.unlockAchievement({
-                achievementId: id,
+                achievementId: shotgun.achievementList[name].id
             },
             function(){
                 if (DEBUG_GAMECENTER) AdvanceAlert('実績登録に成功しました');

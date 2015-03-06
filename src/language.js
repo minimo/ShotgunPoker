@@ -83,14 +83,6 @@ var languagePack = {
         "ENGLISH": "View ad 'Ad' button and life one bonus !"
     },
 
-    //Achievement
-    "実績「": {
-        "ENGLISH": "Achievement「"
-    },
-    "」が解除されました": {
-        "ENGLISH": "」unlocked."
-    },
-
     //Poker Hand
     "THREE CARD": {
         "ENGLISH": "THREE OF A KIND"
@@ -103,5 +95,174 @@ var languagePack = {
     },
     "R.STRAIGHT FLUSH": {
         "ENGLISH": "ROYAL FLUSH"
+    },
+    "ワンペア": {
+        "ENGLISH": "One Pair"
+    },
+    "ツーペア": {
+        "ENGLISH": "Two Pair"
+    },
+    "スリーカード": {
+        "ENGLISH": "Three of a Kind"
+    },
+    "フォーカード": {
+        "ENGLISH": "Four of a Kind"
+    },
+    "ファイブカード": {
+        "ENGLISH": "Five of a Kind"
+    },
+    "フラッシュ": {
+        "ENGLISH": "Flush"
+    },
+    "ストレート": {
+        "ENGLISH": "Straight"
+    },
+    "フルハウス": {
+        "ENGLISH": "Full House"
+    },
+    "ストレートフラッシュ": {
+        "ENGLISH": "Straight Flush"
+    },
+    "ロイヤルストレートフラッシュ": {
+        "ENGLISH": "Royal Flush"
+    },
+
+    //Achievement
+    "実績「": {
+        "ENGLISH": "Achievement '"
+    },
+    "」が解除されました": {
+        "ENGLISH": "' unlocked."
+    },
+
+    //AchievementList
+    "ワンペアを成立させた": {
+        "ENGLISH": "You've passed a One Pair."
+    },
+    "ツーペアを成立させた": {
+        "ENGLISH": "You've passed a Two Pair."
+    },
+    "スリーカードを成立させた": {
+        "ENGLISH": "You've passed a Three of a Kind."
+    },
+    "フォーカードを成立させた": {
+        "ENGLISH": "You've passed a Four of a Kind."
+    },
+    "ファイブカードを成立させた": {
+        "ENGLISH": "You've passed a Five of a Kind."
+    },
+    "フラッシュを成立させた": {
+        "ENGLISH": "You've passed a Flush."
+    },
+    "ストレートを成立させた": {
+        "ENGLISH": "You've passed a Straight."
+    },
+    "フルハウスを成立させた": {
+        "ENGLISH": "You've passed a Full House."
+    },
+    "ストレートフラッシュを成立させた": {
+        "ENGLISH": "You've passed a Straight Flush."
+    },
+    "ロイヤルストレートフラッシュを成立させた": {
+        "ENGLISH": "You've passed a Royal Flush."
+    },
+
+    "ノーマルモード": {
+        "ENGLISH": "Normal"
+    },
+    "ノーマルモードでゲームをスタートした": {
+        "ENGLISH": "You started the game in Normal."
+    },
+    "ハードモード": {
+        "ENGLISH": "Normal"
+    },
+    "ハードモードでゲームをスタートした": {
+        "ENGLISH": "You started the game in Hard."
+    },
+    "コンプリート": {
+        "ENGLISH": "Complete"
+    },
+    "１ゲーム内でファイブカード以外の全役を成立させた": {
+        "ENGLISH": "You passed a whole hands of non Five of a Kind in one game."
+    },
+    "グランドスラム": {
+        "ENGLISH": "Gramd Slam"
+    },
+    "１ゲーム内で全ての役を成立させた": {
+        "ENGLISH": "I was met all of the role in one game."
+    },
+
+    "１０００ＰＴＳ": {
+        "ENGLISH": "1000pts"
+    },
+    "スコアが１０００ＰＴＳを超えた": {
+        "ENGLISH": "Score exceeds the 1000PTS."
+    },
+    "５０００ＰＴＳ": {
+        "ENGLISH": "5000pts"
+    },
+    "スコアが５０００ＰＴＳを超えた": {
+        "ENGLISH": "Score exceeds the 5000PTS."
+    },
+    "１００００ＰＴＳ": {
+        "ENGLISH": "10000pts"
+    },
+    "スコアが１００００ＰＴＳを超えた": {
+        "ENGLISH": "Score exceeds the 10000PTS."
+    },
+    "２００００ＰＴＳ": {
+        "ENGLISH": "20000pts"
+    },
+    "スコアが２００００ＰＴＳを超えた": {
+        "ENGLISH": "Score exceeds the 20000PTS."
+    },
+    "ポーカー上級者": {
+        "ENGLISH": "Poker senior"
+    },
+    "ハードモードで２０００ＰＴＳを超えた": {
+        "ENGLISH": "Score exceeds the 2000pts in Hard mode."
+    },
+    "ポーカーマスター": {
+        "ENGLISH": "Master of Poker"
+    },
+    "ハードモードで５０００ＰＴＳを超えた": {
+        "ENGLISH": "Score exceeds the 5000pts in Hard mode."
+    },
+    "ポーカー神": {
+        "ENGLISH": "The God of Poker"
+    },
+    "ハードモードで１００００ＰＴＳを超えた": {
+        "ENGLISH": "Score exceeds the 10000pts in Hard mode."
+    },
+
+    "１－２－３": {
+        "ENGLISH": "1-2-3"
+    },
+    "ワンペア、ツーペア、スリーカードの順で役を成立させた": {
+        "ENGLISH": "One Pair, Two Pair, You was passed a hand in the order of Three of a Kind."
+    },
+    "１－２－３－４": {
+        "ENGLISH": "1-2-3-4"
+    },
+    "ワンペア、ツーペア、スリーカード、フォーカードの順で役を成立させた": {
+        "ENGLISH": "One Pair, Two Pair, Three of a Kind, You was passed a hand in the order of Four of a Kind."
+    },
+    "恋の２－４－１１": {
+        "ENGLISH": "Love 2-4-11"
+    },
+    "役が成立した手札の中に２、４、Ｊがあった": {
+        "ENGLISH": "2,4 in the hand that winning combination has been established, there was a J."
+    },
+    "スリーセブン": {
+        "ENGLISH": "Triple 7"
+    },
+    "７のスリーカードを成立させた": {
+        "ENGLISH": "You've passed a Three of a Kind."
+    },
+    "ダブルロイヤル": {
+        "ENGLISH": "Double Royal"
+    },
+    "ロイヤルストレートフラッシュを２回連続で成立させた": {
+        "ENGLISH": "Royal Flush You was established in two consecutive."
     },
 };
