@@ -43,6 +43,7 @@ tm.define("shotgun.MainScene", {
     handLog: [],    //役ログ
     bonus: false,   //ボーナスライフ貰ってるかフラグ
     useJoker: false,//ジョーカー使ったよフラグ
+    noMissCount: 0, //ミス無し回数
 
     //カウンタ
     count: 10,      //カード選択カウントダウン用
@@ -535,8 +536,10 @@ tm.define("shotgun.MainScene", {
         if (penalty > 0) {
             appMain.playSE("nopair");
             if (this.mode != GAMEMODE_PRACTICE) this.life -= penalty;
+            this.noMissCount = 0;
         } else {
             appMain.playSE("hand");
+            this.noMissCount++;
         }
 
         //得点がプラスの時のみスコアに加算
@@ -618,6 +621,7 @@ tm.define("shotgun.MainScene", {
                 handCount:this.handCount,
                 complete:cp,
                 leftTime:this.count,
+                noMissCount: this.noMissCount,
             };
             this.checkAchievement(param);
         }

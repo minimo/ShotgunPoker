@@ -431,11 +431,7 @@ shotgun.achievementList = {
         secret: false,
         id: "",
         check: function(param) {
-            if (param.handLog.length < 30) return false;
-            var len = param.handLog.length;
-            for (var i = 0; i < 30; i++) {
-                if (param.handLog[29-i].hand < 1) return false;
-            }
+            if (param.noMissCount < 30) return false;
             return true;
         },
     },
@@ -447,11 +443,7 @@ shotgun.achievementList = {
         secret: true,
         id: "",
         check: function(param) {
-            if (param.handLog.length < 50) return false;
-            var len = param.handLog.length;
-            for (var i = 0; i < 50; i++) {
-                if (param.handLog[49-i].hand < 1) return false;
-            }
+            if (param.noMissCount < 50) return false;
             return true;
         },
     },
