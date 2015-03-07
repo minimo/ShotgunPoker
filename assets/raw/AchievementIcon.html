@@ -19,13 +19,13 @@
 var app;
 tm.main(function() {
 
-    SC_W = SC_H = 128;
+    SC_W = SC_H = 512;
     CARD_W = 200*0.7;
     CARD_H = 300*0.7;
-    CARD_SCALE = 0.35;
+    CARD_SCALE = 1.5;
 
     app = tm.display.CanvasApp("#app");
-    app.background = "rgba(50, 110, 50, 1)";
+//    app.background = "rgba(50, 110, 50, 1)";
     app.resize(SC_W, SC_H);
 
     app.focus = null;
@@ -39,28 +39,60 @@ tm.main(function() {
 //        var shadowColor = 'rgba(160, 160, 160, 1)';
 
         //バックグラウンド
-        this.bg = tm.display.Shape({width:SC_W, height:SC_H,fillStyle: 'rgba(50, 110, 50, 1)', strokeStyle: 'rgba(50, 110, 50, 1)'})
+        this.bg = tm.display.RectangleShape({width:SC_W, height:SC_H, fillStyle: 'rgba(50, 110, 50, 1)', strokeStyle: 'rgba(50, 110, 50, 1)'})
             .addChildTo(this)
-            .setPosition(SC_W*0.5, SC_H*0.5);
+            .setPosition(SC_W*0.5, SC_H*0.5)
 
         //カード
         var suit = 0;
-        var number = 0;
+        var number = 10;
         var c1 = tm.display.Sprite("card", CARD_W, CARD_H)
             .addChildTo(this)
-            .setPosition(SC_W*0.30, SC_H*0.5)
-            .setFrameIndex(suit*13+number)
+            .setPosition(SC_W*0.46, SC_H*0.7)
+            .setFrameIndex(suit*13+number-1)
             .setScale(CARD_SCALE)
-            .setRotation(-15);
+            .setOrigin(0.5, 0.8)
+            .setRotation(-40);
 
-        var suit = 2;
-        var number = 0;
+        var suit = 0;
+        var number = 11;
         var c2 = tm.display.Sprite("card", CARD_W, CARD_H)
             .addChildTo(this)
-            .setPosition(SC_W*0.70, SC_H*0.5)
-            .setFrameIndex(suit*13+number)
+            .setPosition(SC_W*0.475, SC_H*0.65)
+            .setFrameIndex(suit*13+number-1)
             .setScale(CARD_SCALE)
-            .setRotation(15);
+            .setOrigin(0.5, 0.8)
+            .setRotation(-20);
+
+        var suit = 0;
+        var number = 12;
+        var c3 = tm.display.Sprite("card", CARD_W, CARD_H)
+            .addChildTo(this)
+            .setPosition(SC_W*0.525, SC_H*0.65)
+            .setFrameIndex(suit*13+number-1)
+            .setScale(CARD_SCALE)
+            .setOrigin(0.5, 0.8)
+            .setRotation(0);
+
+        var suit = 0;
+        var number = 13;
+        var c4 = tm.display.Sprite("card", CARD_W, CARD_H)
+            .addChildTo(this)
+            .setPosition(SC_W*0.54, SC_H*0.65)
+            .setFrameIndex(suit*13+number-1)
+            .setScale(CARD_SCALE)
+            .setOrigin(0.5, 0.8)
+            .setRotation(20);
+
+        var suit = 0;
+        var number = 1;
+        var c5 = tm.display.Sprite("card", CARD_W, CARD_H)
+            .addChildTo(this)
+            .setPosition(SC_W*0.54, SC_H*0.65)
+            .setFrameIndex(suit*13+number-1)
+            .setScale(CARD_SCALE)
+            .setOrigin(0.5, 0.8)
+            .setRotation(40);
     }
 
     var loadingScene = tm.ui["LoadingScene"]({
