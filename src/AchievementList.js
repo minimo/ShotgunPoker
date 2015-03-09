@@ -10,7 +10,7 @@ shotgun.achievementList = {
 
     /*
      * 単体役成立系
-     * total: 100 points
+     * total: 200 points
      */
     "onepair": {
         name: "ワンペア",
@@ -75,7 +75,7 @@ shotgun.achievementList = {
     "flush": {
         name: "フラッシュ",
         text: "フラッシュを成立させた",
-        point: 5,
+        point: 10,
         percent: "0",
         secret: false,
         id: "CgkI-I-vk7YTEAIQCg",
@@ -87,7 +87,7 @@ shotgun.achievementList = {
     "fullhouse": {
         name: "フルハウス",
         text: "フルハウスを成立させた",
-        point: 15,
+        point: 20,
         percent: "0",
         secret: false,
         id: "CgkI-I-vk7YTEAIQCw",
@@ -135,7 +135,7 @@ shotgun.achievementList = {
 
     /*
      * スコア条件系
-     * total: 160 points
+     * total: 380 points
      */
     "score1000": {
         name: "登竜門",
@@ -284,7 +284,7 @@ shotgun.achievementList = {
     },
     "quickdraw": {
         name: "ビリー・ザ・キッド",
-        text: "３回連続で一定時間以内に役を成立させた",
+        text: "３回連続でカウント開始前に役を成立させた",
         point: 25,
         percent: "0",
         secret: false,
@@ -292,9 +292,9 @@ shotgun.achievementList = {
         check: function(param) {
             if (param.handLog.length < 3) return false;
             var len = param.handLog.length;
-            if (param.handLog[len-3].leftTime > 7 &&
-                param.handLog[len-2].leftTime > 7 &&
-                param.handLog[len-1].leftTime > 7) {
+            if (param.handLog[len-3].leftTime > 6 &&
+                param.handLog[len-2].leftTime > 6 &&
+                param.handLog[len-1].leftTime > 6) {
                 return true;
             }
             return false;
@@ -302,7 +302,7 @@ shotgun.achievementList = {
     },
     "runner": {
         name: "ランナーランナー",
-        text: "３回連続で残り０カウント以下でを成立させた",
+        text: "３回連続で残り０カウントで役を成立させた",
         point: 20,
         percent: "0",
         secret: false,
