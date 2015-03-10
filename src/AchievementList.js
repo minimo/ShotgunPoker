@@ -14,7 +14,7 @@ shotgun.achievementList = {
      */
     "onepair": {
         name: "ワンペア",
-        text: "ワンペアを成立させた",
+        text: "ワンペアを成立した",
         point: 5,
         percent: "0",
         secret: false,
@@ -26,7 +26,7 @@ shotgun.achievementList = {
     },
     "twopair": {
         name: "ツーペア",
-        text: "ツーペアを成立させた",
+        text: "ツーペアを成立した",
         point: 5,
         percent: "0",
         secret: false,
@@ -38,7 +38,7 @@ shotgun.achievementList = {
     },
     "threecard": {
         name: "スリーカード",
-        text: "スリーカードを成立させた",
+        text: "スリーカードを成立した",
         point: 10,
         percent: "0",
         secret: false,
@@ -50,7 +50,7 @@ shotgun.achievementList = {
     },
     "fourcard": {
         name: "フォーカード",
-        text: "フォーカードを成立させた",
+        text: "フォーカードを成立した",
         point: 20,
         percent: "0",
         secret: false,
@@ -62,7 +62,7 @@ shotgun.achievementList = {
     },
     "fivecard": {
         name: "ファイブカード",
-        text: "ファイブカードを成立させた",
+        text: "ファイブカードを成立した",
         point: 30,
         percent: "0",
         secret: false,
@@ -74,7 +74,7 @@ shotgun.achievementList = {
     },
     "flush": {
         name: "フラッシュ",
-        text: "フラッシュを成立させた",
+        text: "フラッシュを成立した",
         point: 10,
         percent: "0",
         secret: false,
@@ -86,7 +86,7 @@ shotgun.achievementList = {
     },
     "fullhouse": {
         name: "フルハウス",
-        text: "フルハウスを成立させた",
+        text: "フルハウスを成立した",
         point: 20,
         percent: "0",
         secret: false,
@@ -98,7 +98,7 @@ shotgun.achievementList = {
     },
     "straight": {
         name: "ストレート",
-        text: "ストレートを成立させた",
+        text: "ストレートを成立した",
         point: 20,
         percent: "0",
         secret: false,
@@ -110,7 +110,7 @@ shotgun.achievementList = {
     },
     "straightflush": {
         name: "ストレートフラッシュ",
-        text: "ストレートフラッシュを成立させた",
+        text: "ストレートフラッシュを成立した",
         point: 30,
         percent: "0",
         secret: false,
@@ -122,7 +122,7 @@ shotgun.achievementList = {
     },
     "royalstraightflush": {
         name: "Ｒ．ストレートフラッシュ",
-        text: "ロイヤルストレートフラッシュを成立させた",
+        text: "ロイヤルストレートフラッシュを成立した",
         point: 50,
         percent: "0",
         secret: false,
@@ -284,7 +284,7 @@ shotgun.achievementList = {
     },
     "quickdraw": {
         name: "ビリー・ザ・キッド",
-        text: "３回連続でカウント開始前に役を成立させた",
+        text: "３回連続でカウント開始前に役を成立した",
         point: 25,
         percent: "0",
         secret: false,
@@ -302,7 +302,7 @@ shotgun.achievementList = {
     },
     "runner": {
         name: "ランナーランナー",
-        text: "３回連続で残り０カウントで役を成立させた",
+        text: "３回連続で残り０カウントで役を成立した",
         point: 20,
         percent: "0",
         secret: false,
@@ -320,7 +320,7 @@ shotgun.achievementList = {
     },
     "millionaire": {
         name: "大富豪",
-        text: "ダイヤのフラッシュを成立させた",
+        text: "ダイヤのフラッシュを成立した",
         point: 10,
         percent: "0",
         secret: false,
@@ -334,7 +334,7 @@ shotgun.achievementList = {
     },
     "lovedelux": {
         name: "ラブデラックス",
-        text: "ハートのフラッシュを成立させた",
+        text: "ハートのフラッシュを成立した",
         point: 10,
         percent: "0",
         secret: false,
@@ -348,7 +348,7 @@ shotgun.achievementList = {
     },
     "complete": {
         name: "コンプリート",
-        text: "１ゲーム内でファイブカード以外の全役を成立させた",
+        text: "１ゲーム内でファイブカード以外の全役を成立した",
         point: 50,
         percent: "0",
         secret: false,
@@ -359,7 +359,7 @@ shotgun.achievementList = {
     },
     "grandslam": {
         name: "グランドスラム",
-        text: "１ゲーム内で全ての役を成立させた",
+        text: "１ゲーム内で全ての役を成立した",
         point: 100,
         percent: "0",
         secret: true,
@@ -370,7 +370,7 @@ shotgun.achievementList = {
     },
     "three7": {
         name: "スリーセブン",
-        text: "７のスリーカードを成立させた",
+        text: "７のスリーカードを成立した",
         point: 15,
         percent: "0",
         secret: true,
@@ -388,7 +388,7 @@ shotgun.achievementList = {
     },
     "big7": {
         name: "ビッグセブン",
-        text: "７がハイカードであるフォーカードを成立させた",
+        text: "７がハイカードであるフォーカードを成立した",
         point: 30,
         percent: "0",
         secret: true,
@@ -407,7 +407,7 @@ shotgun.achievementList = {
     },
     "killerqueen": {
         name: "キラークイーン",
-        text: "Ｑのフォーカードを成立させた",
+        text: "Ｑのフォーカードを成立した",
         point: 20,
         percent: "0",
         secret: true,
@@ -454,7 +454,7 @@ shotgun.achievementList = {
      */
     "123": {
         name: "１－２－３",
-        text: "ワンペア、ツーペア、スリーカードの順で役を成立させた",
+        text: "ワンペア、ツーペア、スリーカードの順で役を成立した",
         point: 10,
         percent: "0",
         secret: false,
@@ -472,7 +472,7 @@ shotgun.achievementList = {
     },
     "1234": {
         name: "１－２－３－４",
-        text: "ワンペア、ツーペア、スリーカード、フォーカードの順で役を成立させた",
+        text: "ワンペア、ツーペア、スリーカード、フォーカードの順で役を成立した",
         point: 20,
         percent: "0",
         secret: true,
@@ -491,7 +491,7 @@ shotgun.achievementList = {
     },
     "primenumber": {
         name: "素数を数えるんだ",
-        text: "素数のカードだけで役を成立させた",
+        text: "素数のカードだけで役を成立した",
         point: 10,
         percent: "0",
         secret: true,
@@ -527,7 +527,7 @@ shotgun.achievementList = {
     },
     "acesup": {
         name: "エーシーズアップ",
-        text: "エースのペアと別のペアの組み合わせのツーペアを成立させた",
+        text: "エースのペアと別のペアの組み合わせのツーペアを成立した",
         point: 10,
         percent: "0",
         secret: false,
@@ -540,8 +540,25 @@ shotgun.achievementList = {
     },
     "doubleroyal": {
         name: "ダブルロイヤル",
-        text: "ロイヤルストレートフラッシュを２回連続で成立させた",
+        text: "ロイヤルストレートフラッシュを２回連続で成立した",
         point: 80,
+        percent: "0",
+        secret: false,
+        id: "",
+        check: function(param) {
+            if (param.handLog.length < 2) return false;
+            var len = param.handLog.length;
+            if (param.handLog[len-2].hand == ROYALSTRAIGHTFLUSH &&
+                param.handLog[len-1].hand == ROYALSTRAIGHTFLUSH) {
+                return true;
+            }
+            return false;
+        },
+    },
+    "extend": {
+        name: "エクステンド",
+        text: "エクステンド条件を達成した",
+        point: 50,
         percent: "0",
         secret: false,
         id: "",
