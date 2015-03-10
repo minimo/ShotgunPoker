@@ -44,6 +44,7 @@ tm.define("shotgun.MainScene", {
     bonus: false,   //ボーナスライフ貰ってるかフラグ
     useJoker: false,//ジョーカー使ったよフラグ
     noMissCount: 0, //ミス無し回数
+    scoreExtend: 0, //スコアエクステンド回数
 
     //カウンタ
     count: 10,      //カード選択カウントダウン用
@@ -587,8 +588,20 @@ tm.define("shotgun.MainScene", {
             }
         }
 
-        //初回R.S.Fの場合はライフ＋１
+        //初回R.S.Fの場合エクステンド
         if (hand == ROYALSTRAIGHTFLUSH && this.handCount[hand] == 1) extend++;
+
+        //５０００点超えでエクステンド
+        if (this.score > 5000 && this.scoreExtend == 0) {
+            this.scoreExtend++;
+            extend++;
+        }
+
+        //２００００点超えでエクステンド
+        if (this.score > 20000 && !this.scoreExtend == 1) {
+            this.scoreExtend++;
+            extend++;
+        }
 
         //エクステンド処理
         if (extend != 0 && this.mode == GAMEMODE_NORMAL) {
