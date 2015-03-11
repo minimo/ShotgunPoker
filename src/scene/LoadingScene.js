@@ -123,6 +123,11 @@ tm.define("shotgun.LoadingScene", {
 
         this.stage.label.tweener.wait(11000).fadeIn(10);
 
+        var that = this;
+        this.loadingAsset = tm.display.Label("", 30)
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.6);
+
         // bar
         var bar = this.stage.bar;
         bar.animationFlag = false;
@@ -148,6 +153,9 @@ tm.define("shotgun.LoadingScene", {
                 loader.onprogress = function(e) {
                     // update bar
                     bar.value = e.progress*100;
+
+                    //LoadingAssetName
+                    if (DEBUG) that.loadingAsset.text = e.key;
 
                     // dispatch event
                     var event = tm.event.Event("progress");
