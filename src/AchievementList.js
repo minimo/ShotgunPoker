@@ -431,7 +431,7 @@ shotgun.achievementList = {
         secret: false,
         id: "",
         check: function(param) {
-            if (param.noMissCount > 30) return false;
+            if (!param.noMissCount || param.noMissCount < 30) return false;
             return true;
         },
     },
@@ -443,7 +443,7 @@ shotgun.achievementList = {
         secret: true,
         id: "",
         check: function(param) {
-            if (param.noMissCount > 50) return false;
+            if (!param.noMissCount || param.noMissCount < 50) return false;
             return true;
         },
     },
