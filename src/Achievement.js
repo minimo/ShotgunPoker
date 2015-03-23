@@ -17,7 +17,7 @@ tm.define("shotgun.Achievement", {
         handLog:[0,0,0,0,0,0,0,0,0,0],
         score:0,
         handCount:0,
-        complete:false,
+        complete: false,
         gameover: false,
         useJoker: false,
         leftTime: -99,
