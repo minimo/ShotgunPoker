@@ -111,7 +111,7 @@ shotgun.achievementList = {
     "straightflush": {
         name: "ストレートフラッシュ",
         text: "ストレートフラッシュを成立した",
-        point: 30,
+        point: 25,
         percent: "0",
         secret: false,
         id: "CgkI-I-vk7YTEAIQDQ",
@@ -285,7 +285,7 @@ shotgun.achievementList = {
     "quickdraw": {
         name: "ビリー・ザ・キッド",
         text: "３回連続でカウント開始前に役を成立した",
-        point: 25,
+        point: 20,
         percent: "0",
         secret: false,
         id: "",
@@ -303,7 +303,7 @@ shotgun.achievementList = {
     "runner": {
         name: "ランナーランナー",
         text: "３回連続で残り０カウントで役を成立した",
-        point: 20,
+        point: 10,
         percent: "0",
         secret: false,
         id: "",
@@ -360,7 +360,7 @@ shotgun.achievementList = {
     "grandslam": {
         name: "グランドスラム",
         text: "１ゲーム内で全ての役を成立した",
-        point: 100,
+        point: 80,
         percent: "0",
         secret: true,
         id: "",
@@ -389,7 +389,7 @@ shotgun.achievementList = {
     "big7": {
         name: "ビッグセブン",
         text: "７がハイカードであるフォーカードを成立した",
-        point: 30,
+        point: 20,
         percent: "0",
         secret: true,
         id: "",
@@ -426,7 +426,7 @@ shotgun.achievementList = {
     "wing": {
         name: "ウィング",
         text: "３０回連続でミス無しだった",
-        point: 40,
+        point: 30,
         percent: "0",
         secret: false,
         id: "",
@@ -541,7 +541,7 @@ shotgun.achievementList = {
     "doubleroyal": {
         name: "ダブルロイヤル",
         text: "ロイヤルストレートフラッシュを２回成立した",
-        point: 80,
+        point: 50,
         percent: "0",
         secret: false,
         id: "",
@@ -554,7 +554,7 @@ shotgun.achievementList = {
     "extend": {
         name: "エクステンド",
         text: "エクステンド条件を達成した",
-        point: 50,
+        point: 30,
         percent: "0",
         secret: false,
         id: "",
