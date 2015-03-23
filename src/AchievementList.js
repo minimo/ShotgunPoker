@@ -193,7 +193,7 @@ shotgun.achievementList = {
         },
     },
     "senior": {
-        name: "ポーカー上級者",
+        name: "上級者",
         text: "ハードモードで２０００ＰＴＳを超えた",
         point: 20,
         percent: "0",
@@ -323,7 +323,7 @@ shotgun.achievementList = {
         text: "ダイヤのフラッシュを成立した",
         point: 10,
         percent: "0",
-        secret: false,
+        secret: true,
         id: "",
         check: function(param) {
             if (param.lastHand != FLUSH) return false;
@@ -337,7 +337,7 @@ shotgun.achievementList = {
         text: "ハートのフラッシュを成立した",
         point: 10,
         percent: "0",
-        secret: false,
+        secret: true,
         id: "",
         check: function(param) {
             if (param.lastHand != FLUSH) return false;

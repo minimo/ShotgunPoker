@@ -149,7 +149,7 @@ var languagePack = {
     "あなたが神か": {
         "ENGLISH": "The God"
     },
-    "ポーカー上級者": {
+    "上級者": {
         "ENGLISH": "Senior Player"
     },
     "ポーカーマスター": {
