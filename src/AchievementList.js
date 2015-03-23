@@ -138,7 +138,7 @@ shotgun.achievementList = {
      * total: 380 points
      */
     "score1000": {
-        name: "登竜門",
+        name: "中級者",
         text: "スコアが１０００ＰＴＳを超えた",
         point: 10,
         percent: "0",
@@ -540,18 +540,14 @@ shotgun.achievementList = {
     },
     "doubleroyal": {
         name: "ダブルロイヤル",
-        text: "ロイヤルストレートフラッシュを２回連続で成立した",
+        text: "ロイヤルストレートフラッシュを２回成立した",
         point: 80,
         percent: "0",
         secret: false,
         id: "",
         check: function(param) {
-            if (param.handLog.length < 2) return false;
-            var len = param.handLog.length;
-            if (param.handLog[len-2].hand == ROYALSTRAIGHTFLUSH &&
-                param.handLog[len-1].hand == ROYALSTRAIGHTFLUSH) {
-                return true;
-            }
+            if (param.lastHand != ROYALSTRAIGHTFLUSH) return false;
+            if (this.handCound[ROYALSTRAIGHTFLUSH] == 2) return true;
             return false;
         },
     },
@@ -563,12 +559,8 @@ shotgun.achievementList = {
         secret: false,
         id: "",
         check: function(param) {
-            if (param.handLog.length < 2) return false;
-            var len = param.handLog.length;
-            if (param.handLog[len-2].hand == ROYALSTRAIGHTFLUSH &&
-                param.handLog[len-1].hand == ROYALSTRAIGHTFLUSH) {
-                return true;
-            }
+            if (this.extend === undefined) return false;
+            if (this.extend > 0) return true;
             return false;
         },
     },

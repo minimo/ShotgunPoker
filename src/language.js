@@ -134,36 +134,126 @@ var languagePack = {
     "」が解除されました": {
         "ENGLISH": "' unlocked."
     },
+    "中級者": {
+        "ENGLISH": "Intermediate"
+    },
+    "熟練者": {
+        "ENGLISH": "Skilled person"
+    },
+    "ゲームの達人": {
+        "ENGLISH": "Master of The Game"
+    },
+    "ポーカーチャンプ": {
+        "ENGLISH": "Poker Champ"
+    },
+    "あなたが神か": {
+        "ENGLISH": "The God"
+    },
+    "ポーカー上級者": {
+        "ENGLISH": "Senior Player"
+    },
+    "ポーカーマスター": {
+        "ENGLISH": "Poker Master"
+    },
+    "ポーカー神": {
+        "ENGLISH": "The God of Poker"
+    },
+    "ゲームスタート": {
+        "ENGLISH": "Beginning"
+    },
+    "挑戦者": {
+        "ENGLISH": "Challenger"
+    },
+    "ジョーカー": {
+        "ENGLISH": "Joker"
+    },
+    "勿体ない？": {
+        "ENGLISH": "Mottainai?"
+    },
+    "ビリー・ザ・キッド": {
+        "ENGLISH": "Billy the KID"
+    },
+    "ランナーランナー": {
+        "ENGLISH": "Runner Runner"
+    },
+    "大富豪": {
+        "ENGLISH": "Millionaire"
+    },
+    "ラブデラックス": {
+        "ENGLISH": "Love Delux"
+    },
+    "コンプリート": {
+        "ENGLISH": "Complete"
+    },
+    "グランドスラム": {
+        "ENGLISH": "Grand Slam"
+    },
+    "スリーセブン": {
+        "ENGLISH": "Three Seven"
+    },
+    "ビッグセブン": {
+        "ENGLISH": "Big Seven"
+    },
+    "キラークイーン": {
+        "ENGLISH": "Killer Queen"
+    },
+    "ウィング": {
+        "ENGLISH": "Wing"
+    },
+    "ビッグウィング": {
+        "ENGLISH": "Big Wing"
+    },
+    "１－２－３": {
+        "ENGLISH": "1-2-3"
+    },
+    "１－２－３－４": {
+        "ENGLISH": "1-2-3-4"
+    },
+    "素数を数えるんだ": {
+        "ENGLISH": "Count Prime Number"
+    },
+    "恋の２－４－１１": {
+        "ENGLISH": "Love 2-4-11"
+    },
+    "エーシーズアップ": {
+        "ENGLISH": "Aces up"
+    },
+    "ダブルロイヤル": {
+        "ENGLISH": "Double Royal"
+    },
+    "エクステンド": {
+        "ENGLISH": "Extend"
+    },
 
     //AchievementList
-    "ワンペアを成立させた": {
+    "ワンペアを成立した": {
         "ENGLISH": "You've passed a One Pair."
     },
-    "ツーペアを成立させた": {
+    "ツーペアを成立した": {
         "ENGLISH": "You've passed a Two Pair."
     },
-    "スリーカードを成立させた": {
+    "スリーカードを成立した": {
         "ENGLISH": "You've passed a Three of a Kind."
     },
-    "フォーカードを成立させた": {
+    "フォーカードを成立した": {
         "ENGLISH": "You've passed a Four of a Kind."
     },
-    "ファイブカードを成立させた": {
+    "ファイブカードを成立した": {
         "ENGLISH": "You've passed a Five of a Kind."
     },
-    "フラッシュを成立させた": {
+    "フラッシュを成立した": {
         "ENGLISH": "You've passed a Flush."
     },
-    "ストレートを成立させた": {
+    "ストレートを成立した": {
         "ENGLISH": "You've passed a Straight."
     },
-    "フルハウスを成立させた": {
+    "フルハウスを成立した": {
         "ENGLISH": "You've passed a Full House."
     },
-    "ストレートフラッシュを成立させた": {
+    "ストレートフラッシュを成立した": {
         "ENGLISH": "You've passed a Straight Flush."
     },
-    "ロイヤルストレートフラッシュを成立させた": {
+    "ロイヤルストレートフラッシュを成立した": {
         "ENGLISH": "You've passed a Royal Flush."
     },
 
@@ -182,13 +272,13 @@ var languagePack = {
     "コンプリート": {
         "ENGLISH": "Complete"
     },
-    "１ゲーム内でファイブカード以外の全役を成立させた": {
+    "１ゲーム内でファイブカード以外の全役を成立した": {
         "ENGLISH": "You passed a whole hands of non Five of a Kind in one game."
     },
     "グランドスラム": {
         "ENGLISH": "Gramd Slam"
     },
-    "１ゲーム内で全ての役を成立させた": {
+    "１ゲーム内で全ての役を成立した": {
         "ENGLISH": "I was met all of the role in one game."
     },
 
@@ -238,13 +328,13 @@ var languagePack = {
     "１－２－３": {
         "ENGLISH": "1-2-3"
     },
-    "ワンペア、ツーペア、スリーカードの順で役を成立させた": {
+    "ワンペア、ツーペア、スリーカードの順で役を成立した": {
         "ENGLISH": "One Pair, Two Pair, You was passed a hand in the order of Three of a Kind."
     },
     "１－２－３－４": {
         "ENGLISH": "1-2-3-4"
     },
-    "ワンペア、ツーペア、スリーカード、フォーカードの順で役を成立させた": {
+    "ワンペア、ツーペア、スリーカード、フォーカードの順で役を成立した": {
         "ENGLISH": "One Pair, Two Pair, Three of a Kind, You was passed a hand in the order of Four of a Kind."
     },
     "恋の２－４－１１": {
@@ -256,13 +346,13 @@ var languagePack = {
     "スリーセブン": {
         "ENGLISH": "Triple 7"
     },
-    "７のスリーカードを成立させた": {
+    "７のスリーカードを成立した": {
         "ENGLISH": "You've passed a Three of a Kind."
     },
     "ダブルロイヤル": {
         "ENGLISH": "Double Royal"
     },
-    "ロイヤルストレートフラッシュを２回連続で成立させた": {
+    "ロイヤルストレートフラッシュを２回成立した": {
         "ENGLISH": "Royal Flush You was established in two consecutive."
     },
 };

@@ -635,6 +635,7 @@ tm.define("shotgun.MainScene", {
                 complete:cp,
                 leftTime:this.count,
                 noMissCount: this.noMissCount,
+                extend: extend,
             };
             this.checkAchievement(param);
         }
