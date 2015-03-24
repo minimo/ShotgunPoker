@@ -93,15 +93,27 @@ tm.define("shotgun.Achievement", {
             var obj = shotgun.achievementList[id];
             if (obj) obj.percent = data[id].percent;
         }
+
+        //ゲームセンター実績情報同期
+        this.syncGamecenter();
     },
 
     //ゲームセンターと実績情報同期
     syncGamecenter: function() {
         if (!ENABLE_GAMECENTER) return false;
-        var successCallback = function (results) {
+        gamecenter.getAchievements(function(results) {
             if (results) {
+                var ac = shotgun.achievementList;
                 var len = results.length;
                 for (var i = 0; i < len; i++) {
+                    var res = results[i];
+                    var id = res.identifier;
+                    if (ac[id]) {
+                        //GAMECENTERが実績未達成の場合はlocalstorage側も合わせる
+                        if (res.percentComplete != "100") {
+                            ac[id].percent = "0";
+                        }
+                    }
                     //results[i].identifier
                     //results[i].percentComplete
                     //results[i].completed
@@ -110,8 +122,7 @@ tm.define("shotgun.Achievement", {
                     //results[i].playerID
                 }
             }
-        }
-        gamecenter.getAchievements(function(){}, function(){});
+        }, function(){});
     },
 
     //全実績をリセット
