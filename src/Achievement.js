@@ -37,10 +37,9 @@ tm.define("shotgun.Achievement", {
                 if (a.percent != "100") {
                     a.percent = "100";
                     acList.push(a);
+                    //ゲームセンターに実績登録
+                    if (ENABLE_GAMECENTER) reportAchievements(list[i], "100");
                 }
-
-                //ゲームセンターに実績登録
-                if (ENABLE_GAMECENTER) reportAchievements(list[i], "100");
             }
         }
         if (acList.length == 0) return null;0
@@ -53,13 +52,12 @@ tm.define("shotgun.Achievement", {
         var ac = shotgun.achievementList;
         var list = Object.getOwnPropertyNames(ac);
         if (ac[name]) {
-            //ゲームセンターに実績登録
-            if (ENABLE_GAMECENTER) reportAchievements(name, "100");
             if (ac[name].percent != "100") {
                 ac[name].percent = "100";
-                return false;
+                //ゲームセンターに実績登録
+                if (ENABLE_GAMECENTER) reportAchievements(name, "100");
+                return true;
             }
-            return true;
         }
         return false;
     },
