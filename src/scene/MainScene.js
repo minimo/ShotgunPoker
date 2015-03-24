@@ -624,7 +624,7 @@ tm.define("shotgun.MainScene", {
         }
 
         //実績判定
-        if (ENABLE_ACHIEVEMENT) {
+        if (!this.gameend && ENABLE_ACHIEVEMENT) {
             var param = {
                 mode:this.mode,
                 cards:this.deck.hands,
