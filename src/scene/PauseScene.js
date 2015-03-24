@@ -107,7 +107,7 @@ tm.define("shotgun.ConfirmDialog", {
     answer: null,
 
     //ラベル用フォントパラメータ
-    labelParam: {fontFamily:"Yasashisa", align: "center", baseline:"middle", outlineWidth:4 },
+    labelParam: {fontFamily:"Yasashisa", align: "center", baseline:"middle", outlineWidth:3 },
 
     init: function(caption, button, fontSize) {
         this.superInit();
@@ -125,9 +125,21 @@ tm.define("shotgun.ConfirmDialog", {
         var param = {fillStyle:'rgba(0,80,0,1)', lineWidth:4};
 
         //キャプション
-        var lb = tm.display.OutlineLabel(caption, fontSize).addChildTo(this);
-        lb.setParam(this.labelParam);
-        lb.setPosition(SC_W*0.5, SC_H*0.42);
+        if (caption instanceof Array) {
+            tm.display.OutlineLabel(caption[0], fontSize)
+                .addChildTo(this)
+                .setParam(this.labelParam)
+                .setPosition(SC_W*0.5, SC_H*0.39);
+            tm.display.OutlineLabel(caption[1], fontSize)
+                .addChildTo(this)
+                .setParam(this.labelParam)
+                .setPosition(SC_W*0.5, SC_H*0.43);
+        } else {
+            tm.display.OutlineLabel(caption, fontSize)
+                .addChildTo(this)
+                .setParam(this.labelParam)
+                .setPosition(SC_W*0.5, SC_H*0.42);
+        }
 
         //ＹＥＳ
         shotgun.Button(width, height, button[0], {flat: appMain.buttonFlat})
