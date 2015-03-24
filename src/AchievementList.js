@@ -278,7 +278,7 @@ shotgun.achievementList = {
         secret: true,
         id: "",
         check: function(param) {
-            if (param.gameover == true && !param.usejoker) return true;
+            if (param.gameover == true && !param.useJoker) return true;
             return false;
         },
     },
