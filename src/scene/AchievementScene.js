@@ -9,6 +9,15 @@
 tm.define("shotgun.AchievementScene", {
     superClass: tm.app.Scene,
 
+    //タッチ情報
+    startX: 0,
+    startY: 0,
+    touchTime: 0,
+    moveX: 0,
+    moveY: 0,
+    beforeX: 0,
+    beforeY: 0,
+
     //クレジットラベル用パラメータ
     headerParam: {fontFamily:"CasinoRegular", align: "center", baseline:"middle", outlineWidth:2 },
     labelParam: {fontFamily:"Yasashisa", align: "center", baseline:"middle", outlineWidth:2 },
@@ -25,19 +34,37 @@ tm.define("shotgun.AchievementScene", {
         this.base = tm.display.RectangleShape({width: SC_W, height: SC_H*0.2, fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor})
             .addChildTo(this);
 
+        this.bg2 = tm.display.RectangleShape({width: SC_W, height: SC_H*0.15, fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor})
+            .addChildTo(this)
+            .setOrigin(0.5, 0)
+            .setPosition(SC_W*0.5, 0);
+
+        var that = this;
         tm.display.OutlineLabel("ACHIEVEMENT", 60)
-            .addChildTo(this.base)
+            .addChildTo(this)
             .setParam(this.headerParam)
             .setPosition(SC_W*0.5, SC_H*0.1);
+        shotgun.Button(SC_W*0.6, 80, "", {flat: appMain.buttonFlat, fontSize: 50})
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.1)
+            .setVisible(false)
+            .addEventListener("pushed", function() {
+                that.mask.tweener.clear().fadeOut(200);
+                appMain.popScene();
+            });
 
         var that = this;
         var y = 0;
         shotgun.achievementList.$forIn(function(key, value, index) {
             console.log([index, key, value].join(','));
-            tm.display.OutlineLabel($trans(value.name)+": "+$trans(value.text)+": "+value.percent, 20)
+            tm.display.OutlineLabel($trans(value.name)+": "+value.percent, 20)
                 .addChildTo(that.base)
                 .setParam(that.labelParam)
-                .setPosition(SC_W*0.5, SC_H*0.15+SC_H*y*0.02);
+                .setPosition(SC_W*0.5, SC_H*0.2+SC_H*y*0.04);
+            tm.display.OutlineLabel($trans(value.text), 20)
+                .addChildTo(that.base)
+                .setParam(that.labelParam)
+                .setPosition(SC_W*0.5, SC_H*0.2+SC_H*y*0.04+SC_H*0.02);
             y++;
         });
 
@@ -59,18 +86,31 @@ tm.define("shotgun.AchievementScene", {
 
     //タッチorクリック開始処理
     ontouchstart: function(e) {
+        var sx = this.startX = e.pointing.x;
+        var sy = this.startY = e.pointing.y;
+        this.moveX = 0;
+        this.moveY = 0;
+
+        this.beforeX = sx;
+        this.beforeY = sy;
     },
 
     //タッチorクリック移動処理
     ontouchmove: function(e) {
+        var sx = e.pointing.x;
+        var sy = e.pointing.y;
+        var moveX = Math.floor(sx - this.beforeX);
+        var moveY = Math.floor(sy - this.beforeY);
+
+        this.base.y += moveY;
+
+        this.beforeX = sx;
+        this.beforeY = sy;
     },
 
     //タッチorクリック終了処理
     ontouchend: function(e) {
-        this.mask.tweener.clear().fadeOut(200);
-        appMain.popScene();
     },
-
 });
 
 
