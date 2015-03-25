@@ -109,10 +109,8 @@ tm.define("shotgun.Achievement", {
                     var res = results[i];
                     var id = res.identifier;
                     if (ac[id]) {
-                        //GAMECENTERが実績未達成の場合はlocalstorage側も合わせる
-                        if (res.percentComplete != "100") {
-                            ac[id].percent = "0";
-                        }
+                        //実績達成状況をGAMECENTER側の情報にあわせる
+                        ac[id].percent = res.percentComplete;
                     }
                     //results[i].identifier
                     //results[i].percentComplete
