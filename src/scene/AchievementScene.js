@@ -34,10 +34,10 @@ tm.define("shotgun.AchievementScene", {
         var y = 0;
         shotgun.achievementList.$forIn(function(key, value, index) {
             console.log([index, key, value].join(','));
-            tm.display.OutlineLabel($trans(value.name)+": "+value.percent, 20)
+            tm.display.OutlineLabel($trans(value.name)+": "+$trans(value.text)+": "+value.percent, 20)
                 .addChildTo(that.base)
                 .setParam(that.labelParam)
-                .setPosition(SC_W*0.5, SC_H*0.2+SC_H*y*0.02);
+                .setPosition(SC_W*0.5, SC_H*0.15+SC_H*y*0.02);
             y++;
         });
 
