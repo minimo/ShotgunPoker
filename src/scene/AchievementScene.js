@@ -103,6 +103,8 @@ tm.define("shotgun.AchievementScene", {
         var moveY = Math.floor(sy - this.beforeY);
 
         this.base.y += moveY;
+        if (this.base.y > 0) this.base.y = 0;
+        if (this.base.y < -SC_H*0.9) this.base.y = -SC_H*0.9;
 
         this.beforeX = sx;
         this.beforeY = sy;
