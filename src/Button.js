@@ -155,12 +155,12 @@ tm.define("shotgun.Button", {
     },
 
     setVisible: function(b) {
-        this.shadow.visible = b;
+        if (this.shadow) this.shadow.visible = b;
         this.button.visible = b;
         this.label.visible = b;
-        this.lock = !b;
         return this;
     },
+
     setLock: function(b) {
         this.lock = b;
         return this;
