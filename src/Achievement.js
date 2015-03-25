@@ -127,13 +127,11 @@ tm.define("shotgun.Achievement", {
 
     //全実績をリセット
     reset: function() {
-        var acList = [];
-        var ac = shotgun.achievementList;
-        var len = shotgun.achievementList.length;
-        for (var i = 0; i < len; i++) {
-            var obj = ac[i];
-            ac.percent = "0";
-        }
+
+        //実績リストの達成状況を全クリア
+        shotgun.achievementList.$forIn(function(key, value, index) {
+            value.percent = "0";
+        });
 
         //ローカルストレージのデータを消してセーブしなおす
         localStorage.removeItem("achievement");
@@ -142,4 +140,4 @@ tm.define("shotgun.Achievement", {
         //ゲームセンターの実績を消去
         if (ENABLE_GAMECENTER) resetAchievements();
     },
-});
+})
