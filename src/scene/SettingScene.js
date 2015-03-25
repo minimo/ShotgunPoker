@@ -104,11 +104,11 @@ tm.define("shotgun.SettingScene", {
         this.dialog = shotgun.ConfirmDialog(["実績をリセットしますか？","（リセット後、元に戻す事はできません）"], ["YES", "NO"], 30);
 
         //実績クリア
-        tm.display.OutlineLabel("ACHIEVMENT", 40)
+        tm.display.OutlineLabel("ACHIEVEMENT", 40)
             .addChildTo(this)
             .setParam(this.labelParam)
             .setPosition(SC_W*0.5, SC_H*0.65);
-        this.rest = shotgun.Button(SC_W*0.6, height, "ACHIEVMENT RESET", {flat: appMain.buttonFlat, fontSize:40})
+        this.rest = shotgun.Button(SC_W*0.6, height, "ACHIEVEMENT RESET", {flat: appMain.buttonFlat, fontSize:40})
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.73)
             .addEventListener("pushed", function() {
