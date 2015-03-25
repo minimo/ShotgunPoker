@@ -103,6 +103,11 @@ tm.define("shotgun.Achievement", {
         if (!ENABLE_GAMECENTER) return false;
         gamecenter.getAchievements(function(results) {
             if (results) {
+                //実績リストの達成状況を全クリア
+                shotgun.achievementList.$forIn(function(key, value, index) {
+                    value.percent = "0";
+                });
+
                 var ac = shotgun.achievementList;
                 var len = results.length;
                 for (var i = 0; i < len; i++) {
@@ -110,7 +115,9 @@ tm.define("shotgun.Achievement", {
                     var id = res.identifier;
                     if (ac[id]) {
                         //実績達成状況をGAMECENTER側の情報にあわせる
-                        ac[id].percent = res.percentComplete;
+                        if (res.completed) {
+                            ac[id].percent = "100";
+                        }
                     }
                     //results[i].identifier
                     //results[i].percentComplete

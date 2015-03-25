@@ -73,7 +73,7 @@ tm.define("shotgun.AchievementScene", {
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.5);
         this.mask.tweener.clear().fadeOut(200);
-        
+
         this.time = 0;
     },
 
