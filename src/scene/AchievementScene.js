@@ -21,14 +21,25 @@ tm.define("shotgun.AchievementScene", {
         this.bg = tm.display.RectangleShape({width: SC_W, height: SC_H, fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor})
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.5);
-        this.bg2 = tm.display.RectangleShape({width: SC_W, height: SC_H*0.2, fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor})
-            .addChildTo(this)
-            .setPosition(SC_W*0.5, SC_H*0.5);
+
+        this.base = tm.display.RectangleShape({width: SC_W, height: SC_H*0.2, fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor})
+            .addChildTo(this);
 
         tm.display.OutlineLabel("ACHIEVEMENT", 60)
-            .addChildTo(this.bg2)
+            .addChildTo(this.base)
             .setParam(this.headerParam)
             .setPosition(SC_W*0.5, SC_H*0.1);
+
+        var that = this;
+        var y = 0;
+        shotgun.achievementList.$forIn(function(key, value, index) {
+            console.log([index, key, value].join(','));
+            tm.display.OutlineLabel($trans(value.name)+": "+value.percent, 20)
+                .addChildTo(that.base)
+                .setParam(that.labelParam)
+                .setPosition(SC_W*0.5, SC_H*0.2+SC_H*y*0.02);
+            y++;
+        });
 
         //目隠し
         this.mask = tm.display.RectangleShape({width: SC_W, height: SC_H, fillStyle: "rgba(0, 0, 0, 1.0)", strokeStyle: "rgba(0, 0, 0, 1.0)"})
