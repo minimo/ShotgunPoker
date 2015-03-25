@@ -73,6 +73,14 @@ var languagePack = {
         "ENGLISH": "This completes the tutorial above."
     },
 
+    //Setting
+    "実績をリセットしますか？": {
+        "ENGLISH": "Are you sure you want to reset the achievements?"
+    },
+    "（リセット後、元に戻す事はできません）": {
+        "ENGLISH": "(After reset, you can not undo)"
+    },
+
     //GameCenter warning
     "GameCenterに接続できませんでした": {
         "ENGLISH": "I failed to access the GAMECENTER."

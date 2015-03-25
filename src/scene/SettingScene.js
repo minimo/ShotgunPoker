@@ -21,9 +21,6 @@ tm.define("shotgun.SettingScene", {
         this.background = "rgba(0, 0, 0, 0.0)";
         var that = this;
 
-        //スコア消去確認ダイアログ
-        this.dialog = shotgun.ConfirmDialog("CLEAR SCORE DATA?", ["YES", "NO"]);
-
         //バックグラウンド
         this.bg = tm.display.RectangleShape({width: SC_W, height: SC_H, fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor})
             .addChildTo(this)
@@ -73,11 +70,11 @@ tm.define("shotgun.SettingScene", {
         tm.display.OutlineLabel("LANGUAGE", 40)
             .addChildTo(this)
             .setParam(this.labelParam)
-            .setPosition(SC_W*0.5, SC_H*0.50);
+            .setPosition(SC_W*0.5, SC_H*0.48);
         var width = 250, height = 90;
         this.japanese = shotgun.ToggleButton(width, height, "日本語", "日本語", {flat: appMain.buttonFlat, fontSize:40})
             .addChildTo(this)
-            .setPosition(SC_W*0.25, SC_H*0.57)
+            .setPosition(SC_W*0.25, SC_H*0.55)
             .addEventListener("pushed", function() {
                 if (this.toggleON) {
                     appMain.language = "JAPANESE";
@@ -87,7 +84,7 @@ tm.define("shotgun.SettingScene", {
             });
         this.english = shotgun.ToggleButton(width, height, "English", "English", {flat: appMain.buttonFlat, fontSize:40})
             .addChildTo(this)
-            .setPosition(SC_W*0.75, SC_H*0.57)
+            .setPosition(SC_W*0.75, SC_H*0.55)
             .addEventListener("pushed", function() {
                 if (this.toggleON) {
                     appMain.language = "ENGLISH";
@@ -102,6 +99,21 @@ tm.define("shotgun.SettingScene", {
             this.japanese.toggleON = false;
             this.english.toggleON = true;
         }
+
+        //確認ダイアログ
+        this.dialog = shotgun.ConfirmDialog(["実績をリセットしますか？","（リセット後、元に戻す事はできません）"], ["YES", "NO"], 30);
+
+        //実績クリア
+        tm.display.OutlineLabel("ACHIEVMENT", 40)
+            .addChildTo(this)
+            .setParam(this.labelParam)
+            .setPosition(SC_W*0.5, SC_H*0.65);
+        this.rest = shotgun.Button(SC_W*0.6, height, "ACHIEVMENT RESET", {flat: appMain.buttonFlat, fontSize:40})
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.73)
+            .addEventListener("pushed", function() {
+                appMain.pushScene(that.dialog);
+            });
 /*
         tm.display.OutlineLabel("GAME SETTING", 40)
             .addChildTo(this)
@@ -193,17 +205,14 @@ tm.define("shotgun.SettingScene", {
         this.time++;
     },
 
-/*
     onresume: function() {
         if (this.dialog.answer == true) {
-            appMain.highScore[GAMEMODE_NORMAL] = 0;
-            appMain.highScore[GAMEMODE_NORMAL+10] = 0;
-            appMain.highScore[GAMEMODE_HARD] = 0;
-            appMain.highScore[GAMEMODE_HARD+10] = 0;
             this.dialog.answer = false;
+            appMain.achievement.reset();
+            appMain.pushScene(shotgun.AlertDialog({height:SC_H*0.2, text1:"実績をリセットしました"}, 50));
         }
     },
-*/
+
     //タッチorクリック開始処理
     ontouchstart: function(e) {
     },
