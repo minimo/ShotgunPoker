@@ -748,7 +748,7 @@ tm.define("shotgun.MainScene", {
         var sx = e.pointing.x;
         var sy = e.pointing.y;
         var moveX = Math.abs(sx - this.beforeX);
-        var moveY = Math.abs(sx - this.beforeY);
+        var moveY = Math.abs(sy - this.beforeY);
 
         if (!this.shuffled) {
             if (moveX > 200) {
