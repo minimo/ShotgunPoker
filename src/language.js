@@ -75,10 +75,13 @@ var languagePack = {
 
     //Setting
     "実績をリセットしますか？": {
-        "ENGLISH": "Are you sure you want to reset the achievements?"
+        "ENGLISH": "Resets the Achievements?"
     },
     "（リセット後、元に戻す事はできません）": {
         "ENGLISH": "(After reset, you can not undo)"
+    },
+    "実績をリセットしました": {
+        "ENGLISH": "I've reset the Achievements."
     },
 
     //GameCenter warning
@@ -130,6 +133,9 @@ var languagePack = {
     },
     "ストレートフラッシュ": {
         "ENGLISH": "Straight Flush"
+    },
+    "Ｒ．ストレートフラッシュ": {
+        "ENGLISH": "Royal Flush"
     },
     "ロイヤルストレートフラッシュ": {
         "ENGLISH": "Royal Flush"
