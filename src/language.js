@@ -223,11 +223,11 @@ var languagePack = {
     "ビッグウィング": {
         "ENGLISH": "Big Wing"
     },
+    "リトライ": {
+        "ENGLISH": "Retry"
+    },
     "１－２－３": {
         "ENGLISH": "1-2-3"
-    },
-    "１－２－３－４": {
-        "ENGLISH": "1-2-3-4"
     },
     "素数を数えるんだ": {
         "ENGLISH": "Count Prime Number"
@@ -282,6 +282,24 @@ var languagePack = {
     "ハードモードでゲームをスタートした": {
         "ENGLISH": "You started the game in Hard."
     },
+    "ジョーカーを使った": {
+        "ENGLISH": "Used the joker"
+    },
+    "ジョーカーを使わずにゲームオーバーになった": {
+        "ENGLISH": "It became the gameover without a joker."
+    },
+    "３回連続でカウント開始前に役を成立した": {
+        "ENGLISH": "3 times I have met a hand before the count starts in a row."
+    },
+    "３回連続で残り０カウントで役を成立した": {
+        "ENGLISH": "3 times I have met a hand in the remainder 0 count in a row"
+    },
+    "ダイヤのフラッシュを成立した": {
+        "ENGLISH": "Satisfied The flash of diamond."
+    },
+    "ハートのフラッシュを成立した": {
+        "ENGLISH": " Satisfied The flash of heart"
+    },
     "１ゲーム内でファイブカード以外の全役を成立した": {
         "ENGLISH": "You passed a whole hands of non Five of a Kind in one game."
     },
@@ -315,14 +333,35 @@ var languagePack = {
     "ワンペア、ツーペア、スリーカードの順で役を成立した": {
         "ENGLISH": "One Pair, Two Pair, You was passed a hand in the order of Three of a Kind."
     },
-    "ワンペア、ツーペア、スリーカード、フォーカードの順で役を成立した": {
-        "ENGLISH": "One Pair, Two Pair, Three of a Kind, You was passed a hand in the order of Four of a Kind."
-    },
     "役が成立した手札の中に２、４、Ｊがあった": {
-        "ENGLISH": "2,4 in the hand that winning combination has been established, there was a J."
+        "ENGLISH": "2,4 in the hand that winning combination has been established, there was a Jack."
     },
     "７のスリーカードを成立した": {
         "ENGLISH": "You've passed a Three of a Kind."
+    },
+    "７がハイカードであるフォーカードを成立した": {
+        "ENGLISH": "Satisfied Four of a kind is a 7 high-card."
+    },
+    "Ｑのフォーカードを成立した": {
+        "ENGLISH": "Satisfied Four of a kind is Queen."
+    },
+    "３０回連続でミス無しだった": {
+        "ENGLISH": "It was no mistake in 30 consecutive."
+    },
+    "５０回連続でミス無しだった": {
+        "ENGLISH": "It was no mistake in 50 consecutive."
+    },
+    "ゲームオーバー後にリトライした": {
+        "ENGLISH": "You were retry after the game is over."
+    },
+    "素数のカードだけで役を成立した": {
+        "ENGLISH": "I have established a hand in only prime number of card."
+    },
+    "エースのペアと別のペアの組み合わせのツーペアを成立した": {
+        "ENGLISH": "I met the two pair of combination of ace pair and another pair."
+    },
+    "エクステンド条件を達成した": {
+        "ENGLISH": "I have achieved the extended conditions."
     },
     "ロイヤルストレートフラッシュを２回成立した": {
         "ENGLISH": "Royal Flush You was established in two consecutive."
