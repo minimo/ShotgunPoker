@@ -61,14 +61,14 @@ tm.define("shotgun.AchievementScene", {
         var y = 0;
         shotgun.achievementList.$forIn(function(key, value, index) {
             console.log([index, key, value].join(','));
-            tm.display.OutlineLabel($trans(value.name)+": "+$trans(value.percent=="100"?"＊達成済＊":"未達成"), 20)
+            tm.display.OutlineLabel($trans(value.name)+": "+$trans(value.percent=="100"?"** 達成済 **":"未達成"), 20)
                 .addChildTo(that.base)
                 .setParam(that.labelParam)
-                .setPosition(SC_W*0.5, SC_H*0.2+SC_H*y*0.04);
+                .setPosition(SC_W*0.5, SC_H*0.2+SC_H*y*0.06);
             tm.display.OutlineLabel($trans(value.text), 20)
                 .addChildTo(that.base)
                 .setParam(that.labelParam)
-                .setPosition(SC_W*0.5, SC_H*0.2+SC_H*y*0.04+SC_H*0.02);
+                .setPosition(SC_W*0.5, SC_H*0.2+SC_H*y*0.06+SC_H*0.02);
             y++;
         });
 
@@ -118,7 +118,7 @@ tm.define("shotgun.AchievementScene", {
 
         this.base.y += moveY;
         if (this.base.y > 0) this.base.y = 0;
-        if (this.base.y < -SC_H*1.05) this.base.y = -SC_H*1.05;
+        if (this.base.y < -SC_H*1.8) this.base.y = -SC_H*1.8;
 
         this.beforeX = sx;
         this.beforeY = sy;

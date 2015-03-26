@@ -86,7 +86,7 @@ var languagePack = {
     "未達成": {
         "ENGLISH": "Unachieved"
     },
-    "＊達成済＊": {
+    "** 達成済 **": {
         "ENGLISH": "** Achieved **"
     },
 
