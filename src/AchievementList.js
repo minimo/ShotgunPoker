@@ -305,7 +305,7 @@ shotgun.achievementList = {
         text: "３回連続で残り０カウントで役を成立した",
         point: 10,
         percent: "0",
-        secret: false,
+        secret: true,
         id: "",
         check: function(param) {
             if (param.handLog.length < 3) return false;
@@ -523,7 +523,7 @@ shotgun.achievementList = {
         text: "エースのペアと別のペアの組み合わせのツーペアを成立した",
         point: 10,
         percent: "0",
-        secret: false,
+        secret: true,
         id: "",
         check: function(param) {
             if (param.lastHand != TWOPAIR) return false;
