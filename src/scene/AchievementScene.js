@@ -34,10 +34,14 @@ tm.define("shotgun.AchievementScene", {
         this.base = tm.display.RectangleShape({width: SC_W, height: SC_H*0.2, fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor})
             .addChildTo(this);
 
-        this.bg2 = tm.display.RectangleShape({width: SC_W, height: SC_H*0.15, fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor})
+        tm.display.RectangleShape({width: SC_W, height: SC_H*0.15, fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor})
             .addChildTo(this)
             .setOrigin(0.5, 0)
             .setPosition(SC_W*0.5, 0);
+        tm.display.RectangleShape({width: SC_W, height: SC_H*0.23, fillStyle: appMain.bgColor, strokeStyle: appMain.bgColor})
+            .addChildTo(this)
+            .setOrigin(0.5, 1)
+            .setPosition(SC_W*0.5, SC_H);
 
         var that = this;
         tm.display.OutlineLabel("ACHIEVEMENT", 60)
@@ -57,7 +61,7 @@ tm.define("shotgun.AchievementScene", {
         var y = 0;
         shotgun.achievementList.$forIn(function(key, value, index) {
             console.log([index, key, value].join(','));
-            tm.display.OutlineLabel($trans(value.name)+": "+value.percent, 20)
+            tm.display.OutlineLabel($trans(value.name)+": "+$trans(value.percent=="100"?"＊達成済＊":"未達成"), 20)
                 .addChildTo(that.base)
                 .setParam(that.labelParam)
                 .setPosition(SC_W*0.5, SC_H*0.2+SC_H*y*0.04);
@@ -67,6 +71,16 @@ tm.define("shotgun.AchievementScene", {
                 .setPosition(SC_W*0.5, SC_H*0.2+SC_H*y*0.04+SC_H*0.02);
             y++;
         });
+
+        //戻るボタン
+        var width = SC_W, height = 100;
+        shotgun.Button(width, height, "RETURN TO TITLE", {flat: appMain.buttonFlat, fontSize:50})
+            .addChildTo(this)
+            .setPosition(SC_W*0.5, SC_H*0.85)
+            .addEventListener("pushed", function() {
+                that.mask.tweener.clear().fadeOut(200);
+                appMain.popScene();
+            });
 
         //目隠し
         this.mask = tm.display.RectangleShape({width: SC_W, height: SC_H, fillStyle: "rgba(0, 0, 0, 1.0)", strokeStyle: "rgba(0, 0, 0, 1.0)"})
@@ -104,7 +118,7 @@ tm.define("shotgun.AchievementScene", {
 
         this.base.y += moveY;
         if (this.base.y > 0) this.base.y = 0;
-        if (this.base.y < -SC_H*0.9) this.base.y = -SC_H*0.9;
+        if (this.base.y < -SC_H*1.05) this.base.y = -SC_H*1.05;
 
         this.beforeX = sx;
         this.beforeY = sy;

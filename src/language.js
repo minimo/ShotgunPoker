@@ -81,7 +81,13 @@ var languagePack = {
         "ENGLISH": "(After reset, you can not undo)"
     },
     "実績をリセットしました": {
-        "ENGLISH": "I've reset the Achievements."
+        "ENGLISH": "I've reset the achievements."
+    },
+    "未達成": {
+        "ENGLISH": "Unachieved"
+    },
+    "＊達成済＊": {
+        "ENGLISH": "** Achieved **"
     },
 
     //GameCenter warning
