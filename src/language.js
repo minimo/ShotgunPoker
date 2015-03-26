@@ -306,11 +306,11 @@ var languagePack = {
     "１ゲーム内で全ての役を成立した": {
         "ENGLISH": "You were met all of the role in one game."
     },
-    "スコアが１０００ＰＴＳを超えた": {
-        "ENGLISH": "Score exceeds the 1000pts."
-    },
     "スコアが２０００ＰＴＳを超えた": {
         "ENGLISH": "Score exceeds the 2000pts."
+    },
+    "スコアが３０００ＰＴＳを超えた": {
+        "ENGLISH": "Score exceeds the 3000pts."
     },
     "スコアが５０００ＰＴＳを超えた": {
         "ENGLISH": "Score exceeds the 5000pts."

@@ -139,24 +139,24 @@ shotgun.achievementList = {
      */
     "score1000": {
         name: "中級者",
-        text: "スコアが１０００ＰＴＳを超えた",
+        text: "スコアが２０００ＰＴＳを超えた",
         point: 10,
         percent: "0",
         secret: false,
         id: "",
         check: function(param) {
-            return param.score<1000? false: true;
+            return param.score<2000? false: true;
         },
     },
     "score2000": {
         name: "熟練者",
-        text: "スコアが２０００ＰＴＳを超えた",
+        text: "スコアが３０００ＰＴＳを超えた",
         point: 20,
         percent: "0",
         secret: false,
         id: "",
         check: function(param) {
-            return param.score<2000? false: true;
+            return param.score<3000? false: true;
         },
     },
     "score5000": {
