@@ -495,6 +495,7 @@ tm.define("shotgun.MainScene", {
     checkAchievement: function(param) {
         var ac = appMain.achievement.check(param);
         if (ac) {
+            if (DEVICE_IOS) return;
             //達成実績があったらテロップを投入
             var that = this;
             var telop = shotgun.Telop().addChildTo(this).setPosition(SC_W*0.5, SC_H*0.85);
