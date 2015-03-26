@@ -289,37 +289,37 @@ var languagePack = {
         "ENGLISH": "It became the gameover without a joker."
     },
     "３回連続でカウント開始前に役を成立した": {
-        "ENGLISH": "3 times I have met a hand before the count starts in a row."
+        "ENGLISH": "3 times You have met a hand before the count starts in a row."
     },
     "３回連続で残り０カウントで役を成立した": {
-        "ENGLISH": "3 times I have met a hand in the remainder 0 count in a row"
+        "ENGLISH": "3 times You have met a hand in the remainder 0 count in a row"
     },
     "ダイヤのフラッシュを成立した": {
         "ENGLISH": "Satisfied The flash of diamond."
     },
     "ハートのフラッシュを成立した": {
-        "ENGLISH": " Satisfied The flash of heart"
+        "ENGLISH": "Satisfied The flash of heart"
     },
     "１ゲーム内でファイブカード以外の全役を成立した": {
         "ENGLISH": "You passed a whole hands of non Five of a Kind in one game."
     },
     "１ゲーム内で全ての役を成立した": {
-        "ENGLISH": "I was met all of the role in one game."
+        "ENGLISH": "You were met all of the role in one game."
     },
     "スコアが１０００ＰＴＳを超えた": {
-        "ENGLISH": "Score exceeds the 1000PTS."
+        "ENGLISH": "Score exceeds the 1000pts."
     },
     "スコアが２０００ＰＴＳを超えた": {
-        "ENGLISH": "Score exceeds the 2000PTS."
+        "ENGLISH": "Score exceeds the 2000pts."
     },
     "スコアが５０００ＰＴＳを超えた": {
-        "ENGLISH": "Score exceeds the 5000PTS."
+        "ENGLISH": "Score exceeds the 5000pts."
     },
     "スコアが１００００ＰＴＳを超えた": {
-        "ENGLISH": "Score exceeds the 10000PTS."
+        "ENGLISH": "Score exceeds the 10000pts."
     },
     "スコアが２００００ＰＴＳを超えた": {
-        "ENGLISH": "Score exceeds the 20000PTS."
+        "ENGLISH": "Score exceeds the 20000pts."
     },
     "ハードモードで２０００ＰＴＳを超えた": {
         "ENGLISH": "Score exceeds the 2000pts in Hard mode."
@@ -355,13 +355,13 @@ var languagePack = {
         "ENGLISH": "You were retry after the game is over."
     },
     "素数のカードだけで役を成立した": {
-        "ENGLISH": "I have established a hand in only prime number of card."
+        "ENGLISH": "You have established a hand in only prime number of card."
     },
     "エースのペアと別のペアの組み合わせのツーペアを成立した": {
-        "ENGLISH": "I met the two pair of combination of ace pair and another pair."
+        "ENGLISH": "You met the two pair of combination of ace pair and another pair."
     },
     "エクステンド条件を達成した": {
-        "ENGLISH": "I have achieved the extended conditions."
+        "ENGLISH": "You have achieved the extended conditions."
     },
     "ロイヤルストレートフラッシュを２回成立した": {
         "ENGLISH": "Royal Flush You was established in two consecutive."
