@@ -292,9 +292,9 @@ shotgun.achievementList = {
         check: function(param) {
             if (param.handLog.length < 3) return false;
             var len = param.handLog.length;
-            if (param.handLog[len-3].leftTime > 6 &&
-                param.handLog[len-2].leftTime > 6 &&
-                param.handLog[len-1].leftTime > 6) {
+            if (param.handLog[len-3].leftTime > 6 && param.handLog[len-3].hand > 0 &&
+                param.handLog[len-2].leftTime > 6 && param.handLog[len-2].hand > 0 &&
+                param.handLog[len-1].leftTime > 6 && param.handLog[len-1].hand > 0) {
                 return true;
             }
             return false;
@@ -310,9 +310,9 @@ shotgun.achievementList = {
         check: function(param) {
             if (param.handLog.length < 3) return false;
             var len = param.handLog.length;
-            if (param.handLog[len-3].leftTime < 1 &&
-                param.handLog[len-2].leftTime < 1 &&
-                param.handLog[len-1].leftTime < 1) {
+            if (param.handLog[len-3].leftTime < 1 && param.handLog[len-3].hand > 0 &&
+                param.handLog[len-2].leftTime < 1 && param.handLog[len-2].hand > 0 &&
+                param.handLog[len-1].leftTime < 1 && param.handLog[len-1].hand > 0) {
                 return true;
             }
             return false;
@@ -437,7 +437,7 @@ shotgun.achievementList = {
     },
     "bigwing": {
         name: "ビッグウィング",
-        text: "５０回連続ミス無しだった",
+        text: "５０回連続でミス無しだった",
         point: 50,
         percent: "0",
         secret: true,
