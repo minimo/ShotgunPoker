@@ -45,6 +45,7 @@ tm.define("shotgun.MainScene", {
     useJoker: false,//ジョーカー使ったよフラグ
     noMissCount: 0, //ミス無し回数
     scoreExtend: 0, //スコアエクステンド回数
+    retry: false,   //リトライフラグ
 
     //カウンタ
     count: 10,      //カード選択カウントダウン用
@@ -67,13 +68,16 @@ tm.define("shotgun.MainScene", {
     labelParamBefore:{fontFamily: "Yasashisa",align: "left", baseline: "top", outlineWidth: 3, fontWeight:700},
     labelParamModeName: {fontFamily: "Yasashisa", align: "right", baseline: "middle",outlineWidth: 3, fontWeight:700},
 
-    init: function(mode) {
+    init: function(mode, retry) {
         this.superInit();
         this.background = "rgba(0, 0, 0, 0.0)";
 
         //ゲームモード
         if (mode === undefined) mode = GAMEMODE_NORMAL;
         this.mode = mode;
+
+        //リトライフラグ
+        this.retry = retry || false;
 
         //ボーナス貰ってるか判定
         if (appMain.bonusLife != 0) this.bonus = true;
@@ -326,7 +330,7 @@ tm.define("shotgun.MainScene", {
         this.mask.tweener.clear().fadeOut(200);
 
         //起動時実績チェック
-        this.checkAchievement({mode:this.mode});
+        this.checkAchievement({mode:this.mode, retry:this.retry});
     },
     
     update: function() {

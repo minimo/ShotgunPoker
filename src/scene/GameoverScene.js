@@ -126,7 +126,7 @@ tm.define("shotgun.GameoverScene", {
             .addEventListener("pushed", function() {
                 var mode = that.parentScene.mode;
                 that.parentScene = null;
-                that.mask.tweener.clear().fadeIn(300).call(function(){appMain.replaceScene(shotgun.MainScene(mode));});
+                that.mask.tweener.clear().fadeIn(300).call(function(){appMain.replaceScene(shotgun.MainScene(mode, true));});
             });
 
         //戻るボタン

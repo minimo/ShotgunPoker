@@ -21,6 +21,7 @@ tm.define("shotgun.Achievement", {
         gameover: false,
         useJoker: false,
         leftTime: -99,
+        retry: false,
     },
 
     //実績達成チェック

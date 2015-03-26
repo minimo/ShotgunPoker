@@ -447,6 +447,18 @@ shotgun.achievementList = {
             return true;
         },
     },
+    "retry": {
+        name: "リトライ",
+        text: "ゲームオーバー後にリトライした",
+        point: 20,
+        percent: "0",
+        secret: true,
+        id: "",
+        check: function(param) {
+            if (param.retry) return true;
+            return false;
+        },
+    },
 
     /*
      * 複合条件系
@@ -465,25 +477,6 @@ shotgun.achievementList = {
             if (param.handLog[len-3].hand == ONEPAIR &&
                 param.handLog[len-2].hand == TWOPAIR &&
                 param.handLog[len-1].hand == THREECARD) {
-                return true;
-            }
-            return false;
-        },
-    },
-    "1234": {
-        name: "１－２－３－４",
-        text: "ワンペア、ツーペア、スリーカード、フォーカードの順で役を成立した",
-        point: 20,
-        percent: "0",
-        secret: true,
-        id: "",
-        check: function(param) {
-            if (param.handLog.length < 4) return false;
-            var len = param.handLog.length;
-            if (param.handLog[len-4].hand == ONEPAIR &&
-                param.handLog[len-3].hand == TWOPAIR &&
-                param.handLog[len-2].hand == THREECARD &&
-                param.handLog[len-1].hand == FOURCARD) {
                 return true;
             }
             return false;
