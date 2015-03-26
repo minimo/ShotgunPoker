@@ -94,9 +94,6 @@ tm.define("shotgun.Achievement", {
             var obj = shotgun.achievementList[id];
             if (obj) obj.percent = data[id].percent;
         }
-
-        //ゲームセンター実績情報同期
-        this.syncGamecenter();
     },
 
     //ゲームセンターと実績情報同期
