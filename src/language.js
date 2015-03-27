@@ -230,10 +230,10 @@ var languagePack = {
         "ENGLISH": "1-2-3"
     },
     "素数を数えるんだ": {
-        "ENGLISH": "Count Prime Number"
+        "ENGLISH": "Count The Prime number"
     },
     "恋の２－４－１１": {
-        "ENGLISH": "Love 2-4-11"
+        "ENGLISH": "2-4-11 of Love"
     },
     "エーシーズアップ": {
         "ENGLISH": "Aces up"
@@ -292,13 +292,13 @@ var languagePack = {
         "ENGLISH": "3 times You have met a hand before the count starts in a row."
     },
     "３回連続で残り０カウントで役を成立した": {
-        "ENGLISH": "3 times You have met a hand in the remainder 0 count in a row"
+        "ENGLISH": "3 times You have met a hand in the remainder 0 count in a row."
     },
     "ダイヤのフラッシュを成立した": {
         "ENGLISH": "Satisfied The flash of diamond."
     },
     "ハートのフラッシュを成立した": {
-        "ENGLISH": "Satisfied The flash of heart"
+        "ENGLISH": "Satisfied The flash of heart."
     },
     "１ゲーム内でファイブカード以外の全役を成立した": {
         "ENGLISH": "You passed a whole hands of non Five of a Kind in one game."
@@ -337,7 +337,7 @@ var languagePack = {
         "ENGLISH": "2,4 in the hand that winning combination has been established, there was a Jack."
     },
     "７のスリーカードを成立した": {
-        "ENGLISH": "You've passed a Three of a Kind."
+        "ENGLISH": "You've passed a Three of a Kind is seven."
     },
     "７がハイカードであるフォーカードを成立した": {
         "ENGLISH": "Satisfied Four of a kind is a 7 high-card."
