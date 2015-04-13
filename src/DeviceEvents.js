@@ -269,19 +269,22 @@ var resetAchievements = function() {
  */
 
 var ad_units = {
-    ios : {
-        banner:       'ca-app-pub-4753786498901311/3019381180', // or DFP format "/6253334/dfp_example_ad"
+    ios: {
+        banner:       'ca-app-pub-4753786498901311/3019381180',
         interstitial: 'ca-app-pub-4753786498901311/7270571985'
-//        banner: '/6253334/dfp_example_ad', // or DFP format "/6253334/dfp_example_ad"
-//        interstitial: 'ca-app-pub-3940256099942544/4411468910'
     },
-    android : {
-        banner:       'ca-app-pub-4753786498901311/3019381180', // or DFP format "/6253334/dfp_example_ad"
+    android: {
+        banner:       'ca-app-pub-4753786498901311/3019381180',
         interstitial: 'ca-app-pub-4753786498901311/7270571985'
+    },
+    test: {
+        banner:       '/6253334/dfp_example_ad',
+        interstitial: '/6253334/dfp_example_ad/interstitial'
+//        interstitial: 'ca-app-pub-3940256099942544/4411468910'
     }
 };
 // select the right Ad Id according to platform
-var admobid = ( /(android)/i.test(navigator.userAgent) ) ? ad_units.android : ad_units.ios;
+var admobid = (TEST_ADMOB)? ad_units.test:( /(android)/i.test(navigator.userAgent) )? ad_units.android: ad_units.ios;
 
 // AdMob CallBack
 var onBannerLeaveApp = function(result) {
