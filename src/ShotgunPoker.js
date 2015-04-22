@@ -166,7 +166,7 @@ tm.define("shotgun.CanvasApp", {
             this.sounds.volumeBGM = c.volumeBGM;
             this.sounds.volumeSE = c.volumeSE;
             this.returnJoker = c.returnJoker;
-            this.firstNormalGameOver = c.firstNormalGameOver;
+            this.firstNormalGameOver = true;
 
 
             this.highScore[GAMEMODE_NORMAL] = c.highScore_normal;

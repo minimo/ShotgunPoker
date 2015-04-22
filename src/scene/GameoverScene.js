@@ -86,6 +86,7 @@ tm.define("shotgun.GameoverScene", {
         var param = {flat: appMain.buttonFlat, fontSize:50};
 
         //全画面広告ボタン
+/*
         this.Ad = shotgun.Button(width*0.3, height, "Ad", param)
             .addChildTo(this)
             .setPosition(SC_W*0.15, SC_H*0.7)
@@ -98,7 +99,7 @@ tm.define("shotgun.GameoverScene", {
                 }
                 if (that.mode != GAMEMODE_HARD) appMain.bonusLife = 1;
             });
-
+*/
         //GAMECENTER
         shotgun.Button(width*0.4, height, "RANKING", param)
             .addChildTo(this)
@@ -139,6 +140,7 @@ tm.define("shotgun.GameoverScene", {
             });
 
         //ライフサービステロップ
+/*
         if (this.mode == GAMEMODE_NORMAL && !this.bonus) {
             if (appMain.telopCount < 0 || appMain.firstNormalGameOver) {
                 this.telop = shotgun.Telop()
@@ -151,12 +153,25 @@ tm.define("shotgun.GameoverScene", {
             appMain.firstNormalGameOver = false;
             appMain.saveConfig();
         }
-
+*/
         //目隠し
         this.mask = tm.display.RectangleShape({width: SC_W, height: SC_H, fillStyle: "rgba(0, 0, 0, 1.0)", strokeStyle: "rgba(0, 0, 0, 1.0)"})
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.5);
         this.mask.tweener.clear().fadeOut(200);
+
+        //全画面広告
+        if (appMain.firstNormalGameOver || appMain.telopCount < 0) {
+            if(ENABLE_PHONEGAP && AdMob) {
+                AdMob.prepareInterstitial({
+                    adId:admobid.interstitial,
+                    autoShow:true
+                });
+            }
+            appMain.telopCount = 4;
+        }
+        appMain.telopCount--;
+        appMain.firstNormalGameOver = false;
     },
 
     update: function() {
