@@ -161,15 +161,13 @@ tm.define("shotgun.GameoverScene", {
         this.mask.tweener.clear().fadeOut(200);
 
         //全画面広告
-        var dice = rand(0, 10);
-        if (dice < 3) {
-            if(ENABLE_PHONEGAP && AdMob) {
-                function(){
-                    AdMob.prepareInterstitial({
-                        adId:admobid.interstitial,
-                        autoShow:true
-                    });
-                }();
+        if(ENABLE_PHONEGAP && AdMob) {
+            var dice = rand(0, 10);
+            if (dice < 3) {
+                AdMob.prepareInterstitial({
+                    adId:admobid.interstitial,
+                    autoShow:true
+                });
             }
         }
     },
