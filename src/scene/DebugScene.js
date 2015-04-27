@@ -83,7 +83,12 @@ tm.define("shotgun.DebugScene", {
         y++;
         tm.display.OutlineLabel("ENABLE_ACHIEVEMENT : "+(ENABLE_ACHIEVEMENT? "true": "false"), 20).addChildTo(that.base).setParam(that.labelParam).setPosition(SC_W*0.5, SC_H*0.2+SC_H*y*0.06);
         y++;
-
+/*
+        tm.display.OutlineLabel("admobid.banner : "+admobid.banner, 20).addChildTo(that.base).setParam(that.labelParam).setPosition(SC_W*0.5, SC_H*0.2+SC_H*y*0.06);
+        y++;
+        tm.display.OutlineLabel("admobid.interstitial : "+admobid.interstitial, 20).addChildTo(that.base).setParam(that.labelParam).setPosition(SC_W*0.5, SC_H*0.2+SC_H*y*0.06);
+        y++;
+*/
         //戻るボタン
         var width = SC_W, height = 100;
         shotgun.Button(width, height, "RETURN TO TITLE", {flat: appMain.buttonFlat, fontSize:50})
