@@ -163,9 +163,18 @@ tm.define("shotgun.TitleScene", {
             });
 
         //隠しボタン
+        //実績参照
         shotgun.Button(100, 120, "", param)
             .addChildTo(this.titleLayer)
             .setPosition(SC_W*0.1, SC_H*0.12)
+            .setVisible(false)
+            .addEventListener("pushed", function() {
+                appMain.pushScene(shotgun.AchievementScene());
+            });
+        //デバッグフラグ参照
+        shotgun.Button(100, 120, "", param)
+            .addChildTo(this.titleLayer)
+            .setPosition(SC_W*0.85, SC_H*0.12)
             .setVisible(false)
             .addEventListener("pushed", function() {
                 appMain.pushScene(shotgun.AchievementScene());
