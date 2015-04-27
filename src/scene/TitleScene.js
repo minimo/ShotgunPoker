@@ -177,7 +177,7 @@ tm.define("shotgun.TitleScene", {
             .setPosition(SC_W*0.85, SC_H*0.12)
             .setVisible(false)
             .addEventListener("pushed", function() {
-                appMain.pushScene(shotgun.AchievementScene());
+                appMain.pushScene(shotgun.DebugScene());
             });
 
         //ノーマルモード

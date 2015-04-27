@@ -6,7 +6,7 @@
  *
  */
 
-tm.define("shotgun.AchievementScene", {
+tm.define("shotgun.DebugScene", {
     superClass: tm.app.Scene,
 
     //タッチ情報
