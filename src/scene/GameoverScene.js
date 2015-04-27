@@ -161,17 +161,17 @@ tm.define("shotgun.GameoverScene", {
         this.mask.tweener.clear().fadeOut(200);
 
         //全画面広告
-        if (appMain.firstNormalGameOver || appMain.telopCount < 0) {
+        var dice = rand(0, 10);
+        if (dice < 3) {
             if(ENABLE_PHONEGAP && AdMob) {
-                AdMob.prepareInterstitial({
-                    adId:admobid.interstitial,
-                    autoShow:true
-                });
+                function(){
+                    AdMob.prepareInterstitial({
+                        adId:admobid.interstitial,
+                        autoShow:true
+                    });
+                }();
             }
-            appMain.telopCount = 4;
         }
-        appMain.telopCount--;
-        appMain.firstNormalGameOver = false;
     },
 
     update: function() {
