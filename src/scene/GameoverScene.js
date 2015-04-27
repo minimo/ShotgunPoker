@@ -162,8 +162,8 @@ tm.define("shotgun.GameoverScene", {
 
         //全画面広告
         if(ENABLE_PHONEGAP && AdMob) {
-            var dice = rand(0, 10);
-            if (dice < 3) {
+            var dice = rand(0, 4);
+            if (dice == 2) {
                 AdMob.prepareInterstitial({
                     adId:admobid.interstitial,
                     autoShow:true
