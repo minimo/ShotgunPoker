@@ -89,7 +89,7 @@ tm.define("shotgun.AchievementScene", {
         this.mask.tweener.clear().fadeOut(200);
 
         //ゲームセンター実績情報同期
-        appMain.achievement.syncGamecenter();
+        // appMain.achievement.syncGamecenter();
 
         this.time = 0;
     },

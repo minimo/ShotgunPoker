@@ -493,23 +493,23 @@ tm.define("shotgun.MainScene", {
 
     //実績達成チェック
     checkAchievement: function(param) {
-        var ac = appMain.achievement.check(param);
-        if (ac) {
-            if (DEVICE_IOS) return;
-            //達成実績があったらテロップを投入
-            var that = this;
-            var telop = shotgun.Telop().addChildTo(this).setPosition(SC_W*0.5, SC_H*0.85);
-            for (var i = 0; i < ac.length; i++) {
-                var text1 = $trans("実績「");
-                var text2 = $trans("」が解除されました");
-                var text = text1+$trans(ac[i].name)+text2;
-                var size = 30;
-                if (appMain.language == "JAPANESE") {
-                    size = text.length<22? 30: 27;
-                }
-                telop.add({text:text, size:size});
-            }
-        }
+        // var ac = appMain.achievement.check(param);
+        // if (ac) {
+        //     if (DEVICE_IOS) return;
+        //     //達成実績があったらテロップを投入
+        //     var that = this;
+        //     var telop = shotgun.Telop().addChildTo(this).setPosition(SC_W*0.5, SC_H*0.85);
+        //     for (var i = 0; i < ac.length; i++) {
+        //         var text1 = $trans("実績「");
+        //         var text2 = $trans("」が解除されました");
+        //         var text = text1+$trans(ac[i].name)+text2;
+        //         var size = 30;
+        //         if (appMain.language == "JAPANESE") {
+        //             size = text.length<22? 30: 27;
+        //         }
+        //         telop.add({text:text, size:size});
+        //     }
+        // }
     },
 
     //手札内容のチェック

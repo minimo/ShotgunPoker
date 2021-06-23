@@ -351,7 +351,7 @@ tm.define("shotgun.TitleScene", {
             if (appMain.highScore[GAMEMODE_HARD+10]   != 0) submitScore(GAMEMODE_HARD  , true , appMain.highScore[GAMEMODE_HARD+10]);
 
             //ゲームセンター実績情報同期
-            appMain.achievement.syncGamecenter();
+            // appMain.achievement.syncGamecenter();
         }
 
         //スクリーンショット保存

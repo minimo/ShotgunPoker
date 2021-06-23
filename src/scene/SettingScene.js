@@ -208,7 +208,7 @@ tm.define("shotgun.SettingScene", {
     onresume: function() {
         if (this.dialog.answer == true) {
             this.dialog.answer = false;
-            appMain.achievement.reset();
+            // appMain.achievement.reset();
             appMain.pushScene(shotgun.AlertDialog({height:SC_H*0.2, text1:"実績をリセットしました"}, 50));
         }
     },

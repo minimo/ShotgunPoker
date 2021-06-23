@@ -130,7 +130,7 @@ tm.define("shotgun.CanvasApp", {
         localStorage.setItem("config", JSON.stringify(saveObj));
 
         //実績情報
-        this.achievement.save();
+        // this.achievement.save();
 
         return this;
     },
@@ -190,7 +190,7 @@ tm.define("shotgun.CanvasApp", {
         }
 
         //実績情報
-        this.achievement.load();
+        // this.achievement.load();
 
         return this;
     },
